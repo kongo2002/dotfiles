@@ -1,5 +1,5 @@
 --langdef=AutoMod
 --langmap=Automod:.m
---regex-AutoMod=/^begin[ \t]*([a-zA-Z0-9_.]+([ \t]+[a-zA-Z]+)+)[ \t]+procedure/\1/p,procedure/
---regex-AutoMod=/^begin[ \t]*([a-zA-Z0-9_.]+([ \t]+[a-zA-Z]+)+)[ \t]+function/\1/f,function/
---regex-AutoMod=/^begin[ \t]*([a-zA-Z0-9_.]+)[ \t]*$/\1/s,subroutine/
+--regex-AutoMod=/begin[ \t]*([a-zA-Z0-9_.:]+([ \t]+[a-zA-Z]+)+)[ \t]+procedure/\1/p,procedure/
+--regex-AutoMod=/begin[ \t]*([a-zA-Z0-9_.:]+([ \t]+[a-zA-Z]+)*)[ \t]+function/\1/f,function/
+--regex-AutoMod=/^begin[ \t]*([a-zA-Z0-9_.]+)[ \t]*(procedure[ \t]*)?$/\1/s,subroutine/
