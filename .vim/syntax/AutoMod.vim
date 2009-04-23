@@ -9,6 +9,7 @@ elseif exists("b:current_syntax")
     finish
 endif
 
+" synchronization settings
 syn sync clear
 syn sync fromstart
 
@@ -51,7 +52,7 @@ syn keyword mModel  amount align acceleration deceleration capacity
 syn keyword mModel  choice exponential greatest lognormal limit loadtype
 syn keyword mModel  max maximum minimum norm normal orientation random
 syn keyword mModel  previous state triangular weibull x y z
-syn keyword mModel  path destination
+syn keyword mModel  path destination distance
 
 " constants
 syn keyword mBool  true True TRUE false False FALSE
