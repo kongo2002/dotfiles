@@ -1,0 +1,25 @@
+" kongo .vimperatorrc
+" 2.0 alpha 3
+
+" use colorscheme ~/.vimperator/colors/kongo.vimp
+colorscheme kongo
+
+" tab-complete search engines, smart-list
+set complete=sl
+
+" set title
+set titlestring="vimperator"
+
+" show bottom scrollbar only
+set guioptions=b
+
+" hide tabline
+set showtabline=0
+
+" tab switching options
+noremap <Right> gt
+noremap <Left> gT
+
+" toggle tabline
+map <A-Up> :set showtabline=1<CR>
+map <A-Down> :set showtabline=0<CR>

@@ -30,11 +30,6 @@ alias ls="ls -h --color=auto"
 alias ll="ls -lh --color=auto"
 alias l="ls -lha --color=auto"
 
-alias ffnest="Xnest :2 -geometry 1400x900 &; firefox --display :2 &"
-alias winword="wine ~/.wine/drive_c/Programme/Microsoft\ Office/Office12/WINWORD.EXE"
-alias excel="wine ~/.wine/drive_c/Programme/Microsoft\ Office/Office12/EXCEL.EXE"
-alias powerpoint="wine ~/.wine/drive_c/Programme/Microsoft\ Office/Office12/POWERPNT.EXE"
-
 PROMPT='%n@%m> '
 RPROMPT=' %~'
 
