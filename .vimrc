@@ -8,12 +8,13 @@ set smarttab
 set ignorecase
 set smartcase
 
+set number
+
 filetype plugin on
 set grepprg=grep\ -nH\ $*
 
 filetype indent on
 
-map <F12> :w!<CR>:!aspell -c %<CR>:e! %<CR>
 map <F3> :TlistToggle<CR>
 
 imap ;; <Esc>
