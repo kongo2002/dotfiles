@@ -8,7 +8,7 @@ export MPD_HOST="127.0.0.1"
 export MPD_PORT="6600"
 
 # settings for lancelot nlp solver engine
-export LANDIR="/home/kongo/lancelot/lancelot"
+export LANDIR="/home/kongo/programs/lancelot/lancelot"
 alias sdlan="$LANDIR/sdlan"
 alias lan="$LANDIR/lan"
 
