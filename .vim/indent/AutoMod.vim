@@ -11,7 +11,7 @@ endif
 let b:did_indent = 1
 
 setlocal indentexpr=GetAutoModIndent(v:lnum)
-setlocal indentkeys+==end,=else,=until,=begin
+setlocal indentkeys+==end,=else,=until,=begin,=order
 
 function! GetAutoModIndent( line_num )
 
@@ -46,8 +46,18 @@ function! GetAutoModIndent( line_num )
         return indnt + &shiftwidth
     endif
 
+    " order/backorder
+    if this_line =~ '^\s*in\s\+case\>' && prev_line =~ '^\s*order\>'
+        return indnt + &shiftwidth
+    endif
+
     " unindent
     if this_line =~ '^\s*end\>'
+        return indnt - &shiftwidth
+    endif
+
+    " backorder unindent
+    if prev_line =~ '^\s*in\s\+case\>'
         return indnt - &shiftwidth
     endif
 
