@@ -1,7 +1,7 @@
 " AutoMod indent file
 " Language:     AutoMod
 " Maintainer:   Gregor Uhlenheuer
-" Last Change:  2008 11 03
+" Last Change:  2009 05 09
 
 " check for other indent file
 if exists("b:did_indent")
