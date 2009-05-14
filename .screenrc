@@ -7,5 +7,5 @@ hardstatus alwayslastline "%{wk} %=%?%{wk}%-w%?%{yk}%50>[%n %t]%?%{wk}%+w%?%="
 #caption always "%{= kw}%?%-Lw%?%{+b kw}%n*%t%f %?(%u)%?%{= kw}%?%+Lw%?"
 
 screen -t zsh 0 zsh
-screen -t irc 1 zsh
-screen -t rtorrent 2 zsh
+screen -t irc 1 irssi
+screen -t rtorrent 2 rtorrent
