@@ -37,7 +37,8 @@ syn keyword mControl    nlt not of on open or order ordered preempt print
 syn keyword mControl    read remove result rotate save scale send set
 syn keyword mControl    schedule take terminate to translate travel use
 syn keyword mControl    wait with clone create bring choose claim increment
-syn keyword mControl    merge toggle without next along
+syn keyword mControl    merge toggle without next along satisfying
+syn keyword mControl    among whose
 
 " model specific keywords
 syn keyword mModel  absolute ac all appending backorder color continuous
@@ -52,7 +53,7 @@ syn keyword mModel  amount align acceleration deceleration capacity
 syn keyword mModel  choice exponential greatest lognormal limit loadtype
 syn keyword mModel  max maximum minimum norm normal orientation random
 syn keyword mModel  previous state triangular weibull x y z
-syn keyword mModel  path destination distance satisfying
+syn keyword mModel  path destination distance
 
 " constants
 syn keyword mBool  true True TRUE false False FALSE
