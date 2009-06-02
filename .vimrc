@@ -22,6 +22,8 @@ imap ;; <Esc>
 set encoding=utf-8
 set fileencodings=
 
+set fdm=marker
+
 colorscheme slate
 
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
