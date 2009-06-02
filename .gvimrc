@@ -1,5 +1,5 @@
 set guifont=Terminus\ 10
-set columns=80
+set columns=90
 set lines=60
 
 colorscheme Vitamins2
