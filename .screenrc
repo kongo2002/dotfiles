@@ -9,3 +9,4 @@ hardstatus alwayslastline "%{wk} %=%?%{wk}%-w%?%{yk}%50>[%n %t]%?%{wk}%+w%?%="
 screen -t zsh 0 zsh
 screen -t irc 1 irssi
 screen -t rtorrent 2 rtorrent
+screen -t icq 3 irssi -!
