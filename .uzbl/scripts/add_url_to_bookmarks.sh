@@ -3,7 +3,7 @@ bookmarks_file=$HOME/.uzbl/bookmarks
 bookmarks_tags=$HOME/.uzbl/bookmarks.tags
 
 COLORS=" -nb #303030 -nf khaki -sb #CCFFAA -sf #303030"
-OPTIONS=" -i -xs -rs -l 10"
+OPTIONS=" -i -l 10"
 
 tag=`< $bookmarks_tags dmenu $OPTIONS $COLORS`
 
