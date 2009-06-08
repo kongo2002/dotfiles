@@ -141,8 +141,8 @@ URxvt.urlLauncher:              firefox
 *color3: #ffffb6 
 *color11: #ffffcb 
 ! blue 
-*color4: #96dbfe 
-*color12: #ffffc8 
+*color4: #6699cc 
+*color12: #96cbfe
 ! magenta 
 *color5: #ff73fd 
 *color13: #ff9cfe 
