@@ -29,3 +29,4 @@ colorscheme slate
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
 let g:tex_flavor='latex'
+let g:Tex_ViewRule_dvi = 'xdvi'
