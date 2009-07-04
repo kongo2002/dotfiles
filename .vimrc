@@ -24,7 +24,7 @@ set fileencodings=
 
 set fdm=marker
 
-colorscheme slate
+colorscheme jellybeans
 
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
