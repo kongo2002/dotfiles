@@ -1,0 +1,39 @@
+snippet startproc
+	/*************************************************************************/
+	/* Procedure:	${1:P_name}	*/
+	/* Comment:		${2:no comment}	*/
+	/*************************************************************************/
+	begin $1 arriving procedure
+		${3:/* code */}
+	end /* $1 */
+
+snippet startsub
+	/*************************************************************************/
+	/* Subroutine:	${1:S_name}	*/
+	/* Comment:		${2:no comment}	*/
+	/*************************************************************************/
+	begin $1 procedure
+		${3:/* code */}
+	end /* $1 */
+
+snippet startfunc
+	/*************************************************************************/
+	/* Function:	${1:F_name}	*/
+	/* Arguments:	${2:Integer Ai}	*/
+	/* Return:		${3:Integer}	*/
+	/* Comment:		${4:no comment}	*/
+	/*************************************************************************/
+	begin $1 function
+		${5:/* code */}
+	end /* $1 */
+
+snippet while
+	while ${1:condition} do
+	begin
+		${2:/* code */}
+	end${3}
+snippet for
+	for each ${1:variable} in ${2:entity list} do
+	begin
+		${3:/* code */}
+	end${4}
