@@ -8,8 +8,8 @@ export MPD_HOST="127.0.0.1"
 export MPD_PORT="6600"
 
 # settings for uzbl (especially)
-export XDG_CONFIG_HOME="~/.config"
-export XDG_DATA_HOME="~/.data"
+export XDG_CONFIG_HOME="/home/kongo/.config"
+export XDG_DATA_HOME="/home/kongo/.data"
 
 # settings for lancelot nlp solver engine
 export LANDIR="/home/kongo/programs/lancelot/lancelot"
