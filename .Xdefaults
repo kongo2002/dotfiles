@@ -222,10 +222,10 @@ URxvt.urlLauncher:              firefox
 !XTerm*font:             -*-proggycleanszcp-*-*-*-*-*-*-*-96-*-70-*-*
 XTerm*font:          -*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-1
 
-URxvt.font:                 xft:Terminus:pixelsize=13.0:antialias=true:hinting=true 
+URxvt.font:                 xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true 
 !URxvt.boldFont:             xft:Terminus:pixelsize=13.0:antialias=true:bold:hinting=true 
 !URxvt.italicFont:           xft:Terminus:pixelsize=13.0:antialias=true:italic:autohint=true:hinting=true 
 !URxvt.bolditalicFont:       xft:Terminus:pixelsize=13.0:antialias=true:bold:italic:autohint=true:hinting=true
-URxvt.boldFont:             xft:Terminus:pixelsize=13.0:antialias=true:hinting=true 
-URxvt.italicFont:           xft:Terminus:pixelsize=13.0:antialias=true:hinting=true 
-URxvt.bolditalicFont:       xft:Terminus:pixelsize=13.0:antialias=true:hinting=true
+URxvt.boldFont:             xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:bold:hinting=true 
+URxvt.italicFont:           xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:italic:hinting=true 
+URxvt.bolditalicFont:       xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:bold:italic:hinting=true

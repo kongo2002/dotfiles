@@ -34,8 +34,14 @@ alias ls="ls -h --color=auto"
 alias ll="ls -lh --color=auto"
 alias l="ls -lha --color=auto"
 
+parse_git_branch() {
+    if [[ -d ".git" ]] then
+        git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    fi
+}
+
 PROMPT='%n@%m> '
-RPROMPT=' %~'
+RPROMPT='$(parse_git_branch) %~'
 
 EDITOR="/usr/bin/vim"
 
