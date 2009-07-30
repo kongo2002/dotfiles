@@ -40,8 +40,11 @@ parse_git_branch() {
     fi
 }
 
+fg_green=$'%{\e[1;32m%}'
+fg_no=$'%{\e[0m%}'
+
 PROMPT='%n@%m> '
-RPROMPT='$(parse_git_branch) %~'
+RPROMPT='$fg_green$(parse_git_branch)$fg_no %~'
 
 EDITOR="/usr/bin/vim"
 
