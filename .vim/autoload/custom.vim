@@ -1,7 +1,7 @@
 " Author: Gregor Uhlenheuer
 " Last Change: Aug 04, 2009
 
-function! custom#Telegram() range
+function! custom#Telegram(...) range
     let lnum = a:firstline
     let id = 1
     if lnum > 1
@@ -13,7 +13,11 @@ function! custom#Telegram() range
     endif
     while lnum <= a:lastline
         let line = getline(lnum)
-        let line = substitute(line, '\(.*\)$', '<item id="'.id.'" desc="\1">', '')
+        if a:0 > 0
+            let line = substitute(line, '\(.*\)\s\+\(\d\+\)$', '<item id="'.id.'" len="\2" desc="\1">', '')
+        else
+            let line = substitute(line, '\(.*\)$', '<item id="'.id.'" len="1" desc="\1">', '')
+        endif
         call setline(lnum, line)
         let id += 1
         let lnum += 1
