@@ -32,6 +32,9 @@ set fdm=marker
 " display line numbers
 set number
 
+" switch buffers without saving
+set hidden
+
 " toggle taglist plugin
 map <F3> :TlistToggle<CR>
 
@@ -50,11 +53,13 @@ map <C-k> <C-w>-
 map <C-h> <C-w><
 map <C-l> <C-w>>
 
+" search and replace
+map <F4> :%s///gc<Left><Left><Left><Left>
+
 filetype plugin on
 filetype indent on
 
 set encoding=utf-8
-set fileencodings=
 
 colorscheme jellybeans
 
