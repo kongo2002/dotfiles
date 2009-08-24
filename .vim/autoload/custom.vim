@@ -25,11 +25,11 @@ function! custom#Telegram(...) range
 endfunction
 
 function! custom#CleanTex()
-    normal! :%s/ä/"a/g<CR>
-    normal! :%s/ö/"o/g<CR>
-    normal! :%s/ü/"u/g<CR>
-    normal! :%s/Ä/"A/g<CR>
-    normal! :%s/Ö/"O/g<CR>
-    normal! :%s/Ü/"U/g<CR>
-    normal! :%s/ß/"s/g<CR>
+    silent! %s/ä/\"a/gI
+    silent! %s/ö/\"o/gI
+    silent! %s/ü/\"u/gI
+    silent! %s/Ä/\"A/gI
+    silent! %s/Ö/\"O/gI
+    silent! %s/Ü/\"U/gI
+    silent! %s/ß/\"s/gI
 endfunction
