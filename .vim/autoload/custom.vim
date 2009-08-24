@@ -23,3 +23,13 @@ function! custom#Telegram(...) range
         let lnum += 1
     endwhile
 endfunction
+
+function! custom#CleanTex()
+    normal! :%s/ä/"a/g<CR>
+    normal! :%s/ö/"o/g<CR>
+    normal! :%s/ü/"u/g<CR>
+    normal! :%s/Ä/"A/g<CR>
+    normal! :%s/Ö/"O/g<CR>
+    normal! :%s/Ü/"U/g<CR>
+    normal! :%s/ß/"s/g<CR>
+endfunction

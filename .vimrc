@@ -35,6 +35,9 @@ set number
 " switch buffers without saving
 set hidden
 
+" number of screen lines around cursor
+set scrolloff=5
+
 " toggle taglist plugin
 map <F3> :TlistToggle<CR>
 
@@ -66,8 +69,9 @@ colorscheme jellybeans
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
 let g:tex_flavor='latex'
-let g:Tex_ViewRule_dvi = 'xdvi'
+let g:Tex_ViewRule_dvi = 'evince'
 
 au FileType python map <F6> :!python %<CR>
 au FileType perl map <F6> :!perl %<CR>
 au FileType html,xhtml map <F6> :!firefox %<CR>
+au FileType tex map <F6> :w<CR>\ll\lv
