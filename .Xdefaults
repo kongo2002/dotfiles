@@ -214,18 +214,9 @@ URxvt.urlLauncher:              firefox
 !*color14:                  orange
 !*color15:                  cyan
 
-!XTerm*font:			xft:Bitstream Vera Sans Mono:size=8:style=roman
-!XTerm*font:         -windows-proggytiny-medium-r-normal--0-0-96-96-c-0-iso8859-1
-!XTerm*font:         -windows-proggytiny-medium-r-normal--10-80-96-96-c-60-iso8859-1
-!XTerm*font:         -windows-proggyopti-medium-r-normal--11-80-96-96-c-70-iso8859-1
-!XTerm*font:         -*-proggysquaresz-*-*-*-*-*-*-*-96-*-70-*-*
-!XTerm*font:             -*-proggycleanszcp-*-*-*-*-*-*-*-96-*-70-*-*
-XTerm*font:          -*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-1
+XTerm*font:                 -*-terminus-medium-*-*-*-12-*-*-*-*-*-iso8859-1
 
-URxvt.font:                 xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true 
-!URxvt.boldFont:             xft:Terminus:pixelsize=13.0:antialias=true:bold:hinting=true 
-!URxvt.italicFont:           xft:Terminus:pixelsize=13.0:antialias=true:italic:autohint=true:hinting=true 
-!URxvt.bolditalicFont:       xft:Terminus:pixelsize=13.0:antialias=true:bold:italic:autohint=true:hinting=true
-URxvt.boldFont:             xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:bold:hinting=true 
-URxvt.italicFont:           xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:italic:hinting=true 
-URxvt.bolditalicFont:       xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:bold:italic:hinting=true
+URxvt.font:                 xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:hinting=true 
+URxvt.boldFont:             xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:bold:hinting=true 
+URxvt.italicFont:           xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:italic:hinting=true 
+URxvt.bolditalicFont:       xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:bold:italic:hinting=true
