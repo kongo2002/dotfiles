@@ -75,6 +75,7 @@ au FileType python map <F6> :!python %<CR>
 au FileType perl map <F6> :!perl %<CR>
 au FileType html,xhtml map <F6> :!firefox %<CR>
 au FileType tex map <F6> :w<CR>\ll\lv
+au FileType tex setlocal spell spelllang=de
 
 " convert special chars in tex files
 "au BufWrite *.tex call custom#CleanTex()

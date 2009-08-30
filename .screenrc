@@ -9,4 +9,3 @@ hardstatus alwayslastline "%{= dw} %=%?%{dw}%-w%?%{dy}%50>[%n %t]%?%{dw}%+w%?%="
 screen -t zsh 0 zsh
 screen -t irc 1 irssi
 screen -t p2p 2 rtorrent
-screen -t icq 3 irssi -!

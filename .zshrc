@@ -48,6 +48,8 @@ RPROMPT='$fg_green$(parse_git_branch)$fg_no %~'
 
 EDITOR="/usr/bin/vim"
 
+set -o vi
+
 # history settings
 #
 HISTFILE=~/.zshhistory
