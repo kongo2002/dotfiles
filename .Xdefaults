@@ -9,9 +9,9 @@
 !URxvt*boldItalicFont:			xft:DejaVu Sans Mono:size=7
 
 !*background:               #1c1c1c
-*background:               #000000
+*background:               #111111
 !*foreground:               #b4b4b4
-*foreground:               #ffffff
+*foreground:               #eeeeee
 
 !URxvt*colorBD:                  orange
 !URxvt*colorIT:                  cyan

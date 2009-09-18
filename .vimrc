@@ -42,7 +42,7 @@ set scrolloff=5
 map <F3> :TlistToggle<CR>
 
 " bind escape key
-imap ;; <Esc>
+imap jj <Esc>
 
 " hide search highlight
 map # :noh<CR>
