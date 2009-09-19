@@ -44,9 +44,6 @@ map <F3> :TlistToggle<CR>
 " bind escape key
 imap jj <Esc>
 
-" hide search highlight
-map # :noh<CR>
-
 " change window
 map + <C-w>w
 
