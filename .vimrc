@@ -103,6 +103,7 @@ au FileType perl map <buffer> <F6> :!perl %<CR>
 au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
 au FileType tex map <buffer> <F6> :w<CR>\ll\lv
 au FileType tex setlocal spell spelllang=de
+au FileType AutoMod setlocal foldmethod=syntax
 
 " convert special chars in tex files
 "au BufWrite *.tex call custom#CleanTex()

@@ -21,39 +21,39 @@ syn keyword mStatement break continue
 
 syn keyword mRepeat while do until each for
 
-syn keyword mConditional    if then else
+syn keyword mConditional if then else
 
 syn keyword mSystem function procedure return model modelsys pickup
 syn keyword mSystem arriving leaving initialization passing retrieving
 syn keyword mSystem blocked cleared start finish done
 
 " todo statements
-syn keyword mTodo   TODO FIXME XXX contained
+syn keyword mTodo TODO FIXME XXX contained
 
 " control keywords
-syn keyword mControl    and as at but be by call case dec delimiter dispatch
-syn keyword mControl    filled free from get in inc insert into is move
-syn keyword mControl    nlt not of on open or order ordered preempt print
-syn keyword mControl    read remove result rotate save scale send set
-syn keyword mControl    schedule take terminate to translate travel use
-syn keyword mControl    wait with clone create bring choose claim increment
-syn keyword mControl    merge toggle without next along satisfying
-syn keyword mControl    among whose
+syn keyword mControl and as at but be by call case dec delimiter dispatch
+syn keyword mControl filled free from get in inc insert into is move
+syn keyword mControl nlt not of on open or order ordered preempt print
+syn keyword mControl read remove result rotate save scale send set
+syn keyword mControl schedule take terminate to translate travel use
+syn keyword mControl wait with clone create bring choose claim increment
+syn keyword mControl merge toggle without next along satisfying
+syn keyword mControl among whose
 
 " model specific keywords
-syn keyword mModel  absolute ac all appending backorder color continuous
-syn keyword mModel  counter current day days deliver die down eof
-syn keyword mModel  finished first hr job last list load loads location
-syn keyword mModel  message min new nextclock nextof null ok one oneof
-syn keyword mModel  orderlist parentsys park parking pausecontinue percent
-syn keyword mModel  priority procindex reading relative resource sec schedjob
-syn keyword mModel  size space status theLoad theVehicle this time type
-syn keyword mModel  uniform up vehicle work writing substring remaining
-syn keyword mModel  amount align acceleration deceleration capacity
-syn keyword mModel  choice exponential greatest lognormal limit loadtype
-syn keyword mModel  max maximum minimum norm normal orientation random
-syn keyword mModel  previous state triangular weibull x y z
-syn keyword mModel  path destination distance velocity
+syn keyword mModel absolute ac all appending backorder color continuous
+syn keyword mModel counter current day days deliver die down eof
+syn keyword mModel finished first hr job last list load loads location
+syn keyword mModel message min new nextclock nextof null ok one oneof
+syn keyword mModel orderlist parentsys park parking pausecontinue percent
+syn keyword mModel priority procindex reading relative resource sec schedjob
+syn keyword mModel size space status theLoad theVehicle this time type
+syn keyword mModel uniform up vehicle work writing substring remaining
+syn keyword mModel amount align acceleration deceleration capacity
+syn keyword mModel choice exponential greatest lognormal limit loadtype
+syn keyword mModel max maximum minimum norm normal orientation random
+syn keyword mModel previous state triangular weibull x y z
+syn keyword mModel path destination distance velocity
 
 " constants
 syn keyword mBool  true True TRUE false False FALSE
@@ -71,6 +71,9 @@ syn region mCharacter start=/'/ skip=/\\'/ end=/'/
 " blocks
 syn match mBlockError /\<end\>/
 syn region mBlockInner matchgroup=mBlock start=/\<begin\>/ end=/\<end\>/ contains=ALLBUT,mBlock
+
+" folding of procedures/functions only
+syn region mFold start=/^begin\>/ end=/^end\>/ transparent fold keepend containedin=ALL
 
 " parantheses
 syn match mParenError display /)/
