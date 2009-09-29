@@ -53,7 +53,6 @@ map <F5> :NERDTreeToggle<CR>
 
 " bind escape key
 imap jj <Esc>
-imap <S-Space> <Esc>
 
 " search recursively in current dir for word under cursor
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> copen<CR>

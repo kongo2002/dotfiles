@@ -80,15 +80,13 @@ syn match mParenError display /)/
 syn region mParenInner  matchgroup=mParen start=/(/ end=/)/ contains=ALLBUT,mComment,mTodo,mParen
 
 " operators
-syn match mOperator display "[-+*/%=]\+"
+syn match mOperator display /[-+*/%=]\+/
 
 " numbers
-" syn match mNumber display "[0-9]*\.\?[0-9]\+"
-syn match mNumbers display transparent "\<\d\|\.\d" contains=mNumber
-syn match mNumber display contained "\d\+"
+syn match mNumber display /\<\d*\.\?\d\+/
 
 " constants
-syn match mConstant display "\s[A-Z]\+\([_-]*[A-Z]\+\)*\s"
+syn match mConstant display /\s[A-Z]\+\([_-]*[A-Z]\+\)*\s/
 
 " nesting comments
 syn region mComment start=/\/\*/ end=/\*\// contains=mComment,mTodo
