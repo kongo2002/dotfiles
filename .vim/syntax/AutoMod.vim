@@ -17,7 +17,7 @@ syn sync fromstart
 syn case match
 
 " standard control statements
-syn keyword mStatement  begin end break continue
+syn keyword mStatement break continue
 
 syn keyword mRepeat while do until each for
 
@@ -68,7 +68,12 @@ syn region mString start=/"/ skip=/\\"/ end=/"/
 " character strings
 syn region mCharacter start=/'/ skip=/\\'/ end=/'/
 
+" blocks
+syn match mBlockError /\<end\>/
+syn region mBlockInner matchgroup=mBlock start=/\<begin\>/ end=/\<end\>/ contains=ALLBUT,mBlock
+
 " parantheses
+syn match mParenError display /)/
 syn region mParenInner  matchgroup=mParen start=/(/ end=/)/ contains=ALLBUT,mComment,mTodo,mParen
 
 " operators
@@ -87,18 +92,21 @@ syn region mComment start=/\/\*/ end=/\*\// contains=mComment,mTodo
 
 " default highlighting
 hi def link mStatement  Function
+hi def link mBlock Function
 hi def link mRepeat Function
-hi def link mConditional    Function
+hi def link mConditional Function
 hi def link mSystem Label
-hi def link mControl    Statement
-hi def link mModel  Type
-hi def link mBool  Boolean
-hi def link mCharacter  Character
+hi def link mControl Statement
+hi def link mModel Type
+hi def link mBool Boolean
+hi def link mCharacter Character
 hi def link mString String
-hi def link mTodo   Todo
-hi def link mComment    Comment
-hi def link mColor  SpecialChar
-hi def link mParen  Function
+hi def link mTodo Todo
+hi def link mComment Comment
+hi def link mColor SpecialChar
+hi def link mParen Function
 hi def link mNumber Number
 hi def link mOperator Operator
-hi def link mConstant   Constant
+hi def link mConstant Constant
+hi def link mParenError Error
+hi def link mBlockError Error
