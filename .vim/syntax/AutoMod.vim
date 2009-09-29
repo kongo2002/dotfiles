@@ -83,10 +83,10 @@ syn region mParenInner  matchgroup=mParen start=/(/ end=/)/ contains=ALLBUT,mCom
 syn match mOperator display /[-+*/%=]\+/
 
 " numbers
-syn match mNumber display /\<\d*\.\?\d\+/
+syn match mNumber display /\<\d*\.\?\d\+\>/
 
 " constants
-syn match mConstant display /\s[A-Z]\+\([_-]*[A-Z]\+\)*\s/
+syn match mConstant display /\<\u\+\%(_*[0-9A-Z]\+\)*\>/
 
 " nesting comments
 syn region mComment start=/\/\*/ end=/\*\// contains=mComment,mTodo
