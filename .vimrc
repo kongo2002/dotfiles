@@ -8,6 +8,7 @@ set tabstop=4
 set smarttab
 
 " ignore case in search when no uppercase search
+set incsearch
 set ignorecase
 set smartcase
 
@@ -87,8 +88,13 @@ set encoding=utf-8
 
 colorscheme jellybeans
 
+" TagList settings
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
+" NERDTree settings
+let NERDTreeQuitOnOpen=1
+
+" LatexSuite settings
 let g:tex_flavor='latex'
 let g:Tex_ViewRule_dvi = 'evince'
 
