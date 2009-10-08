@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     AutoMod
 " Maintainer:   Gregor Uhlenheuer
-" Last Change: Sep 29, 2009
+" Last Change: Okt 08, 2009
 
 if version < 600
     syntax clear
@@ -10,7 +10,6 @@ elseif exists("b:current_syntax")
 endif
 
 " synchronization settings
-syn sync clear
 syn sync fromstart
 
 " case sensitive matching
@@ -53,7 +52,7 @@ syn keyword mModel amount align acceleration deceleration capacity
 syn keyword mModel choice exponential greatest lognormal limit loadtype
 syn keyword mModel max maximum minimum norm normal orientation random
 syn keyword mModel previous state triangular weibull x y z
-syn keyword mModel path destination distance velocity
+syn keyword mModel path destination distance velocity line
 
 " constants
 syn keyword mBool  true True TRUE false False FALSE
@@ -111,3 +110,5 @@ hi def link mOperator Operator
 hi def link mConstant Constant
 hi def link mParenError Error
 hi def link mBlockError Error
+
+let b:current_syntax = "AutoMod"

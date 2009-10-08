@@ -1,4 +1,3 @@
-set makeprg=g++\ -Wall\ -o\ %<\ %
 set grepprg=grep\ -nH\ $*
 
 " tabs settings
@@ -58,16 +57,10 @@ imap jj <Esc>
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> copen<CR>
 
 " cd to the directory containing the file in the buffer
-nmap ,cd :lcd %:h<CR>
+nmap <Leader>cd :lcd %:h<CR>
 
 " change window
 map + <C-w>w
-
-" window movement
-map <C-m> <C-w>+
-map <C-k> <C-w>-
-map <C-h> <C-w><
-map <C-l> <C-w>>
 
 " map special keys for non-us keyboards
 map ü <C-]>
@@ -77,13 +70,19 @@ map Ö {
 map Ä }
 map ß \
 
+" next buffer
+map <C-n> :bn<CR>
+
 " close current window
-noremap ,cc :close<CR>
+noremap <Leader>cc :close<CR>
 
 filetype plugin on
 filetype indent on
 
 set encoding=utf-8
+
+" enable 256 color support
+set t_Co=256
 
 colorscheme jellybeans
 
@@ -103,6 +102,8 @@ au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
 au FileType tex map <buffer> <F6> :w<CR>\ll\lv
 au FileType tex setlocal spell spelllang=de
 au FileType AutoMod setlocal foldmethod=syntax
+au FileType cpp setlocal makeprg=g++\ -Wall\ -o\ %<\ %
+au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
 
 " convert special chars in tex files
 "au BufWrite *.tex call custom#CleanTex()
