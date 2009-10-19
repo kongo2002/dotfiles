@@ -53,7 +53,13 @@ function! GetAutoModIndent( line_num )
 
     " unindent
     if this_line =~ '^\s*end\>'
-        return indnt - &shiftwidth
+        let indnt = indnt - &shiftwidth
+
+        if getline( prev_line_num-1 ) =~ '^\s*else\s*$'
+            let indnt = indnt - &shiftwidth
+        endif
+
+        return indnt
     endif
 
     " backorder unindent

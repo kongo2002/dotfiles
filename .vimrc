@@ -102,6 +102,11 @@ nmap <silent> gC :cprev<CR>
 nmap <silent> gb :bnext<CR>
 nmap <silent> gB :bprev<CR>
 nmap <tab> :b<Space>
+
+" fuzzyfinder mappings
+nmap <Leader>fb :FufBuffer<CR>
+nmap <Leader>fd :FufDir<CR>
+nmap <Leader>ff :FufFile<CR>
  
 " close current window
 noremap <Leader>cc :close<CR>
