@@ -1,4 +1,12 @@
-set grepprg=grep\ -nH\ $*
+" ===========================================================================
+"       GLOBAL SETTINGS
+" ===========================================================================
+
+filetype on
+filetype plugin on
+filetype indent on
+
+set encoding=utf-8
 
 " tabs settings
 set expandtab
@@ -44,20 +52,36 @@ set synmaxcol=1024
 " do not redraw screen when executing macros
 set lazyredraw
 
-" toggle taglist plugin
-map <F3> :TlistToggle<CR>
+" turn on wildmenu completion
+set wildmenu
 
-" toggle NERDTree
-map <F5> :NERDTreeToggle<CR>
+" indicates fast terminal connection
+set ttyfast
+
+" modify grep settings
+set grepprg=grep\ -nH\ $*
+
+" enable 256 color support
+set t_Co=256
+
+colorscheme jellybeans
+
+" ===========================================================================
+"       MAPPINGS
+" ===========================================================================
+
+" set mapleader from backslash to comma
+let mapleader=','
+
+" map Ctrl-E to do what , used to do
+nnoremap <C-e> ,
+vnoremap <C-e> ,
 
 " bind escape key
 imap jj <Esc>
 
 " search recursively in current dir for word under cursor
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> copen<CR>
-
-" cd to the directory containing the file in the buffer
-nmap <Leader>cd :lcd %:h<CR>
 
 " change window
 map + <C-w>w
@@ -70,21 +94,27 @@ map Ö {
 map Ä }
 map ß \
 
-" next buffer
-map <C-n> :bn<CR>
-
+" Quickfix navigation
+nmap <silent> gc :cnext<CR>
+nmap <silent> gC :cprev<CR>
+ 
+" Buffer navigation
+nmap <silent> gb :bnext<CR>
+nmap <silent> gB :bprev<CR>
+nmap <tab> :b<Space>
+ 
 " close current window
 noremap <Leader>cc :close<CR>
 
-filetype plugin on
-filetype indent on
+" cd to the directory containing the file in the buffer
+nmap <Leader>cd :lcd %:h<CR>
 
-set encoding=utf-8
+" yank to end of line
+nnoremap Y y$
 
-" enable 256 color support
-set t_Co=256
-
-colorscheme jellybeans
+" ===========================================================================
+"       PLUGIN SETTINGS
+" ===========================================================================
 
 " TagList settings
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
@@ -95,6 +125,10 @@ let NERDTreeQuitOnOpen=1
 " LatexSuite settings
 let g:tex_flavor='latex'
 let g:Tex_ViewRule_dvi = 'evince'
+
+" ===========================================================================
+"       FILETYPE SPECIFICS
+" ===========================================================================
 
 au FileType python map <buffer> <F6> :!python %<CR>
 au FileType perl map <buffer> <F6> :!perl %<CR>
