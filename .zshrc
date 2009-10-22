@@ -16,6 +16,8 @@ export LANDIR="/home/kongo/programs/lancelot/lancelot"
 alias sdlan="$LANDIR/sdlan"
 alias lan="$LANDIR/lan"
 
+alias gvim='LC_ALL=C gvim'
+
 alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'

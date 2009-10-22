@@ -94,6 +94,15 @@ map Ö {
 map Ä }
 map ß \
 
+" easier navigation in command mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+cnoremap <C-n> <Up>
+cnoremap <C-b> <S-Left>
+cnoremap <C-f> <S-Right>
+
 " Quickfix navigation
 nmap <silent> gc :cnext<CR>
 nmap <silent> gC :cprev<CR>
