@@ -55,6 +55,9 @@ set lazyredraw
 " turn on wildmenu completion
 set wildmenu
 
+" turn on mouse in all modes
+set mouse=a
+
 " indicates fast terminal connection
 set ttyfast
 

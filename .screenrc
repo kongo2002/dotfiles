@@ -7,5 +7,16 @@ hardstatus alwayslastline "%{= dw} %=%?%{dw}%-w%?%{dy}%50>[%n %t]%?%{dw}%+w%?%="
 #caption always "%{= kw}%?%-Lw%?%{+b kw}%n*%t%f %?(%u)%?%{= kw}%?%+Lw%?"
 
 screen -t zsh 0 zsh
-screen -t irc 1 irssi
-screen -t p2p 2 rtorrent
+screen -t irc 1 zsh
+screen -t p2p 2 zsh
+
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+
+# tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# erase background with current bg color
+defbce "on"
