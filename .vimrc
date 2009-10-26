@@ -1,12 +1,17 @@
-" ===========================================================================
+" =====================================================================
 "       GLOBAL SETTINGS
-" ===========================================================================
+" =====================================================================
+
+set nocompatible
 
 filetype on
 filetype plugin on
 filetype indent on
 
 set encoding=utf-8
+
+" allow backspace in insert mode
+set backspace=indent,eol,start
 
 " tabs settings
 set expandtab
@@ -69,9 +74,9 @@ set t_Co=256
 
 colorscheme jellybeans
 
-" ===========================================================================
+" =====================================================================
 "       MAPPINGS
-" ===========================================================================
+" =====================================================================
 
 " set mapleader from backslash to comma
 let mapleader=','
@@ -100,8 +105,6 @@ map ß \
 " easier navigation in command mode
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap <C-h> <Left>
-cnoremap <C-l> <Right>
 cnoremap <C-n> <Up>
 cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
@@ -114,6 +117,9 @@ nmap <silent> gC :cprev<CR>
 nmap <silent> gb :bnext<CR>
 nmap <silent> gB :bprev<CR>
 nmap <tab> :b<Space>
+
+" TagList mapping
+map <F3> :TlistToggle<CR>
 
 " fuzzyfinder mappings
 nmap <Leader>fb :FufBuffer<CR>
@@ -129,9 +135,9 @@ nmap <Leader>cd :lcd %:h<CR>
 " yank to end of line
 nnoremap Y y$
 
-" ===========================================================================
+" =====================================================================
 "       PLUGIN SETTINGS
-" ===========================================================================
+" =====================================================================
 
 " TagList settings
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
@@ -143,9 +149,9 @@ let NERDTreeQuitOnOpen=1
 let g:tex_flavor='latex'
 let g:Tex_ViewRule_dvi = 'evince'
 
-" ===========================================================================
+" =====================================================================
 "       FILETYPE SPECIFICS
-" ===========================================================================
+" =====================================================================
 
 au FileType python map <buffer> <F6> :!python %<CR>
 au FileType perl map <buffer> <F6> :!perl %<CR>
@@ -158,3 +164,14 @@ au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
 
 " convert special chars in tex files
 "au BufWrite *.tex call custom#CleanTex()
+
+" =====================================================================
+"       TERM FIX
+" =====================================================================
+
+if &term ==? "rxvt-unicode"
+    imap OA <Esc>ki
+    imap OB <Esc>ji
+    imap OC <Esc>li
+    imap OD <Esc>hi
+endif

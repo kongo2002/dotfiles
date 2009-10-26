@@ -36,17 +36,47 @@ alias ls="ls -h --color=auto"
 alias ll="ls -lh --color=auto"
 alias l="ls -lha --color=auto"
 
-parse_git_branch() {
+# get current vi mode
+function zle-keymap-select {
+    VIMODE="${${KEYMAP/vicmd/[M] }/(main|viins)/[I] }"
+    zle reset-prompt
+}
+
+# register new zsh widget
+zle -N zle-keymap-select
+
+git_b() {
     if [[ -d ".git" ]] then
         git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
     fi
 }
 
-fg_green=$'%{\e[1;32m%}'
-fg_no=$'%{\e[0m%}'
+git_c() {
+    s="$(git status | tail -1 | sed -e 's/^\(\w*\).*/\1/')"
 
-PROMPT='%n@%m> '
-RPROMPT='$fg_green$(parse_git_branch)$fg_no %~'
+    if [ "$s" = "nothing" ]; then
+        GCOLOR=$PR_BOLD_GREEN
+    elif [ "$s" = "no" ]; then
+        GCOLOR=$PR_BOLD_YELLOW
+    else
+        GCOLOR=$PR_BOLD_RED
+    fi
+
+    printf "%s" "${GCOLOR}"
+}
+
+setprompt() {    # load colors
+    autoload -U colors
+    colors
+
+    for COLOR in RED GREEN YELLOW BLUE WHITE BLACK; do
+        eval PR_$COLOR='%{$fg_no_bold[${(L)COLOR}]%}'
+        eval PR_BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+    done
+
+    PROMPT='${PR_BOLD_BLUE}$VIMODE${PR_BOLD_WHITE}%n@%m${PR_BOLD_RED}!${PR_BOLD_WHITE}%!>%{${reset_color}%} '
+    RPROMPT='$(git_c)$(git_b)%{${reset_color}%} %~'
+}
 
 EDITOR="/usr/bin/vim"
 
@@ -56,7 +86,6 @@ set -o vi
 #
 HISTFILE=~/.zshhistory
 HISTSIZE=3000
-HISTIGNORE=ll:ls
 SAVEHIST=3000
 
 bindkey "^f" history-beginning-search-backward
@@ -230,3 +259,5 @@ setopt                       \
         unset                \
      NO_verbose              \
      	zle
+
+setprompt
