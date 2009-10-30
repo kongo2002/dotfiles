@@ -66,6 +66,9 @@ set mouse=a
 " indicates fast terminal connection
 set ttyfast
 
+" no backup
+set nobackup
+
 " modify grep settings
 set grepprg=grep\ -nH\ $*
 
@@ -87,6 +90,10 @@ vnoremap <C-e> ,
 
 " bind escape key
 imap jj <Esc>
+
+" switch 'jump to mark' mapping
+nnoremap ' `
+nnoremap ` '
 
 " search recursively in current dir for word under cursor
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> copen<CR>
@@ -166,7 +173,7 @@ au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
 "au BufWrite *.tex call custom#CleanTex()
 
 " =====================================================================
-"       TERM FIX
+"       TERM SPECIFICS
 " =====================================================================
 
 if &term ==? "rxvt-unicode"
