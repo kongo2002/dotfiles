@@ -32,10 +32,13 @@ set laststatus=2
 
 " filename, flags
 set statusline=%<%F\ #%n\ %1*%m%*%r%h%w
-"
+
 " fileformat, encoding
 set statusline+=\ [%{&ff}]\ %y\ [%{(&fenc==\"\"?&enc:&fenc)}]
-"
+
+" current space.vim command
+set statusline+=\ %{SSpace()}
+
 " line, column, percentage
 set statusline+=%=%10(%l,%v%)\ %P
 
@@ -182,3 +185,15 @@ if &term ==? "rxvt-unicode"
     imap OC <Esc>li
     imap OD <Esc>hi
 endif
+
+" =====================================================================
+"       CUSTOM FUNCTIONS
+" =====================================================================
+
+function! SSpace()
+    if exists("*GetSpaceMovement") && GetSpaceMovement() != ""
+        return "[" . GetSpaceMovement() . "]"
+    else
+        return ""
+    endif
+endfunction

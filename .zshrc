@@ -80,7 +80,8 @@ setprompt() {    # load colors
 
 EDITOR="/usr/bin/vim"
 
-set -o vi
+# toggle vi mode
+bindkey -v
 
 # history settings
 #
