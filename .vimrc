@@ -1,6 +1,9 @@
-" =====================================================================
-"       GLOBAL SETTINGS
-" =====================================================================
+" Filename:     .vimrc
+" Description:  Vim configuration file
+" Author:       Gregor Uhlenheuer
+" Last Change:  Mo 02 Nov 2009 22:03:07 CET
+
+" GLOBAL SETTINGS -------------------------------------------------{{{1
 
 set nocompatible
 
@@ -27,6 +30,10 @@ set smartcase
 " highlight current cursorline
 set cursorline
 
+" enable modelines
+set modeline
+set modelines=5
+
 " display statusline even if there is only one window
 set laststatus=2
 
@@ -47,6 +54,9 @@ set fdm=marker
 
 " display line numbers
 set number
+
+" line numbers as narrow as possible
+set numberwidth=1
 
 " switch buffers without saving
 set hidden
@@ -80,12 +90,11 @@ set t_Co=256
 
 colorscheme jellybeans
 
-" =====================================================================
-"       MAPPINGS
-" =====================================================================
+" MAPPINGS --------------------------------------------------------{{{1
 
 " set mapleader from backslash to comma
 let mapleader=','
+let g:mapleader=','
 
 " map Ctrl-E to do what , used to do
 nnoremap <C-e> ,
@@ -98,11 +107,14 @@ imap jj <Esc>
 nnoremap ' `
 nnoremap ` '
 
-" search recursively in current dir for word under cursor
-map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> copen<CR>
+" redraw screen and remove search highlights
+nnoremap <silent> <C-l> :noh<CR><C-l>
 
 " change window
 map + <C-w>w
+
+" yank to end of line
+nnoremap Y y$
 
 " map special keys for non-us keyboards
 map ü <C-]>
@@ -119,49 +131,57 @@ cnoremap <C-n> <Up>
 cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
 
+" toggle paste mode
+nmap <silent> <Leader>p :set paste! paste?<CR>
+
+" toggle wrap
+nmap <silent> <Leader>w :set wrap! wrap?<CR>
+
 " Quickfix navigation
 nmap <silent> gc :cnext<CR>
 nmap <silent> gC :cprev<CR>
- 
+
 " Buffer navigation
 nmap <silent> gb :bnext<CR>
 nmap <silent> gB :bprev<CR>
-nmap <tab> :b<Space>
 
 " TagList mapping
 map <F3> :TlistToggle<CR>
 
-" fuzzyfinder mappings
+" FuzzyFinder mappings
 nmap <Leader>fb :FufBuffer<CR>
 nmap <Leader>fd :FufDir<CR>
 nmap <Leader>ff :FufFile<CR>
- 
+
 " close current window
 noremap <Leader>cc :close<CR>
 
 " cd to the directory containing the file in the buffer
 nmap <Leader>cd :lcd %:h<CR>
 
-" yank to end of line
-nnoremap Y y$
+" search recursively in current dir for word under cursor
+map <F4> :execute "vimgrep /".expand("<cword>")."/j **"<Bar>copen<CR>
 
-" =====================================================================
-"       PLUGIN SETTINGS
-" =====================================================================
+" PLUGIN SETTINGS -------------------------------------------------{{{1
 
-" TagList settings
+" SNIPMATE SETTINGS -----------------------------------------------{{{2
+
+let g:snips_author='Gregor Uhlenheuer'
+
+" TAGLIST SETTINGS ------------------------------------------------{{{2
+
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
-" NERDTree settings
+" NERDTREE SETTINGS -----------------------------------------------{{{2
+
 let NERDTreeQuitOnOpen=1
 
-" LatexSuite settings
+" LATEXSUITE SETTINGS ---------------------------------------------{{{2
+
 let g:tex_flavor='latex'
 let g:Tex_ViewRule_dvi = 'evince'
 
-" =====================================================================
-"       FILETYPE SPECIFICS
-" =====================================================================
+" FILETYPE SPECIFICS ----------------------------------------------{{{1
 
 au FileType python map <buffer> <F6> :!python %<CR>
 au FileType perl map <buffer> <F6> :!perl %<CR>
@@ -175,9 +195,7 @@ au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
 " convert special chars in tex files
 "au BufWrite *.tex call custom#CleanTex()
 
-" =====================================================================
-"       TERM SPECIFICS
-" =====================================================================
+" TERM SPECIFICS --------------------------------------------------{{{1
 
 if &term ==? "rxvt-unicode"
     imap OA <Esc>ki
@@ -186,9 +204,7 @@ if &term ==? "rxvt-unicode"
     imap OD <Esc>hi
 endif
 
-" =====================================================================
-"       CUSTOM FUNCTIONS
-" =====================================================================
+" CUSTOM FUNCTIONS ------------------------------------------------{{{1
 
 function! SSpace()
     if exists("*GetSpaceMovement") && GetSpaceMovement() != ""
