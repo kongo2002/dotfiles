@@ -164,19 +164,19 @@ map <F4> :execute "vimgrep /".expand("<cword>")."/j **"<Bar>copen<CR>
 
 " PLUGIN SETTINGS -------------------------------------------------{{{1
 
-" SNIPMATE SETTINGS -----------------------------------------------{{{2
+" SNIPMATE --------------------------------------------------------{{{2
 
 let g:snips_author='Gregor Uhlenheuer'
 
-" TAGLIST SETTINGS ------------------------------------------------{{{2
+" TAGLIST ---------------------------------------------------------{{{2
 
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
-" NERDTREE SETTINGS -----------------------------------------------{{{2
+" NERDTREE --------------------------------------------------------{{{2
 
 let NERDTreeQuitOnOpen=1
 
-" LATEXSUITE SETTINGS ---------------------------------------------{{{2
+" LATEXSUITE ------------------------------------------------------{{{2
 
 let g:tex_flavor='latex'
 let g:Tex_ViewRule_dvi = 'evince'
