@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     AutoMod
 " Maintainer:   Gregor Uhlenheuer
-" Last Change: Okt 08, 2009
+" Last Change: 2009 11 03
 
 if version < 600
     syntax clear
@@ -51,7 +51,7 @@ syn keyword mModel uniform up vehicle work writing substring remaining
 syn keyword mModel amount align acceleration deceleration capacity
 syn keyword mModel choice exponential greatest lognormal limit loadtype
 syn keyword mModel max maximum minimum norm normal orientation random
-syn keyword mModel previous state triangular weibull x y z
+syn keyword mModel previous state triangular weibull x y z total
 syn keyword mModel path destination distance velocity line
 
 " constants
@@ -61,6 +61,9 @@ syn keyword mBool  true True TRUE false False FALSE
 syn keyword mColor  black blue cyan dkgray green ltblue ltgray ltgreen ltyellow
 syn keyword mColor  magenta orange purple red white yellow brown
 
+" 'at end' keyword
+syn match mAtEnd display /\(at\s\+\)\@<=end\>/
+
 " strings
 syn region mString start=/"/ skip=/\\"/ end=/"/
 
@@ -68,8 +71,8 @@ syn region mString start=/"/ skip=/\\"/ end=/"/
 syn region mCharacter start=/'/ skip=/\\'/ end=/'/
 
 " blocks
-syn match mBlockError /\<end\>/
-syn region mBlockInner matchgroup=mBlock start=/\<begin\>/ end=/\<end\>/ contains=ALLBUT,mBlock
+syn match mBlockError /^\s*\<end\>/
+syn region mBlockInner matchgroup=mBlock start=/\<begin\>/ end=/^\s*\<end\>/ contains=ALLBUT,mBlock
 
 " folding of procedures/functions only
 syn region mFold start=/^begin\>/ end=/^end\>/ transparent fold keepend containedin=ALL
@@ -110,5 +113,6 @@ hi def link mOperator Operator
 hi def link mConstant Constant
 hi def link mParenError Error
 hi def link mBlockError Error
+hi def link mAtEnd Type
 
 let b:current_syntax = "AutoMod"

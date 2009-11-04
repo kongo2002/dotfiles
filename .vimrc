@@ -116,6 +116,9 @@ map + <C-w>w
 " yank to end of line
 nnoremap Y y$
 
+" move to middle of current line
+nmap <expr> gM (strlen(getline("."))/2)."<Bar>"
+
 " map special keys for non-us keyboards
 map ü <C-]>
 map ö [
