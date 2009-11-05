@@ -44,7 +44,10 @@ set statusline=%<%F\ #%n\ %1*%m%*%r%h%w
 set statusline+=\ [%{&ff}]\ %y\ [%{(&fenc==\"\"?&enc:&fenc)}]
 
 " current space.vim command
-set statusline+=\ %{SSpace()}
+set statusline+=%{SSpace()}
+
+" current syntax group
+set statusline+=%{SyntaxItem()}
 
 " line, column, percentage
 set statusline+=%=%10(%l,%v%)\ %P
@@ -198,6 +201,7 @@ au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
 
 " TERM SPECIFICS --------------------------------------------------{{{1
 
+" fix arrow keys
 if &term ==? "rxvt-unicode"
     imap OA <Esc>ki
     imap OB <Esc>ji
@@ -207,9 +211,20 @@ endif
 
 " CUSTOM FUNCTIONS ------------------------------------------------{{{1
 
+" get current movement for space.vim plugin
 function! SSpace()
     if exists("*GetSpaceMovement") && GetSpaceMovement() != ""
-        return "[" . GetSpaceMovement() . "]"
+        return " [" . GetSpaceMovement() . "]"
+    else
+        return ""
+    endif
+endfunction
+
+" get syntax highlight group under cursor
+function! SyntaxItem()
+    let synGrp=synIDattr(synID(line("."), col("."), 1), "name")
+    if synGrp != ""
+        return " [" . synGrp . "]"
     else
         return ""
     endif
