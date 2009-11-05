@@ -189,8 +189,6 @@ let g:Tex_ViewRule_dvi = 'evince'
 au FileType python map <buffer> <F6> :!python %<CR>
 au FileType perl map <buffer> <F6> :!perl %<CR>
 au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
-au FileType tex map <buffer> <F6> :w<CR>\ll\lv
-au FileType tex setlocal spell spelllang=de
 au FileType AutoMod setlocal fdm=syntax noet
 au FileType cpp setlocal makeprg=g++\ -Wall\ -o\ %<\ %
 au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
