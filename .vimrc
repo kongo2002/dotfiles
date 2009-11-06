@@ -91,6 +91,9 @@ set grepprg=grep\ -nH\ $*
 " enable 256 color support
 set t_Co=256
 
+" set colorscheme
+set background=dark
+
 colorscheme jellybeans
 
 " MAPPINGS --------------------------------------------------------{{{1
@@ -180,12 +183,18 @@ let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
 " NERDTREE --------------------------------------------------------{{{2
 
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen = 1
 
 " LATEXSUITE ------------------------------------------------------{{{2
 
-let g:tex_flavor='latex'
+let g:tex_flavor = 'latex'
 let g:Tex_ViewRule_dvi = 'evince'
+
+" TO_HTML ---------------------------------------------------------{{{2
+
+let html_number_lines = 0 " don't show line numbers
+let html_use_css = 1      " don't use inline stylesheets
+let html_no_pre = 1       " don't enclose in <pre> tags
 
 " FILETYPE SPECIFICS ----------------------------------------------{{{1
 
@@ -229,3 +238,16 @@ function! SyntaxItem()
         return ""
     endif
 endfunction
+
+" implement a custom TOhtml function
+function! DivHtml() range
+    exec a:firstline . "," . a:lastline . "TOhtml"
+    %g/<style/normal $dgg
+    %s/<\/style>\n<\/head>\n//
+    %s/body {/.vim_block {/
+    %s/<body\(.*\)>/<div class="vim_block"\1>/
+    %s/<\/body>\n<\/html>/<\/div>/
+    silent %s/<br>//g
+endfunction
+
+command -range=% DivHtml <line1>,<line2>call DivHtml()
