@@ -173,6 +173,9 @@ map <F4> :execute "vimgrep /".expand("<cword>")."/j **"<Bar>copen<CR>
 
 " PLUGIN SETTINGS -------------------------------------------------{{{1
 
+" extend runtime path with plugin directory
+silent! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
+
 " SNIPMATE --------------------------------------------------------{{{2
 
 let g:snips_author='Gregor Uhlenheuer'
