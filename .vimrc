@@ -172,6 +172,9 @@ nmap <silent> gC :cprev<CR>
 nmap <silent> gb :bnext<CR>
 nmap <silent> gB :bprev<CR>
 
+" NERDTree mapping
+map <F1> :NERDTreeToggle<CR>
+
 " TagList mapping
 map <F3> :TlistToggle<CR>
 
@@ -192,7 +195,7 @@ map <F4> :execute "vimgrep /".expand("<cword>")."/j **"<Bar>copen<CR>
 " PLUGIN SETTINGS -------------------------------------------------{{{1
 
 " extend runtime path with plugin directory
-silent! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
+sil! cal pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
 
 " SNIPMATE --------------------------------------------------------{{{2
 
@@ -206,10 +209,13 @@ let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
 let NERDTreeQuitOnOpen = 1
 
-" LATEXSUITE ------------------------------------------------------{{{2
+" LATEX -----------------------------------------------------------{{{2
 
-let g:tex_flavor = 'latex'
-let g:Tex_ViewRule_dvi = 'evince'
+" enable syntax folding
+let g:tex_fold_enabled = 1
+
+" do not search for 'Makefile'
+let g:tex_ignore_makefile = 1
 
 " TO_HTML ---------------------------------------------------------{{{2
 
