@@ -82,6 +82,24 @@ set mouse=a
 " indicates fast terminal connection
 set ttyfast
 
+" visually break lines
+set wrap
+
+" break lines at sensible place
+set linebreak
+
+" hook arrow for wrapped characters
+set showbreak=↪
+
+" show certain non-printing characters
+set list listchars=
+
+set lcs+=tab:»·
+set lcs+=extends:→
+set lcs+=precedes:←
+set lcs+=nbsp:·
+set lcs+=trail:·
+
 " no backup
 set nobackup
 
