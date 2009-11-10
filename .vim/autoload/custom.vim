@@ -33,3 +33,20 @@ function! custom#CleanTex()
     silent! %s/Ü/\"U/gI
     silent! %s/ß/\"s/gI
 endfunction
+
+function! custom#CleanDXF()
+    let id = 0
+    normal gg
+    while search('\<VRMLIndexedFaceSet\>', 'e') > 0
+        let id += 1
+        call search('^\s*DEF\>', 'be')
+        normal f{%
+        if search(']', 'n', line(".")) > 0
+            call setline(line('.')+1, getline(line('.')+1).']')
+        endif
+        normal V%d
+    endwhile
+    silent! %s/,\_s\+]/\r]/
+    silent! g/^\s*$/d
+    echo id . " IndexedFaceSet's removed"
+endfunction
