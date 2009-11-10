@@ -209,14 +209,6 @@ let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
 let NERDTreeQuitOnOpen = 1
 
-" LATEX -----------------------------------------------------------{{{2
-
-" enable syntax folding
-let g:tex_fold_enabled = 1
-
-" do not search for 'Makefile'
-let g:tex_ignore_makefile = 1
-
 " TO_HTML ---------------------------------------------------------{{{2
 
 let html_number_lines = 0 " don't show line numbers
@@ -225,6 +217,8 @@ let html_no_pre = 1       " don't enclose in <pre> tags
 
 " FILETYPE SPECIFICS ----------------------------------------------{{{1
 
+" AUTOCOMMANDS ----------------------------------------------------{{{2
+
 au FileType python map <buffer> <F6> :!python %<CR>
 au FileType perl map <buffer> <F6> :!perl %<CR>
 au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
@@ -232,8 +226,10 @@ au FileType AutoMod setlocal fdm=syntax noet
 au FileType cpp setlocal makeprg=g++\ -Wall\ -o\ %<\ %
 au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
 
-" convert special chars in tex files
-"au BufWrite *.tex call custom#CleanTex()
+" LATEX -----------------------------------------------------------{{{2
+
+let g:tex_fold_enabled = 1    " enable syntax folding
+let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
 
 " TERM SPECIFICS --------------------------------------------------{{{1
 
