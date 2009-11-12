@@ -44,7 +44,7 @@ function! custom#CleanDXF()
         if search(']', 'n', line(".")) > 0
             call setline(line('.')+1, getline(line('.')+1).']')
         endif
-        normal V%d
+        normal d%dd
     endwhile
     silent! %s/,\_s\+]/\r]/
     silent! g/^\s*$/d
