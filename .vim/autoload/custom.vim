@@ -35,10 +35,10 @@ function! custom#CleanTex()
 endfunction
 
 function! custom#CleanDXF()
-    let id = 0
+    let l:id = 0
     normal gg
     while search('\<VRMLIndexedFaceSet\>', 'e') > 0
-        let id += 1
+        let l:id += 1
         call search('^\s*DEF\>', 'be')
         normal f{%
         if search(']', 'n', line(".")) > 0
@@ -48,5 +48,24 @@ function! custom#CleanDXF()
     endwhile
     silent! %s/,\_s\+]/\r]/
     silent! g/^\s*$/d
-    echo id . " IndexedFaceSet's removed"
+    echo l:id . " IndexedFaceSet's removed"
+endfunction
+
+function! custom#analyzeDXF()
+    normal gg
+    while search('\<VRML\S\+Set\>', 'W') > 0
+        let l:type = matchstr(getline('.'), '\<VRML\S\+Set\>')
+        let l:hitLine = search('^\s*DEF.*{', 'bn')
+        let l:hitName = matchstr(getline(l:hitLine), 'DEF \zs\S\+')
+        if input('Delete '.l:hitName.' ['.l:type.'] ? ', 'yes') == 'yes'
+            call search('^\s*DEF\>', 'be')
+            normal f{%
+            if search(']', 'n', line(".")) > 0
+                call setline(line('.')+1, getline(line('.')+1).']')
+            endif
+            normal d%dd
+        endif
+    endwhile
+    silent! %s/,\_s\+]/\r]/
+    silent! g/^\s*$/d
 endfunction
