@@ -1,5 +1,5 @@
 " Author: Gregor Uhlenheuer
-" Last Change: Aug 04, 2009
+" Last Change: Fr 13 Nov 2009 23:41:17 CET
 
 function! custom#Telegram(...) range
     let lnum = a:firstline
@@ -41,20 +41,21 @@ function! custom#CleanDXF()
         let l:id += 1
         call search('^\s*DEF\>', 'be')
         normal f{%
-        if search(']', 'n', line(".")) > 0
+        if search(']', 'n', line('.')) > 0
             call setline(line('.')+1, getline(line('.')+1).']')
         endif
-        normal d%dd
+        normal "_d%
+        delete _
     endwhile
     silent! %s/,\_s\+]/\r]/
     silent! g/^\s*$/d
     echo l:id . " IndexedFaceSet's removed"
 endfunction
 
-function! custom#analyzeDXF()
+function! custom#AnalyzeDXF()
     normal gg
     while search('\<VRML\S\+Set\>', 'W') > 0
-        let l:type = matchstr(getline('.'), '\<VRML\S\+Set\>')
+        let l:type = matchstr(getline('.'), '\<VRML\zs\S\+Set\>')
         let l:hitLine = search('^\s*DEF.*{', 'bn')
         let l:hitName = matchstr(getline(l:hitLine), 'DEF \zs\S\+')
         if input('Delete '.l:hitName.' ['.l:type.'] ? ', 'yes') == 'yes'
@@ -63,7 +64,8 @@ function! custom#analyzeDXF()
             if search(']', 'n', line(".")) > 0
                 call setline(line('.')+1, getline(line('.')+1).']')
             endif
-            normal d%dd
+            normal "_d%
+            delete _
         endif
     endwhile
     silent! %s/,\_s\+]/\r]/
