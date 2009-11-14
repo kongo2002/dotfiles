@@ -110,7 +110,7 @@ syn region dSection start=/^SECTION$/ end=/^ENDSEC/ fold transparent contains=AL
 
 syn region dTabSec start=/^TABLE$/ end=/^ENDTAB/ fold transparent contains=ALLBUT,dSection,dTabSec
 
-syn region dBlockSec start=/^BLOCK$/ end=/^AcDbBlockEnd/ fold transparent contains=ALLBUT,dSection,dTabSec,dBlocSec
+syn region dBlockSec start=/^BLOCK$/ end=/^AcDbBlockEnd/ fold transparent contains=ALLBUT,dSection,dTabSec,dBlockSec
 
 " highlight group codes {{{
 call s:hiGroupCode('dName', 2)
