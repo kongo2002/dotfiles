@@ -34,7 +34,7 @@ function! custom#CleanTex()
     silent! %s/ß/\"s/gI
 endfunction
 
-function! custom#CleanDXF()
+function! custom#CleanVRML()
     let l:id = 0
     normal gg
     while search('\<VRMLIndexedFaceSet\>', 'e') > 0
@@ -52,7 +52,7 @@ function! custom#CleanDXF()
     echo l:id . " IndexedFaceSet's removed"
 endfunction
 
-function! custom#AnalyzeDXF()
+function! custom#AnalyzeVRML()
     normal gg
     while search('\<VRML\S\+Set\>', 'W') > 0
         let l:type = matchstr(getline('.'), '\<VRML\zs\S\+Set\>')
@@ -70,4 +70,36 @@ function! custom#AnalyzeDXF()
     endwhile
     silent! %s/,\_s\+]/\r]/
     silent! g/^\s*$/d
+endfunction
+
+function! custom#DeleteTextInDXF()
+    let l:object = 0
+    let l:lines = 0
+    let l:handles = []
+    call cursor(1, 1)
+    " delete text objects
+    while search('^  0\ze\nM\?TEXT$', '') > 0
+        let l:handle = matchstr(getline(line('.')+3), '^\S\+$')
+        call add(l:handles, l:handle)
+        let l:hitLine = search('^  0$', 'n') - 1
+        exec '.,'.l:hitLine.'delete _'
+        let l:object += 1
+        let l:lines += l:hitLine - line('.')
+    endwhile
+    " delete dimension objects
+    while search('^  0\ze\nDIMENSION$', '') > 0
+        let l:handle = matchstr(getline(line('.')+3), '^\S\+$')
+        call add(l:handles, l:handle)
+        let l:hitLine = search('^  0$', 'n') - 1
+        exec '.,'.l:hitLine.'delete _'
+        let l:object += 1
+        let l:lines += l:hitLine - line('.')
+    endwhile
+    " delete back references in blocks
+    for item in l:handles
+        while search('^'.item.'$') > 0
+            exec '-1,.delete _'
+        endif
+    endfor
+    echo l:object.' entities deleted ['.l:lines.' lines]'
 endfunction

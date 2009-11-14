@@ -114,6 +114,7 @@ syn region dBlockSec start=/^BLOCK$/ end=/^AcDbBlockEnd/ fold transparent contai
 
 " highlight group codes {{{
 call s:hiGroupCode('dName', 2)
+call s:hiGroupCode('dBlockName', 3)
 call s:hiGroupCode('dLayerName', 8)
 call s:hiGroupCode('dStartX', 10)
 call s:hiGroupCode('dStartY', 20)
