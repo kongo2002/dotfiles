@@ -72,34 +72,28 @@ function! custom#AnalyzeVRML()
     silent! g/^\s*$/d
 endfunction
 
-function! custom#DeleteTextInDXF()
-    let l:object = 0
-    let l:lines = 0
+function! s:RemoveEntity(entity)
     let l:handles = []
     call cursor(1, 1)
-    " delete text objects
-    while search('^  0\ze\nM\?TEXT$', '') > 0
+    while search('^  0\ze\n'.a:entity.'$', 'W') > 0
         let l:handle = matchstr(getline(line('.')+3), '^\S\+$')
         call add(l:handles, l:handle)
         let l:hitLine = search('^  0$', 'n') - 1
         exec '.,'.l:hitLine.'delete _'
-        let l:object += 1
-        let l:lines += l:hitLine - line('.')
     endwhile
-    " delete dimension objects
-    while search('^  0\ze\nDIMENSION$', '') > 0
-        let l:handle = matchstr(getline(line('.')+3), '^\S\+$')
-        call add(l:handles, l:handle)
-        let l:hitLine = search('^  0$', 'n') - 1
-        exec '.,'.l:hitLine.'delete _'
-        let l:object += 1
-        let l:lines += l:hitLine - line('.')
-    endwhile
-    " delete back references in blocks
-    for item in l:handles
-        while search('^'.item.'$') > 0
-            exec '-1,.delete _'
-        endif
+    return l:handles
+endfunction
+
+function! custom#CleanDXF()
+    let l:retList = []
+    for entity in ['MTEXT', 'DIMENSION', 'TEXT']
+        let l:retList += s:RemoveEntity(entity)
     endfor
-    echo l:object.' entities deleted ['.l:lines.' lines]'
+    for item in l:retList
+        call cursor(1, 1)
+        while search('^'.item.'$', 'W') > 0
+            exec '-1,.delete _'
+        endwhile
+    endfor
+    echo len(l:retList).' entities deleted'
 endfunction
