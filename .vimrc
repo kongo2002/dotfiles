@@ -74,6 +74,13 @@ set mouse=a
 " indicates fast terminal connection
 set ttyfast
 
+" do not timeout on mappings
+set notimeout
+
+" timeout on keycodes
+set ttimeout
+set ttimeoutlen=100
+
 " visually break lines
 set wrap
 
@@ -234,7 +241,7 @@ let html_no_pre = 1       " don't enclose in <pre> tags
 au FileType python map <buffer> <F6> :!python %<CR>
 au FileType perl map <buffer> <F6> :!perl %<CR>
 au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
-au FileType AutoMod setlocal fdm=syntax noet
+au FileType AutoMod setlocal fdm=syntax noet nolist
 au FileType cpp setlocal makeprg=g++\ -Wall\ -o\ %<\ %
 au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
 
@@ -251,6 +258,21 @@ if &term ==? "rxvt-unicode"
     imap OB <Esc>ji
     imap OC <Esc>li
     imap OD <Esc>hi
+endif
+
+" WINDOWS SPECIFICS -----------------------------------------------{{{1
+
+if has('win32')
+    set guifont=Lucida_Console:h8:cDEFAULT
+    set lines=80
+    set columns=90
+
+    let Tlist_AutoMod_settings='AutoMod;'
+    let Tlist_AutoMod_settings='p:procedure;'
+    let Tlist_AutoMod_settings='f:function;'
+    let Tlist_AutoMod_settings='s:subroutine'
+
+    let Tlist_Ctags_Cmd='D:\ctags57\ctags.exe'
 endif
 
 " CUSTOM FUNCTIONS ------------------------------------------------{{{1
