@@ -27,30 +27,22 @@ set incsearch
 set ignorecase
 set smartcase
 
+" set reasonable history size
+set history=1000
+
+set viminfo='100,<1000,s100,h
+"           |    |     |    |
+"           |    |     |    +-- Don't restore hlsearch on startup
+"           |    |     +------- Exclude registers greater than N Kb
+"           |    +------------- Keep N lines for each register
+"           +------------------ Keep marks for N files
+
 " highlight current cursorline
 set cursorline
 
 " enable modelines
 set modeline
 set modelines=5
-
-" display statusline even if there is only one window
-set laststatus=2
-
-" filename, flags
-set statusline=%<%F\ #%n\ %1*%m%*%r%h%w
-
-" fileformat, encoding
-set statusline+=\ [%{&ff}]\ %y\ [%{(&fenc==\"\"?&enc:&fenc)}]
-
-" current space.vim command
-set statusline+=%{SSpace()}
-
-" current syntax group
-set statusline+=%{SyntaxItem()}
-
-" line, column, percentage
-set statusline+=%=%10(%l,%v%)\ %P
 
 " folding method: markers
 set fdm=marker
@@ -113,6 +105,26 @@ set t_Co=256
 set background=dark
 
 colorscheme jellybeans
+
+" STATUSLINE SETTINGS ---------------------------------------------{{{1
+
+" display statusline even if there is only one window
+set laststatus=2
+
+" filename, flags
+set statusline=%<%F\ #%n\ %1*%m%*%r%h%w
+
+" fileformat, encoding
+set statusline+=\ [%{&ff}]\ %y\ [%{(&fenc==\"\"?&enc:&fenc)}]
+
+" current space.vim command
+set statusline+=%{SSpace()}
+
+" current syntax group
+set statusline+=%{SyntaxItem()}
+
+" line, column, percentage
+set statusline+=%=%10(%l,%v%)\ %P
 
 " MAPPINGS --------------------------------------------------------{{{1
 
