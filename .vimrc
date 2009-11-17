@@ -222,7 +222,7 @@ let g:snips_author='Gregor Uhlenheuer'
 
 " TAGLIST ---------------------------------------------------------{{{2
 
-let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
+let Tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
 " NERDTREE --------------------------------------------------------{{{2
 
@@ -266,11 +266,6 @@ if has('win32')
     set guifont=Lucida_Console:h8:cDEFAULT
     set lines=80
     set columns=90
-
-    let Tlist_AutoMod_settings='AutoMod;'
-    let Tlist_AutoMod_settings='p:procedure;'
-    let Tlist_AutoMod_settings='f:function;'
-    let Tlist_AutoMod_settings='s:subroutine'
 
     let Tlist_Ctags_Cmd='D:\ctags57\ctags.exe'
 endif
