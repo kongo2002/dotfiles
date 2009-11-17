@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mo 02 Nov 2009 22:03:07 CET
+" Last Change:  Di 17 Nov 2009 21:59:03 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -227,6 +227,10 @@ let Tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 " NERDTREE --------------------------------------------------------{{{2
 
 let NERDTreeQuitOnOpen = 1
+
+" TIMESTAMP -------------------------------------------------------{{{2
+
+let g:timestamp_rep='%c'
 
 " TO_HTML ---------------------------------------------------------{{{2
 
