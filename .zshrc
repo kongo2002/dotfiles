@@ -22,7 +22,7 @@ alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
 
-alias igrep='grep -i'
+alias ig='grep -i'
 alias ping='ping -c 5'
 
 alias boistop='sudo /etc/init.d/boinc stop'
