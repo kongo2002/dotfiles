@@ -1,12 +1,13 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 17 Nov 2009 21:59:03 CET
+" Last Change:  Di 24 Nov 2009 21:12:18 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
 set nocompatible
 
+syntax on
 filetype on
 filetype plugin on
 filetype indent on
@@ -21,6 +22,9 @@ set expandtab
 set shiftwidth=4
 set tabstop=4
 set smarttab
+
+" turn on highlight search
+set hlsearch
 
 " ignore case in search when no uppercase search
 set incsearch
@@ -102,6 +106,9 @@ set lcs+=trail:·
 " no backup
 set nobackup
 
+" hide intro screen
+set shortmess+=I
+
 " modify grep settings
 set grepprg=grep\ -nH\ $*
 
@@ -158,6 +165,9 @@ map + <C-w>w
 
 " yank to end of line
 nnoremap Y y$
+
+" use Q for formatting
+map Q gq
 
 " move to middle of current line
 nmap <expr> gM (strlen(getline("."))/2)."<Bar>"
@@ -248,11 +258,16 @@ au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
 au FileType AutoMod setlocal fdm=syntax noet nolist
 au FileType cpp setlocal makeprg=g++\ -Wall\ -o\ %<\ %
 au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
+au FileType crontab setlocal backupcopy=yes
 
 " LATEX -----------------------------------------------------------{{{2
 
 let g:tex_fold_enabled = 1    " enable syntax folding
 let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
+
+" AUTOCOMMANDS ----------------------------------------------------{{{1
+
+au BufReadPost * call LastCurPos()
 
 " TERM SPECIFICS --------------------------------------------------{{{1
 
@@ -262,6 +277,12 @@ if &term ==? "rxvt-unicode"
     imap OB <Esc>ji
     imap OC <Esc>li
     imap OD <Esc>hi
+endif
+
+if &term ==? "xterm"
+  set t_Sb=^[4%dm
+  set t_Sf=^[3%dm
+  set ttymouse=xterm2
 endif
 
 " WINDOWS SPECIFICS -----------------------------------------------{{{1
@@ -276,7 +297,7 @@ endif
 
 " CUSTOM FUNCTIONS ------------------------------------------------{{{1
 
-" get current movement for space.vim plugin
+" get current movement for space.vim plugin -----------------------{{{2
 function! SSpace()
     if exists("*GetSpaceMovement") && GetSpaceMovement() != ""
         return " [" . GetSpaceMovement() . "]"
@@ -285,7 +306,7 @@ function! SSpace()
     endif
 endfunction
 
-" get syntax highlight group under cursor
+" get syntax highlight group under cursor -------------------------{{{2
 function! SyntaxItem()
     let synGrp=synIDattr(synID(line("."), col("."), 1), "name")
     if synGrp != ""
@@ -295,7 +316,7 @@ function! SyntaxItem()
     endif
 endfunction
 
-" implement a custom TOhtml function
+" implement a custom TOhtml function ------------------------------{{{2
 function! DivHtml() range
     exec a:firstline . "," . a:lastline . "TOhtml"
     %g/<style/normal $dgg
@@ -307,3 +328,10 @@ function! DivHtml() range
 endfunction
 
 command -range=% DivHtml <line1>,<line2>call DivHtml()
+
+" jump to last cursor position ------------------------------------{{{2
+function! LastCurPos()
+    if line("'\"") > 0 && line ("'\"") <= line("$")
+        exe "normal g'\""
+    endif
+endfunction
