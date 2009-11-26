@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 24 Nov 2009 21:12:18 CET
+" Last Change:  Do 26 Nov 2009 16:41:33 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -256,8 +256,6 @@ au FileType python map <buffer> <F6> :!python %<CR>
 au FileType perl map <buffer> <F6> :!perl %<CR>
 au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
 au FileType AutoMod setlocal fdm=syntax noet nolist
-au FileType cpp setlocal makeprg=g++\ -Wall\ -o\ %<\ %
-au FileType c setlocal makeprg=gcc\ -Wall\ -o\ %<\ %
 au FileType crontab setlocal backupcopy=yes
 
 " LATEX -----------------------------------------------------------{{{2
