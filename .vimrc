@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Do 26 Nov 2009 16:41:33 CET
+" Last Change:  Fr 27 Nov 2009 00:57:56 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -255,7 +255,6 @@ let html_no_pre = 1       " don't enclose in <pre> tags
 au FileType python map <buffer> <F6> :!python %<CR>
 au FileType perl map <buffer> <F6> :!perl %<CR>
 au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
-au FileType AutoMod setlocal fdm=syntax noet nolist
 au FileType crontab setlocal backupcopy=yes
 
 " LATEX -----------------------------------------------------------{{{2

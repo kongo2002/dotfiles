@@ -1,3 +1,8 @@
+" Vim filetype file
+" Filename:     tex.vim
+" Author:       Gregor Uhlenheuer
+" Last Change:  Do 26 Nov 2009 23:51:15 CET
+
 " turn on syntax-based folding
 setlocal foldmethod=syntax
 

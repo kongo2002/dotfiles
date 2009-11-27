@@ -1,6 +1,6 @@
 " Name:         dict.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 08 Nov 2009 18:30:21 CET
+" Last Change:  Do 26 Nov 2009 23:22:30 CET
 
 if exists('g:loaded_dict')
     finish
@@ -10,6 +10,10 @@ let g:dict_url = 'http://www.dict.org/bin/Dict?Form=Dict2&Query='
 let g:dict_query = '&Strategy=*&Database=*'
 
 function! GetDictEntries(term)
+    if a:term == ''
+        return
+    endif
+
     " get results
     let cmd = "curl -s -f -S '".g:dict_url.a:term.g:dict_query."'"
     let result = split(system(cmd), '\n')
@@ -19,6 +23,7 @@ function! GetDictEntries(term)
     resize 10
     setl modifiable
     setl noreadonly
+    setl nolist
     call append(0, result)
 
     " clean up
