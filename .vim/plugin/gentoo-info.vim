@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Sa 28 Nov 2009 22:45:55 CET
+" Last Change:  Sa 28 Nov 2009 23:39:04 CET
 
 let g:gentoo_portdir = '/usr/portage'
 
@@ -91,7 +91,7 @@ function! s:cleanUpResult(lines, package, mode)
             call remove(l:lines, 0, 6)
         endif
 
-        call map(l:lines, 'substitute(v:val, "<br\\/>", "", "g")')
+        call map(l:lines, 'substitute(v:val, "<br\\/>", "@@", "g")')
         call map(l:lines, 'substitute(v:val, "<[^>]*>", "", "g")')
         call filter(l:lines, 'v:val !~ ''View.*Download''')
         call filter(l:lines, 'v:val !~ ''^\s*$''')
@@ -100,7 +100,7 @@ function! s:cleanUpResult(lines, package, mode)
         call map(l:lines, 'substitute(v:val, "^\\s\\+", "", "")')
         call map(l:lines, 'substitute(v:val, "&nbsp;", " ", "g")')
         call map(l:lines, 'substitute(v:val, "^\\(Global\\|Local\\)", "\\t\\1", "")')
-        call map(l:lines, 'substitute(v:val, "^".l:package, "&", "")')
+        call map(l:lines, 'substitute(v:val, "^".l:package, "@@&", "")')
     endif
     return l:lines
 endfunction
@@ -111,7 +111,7 @@ function! s:display(lines)
     split [GentooInfo]
     setl noreadonly modifiable nolist
     call append(0, a:lines)
-    sil! %s//\r/ge
+    sil! %s/@@/\r/ge
     setl nomodified readonly
     nmap <buffer> <CR> :bd!<CR>
     call cursor(1, 1)
@@ -120,7 +120,7 @@ endfunction
 
 " function s:setSyntax {{{
 function! s:setSyntax(package)
-    let l:pkg = substitute(a:package, '^\S\+\/\(\S\+\)', '\1', '')
+    let l:pkg = substitute(a:package, '^\S\+\/\(\S\+\).*', '\1', '')
     setl iskeyword+=~
     setl iskeyword+=-
 
@@ -759,6 +759,7 @@ function! s:setSyntax(package)
     exe 'syntax match genIPackage display /.*' . l:pkg . '.*/'
     syntax match genIMask display /Hard\s\+Masked/
     syntax match genIWWW display /\%(https\?:\/\/\)\?\%(www.\)\?\%([a-zA-Z0-9/_-]\+\.\)*[a-zA-Z0-9/_-]\+\.[a-z]\+\/\?/
+
     hi link genIArch Constant
     hi link genIStab PreProc
     hi link genIPackage Statement
