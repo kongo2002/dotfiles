@@ -2,14 +2,13 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Sa 28 Nov 2009 23:39:04 CET
+" Last Change:  So 29 Nov 2009 13:01:21 CET
 
 let g:gentoo_portdir = '/usr/portage'
 
-" helper functions for list manipulation {{{
+" list manipulation functions {{{
 
-" function s:removeTill {{{
-function! s:removeTill(lines, pattern)
+function! s:removeTill(lines, pattern) "{{{
     let l:index = 0
     for line in a:lines
         if line =~ a:pattern
@@ -22,8 +21,7 @@ function! s:removeTill(lines, pattern)
 endfunction
 " }}}
 
-" function s:removeFrom {{{
-function! s:removeFrom(lines, pattern)
+function! s:removeFrom(lines, pattern) "{{{
     let l:index = 0
     for line in a:lines
         if line =~ a:pattern
@@ -38,8 +36,7 @@ endfunction
 
 " }}}
 
-" function s:getPortageTree {{{
-function! s:getPortageTree()
+function! s:getPortageTree() "{{{
     let l:cat_file = g:gentoo_portdir . '/profiles/categories'
     if filereadable(l:cat_file)
         let s:categories = readfile(g:gentoo_portdir.'/profiles/categories')
@@ -48,8 +45,7 @@ function! s:getPortageTree()
 endfunction
 " }}}
 
-" function s:getPackage {{{
-function! s:getPackage(name)
+function! s:getPackage(name) "{{{
     if a:name != ''
         if a:name =~'\S\+\/\S\+'
             return a:name
@@ -67,8 +63,7 @@ function! s:getPackage(name)
 endfunction
 " }}}
 
-" function s:fetchInfo {{{
-function! s:fetchInfo(package, mode)
+function! s:fetchInfo(package, mode) "{{{
     let l:mode = (a:mode == 'info') ? '' : '/'.a:mode
     let l:url = 'http://gentoo-portage.com/' . a:package . l:mode
     let l:cmd = 'curl -s -f -S ' . l:url
@@ -76,8 +71,7 @@ function! s:fetchInfo(package, mode)
 endfunction
 " }}}
 
-" function s:cleanUpResult {{{
-function! s:cleanUpResult(lines, package, mode)
+function! s:cleanUpResult(lines, package, mode) "{{{
     if len(a:lines) > 0
         let l:lines = a:lines
         let l:package = substitute(a:package, '.*\/', '', '')
@@ -106,8 +100,7 @@ function! s:cleanUpResult(lines, package, mode)
 endfunction
 " }}}
 
-" function s:display {{{
-function! s:display(lines)
+function! s:display(lines) "{{{
     split [GentooInfo]
     setl noreadonly modifiable nolist
     call append(0, a:lines)
@@ -118,8 +111,7 @@ function! s:display(lines)
 endfunction
 " }}}
 
-" function s:setSyntax {{{
-function! s:setSyntax(package)
+function! s:setSyntax(package) "{{{
     let l:pkg = substitute(a:package, '^\S\+\/\(\S\+\).*', '\1', '')
     setl iskeyword+=~
     setl iskeyword+=-
@@ -770,14 +762,12 @@ function! s:setSyntax(package)
 endfunction
 " }}}
 
-" function s:GComplete {{{
-function! s:GComplete(A, L, P)
+function! s:GComplete(A, L, P) "{{{
     return ['info', 'use', 'dep', 'rdep', 'changelog']
 endfunction
 " }}}
 
-" function GentooInfo {{{
-function! GentooInfo(...)
+function! GentooInfo(...) "{{{
     if a:0 < 1
         echoerr "Usage: GentooInfo [mode] <package>"
         return
@@ -794,6 +784,6 @@ function! GentooInfo(...)
     endif
     call s:setSyntax(l:package)
 endfunction
-
-command! -complete=customlist,s:GComplete -nargs=+ GInfo call GentooInfo(<f-args>)
 " }}}
+
+com! -complete=customlist,s:GComplete -nargs=+ GInfo call GentooInfo(<f-args>)
