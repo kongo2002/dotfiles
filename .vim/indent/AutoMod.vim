@@ -1,7 +1,7 @@
 " AutoMod indent file
 " Language:     AutoMod
 " Maintainer:   Gregor Uhlenheuer
-" Last Change: 2009 10 19
+" Last Change:  So 29 Nov 2009 18:46:30 CET
 
 if exists("b:did_indent")
     finish
@@ -10,7 +10,7 @@ endif
 let b:did_indent = 1
 
 setlocal indentexpr=GetAutoModIndent(v:lnum)
-setlocal indentkeys+==end,=else,=until,=begin,=order
+setlocal indentkeys+==end,=else,=until,=begin,=order,=choice
 
 function! GetAutoModIndent( line_num )
 
@@ -50,6 +50,11 @@ function! GetAutoModIndent( line_num )
         return indnt + &shiftwidth
     endif
 
+    " choose/save choice as
+    if this_line =~ '^\s*save\s\+choice\>' && prev_line =~ '^\s*choose\>'
+        return indnt + &shiftwidth
+    endif
+
     " unindent
     if this_line =~ '^\s*end\>'
         let indnt = indnt - &shiftwidth
@@ -58,11 +63,24 @@ function! GetAutoModIndent( line_num )
             let indnt = indnt - &shiftwidth
         endif
 
+        if prev_line =~ '^\s*save\s\+choice\>'
+            let indnt = indnt - &shiftwidth
+        endif
+
+        if prev_line =~ '^\s*in\s\+case\>'
+            let indnt = indnt - &shiftwidth
+        endif
+
         return indnt
     endif
 
     " backorder unindent
     if prev_line =~ '^\s*in\s\+case\>'
+        return indnt - &shiftwidth
+    endif
+
+    " save choice unindent
+    if prev_line =~ '^\s*save\s\+choice\>'
         return indnt - &shiftwidth
     endif
 
