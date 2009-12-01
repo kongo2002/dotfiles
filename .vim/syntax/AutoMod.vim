@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     AutoMod
 " Maintainer:   Gregor Uhlenheuer
-" Last Change: 2009 11 03
+" Last Change:  Di 01 Dez 2009 17:16:04 CET
 
 if version < 600
     syntax clear
@@ -40,7 +40,7 @@ syn keyword mControl merge toggle without next along satisfying
 syn keyword mControl among whose
 
 " model specific keywords
-syn keyword mModel absolute ac all appending backorder color continuous
+syn keyword mModel a absolute ac all appending backorder color continuous
 syn keyword mModel counter current day days deliver die down eof
 syn keyword mModel finished first hr job last list load loads location
 syn keyword mModel message min new nextclock nextof null ok one oneof
@@ -55,7 +55,7 @@ syn keyword mModel previous state triangular weibull x y z total
 syn keyword mModel path destination distance velocity line
 
 " constants
-syn keyword mBool  true True TRUE false False FALSE
+syn keyword mBool  true false
 
 " color statements
 syn keyword mColor  black blue cyan dkgray green ltblue ltgray ltgreen ltyellow
@@ -74,7 +74,7 @@ syn region mCharacter start=/'/ skip=/\\'/ end=/'/
 syn match mBlockError /^\s*\<end\>/
 syn region mBlockInner matchgroup=mBlock start=/\<begin\>/ end=/^\s*\<end\>/ contains=ALLBUT,mBlock
 
-" folding of procedures/functions only
+" folding of procedures/functions/subroutines only
 syn region mFold start=/^begin\>/ end=/^end\>/ transparent fold keepend containedin=ALL
 
 " parantheses
