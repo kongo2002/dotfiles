@@ -1,13 +1,16 @@
 " Vim filetype file
 " Filename:     tex.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Do 26 Nov 2009 23:51:15 CET
+" Last Change:  Di 01 Dez 2009 12:55:53 CET
 
 " turn on syntax-based folding
 setlocal foldmethod=syntax
 
 " turn on spellchecking
 setlocal spell spelllang=de
+
+" set spellfile
+set spellfile=~/.vim/spell/de.utf-8.add
 
 " show only the first 10 suggestions
 setlocal sps=fast,10
