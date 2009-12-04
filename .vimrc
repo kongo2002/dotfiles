@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 28 Nov 2009 12:39:02 CET
+" Last Change:  Fr 04 Dez 2009 01:12:01 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -41,6 +41,9 @@ set viminfo='100,<1000,s100,h
 "           |    +------------- Keep N lines for each register
 "           +------------------ Keep marks for N files
 
+" interoperate with the X clipboard (* register)
+set clipboard=unnamed
+
 " highlight current cursorline
 set cursorline
 
@@ -60,6 +63,9 @@ set numberwidth=1
 " switch buffers without saving
 set hidden
 
+" vertical diffsplit by default
+set diffopt+=vertical
+
 " number of screen lines around cursor
 set scrolloff=5
 
@@ -72,8 +78,13 @@ set lazyredraw
 " turn on wildmenu completion
 set wildmenu
 
+" disable some filetypes for completion
+set wildignore=*.o,*.obj,*.dll
+
 " turn on mouse in all modes
-set mouse=a
+if has('mouse')
+    set mouse=a
+endif
 
 " indicates fast terminal connection
 set ttyfast
@@ -253,10 +264,12 @@ let html_no_pre = 1       " don't enclose in <pre> tags
 
 " AUTOCOMMANDS ----------------------------------------------------{{{2
 
-au FileType python map <buffer> <F6> :!python %<CR>
-au FileType perl map <buffer> <F6> :!perl %<CR>
-au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
-au FileType crontab setlocal backupcopy=yes
+if has('autocmd')
+    au FileType python map <buffer> <F6> :!python %<CR>
+    au FileType perl map <buffer> <F6> :!perl %<CR>
+    au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
+    au FileType crontab setlocal backupcopy=yes
+endif
 
 " LATEX -----------------------------------------------------------{{{2
 
@@ -265,7 +278,9 @@ let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
 
 " AUTOCOMMANDS ----------------------------------------------------{{{1
 
-au BufReadPost * call LastCurPos()
+if has('autocmd')
+    au BufReadPost * call LastCurPos()
+endif
 
 " TERM SPECIFICS --------------------------------------------------{{{1
 
