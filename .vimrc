@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 04 Dez 2009 01:12:01 CET
+" Last Change:  Fr 04 Dez 2009 01:39:14 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -249,6 +249,11 @@ let Tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 " NERDTREE --------------------------------------------------------{{{2
 
 let NERDTreeQuitOnOpen = 1
+
+" SPACE-VIM -------------------------------------------------------{{{2
+
+" disable select mode mappings due to problems with snipmate
+let g:space_disable_select_mode = 1
 
 " TIMESTAMP -------------------------------------------------------{{{2
 
