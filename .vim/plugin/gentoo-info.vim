@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  So 29 Nov 2009 13:01:21 CET
+" Last Change:  Sa 05 Dez 2009 23:11:02 CET
 
 let g:gentoo_portdir = '/usr/portage'
 
@@ -64,7 +64,7 @@ endfunction
 " }}}
 
 function! s:fetchInfo(package, mode) "{{{
-    let l:mode = (a:mode == 'info') ? '' : '/'.a:mode
+    let l:mode = (a:mode == 'info') ? '' : '/' . a:mode
     let l:url = 'http://gentoo-portage.com/' . a:package . l:mode
     let l:cmd = 'curl -s -f -S ' . l:url
     return s:cleanUpResult(split(system(l:cmd), '\n'), a:package, a:mode)
@@ -106,7 +106,7 @@ function! s:display(lines) "{{{
     call append(0, a:lines)
     sil! %s/@@/\r/ge
     setl nomodified readonly
-    nmap <buffer> <CR> :bd!<CR>
+    nnoremap <buffer> <CR> :bd!<CR>
     call cursor(1, 1)
 endfunction
 " }}}

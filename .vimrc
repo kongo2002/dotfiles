@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 05 Dez 2009 19:44:20 CET
+" Last Change:  So 06 Dez 2009 00:43:31 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -274,19 +274,15 @@ if has('autocmd')
     au FileType perl map <buffer> <F6> :!perl %<CR>
     au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
     au FileType crontab setlocal backupcopy=yes
-    au BufWrite *.bib call custom#CleanTex()
+    au BufWrite *.bib call custom#PrepareBib()
+    au BufWrite *.tex call custom#PrepareTex()
+    au BufReadPost * call LastCurPos()
 endif
 
 " LATEX -----------------------------------------------------------{{{2
 
 let g:tex_fold_enabled = 1    " enable syntax folding
 let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
-
-" AUTOCOMMANDS ----------------------------------------------------{{{1
-
-if has('autocmd')
-    au BufReadPost * call LastCurPos()
-endif
 
 " TERM SPECIFICS --------------------------------------------------{{{1
 
@@ -304,7 +300,7 @@ if &term ==? "xterm"
   set ttymouse=xterm2
 endif
 
-" WINDOWS SPECIFICS -----------------------------------------------{{{1
+" OS SPECIFICS ----------------------------------------------------{{{1
 
 if has('win32')
     set guifont=Lucida_Console:h8:cDEFAULT
