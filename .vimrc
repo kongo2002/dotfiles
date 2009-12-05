@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 04 Dez 2009 01:39:14 CET
+" Last Change:  Sa 05 Dez 2009 19:44:20 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -274,6 +274,7 @@ if has('autocmd')
     au FileType perl map <buffer> <F6> :!perl %<CR>
     au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
     au FileType crontab setlocal backupcopy=yes
+    au BufWrite *.bib call custom#CleanTex()
 endif
 
 " LATEX -----------------------------------------------------------{{{2

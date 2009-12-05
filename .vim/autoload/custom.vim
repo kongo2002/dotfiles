@@ -1,5 +1,5 @@
 " Author: Gregor Uhlenheuer
-" Last Change: Fr 13 Nov 2009 23:41:17 CET
+" Last Change: Sa 05 Dez 2009 19:39:59 CET
 
 function! custom#Telegram(...) range
     let lnum = a:firstline
@@ -32,6 +32,7 @@ function! custom#CleanTex()
     silent! %s/Ö/\"O/gI
     silent! %s/Ü/\"U/gI
     silent! %s/ß/\"s/gI
+    silent! %s/\s\+\(~\?\\cite\)/\1/g
 endfunction
 
 function! custom#CleanVRML()
