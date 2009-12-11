@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 06 Dez 2009 00:43:31 CET
+" Last Change:  Fr 11 Dez 2009 02:08:24 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -232,6 +232,13 @@ nmap <Leader>cd :lcd %:h<CR>
 
 " search recursively in current dir for word under cursor
 map <F4> :execute "vimgrep /".expand("<cword>")."/j **"<Bar>copen<CR>
+
+" maps Control-Space to omnicompletion
+if has('gui_running')
+    inoremap <C-Space> <C-x><C-o>
+else
+    inoremap <Nul> <C-x><C-o>
+endif
 
 " PLUGIN SETTINGS -------------------------------------------------{{{1
 
