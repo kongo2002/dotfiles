@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 11 Dez 2009 02:08:24 CET
+" Last Change:  Sa 12 Dez 2009 17:21:56 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -251,7 +251,8 @@ let g:snips_author='Gregor Uhlenheuer'
 
 " TAGLIST ---------------------------------------------------------{{{2
 
-let Tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
+let Tlist_Exit_OnlyWindow = 1
+let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
 " NERDTREE --------------------------------------------------------{{{2
 
