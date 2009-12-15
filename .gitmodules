@@ -12,7 +12,7 @@
     url = git://github.com/tpope/vim-fugitive.git
 [submodule ".vim_plugins/vim-space"]
     path = .vim_plugins/vim-space
-    url = git://github.com/spiiph/vim-space.git
+    url = git://github.com/kongo2002/vim-space.git
 [submodule ".vim_plugins/vim-surround"]
     path = .vim_plugins/vim-surround
     url = git://github.com/tpope/vim-surround.git
