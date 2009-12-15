@@ -52,17 +52,21 @@ git_b() {
 }
 
 git_c() {
-    s="$(git status | tail -1 | sed -e 's/^\(\w*\).*/\1/')"
+    if [[ -d ".git" ]] then
+        s="$(git status | tail -1 | sed -e 's/^\(\w*\).*/\1/')"
 
-    if [ "$s" = "nothing" ]; then
-        GCOLOR=$PR_BOLD_GREEN
-    elif [ "$s" = "no" ]; then
-        GCOLOR=$PR_BOLD_YELLOW
+        if [ "$s" = "nothing" ]; then
+            GCOLOR=$PR_BOLD_GREEN
+        elif [ "$s" = "no" ]; then
+            GCOLOR=$PR_BOLD_YELLOW
+        else
+            GCOLOR=$PR_BOLD_RED
+        fi
+
+        printf "%s" "${GCOLOR}"
     else
-        GCOLOR=$PR_BOLD_RED
+        echo ""
     fi
-
-    printf "%s" "${GCOLOR}"
 }
 
 setprompt() {    # load colors
