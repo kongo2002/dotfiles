@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 12 Dez 2009 17:21:56 CET
+" Last Change:  Do 17 Dez 2009 19:58:11 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -233,6 +233,9 @@ nmap <Leader>cd :lcd %:h<CR>
 " search recursively in current dir for word under cursor
 map <F4> :execute "vimgrep /".expand("<cword>")."/j **"<Bar>copen<CR>
 
+" build ctags in current directory
+map <F12> :!ctags -R .<CR><CR>
+
 " maps Control-Space to omnicompletion
 if has('gui_running')
     inoremap <C-Space> <C-x><C-o>
@@ -272,6 +275,17 @@ let g:timestamp_rep='%c'
 let html_number_lines = 0 " don't show line numbers
 let html_use_css = 1      " don't use inline stylesheets
 let html_no_pre = 1       " don't enclose in <pre> tags
+
+" OMNICPPCOMPLETE -------------------------------------------------{{{2
+
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteScope = 1
+let OmniCpp_DefaultNamespaces = [ "std" ]
 
 " FILETYPE SPECIFICS ----------------------------------------------{{{1
 
