@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Do 17 Dez 2009 19:58:11 CET
+" Last Change:  Sa 19 Dez 2009 19:53:19 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -140,13 +140,18 @@ set laststatus=2
 set statusline=%<%F\ #%n\ %1*%m%*%r%h%w
 
 " fileformat, encoding
-set statusline+=\ [%{&ff}]\ %y\ [%{(&fenc==\"\"?&enc:&fenc)}]
+set statusline+=[%{&ff}]%y[%{(&fenc==\"\"?&enc:&fenc)}]
 
 " current space.vim command
 set statusline+=%{SSpace()}
 
+" syntastic plugin
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 " current syntax group
-set statusline+=%{SyntaxItem()}
+"set statusline+=%{SyntaxItem()}
 
 " line, column, percentage
 set statusline+=%=%10(%l,%v%)\ %P
@@ -337,7 +342,7 @@ endif
 " get current movement for space.vim plugin -----------------------{{{2
 function! SSpace()
     if exists("*GetSpaceMovement") && GetSpaceMovement() != ""
-        return " [" . GetSpaceMovement() . "]"
+        return "[" . GetSpaceMovement() . "]"
     else
         return ""
     endif
