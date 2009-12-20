@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 19 Dez 2009 19:53:19 CET
+" Last Change:  So 20 Dez 2009 18:32:27 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -305,6 +305,10 @@ if has('autocmd')
     au BufWrite *.tex call custom#PrepareTex()
     au BufReadPost * call LastCurPos()
 endif
+
+" C / C++ ---------------------------------------------------------{{{2
+
+let g:c_syntax_for_h = 1
 
 " LATEX -----------------------------------------------------------{{{2
 
