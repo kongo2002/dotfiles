@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 20 Dez 2009 18:32:27 CET
+" Last Change:  Mi 23 Dez 2009 00:07:35 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -153,8 +153,11 @@ set statusline+=%*
 " current syntax group
 "set statusline+=%{SyntaxItem()}
 
+" display search matches
+set statusline+=%=%{SearchMatches(actual_curbuf)}
+
 " line, column, percentage
-set statusline+=%=%10(%l,%v%)\ %P
+set statusline+=%10(%l,%v%)\ %P
 
 " MAPPINGS --------------------------------------------------------{{{1
 
@@ -343,7 +346,7 @@ endif
 
 " CUSTOM FUNCTIONS ------------------------------------------------{{{1
 
-" get current movement for space.vim plugin -----------------------{{{2
+" SSpace() - get current movement for space.vim plugin ------------{{{2
 function! SSpace()
     if exists("*GetSpaceMovement") && GetSpaceMovement() != ""
         return "[" . GetSpaceMovement() . "]"
@@ -352,7 +355,7 @@ function! SSpace()
     endif
 endfunction
 
-" get syntax highlight group under cursor -------------------------{{{2
+" SyntaxItem() - get syntax highlight group under cursor ----------{{{2
 function! SyntaxItem()
     let synGrp=synIDattr(synID(line("."), col("."), 1), "name")
     if synGrp != ""
@@ -362,7 +365,7 @@ function! SyntaxItem()
     endif
 endfunction
 
-" implement a custom TOhtml function ------------------------------{{{2
+" DivHtml() - implement a custom TOhtml function ------------------{{{2
 function! DivHtml() range
     exec a:firstline . "," . a:lastline . "TOhtml"
     %g/<style/normal $dgg
@@ -375,9 +378,58 @@ endfunction
 
 command -range=% DivHtml <line1>,<line2>call DivHtml()
 
-" jump to last cursor position ------------------------------------{{{2
+" LastCurPos() - jump to last cursor position ---------------------{{{2
 function! LastCurPos()
     if line("'\"") > 0 && line ("'\"") <= line("$")
         exe "normal g'\""
     endif
+endfunction
+
+" SearchMatches() - get number of search matches ------------------{{{2
+function! SearchMatches(nr)
+    if bufnr('') != a:nr
+        return ''
+    endif
+    try
+        if getreg('/') == '' | return '' | endif
+        if line('$') > 5000 | return '' | endif
+
+        let [buf, lnum, cnum, off] = getpos('.')
+        let [l, c] = searchpos(@/, 'cnbW')
+        if lnum != l || cnum != c | return '' | endif
+
+        let above = 1
+        let below = 0
+
+        while 1
+            let [l, c] = searchpos(@/, 'bW')
+            if l == 0 && c == 0 | break | endif
+
+            let above += 1
+            if above + below > 100
+                call setpos('.', [buf, lnum, cnum, off])
+                return ''
+            endif
+        endwhile
+
+        call setpos('.', [buf, lnum, cnum, off])
+
+        while 1
+            let [l, c] = searchpos(@/, 'W')
+            if l == 0 && c == 0 | break | endif
+
+            let below += 1
+            if above + below > 100
+                call setpos('.', [buf, lnum, cnum, off])
+                return ''
+            endif
+        endwhile
+
+        call setpos('.', [buf, lnum, cnum, off])
+
+        return above . '/' . (above + below)
+
+    catch /.*/
+        return ''
+    endtry
 endfunction
