@@ -1,39 +1,83 @@
 " AutoMod indent file
 " Language:     AutoMod
 " Maintainer:   Gregor Uhlenheuer
-" Last Change:  So 29 Nov 2009 18:46:30 CET
+" Last Change:  Mi 23 Dez 2009 19:10:03 CET
 
 if exists("b:did_indent")
     finish
 endif
-
 let b:did_indent = 1
 
-setlocal indentexpr=GetAutoModIndent(v:lnum)
+let b:indent_use_syntax = has("syntax")
+
+setlocal indentexpr=GetAutoModIndent()
 setlocal indentkeys+==end,=else,=until,=begin,=order,=choice
 
-function! GetAutoModIndent( line_num )
+if exists("*GetAutoModIndent")
+    finish
+endif
 
-    if a:line_num == 1
+function s:PrevNonCNum(step)
+
+    let line = v:lnum
+    let step = a:step
+
+    if b:indent_use_syntax != 1
+        while step > 0 && line > 0
+            if prevnonblank(line-1)
+                let line = prevnonblank(line-1)
+            else
+                return getline(1)
+            endif
+            let step -= 1
+        endwhile
+    else
+        while step > 0 && line > 0
+            let jump = 1
+            let csynid = synIDattr(synID(line-jump, indent(line-jump)+1, 0), "name")
+            while ((line-jump) > 0 && (getline(line-jump) =~ '^\s*$' || csynid =~ "mComment"))
+                let jump += 1
+                let csynid = synIDattr(synID(line-jump, indent(line-jump)+1, 0), "name")
+            endwhile
+            let line -= jump
+            let step -= 1
+        endwhile
+    endif
+
+    return line
+endfunction
+
+function s:PrevNonCLine(step)
+
+    return getline(s:PrevNonCNum(a:step))
+
+endfunction
+
+function GetAutoModIndent()
+
+    let cline = getline(v:lnum)
+
+    if v:lnum = 1
         return 0
     endif
 
-    let this_line = getline( a:line_num )
-
-    let prev_line_num = prevnonblank( a:line_num - 1 )
-    let prev_line = getline( prev_line_num )
-    let indnt = indent( prev_line_num )
+    let indnt = indent(s:PrevNonCNum(1))
 
     " function and procedure definition
-    if this_line =~ '^\s*begin\s*.*\s\(function|procedure\)\>'
+    if cline =~ '^\s*begin\s*.*\s\(function\|procedure\)\>'
         return 0
     endif
 
-    " if
-    if prev_line =~ '\(^\s*\(do\|while\|for\|else\)\>\)\|\(\<then\>\)'
+    " comments
+    if synIDattr(synID(v:lnum, indnt+1, 0), "name") = "mComment"
+        return indnt
+    endif
+
+    " if, do, while, for, else
+    if s:PrevNonCLine(1) =~ '\(^\s*\(do\|while\|for\|else\)\>\)\|\(\<then\>\)'
         let indnt = indnt + &shiftwidth
 
-        if this_line =~ '^\s*begin\>'
+        if cline =~ '^\s*begin\>'
             let indnt = indnt - &shiftwidth
         endif
 
@@ -41,66 +85,64 @@ function! GetAutoModIndent( line_num )
     endif
 
     " begin
-    if prev_line =~ '^\s*begin\>'
+    if s:PrevNonCLine(1) =~ '^\s*begin\>'
         return indnt + &shiftwidth
     endif
 
     " order/backorder
-    if this_line =~ '^\s*in\s\+case\>' && prev_line =~ '^\s*order\>'
+    if cline =~ '^\s*in\s\+case\>' && s:PrevNonCLine(1) =~ '^\s*order\>'
         return indnt + &shiftwidth
     endif
 
     " choose/save choice as
-    if this_line =~ '^\s*save\s\+choice\>' && prev_line =~ '^\s*choose\>'
+    if cline =~ '^\s*save\s\+choice\>' && s:PrevNonCLine(1) =~ '^\s*choose\>'
         return indnt + &shiftwidth
     endif
 
-    " unindent
-    if this_line =~ '^\s*end\>'
+    " backorder unindent
+    if s:PrevNonCLine(1) =~ '^\s*in\s\+case\>'
+        let indnt -= &sw
+    endif
+
+    " save choice unindent
+    if s:PrevNonCLine(1) =~ '^\s*save\s\+choice\>'
+        let indnt -= &sw
+    endif
+
+    " end unindent
+    if cline =~ '^\s*end\>'
         let indnt = indnt - &shiftwidth
 
-        if getline( prev_line_num-1 ) =~ '^\s*else\s*$'
+        if s:PrevNonCLine(2) =~ '^\s*else\s*$'
             let indnt = indnt - &shiftwidth
         endif
 
-        if prev_line =~ '^\s*save\s\+choice\>'
-            let indnt = indnt - &shiftwidth
-        endif
-
-        if prev_line =~ '^\s*in\s\+case\>'
-            let indnt = indnt - &shiftwidth
+        if s:PrevNonCLine(2) =~ '^\s*if\>.*\<then\>\s*$'
+            let indnt -= &sw
         endif
 
         return indnt
     endif
 
-    " backorder unindent
-    if prev_line =~ '^\s*in\s\+case\>'
+    " until unindent
+    if cline =~ '^\s*until\>' && s:PrevNonCLine(1) !~ '^\s*end\>'
         return indnt - &shiftwidth
     endif
 
-    " save choice unindent
-    if prev_line =~ '^\s*save\s\+choice\>'
+    " else unindent
+    if cline =~ '^\s*else\>' && s:PrevNonCLine(1) !~ '^\s*end\>'
         return indnt - &shiftwidth
     endif
 
-    " until
-    if this_line =~ '^\s*until\>' && prev_line !~ '^\s*end\>'
+    " remaining unindentation
+    if s:PrevNonCLine(2) =~ '^\s*else\s*$'
         return indnt - &shiftwidth
     endif
 
-    " else
-    if this_line =~ '^\s*else\>' && prev_line !~ '^\s*end\>'
-        return indnt - &shiftwidth
-    endif
-
-    if this_line !~ '^\s*end\>' && getline( prev_line_num-1 ) =~ '^\s*else\s*$'
-        return indnt - &shiftwidth
-    endif
-
-    " if (short version)
-    if this_line !~ '^\s*\(end\|else\)\>' && prev_line !~ '^\s*begin\>' && getline( prev_line_num-1 ) =~ '\(^\s*\(do\|while\|for\)\>\)\|\(\<then\>\)' && getline( prev_line_num-1 ) !~ 'begin\s*$'
-        return indnt - &shiftwidth
+    if s:PrevNonCLine(1) !~ '^\s*begin\>' && s:PrevNonCLine(2) !~ 'begin\s*$'
+        if s:PrevNonCLine(2) =~ '\(^\s*\(do\|while\|for\)\>\)\|\(\<then\>\)'
+            return indnt - &shiftwidth
+        endif
     endif
 
     return indnt
