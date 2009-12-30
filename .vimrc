@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mi 23 Dez 2009 00:07:35 CET
+" Last Change:  Mi 30 Dez 2009 02:17:25 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -336,7 +336,7 @@ endif
 
 " OS SPECIFICS ----------------------------------------------------{{{1
 
-if has('win32')
+if has('win32') || has('win64')
     set guifont=Lucida_Console:h8:cDEFAULT
     set lines=80
     set columns=90

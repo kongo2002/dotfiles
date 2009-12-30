@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Sa 05 Dez 2009 23:11:02 CET
+" Last Change:  Di 29 Dez 2009 17:42:51 CET
 
 let g:gentoo_portdir = '/usr/portage'
 
@@ -769,7 +769,7 @@ endfunction
 
 function! GentooInfo(...) "{{{
     if a:0 < 1
-        echoerr "Usage: GentooInfo [mode] <package>"
+        echoerr "Usage: GentooInfo <package> [mode]"
         return
     endif
     let l:package = s:getPackage(a:1)
