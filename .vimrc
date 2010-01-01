@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mi 30 Dez 2009 02:17:25 CET
+" Last Change:  Fr 01 Jan 2010 18:52:03 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -54,6 +54,9 @@ set modelines=5
 " folding method: markers
 set fdm=marker
 
+" start with no folds closed
+set foldlevelstart=99
+
 " display line numbers
 set number
 
@@ -79,7 +82,7 @@ set lazyredraw
 set wildmenu
 
 " disable some filetypes for completion
-set wildignore=*.o,*.obj,*.dll
+set wildignore=*.o,*.obj,*.dll,*.pyc
 
 " turn on mouse in all modes
 if has('mouse')
@@ -359,7 +362,7 @@ endfunction
 function! SyntaxItem()
     let synGrp=synIDattr(synID(line("."), col("."), 1), "name")
     if synGrp != ""
-        return " [" . synGrp . "]"
+        return "[" . synGrp . "]"
     else
         return ""
     endif
@@ -368,7 +371,7 @@ endfunction
 " DivHtml() - implement a custom TOhtml function ------------------{{{2
 function! DivHtml() range
     exec a:firstline . "," . a:lastline . "TOhtml"
-    %g/<style/normal $dgg
+    %g/<style/normal! $dgg
     %s/<\/style>\n<\/head>\n//
     %s/body {/.vim_block {/
     %s/<body\(.*\)>/<div class="vim_block"\1>/
