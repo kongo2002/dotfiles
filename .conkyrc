@@ -1,37 +1,40 @@
-background			no
-update_interval		1.0
-double_buffer		yes
+background              no
+update_interval         1.0
+double_buffer           yes
 
-use_xft			no
-xftfont			Monospace:size=10
-xftalpha		0.8
+use_xft                 yes
+xftfont                 Monospace:size=7
+xftalpha                0.8
 
-own_window		yes
-own_window_transparent	no
-own_window_type		normal
-own_window_hints	undecorated,below,sticky,skip_taskbar,skip_pager
-#on_bottom		yes
+own_window              yes
+own_window_transparent  no
+own_window_type         normal
+own_window_hints        undecorated,below,sticky,skip_taskbar,skip_pager
 
-minimum_size		1680 1
-draw_shades			no
-draw_outline		yes
-draw_borders		yes
-draw_graph_borders	no
-stippled_borders	0
-border_margin		3
-border_width		0
+minimum_size            1680 1
+draw_shades             no
+draw_outline            yes
+draw_borders            yes
+draw_graph_borders      no
+stippled_borders        0
+border_margin           3
+border_width            0
 
-default_color		white
-default_shade_color	black
-default_outline_color	black
+default_color           white
+default_shade_color     black
+default_outline_color   black
 
-alignment		bottom_right
-gap_x			0
-gap_y			0
+alignment               top_right
+gap_x                   0
+gap_y                   0
 
-no_buffers		yes
+no_buffers              yes
 
-music_player_interval 2
+music_player_interval   2
+
+color0                  FFFFFF
+color1                  707070
+color2                  99C906
 
 TEXT
-${alignc}${time %H:%M %d.%m.%y} ${color #707070}${kernel}: ${color #F09000}M${color #707070}:${color white} ${memperc}% ${color #F09000}CPU${color #707070}:${color white} ${cpu cpu1}%${color #707070}/${color white}${cpu cpu2}% ${freq_g}GHz ${color #F09000}HD${color #707070}: ${color white}${fs_used /home}${color #707070}/${color white}${fs_size /home} ${color #F09000}T${color #707070}: ${color white}${hwmon 1 temp 1}C${color #707070}/${color white}${hwmon 1 temp 2}C${color #707070}/${color white}${nvidia temp}C ${color #F09000}N${color #707070}: ${color white}${downspeedf eth0}kb${color #707070}/${color white}${upspeedf eth0}kb ${color #F09000}M${color #707070}:${color white} ${mem}${color #707070}/${color white}${memmax} ${color #F09000}P${color #707070}:${color white} ${running_processes}${color #707070}/${color white}${processes} ${color #F09000}MPD${color #707070}: ${color white}${mpd_smart} ${color #707070}(${color white}${mpd_elapsed}${color #707070}/${color white}${mpd_length}${color #707070}) [${mpd_vol}%]
+${alignc}${time %H:%M %d.%m.%y} ${color1}${kernel}: ${color2}M${color1}:${color0} ${memperc}% ${color2}CPU${color1}:${color0} ${cpu cpu1}%${color1}/${color0}${cpu cpu2}% ${freq_g}GHz ${color2}HD${color1}: ${color0}${fs_used /home}${color1}/${color0}${fs_size /home} ${color2}T${color1}: ${color0}${hwmon 1 temp 1}C${color1}/${color0}${hwmon 1 temp 2}C${color1}/${color0}${nvidia temp}C ${color2}N${color1}: ${color0}${downspeedf eth0}kb${color1}/${color0}${upspeedf eth0}kb ${color2}M${color1}:${color0} ${mem}${color1}/${color0}${memmax} ${color2}P${color1}:${color0} ${running_processes}${color1}/${color0}${processes} ${color2}MPD${color1}: ${color0}${mpd_smart} ${color1}(${color0}${mpd_elapsed}${color1}/${color0}${mpd_length}${color1}) [${mpd_vol}%]

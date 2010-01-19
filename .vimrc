@@ -1,9 +1,13 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 01 Jan 2010 18:52:03 CET
+" Last Change:  Di 19 Jan 2010 16:32:16 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
+
+" unlet g:colors_name to prevent multiple loading of the
+" same colorsame when resourcing .vimrc
+sil! unlet g:colors_name
 
 set nocompatible
 
@@ -126,8 +130,10 @@ set shortmess+=I
 " modify grep settings
 set grepprg=grep\ -nH\ $*
 
-" enable 256 color support
-set t_Co=256
+" enable 256 color support in xterm and rxvt-unicode
+if &term =~? "rxvt\|xterm"
+    set t_Co=256
+endif
 
 " set colorscheme
 set background=dark
@@ -183,13 +189,17 @@ nnoremap ` '
 nnoremap <silent> <C-l> :noh<CR><C-l>
 
 " change window
-map + <C-w>w
+noremap + <C-w>w
 
 " yank to end of line
 nnoremap Y y$
 
 " use Q for formatting
-map Q gq
+noremap Q gq
+
+" easier navigation on wrapped lines
+nnoremap j gj
+nnoremap k gk
 
 " move to middle of current line
 nmap <expr> gM (strlen(getline("."))/2)."<Bar>"
@@ -303,13 +313,15 @@ let OmniCpp_DefaultNamespaces = [ "std" ]
 " AUTOCOMMANDS ----------------------------------------------------{{{2
 
 if has('autocmd')
-    au FileType python map <buffer> <F6> :!python %<CR>
-    au FileType perl map <buffer> <F6> :!perl %<CR>
-    au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
-    au FileType crontab setlocal backupcopy=yes
-    au BufWrite *.bib call custom#PrepareBib()
-    au BufWrite *.tex call custom#PrepareTex()
-    au BufReadPost * call LastCurPos()
+    au! FileType python map <buffer> <F6> :!python %<CR>
+    au! FileType perl map <buffer> <F6> :!perl %<CR>
+    au! FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
+    au! FileType crontab setlocal backupcopy=yes
+    au! BufWrite *.bib call custom#PrepareBib()
+    au! BufWrite *.tex call custom#PrepareTex()
+    au! BufReadPost * call LastCurPos()
+    au! BufWritePost .vimrc,_vimrc so %
+    au! BufWritePost .Xdefaults sil !xrdb %
 endif
 
 " C / C++ ---------------------------------------------------------{{{2
@@ -379,7 +391,7 @@ function! DivHtml() range
     silent %s/<br>//g
 endfunction
 
-command -range=% DivHtml <line1>,<line2>call DivHtml()
+com! -range=% DivHtml <line1>,<line2>call DivHtml()
 
 " LastCurPos() - jump to last cursor position ---------------------{{{2
 function! LastCurPos()

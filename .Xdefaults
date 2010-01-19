@@ -1,7 +1,5 @@
-!*background:               #1c1c1c
-*background:               #111111
-!*foreground:               #b4b4b4
-*foreground:               #eeeeee
+*background:                    #111111
+*foreground:                    #eeeeee
 
 !URxvt*colorBD:                  orange
 !URxvt*colorIT:                  cyan
@@ -22,7 +20,7 @@ URxvt*imLocale:                 de_DE.UTF-8
 URxvt*geometry:                 85x35
 xterm*geometry:                 85x35
 
-! oeffnen von links mit dem mittelklick
+! open urls with middle mouse click
 URxvt.perl-ext-common:          default,matcher
 URxvt.matcher.button:           2
 URxvt.matcher.pattern.1:        \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
@@ -32,117 +30,121 @@ URxvt.urlLauncher:              firefox
 ! screen scrollbackbuffer
 !URxvt*secondaryScroll:          true
 
-!black
+! Theme Six
+! (http://phraktured.net/terminal-colors/)
+!*background: rgb:be/be/be
+!*foreground: rgb:21/21/21
+!*color0:     rgb:00/00/00
+!*color1:     rgb:bf/72/76
+!*color2:     rgb:86/af/80
+!*color3:     rgb:96/8a/38
+!*color4:     rgb:36/73/b5
+!*color5:     rgb:9a/70/b2
+!*color6:     rgb:7a/be/cc
+!*color7:     rgb:db/db/db
+!*color8:     rgb:66/92/af
+!*color9:     rgb:e5/50/5f
+!*color10:    rgb:87/bc/87
+!*color11:    rgb:e0/d9/5c
+!*color12:    rgb:1b/85/d6
+!*color13:    rgb:ad/73/ba
+!*color14:    rgb:33/8e/aa
+!*color15:    rgb:f4/f4/f4
+
+! Theme Twenty-Four
+! (http://phraktured.net/terminal-colors/)
+!*background:    rgb:ff/ff/ff
+!*foreground:    rgb:00/00/00
+!*color0:  rgb:00/00/00
+!*color1:  rgb:cd/5c/5c
+!*color2:  rgb:8e/ae/71
+!*color3:  rgb:d2/b4/8c
+!*color4:  rgb:5f/7b/8a
+!*color5:  rgb:cd/cd/b4
+!*color6:  rgb:68/68/68
+!*color7:  rgb:ff/ff/ff
+!*color8:  rgb:00/00/00
+!*color9:  rgb:ee/63/63
+!*color10: rgb:95/c7/49
+!*color11: rgb:cd/cd/c1
+!*color12: rgb:6b/7b/8a
+!*color13: rgb:cd/cd/b4
+!*color14: rgb:77/87/98
+!*color15: rgb:ca/ca/ca
+
+! earth colors
 !*color0:  #222222
 !*color8:  #554444
-
-!red
 !*color1:  #884422
 !*color9:  #cc5533
-
-!green
 !*color2:  #778800
 !*color10: #88aa22
-
-!yellow
 !*color3:  #887733
 !*color11: #aa9955
-
-!blue
 !*color4:  #3ef99a
 !*color12: #6777df
-
-!magneta
 !*color5:  #885500
 !*color13: #996600
-
-!cyan
 !*color6:  #5555aa
 !*color14: #7777aa
-
-!white
 !*color7:  #bbaa99
 !*color15: #ddccaa
 
 ! tango color scheme
 !*background : #555753
 !*foreground : #d3d7cf
-! Black
 !*color0     : #888a85
 !*color8     : #2e3436
-! Red
 !*color1     : #ef2828
 !*color9     : #a40000
-! Green
 !*color2     : #8ae234
 !*color10    : #4e9a06
-! Yellow
 !*color3     : #fce94f
 !*color11    : #c4a000
-! Blue
 !*color4     : #729fcf
 !*color12    : #204a87
-! Purple
 !*color5     : #ad7fa8
 !*color13    : #5c3566
-! Cyan
 !*color6     : #92B19E
 !*color14    : #A1CDCD
-! White
 !*color7     : #eeeeec
 !*color15    : #babdb6
 
 ! MrElendig
-! black
-!*color0: #1c1c1c
-!*color8: #888888
-! red
-!*color1: #DE1923
-!*color9: #FF6050
-! green
-!*color2: #559933
-!*color10: #66D077
-! yellow
-!*color3: #FF9922
-!*color11: #FFFFAF
-! blue
-!*color4: #3579A8
-!*color12: #4EB4FA
-! magenta
-!*color5: #BB88DD
-!*color13: #D7AFD7
-! cyan
-!*color6: #00BBDD
-!*color14: #0DEBFF
-! white
-!*color7: #C7C7C7
-!*color15: #D9D9D9
+*color0: #1c1c1c
+*color8: #888888
+*color1: #DE1923
+*color9: #FF6050
+*color2: #559933
+*color10: #66D077
+*color3: #FF9922
+*color11: #FFFFAF
+*color4: #3579A8
+*color12: #4EB4FA
+*color5: #BB88DD
+*color13: #D7AFD7
+*color6: #00BBDD
+*color14: #0DEBFF
+*color7: #C7C7C7
+*color15: #D9D9D9
 
-! ir_black colors
-! black
-*color0: #4e4e4e
-*color8: #7c7c7c
-! red
-*color1: #ff6c60
-*color9: #ffb6b0
-! green
-*color2: #a8ff60
-*color10: #ceffab
-! yellow
-*color3: #ffffb6
-*color11: #ffffcb
-! blue
-*color4: #6699cc
-*color12: #96cbfe
-! magenta
-*color5: #ff73fd
-*color13: #ff9cfe
-! cyan
-*color6: #c6c5fe
-*color14: #dfdffe
-! white
-*color7: #eeeeee
-*color15: #ffffff
+! ir_black
+!*color0: #4e4e4e
+!*color8: #7c7c7c
+!*color1: #ff6c60
+!*color9: #ffb6b0
+!*color2: #a8ff60
+!*color10: #ceffab
+!*color3: #ffffb6
+!*color11: #ffffcb
+!*color4: #6699cc
+!*color12: #96cbfe
+!*color5: #ff73fd
+!*color13: #ff9cfe
+!*color6: #c6c5fe
+!*color14: #dfdffe
+!*color7: #eeeeee
+!*color15: #ffffff
 
 !Pnevma2
 !*color0: #2F2E2D
@@ -163,28 +165,20 @@ URxvt.urlLauncher:              firefox
 !*color15: #EFEFEF
 
 ! ST.x
-!black
 !*color0:      #222222
 !*color8:      #666666
-!red
 !*color1:      #535d6c
 !*color9:      #cf6171
-!green
 !*color2:      #aece92
 !*color10:     #c5f779
-!yellow
 !*color3:      #efefef
 !*color11:     #fff796
-!blue
 !*color4:      #71C5F4
 !*color12:     #67CDE9
-!magenta
 !*color5:      #963c59
 !*color13:     #cf9ebe
-!cyan
 !*color6:      #418179
 !*color14:     #71bebe
-!white
 !*color7:      #efefef
 !*color15:     #ffffff
 
@@ -205,9 +199,10 @@ URxvt.urlLauncher:              firefox
 !*color14:                  orange
 !*color15:                  cyan
 
-xterm*faceName:             xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:hinting=true
+xterm*boldMode:             false
+xterm*font:                 -*-proggycleanszcp-*-*-*-*-*-*-*-96-*-70-*-*
 
-URxvt*font:                 xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:hinting=true
-URxvt*boldFont:             xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:bold:hinting=true
-URxvt*italicFont:           xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:italic:hinting=true
-URxvt*bolditalicFont:       xft:Dejavu Sans Mono:pixelsize=12.0:antialias=true:bold:italic:hinting=true
+URxvt*font:                 xft:Dejavu Sans Mono:pixelsize=11.0:antialias=true:hinting=true
+URxvt*boldFont:             xft:Dejavu Sans Mono:pixelsize=11.0:antialias=true:hinting=true
+URxvt*italicFont:           xft:Dejavu Sans Mono:pixelsize=11.0:antialias=true:hinting=true
+URxvt*bolditalicFont:       xft:Dejavu Sans Mono:pixelsize=11.0:antialias=true:hinting=true
