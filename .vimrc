@@ -1,12 +1,12 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 19 Jan 2010 16:32:16 CET
+" Last Change:  Di 19 Jan 2010 17:13:52 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
 " unlet g:colors_name to prevent multiple loading of the
-" same colorsame when resourcing .vimrc
+" same colorscheme when resourcing .vimrc
 sil! unlet g:colors_name
 
 set nocompatible
@@ -131,7 +131,7 @@ set shortmess+=I
 set grepprg=grep\ -nH\ $*
 
 " enable 256 color support in xterm and rxvt-unicode
-if &term =~? "rxvt\|xterm"
+if &term ==? "rxvt-unicode" || &term ==? "xterm"
     set t_Co=256
 endif
 
