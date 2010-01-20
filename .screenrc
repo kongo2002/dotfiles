@@ -1,7 +1,7 @@
 bind ' ' windowlist -b
 
 #hardstatus alwayslastline "%{= dk} %=%?%{= dk}%-w%?%{= dy}%50>[%n %t]%?%{= dk}%+w%?%="
-hardstatus alwayslastline "%{= dw} %=%?%{dw}%-w%?%{dy}%50>[%n %t]%?%{dw}%+w%?%="
+hardstatus alwayslastline "%{= dw} %=%?%{dw}%-w%?%{dg}%50>[%n %t]%?%{dw}%+w%?%="
 #hardstatus alwayslastline "%{kw} %=%?%{kw}%-w%?%{ky}%50>[%n %t]%?%{kw}%+w%?%="
 
 #caption always "%{= kw}%?%-Lw%?%{+b kw}%n*%t%f %?(%u)%?%{= kw}%?%+Lw%?"
