@@ -111,7 +111,8 @@ URxvt.urlLauncher:              firefox
 !*color15    : #babdb6
 
 ! MrElendig
-*color0: #1c1c1c
+!*color0: #1c1c1c
+*color0: #5D5D5D
 *color8: #888888
 *color1: #DE1923
 *color9: #FF6050
