@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 19 Jan 2010 17:13:52 CET
+" Last Change:  Fr 22 Jan 2010 14:58:43 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -163,7 +163,7 @@ set statusline+=%*
 "set statusline+=%{SyntaxItem()}
 
 " display search matches
-set statusline+=%=%{SearchMatches(actual_curbuf)}
+set statusline+=%=%{SearchMatches()}
 
 " line, column, percentage
 set statusline+=%10(%l,%v%)\ %P
@@ -268,6 +268,10 @@ endif
 
 " extend runtime path with plugin directory
 sil! cal pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
+
+" SYNTASTIC -------------------------------------------------------{{{2
+
+let g:syntastic_enable_signs = 1
 
 " SNIPMATE --------------------------------------------------------{{{2
 
@@ -401,10 +405,7 @@ function! LastCurPos()
 endfunction
 
 " SearchMatches() - get number of search matches ------------------{{{2
-function! SearchMatches(nr)
-    if bufnr('') != a:nr
-        return ''
-    endif
+function! SearchMatches()
     try
         if getreg('/') == '' | return '' | endif
         if line('$') > 5000 | return '' | endif
