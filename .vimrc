@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 22 Jan 2010 14:58:43 CET
+" Last Change:  Sa 23 Jan 2010 22:16:36 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -220,10 +220,13 @@ cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
 
 " toggle paste mode
-nmap <silent> <Leader>p :set paste! paste?<CR>
+nmap <silent> <Leader>p :setl paste! paste?<CR>
 
 " toggle wrap
-nmap <silent> <Leader>w :set wrap! wrap?<CR>
+nmap <silent> <Leader>w :setl wrap! wrap?<CR>
+
+" toggle list
+nmap <silent> <Leader>nl :setl list! list?<CR>
 
 " Quickfix navigation
 nmap <silent> gc :cnext<CR>
@@ -244,6 +247,9 @@ map <F3> :TlistToggle<CR>
 nmap <Leader>fb :FufBuffer<CR>
 nmap <Leader>fd :FufDir<CR>
 nmap <Leader>ff :FufFile<CR>
+
+" LustyJuggler mapping
+nmap <Leader>g :LustyJuggler<CR>
 
 " close current window
 noremap <Leader>cc :close<CR>
