@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 23 Jan 2010 22:16:36 CET
+" Last Change:  Mo 25 Jan 2010 20:23:44 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -146,7 +146,7 @@ colorscheme jellybeans
 set laststatus=2
 
 " filename, flags
-set statusline=%<%F\ #%n\ %1*%m%*%r%h%w
+set statusline=%<%F\ #%n\ %m%*%r%h%w
 
 " fileformat, encoding
 set statusline+=[%{&ff}]%y[%{(&fenc==\"\"?&enc:&fenc)}]
