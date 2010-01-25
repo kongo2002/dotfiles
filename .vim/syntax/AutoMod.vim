@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     AutoMod
 " Maintainer:   Gregor Uhlenheuer
-" Last Change:  Di 01 Dez 2009 17:16:04 CET
+" Last Change:  Mo 25 Jan 2010 19:04:25 CET
 
 if version < 600
     syntax clear
@@ -52,7 +52,7 @@ syn keyword mModel amount align acceleration deceleration capacity
 syn keyword mModel choice exponential greatest lognormal limit loadtype
 syn keyword mModel max maximum minimum norm normal orientation random
 syn keyword mModel previous state triangular weibull x y z total
-syn keyword mModel path destination distance velocity line
+syn keyword mModel path destination distance velocity line realclock
 
 " constants
 syn keyword mBool  true false
@@ -96,8 +96,8 @@ syn region mComment start=/\/\*/ end=/\*\// contains=mComment,mTodo
 " default highlighting
 hi def link mStatement  Function
 hi def link mBlock Function
-hi def link mRepeat Function
-hi def link mConditional Function
+hi def link mRepeat Repeat
+hi def link mConditional Conditional
 hi def link mSystem Label
 hi def link mControl Statement
 hi def link mModel Type
