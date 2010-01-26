@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 26 Jan 2010 19:00:55 CET
+" Last Change:  Di 26 Jan 2010 19:04:08 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -247,9 +247,6 @@ map <F3> :TlistToggle<CR>
 nmap <Leader>fb :FufBuffer<CR>
 nmap <Leader>fd :FufDir<CR>
 nmap <Leader>ff :FufFile<CR>
-
-" LustyJuggler mapping
-nmap <Leader>g :LustyJuggler<CR>
 
 " close current window
 noremap <Leader>cc :close<CR>
