@@ -1,7 +1,7 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Di 26 Jan 2010 16:52:39 CET
+" Last Change:  Di 26 Jan 2010 18:59:14 CET
 " Version:      0.1
 
 set background=dark
@@ -96,8 +96,8 @@ hi WildMenu         ctermfg=112         ctermbg=232        cterm=bold
 " SpecialKey    = 'listchars' and special/map keys in :map
 " Title         = titles in :set all, :autocmd etc.
 
-hi ErrorMsg         guifg=#d70000       guibg=NONE         gui=none
-hi ErrorMsg         ctermfg=160         ctermbg=NONE       cterm=none
+hi ErrorMsg         guifg=#d70000       guibg=#151515      gui=none
+hi ErrorMsg         ctermfg=160         ctermbg=233       cterm=none
 hi WarningMsg       guifg=#de4900                          gui=none
 hi WarningMsg       ctermfg=166                            cterm=none
 hi MoreMsg          guifg=#a28700                          gui=none

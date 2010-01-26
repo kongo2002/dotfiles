@@ -1,9 +1,9 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 26 Jan 2010 13:19:49 CET
+" Last Change:  Di 26 Jan 2010 19:00:55 CET
 
-" GLOBAL SETTINGS -------------------------------------------------{{{1
+" GLOBAL SETTINGS ------------------------------------------------------{{{1
 
 " unlet g:colors_name to prevent multiple loading of the
 " same colorscheme when resourcing .vimrc
@@ -140,7 +140,7 @@ set background=dark
 
 colorscheme kongo
 
-" STATUSLINE SETTINGS ---------------------------------------------{{{1
+" STATUSLINE SETTINGS --------------------------------------------------{{{1
 
 " display statusline even if there is only one window
 set laststatus=2
@@ -168,7 +168,7 @@ set statusline+=%=%{SearchMatches()}
 " line, column, percentage
 set statusline+=%10(%l,%v%)\ %P
 
-" MAPPINGS --------------------------------------------------------{{{1
+" MAPPINGS -------------------------------------------------------------{{{1
 
 " set mapleader from backslash to comma
 let mapleader=','
@@ -260,6 +260,9 @@ nmap <Leader>cd :lcd %:h<CR>
 " search recursively in current dir for word under cursor
 map <F4> :execute "vimgrep /".expand("<cword>")."/j **"<Bar>copen<CR>
 
+" toggle matching of long lines
+map <F11> :call ToggleLongLines()<CR>
+
 " build ctags in current directory
 map <F12> :!ctags -R .<CR><CR>
 
@@ -270,44 +273,44 @@ else
     inoremap <Nul> <C-x><C-o>
 endif
 
-" PLUGIN SETTINGS -------------------------------------------------{{{1
+" PLUGIN SETTINGS ------------------------------------------------------{{{1
 
 " extend runtime path with plugin directory
-sil! cal pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
+sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
 
-" SYNTASTIC -------------------------------------------------------{{{2
+" SYNTASTIC ------------------------------------------------------------{{{2
 
 let g:syntastic_enable_signs = 1
 
-" SNIPMATE --------------------------------------------------------{{{2
+" SNIPMATE -------------------------------------------------------------{{{2
 
 let g:snips_author='Gregor Uhlenheuer'
 
-" TAGLIST ---------------------------------------------------------{{{2
+" TAGLIST --------------------------------------------------------------{{{2
 
 let Tlist_Exit_OnlyWindow = 1
 let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
 
-" NERDTREE --------------------------------------------------------{{{2
+" NERDTREE -------------------------------------------------------------{{{2
 
 let NERDTreeQuitOnOpen = 1
 
-" SPACE-VIM -------------------------------------------------------{{{2
+" SPACE-VIM ------------------------------------------------------------{{{2
 
 " disable select mode mappings due to problems with snipmate
 let g:space_disable_select_mode = 1
 
-" TIMESTAMP -------------------------------------------------------{{{2
+" TIMESTAMP ------------------------------------------------------------{{{2
 
 let g:timestamp_rep='%c'
 
-" TO_HTML ---------------------------------------------------------{{{2
+" TO_HTML --------------------------------------------------------------{{{2
 
 let html_number_lines = 0 " don't show line numbers
 let html_use_css = 1      " don't use inline stylesheets
 let html_no_pre = 1       " don't enclose in <pre> tags
 
-" OMNICPPCOMPLETE -------------------------------------------------{{{2
+" OMNICPPCOMPLETE ------------------------------------------------------{{{2
 
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
@@ -318,9 +321,9 @@ let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteScope = 1
 let OmniCpp_DefaultNamespaces = [ "std" ]
 
-" FILETYPE SPECIFICS ----------------------------------------------{{{1
+" FILETYPE SPECIFICS ---------------------------------------------------{{{1
 
-" AUTOCOMMANDS ----------------------------------------------------{{{2
+" AUTOCOMMANDS ---------------------------------------------------------{{{2
 
 if has('autocmd')
     au! FileType python map <buffer> <F6> :!python %<CR>
@@ -334,16 +337,16 @@ if has('autocmd')
     au! BufWritePost .Xdefaults sil !xrdb %
 endif
 
-" C / C++ ---------------------------------------------------------{{{2
+" C / C++ --------------------------------------------------------------{{{2
 
 let g:c_syntax_for_h = 1
 
-" LATEX -----------------------------------------------------------{{{2
+" LATEX ----------------------------------------------------------------{{{2
 
 let g:tex_fold_enabled = 1    " enable syntax folding
 let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
 
-" TERM SPECIFICS --------------------------------------------------{{{1
+" TERM SPECIFICS -------------------------------------------------------{{{1
 
 " fix arrow keys
 if &term ==? "rxvt-unicode"
@@ -359,7 +362,7 @@ if &term ==? "xterm"
   set ttymouse=xterm2
 endif
 
-" OS SPECIFICS ----------------------------------------------------{{{1
+" OS SPECIFICS ---------------------------------------------------------{{{1
 
 if has('win32') || has('win64')
     set guifont=Lucida_Console:h8:cDEFAULT
@@ -369,9 +372,9 @@ if has('win32') || has('win64')
     let Tlist_Ctags_Cmd='D:\ctags57\ctags.exe'
 endif
 
-" CUSTOM FUNCTIONS ------------------------------------------------{{{1
+" CUSTOM FUNCTIONS -----------------------------------------------------{{{1
 
-" SSpace() - get current movement for space.vim plugin ------------{{{2
+" SSpace() - get current movement for space.vim plugin -----------------{{{2
 function! SSpace()
     if exists("*GetSpaceMovement") && GetSpaceMovement() != ""
         return "[" . GetSpaceMovement() . "]"
@@ -380,7 +383,7 @@ function! SSpace()
     endif
 endfunction
 
-" SyntaxItem() - get syntax highlight group under cursor ----------{{{2
+" SyntaxItem() - get syntax highlight group under cursor ---------------{{{2
 function! SyntaxItem()
     let synGrp=synIDattr(synID(line("."), col("."), 1), "name")
     if synGrp != ""
@@ -390,7 +393,7 @@ function! SyntaxItem()
     endif
 endfunction
 
-" DivHtml() - implement a custom TOhtml function ------------------{{{2
+" DivHtml() - implement a custom TOhtml function -----------------------{{{2
 function! DivHtml() range
     exec a:firstline . "," . a:lastline . "TOhtml"
     %g/<style/normal! $dgg
@@ -403,14 +406,14 @@ endfunction
 
 com! -range=% DivHtml <line1>,<line2>call DivHtml()
 
-" LastCurPos() - jump to last cursor position ---------------------{{{2
+" LastCurPos() - jump to last cursor position --------------------------{{{2
 function! LastCurPos()
     if line("'\"") > 0 && line ("'\"") <= line("$")
         exe "normal g'\""
     endif
 endfunction
 
-" SearchMatches() - get number of search matches ------------------{{{2
+" SearchMatches() - get number of search matches -----------------------{{{2
 function! SearchMatches()
     try
         if getreg('/') == '' | return '' | endif
@@ -454,4 +457,19 @@ function! SearchMatches()
     catch /.*/
         return ''
     endtry
+endfunction
+
+" ToggleLongLines() - toggle matching of long lines --------------------{{{2
+function! ToggleLongLines()
+    if exists('*matchadd')
+        if !exists('w:long_match')
+            let len = (&tw <= 0 ? 80 : &tw)
+            let w:long_match = matchadd('ErrorMsg', '.\%>'.(len+1).'v', 0)
+            echo 'longlines'
+        else
+            call matchdelete(w:long_match)
+            unlet w:long_match
+            echo 'nolonglines'
+        endif
+    endif
 endfunction
