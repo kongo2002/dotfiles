@@ -1,7 +1,7 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Mo 25 Jan 2010 22:26:54 CET
+" Last Change:  Di 26 Jan 2010 16:52:39 CET
 " Version:      0.1
 
 set background=dark
@@ -153,30 +153,30 @@ hi SpellLocal       ctermfg=130                            cterm=reverse
 hi DiffAdd          guifg=#80a090       guibg=#313c36      gui=none
 hi DiffAdd          ctermfg=29          ctermbg=23         cterm=none
 hi DiffChange       guifg=NONE          guibg=#4a343a      gui=none
-hi DiffChange       ctermfg=NONE        ctermbg=52         cterm=none
+hi DiffChange       ctermfg=NONE        ctermbg=88         cterm=none
 hi DiffDelete       guifg=#6c6661       guibg=#3c3631      gui=none
 hi DiffDelete       ctermfg=242         ctermbg=23         cterm=none
 hi DiffText         guifg=#f05060       guibg=#4a343a      gui=bold
-hi DiffText         ctermfg=160         ctermbg=52         cterm=bold
+hi DiffText         ctermfg=160         ctermbg=88         cterm=bold
 
 " SYNTAX HIGHLIGHTING {{{1
 
 hi Comment          guifg=#606060                          gui=none
 hi Comment          ctermfg=240                            cterm=none
 hi Constant         guifg=#980c0f                          gui=none
-hi Constant         ctermfg=52                             cterm=none
+hi Constant         ctermfg=88                             cterm=none
 hi String           guifg=#d54817                          gui=none
 hi String           ctermfg=202                            cterm=none
 hi StringDelimiter  guifg=#980c0f                          gui=none
-hi StringDelimiter  ctermfg=52                             cterm=none
+hi StringDelimiter  ctermfg=88                             cterm=none
 hi Character        guifg=#980c0f                          gui=none
-hi Character        ctermfg=52                             cterm=none
-hi Number           guifg=#ddda35                          gui=none
-hi Number           ctermfg=190                            cterm=none
+hi Character        ctermfg=88                             cterm=none
+hi Number           guifg=#e7820f                          gui=none
+hi Number           ctermfg=208                            cterm=none
 hi Boolean          guifg=#98320c                          gui=none
 hi Boolean          ctermfg=130                            cterm=none
-hi Float            guifg=#ddda35                          gui=none
-hi Float            ctermfg=190                            cterm=none
+hi Float            guifg=#e7820f                          gui=none
+hi Float            ctermfg=208                            cterm=none
 hi Identifier       guifg=#ffae25                          gui=none
 hi Identifier       ctermfg=214                            cterm=none
 hi Function         guifg=#ffae25                          gui=none
@@ -205,14 +205,14 @@ hi Macro            guifg=#117ebf                          gui=none
 hi Macro            ctermfg=27                             cterm=none
 hi PreCondit        guifg=#117ebf                          gui=none
 hi PreCondit        ctermfg=27                             cterm=none
-hi Type             guifg=#9eb51e                          gui=none
-hi Type             ctermfg=100                            cterm=none
+hi Type             guifg=#d3d300                          gui=none
+hi Type             ctermfg=226                            cterm=none
 hi StorageClass     guifg=#9eb51e                          gui=none
-hi StorageClass     ctermfg=100                            cterm=none
+hi StorageClass     ctermfg=106                            cterm=none
 hi Structure        guifg=#9eb51e                          gui=none
-hi Structure        ctermfg=100                            cterm=none
+hi Structure        ctermfg=106                            cterm=none
 hi Typedef          guifg=#9eb51e                          gui=none
-hi Typedef          ctermfg=100                            cterm=none
+hi Typedef          ctermfg=106                            cterm=none
 hi Special          guifg=#21d5e0                          gui=none
 hi Special          ctermfg=44                             cterm=none
 hi SpecialChar      guifg=#21d5e0                          gui=none
