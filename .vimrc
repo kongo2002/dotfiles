@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mo 25 Jan 2010 20:23:44 CET
+" Last Change:  Di 26 Jan 2010 13:19:49 CET
 
 " GLOBAL SETTINGS -------------------------------------------------{{{1
 
@@ -138,7 +138,7 @@ endif
 " set colorscheme
 set background=dark
 
-colorscheme jellybeans
+colorscheme kongo
 
 " STATUSLINE SETTINGS ---------------------------------------------{{{1
 

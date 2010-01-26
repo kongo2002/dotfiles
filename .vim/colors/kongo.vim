@@ -1,7 +1,7 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Mo 25 Jan 2010 22:07:40 CET
+" Last Change:  Mo 25 Jan 2010 22:26:54 CET
 " Version:      0.1
 
 set background=dark
@@ -126,8 +126,8 @@ hi TabLineSel       ctermfg=255         ctermbg=232        cterm=none
 
 hi IncSearch        guifg=#9cd620                          gui=reverse
 hi IncSearch        ctermfg=112                            cterm=reverse
-hi Search                               guibg=#9cd620      gui=underline
-hi Search                               ctermbg=112        cterm=underline
+hi Search                               guibg=#9cd620      gui=none
+hi Search                               ctermbg=112        cterm=none
 hi MatchParen       guifg=#ff0000       guibg=NONE         gui=bold
 hi MatchParen       ctermfg=196         ctermbg=NONE       cterm=bold
 
