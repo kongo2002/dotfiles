@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 26 Jan 2010 19:04:08 CET
+" Last Change:  Mi 27 Jan 2010 01:09:31 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -337,6 +337,10 @@ endif
 " C / C++ --------------------------------------------------------------{{{2
 
 let g:c_syntax_for_h = 1
+
+" PYTHON ---------------------------------------------------------------{{{2
+
+let g:python_highlight_all = 1
 
 " LATEX ----------------------------------------------------------------{{{2
 
