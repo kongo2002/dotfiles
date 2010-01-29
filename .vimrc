@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mi 27 Jan 2010 01:09:31 CET
+" Last Change:  Fr 29 Jan 2010 21:37:10 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -34,6 +34,9 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+
+" always activate autoindent
+set autoindent
 
 " set reasonable history size
 set history=1000
@@ -85,6 +88,9 @@ set lazyredraw
 " turn on wildmenu completion
 set wildmenu
 
+" give following files lower priority
+set suffixes+=.info,.aux,.log,.dvi,.bbl,.out,.o,.lo
+
 " disable some filetypes for completion
 set wildignore=*.o,*.obj,*.dll,*.pyc
 
@@ -92,6 +98,9 @@ set wildignore=*.o,*.obj,*.dll,*.pyc
 if has('mouse')
     set mouse=a
 endif
+
+" show cursor position all the time
+set ruler
 
 " indicates fast terminal connection
 set ttyfast
@@ -332,6 +341,8 @@ if has('autocmd')
     au! BufReadPost * call LastCurPos()
     au! BufWritePost .vimrc,_vimrc so %
     au! BufWritePost .Xdefaults sil !xrdb %
+    au! BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
+    au! BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
 endif
 
 " C / C++ --------------------------------------------------------------{{{2
