@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 29 Jan 2010 21:37:10 CET
+" Last Change:  Sa 30 Jan 2010 17:48:27 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -166,6 +166,11 @@ set statusline+=%{SSpace()}
 " syntastic plugin
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" number of long lines
+set statusline+=%#warningmsg#
+set statusline+=%{NumLongLines()}
 set statusline+=%*
 
 " current syntax group
@@ -483,5 +488,23 @@ function! ToggleLongLines()
             unlet w:long_match
             echo 'nolonglines'
         endif
+    endif
+endfunction
+
+" NumLongLines() - return number of long lines --------------------------{{{2
+function! NumLongLines()
+    let l:max = &tw ? &tw : 80
+    let l:i = 1
+    let l:count = 0
+    while l:i <= line('$')
+        if col([l:i, '$']) > l:max
+            let l:count += 1
+        endif
+        let l:i += 1
+    endwhile
+    if l:count > 0
+        return '['.l:count.']'
+    else
+        return ''
     endif
 endfunction
