@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 30 Jan 2010 17:48:27 CET
+" Last Change:  Sa 30 Jan 2010 18:37:26 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -493,7 +493,7 @@ endfunction
 
 " NumLongLines() - return number of long lines --------------------------{{{2
 function! NumLongLines()
-    let l:max = &tw ? &tw : 80
+    let l:max = (&tw ? &tw : 80) + 1
     let l:i = 1
     let l:count = 0
     while l:i <= line('$')
