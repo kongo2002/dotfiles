@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 30 Jan 2010 18:37:26 CET
+" Last Change:  Sa 30 Jan 2010 21:11:58 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -242,6 +242,12 @@ nmap <silent> <Leader>w :setl wrap! wrap?<CR>
 " toggle list
 nmap <silent> <Leader>nl :setl list! list?<CR>
 
+" toggle relative numbers if installed (custom build)
+if exists('+relativenumber')
+    nmap <silent> <Leader>rn :if &rnu <Bar> set nornu nu <Bar>
+                \ else <Bar> set rnu nonu <Bar> endif<CR>
+endif
+
 " Quickfix navigation
 nmap <silent> gc :cnext<CR>
 nmap <silent> gC :cprev<CR>
@@ -269,7 +275,8 @@ noremap <Leader>cc :close<CR>
 nmap <Leader>cd :lcd %:h<CR>
 
 " search recursively in current dir for word under cursor
-map <F4> :execute "vimgrep /".expand("<cword>")."/j **"<Bar>copen<CR>
+map <F4> :execute 'vimgrep /' . expand('<cword>') . '/j **'
+            \ <Bar> copen <CR>
 
 " toggle matching of long lines
 map <F11> :call ToggleLongLines()<CR>
