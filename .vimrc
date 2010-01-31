@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 30 Jan 2010 21:11:58 CET
+" Last Change:  So 31 Jan 2010 18:05:13 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -169,8 +169,10 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 " number of long lines
+let g:num_long_lines = ''
+
 set statusline+=%#warningmsg#
-set statusline+=%{NumLongLines()}
+set statusline+=%{NumLongLines(0)}
 set statusline+=%*
 
 " current syntax group
@@ -355,6 +357,7 @@ if has('autocmd')
     au! BufWritePost .Xdefaults sil !xrdb %
     au! BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
     au! BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
+    au! CursorHold,BufWritePost * call NumLongLines(1)
 endif
 
 " C / C++ --------------------------------------------------------------{{{2
@@ -498,8 +501,9 @@ function! ToggleLongLines()
     endif
 endfunction
 
-" NumLongLines() - return number of long lines --------------------------{{{2
-function! NumLongLines()
+" NumLongLines() - return number of long lines -------------------------{{{2
+function! NumLongLines(update)
+    if !a:update | return g:num_long_lines | endif
     let l:max = (&tw ? &tw : 80) + 1
     let l:i = 1
     let l:count = 0
@@ -510,8 +514,8 @@ function! NumLongLines()
         let l:i += 1
     endwhile
     if l:count > 0
-        return '['.l:count.']'
+        let g:num_long_lines = '['.l:count.']'
     else
-        return ''
+        let g:num_long_lines = ''
     endif
 endfunction
