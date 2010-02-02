@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 02 Feb 2010 01:02:53 CET
+" Last Change:  Di 02 Feb 2010 17:54:28 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -248,6 +248,14 @@ nmap <silent> <Leader>nl :setl list! list?<CR>
 if exists('+relativenumber')
     nmap <silent> <Leader>rn :if &rnu <Bar> set nornu nu <Bar>
                 \ else <Bar> set rnu nonu <Bar> endif<CR>
+endif
+
+" toggle margincolumn if installed (custom build)
+if exists('+margincolumn')
+    " set margincolumn to textwidth
+    set margincolumn=-1
+    nmap <silent> <Leader>mc :if &mc == -1 <Bar> set mc=0 <Bar>
+                \ else <Bar> set mc=-1 <Bar> endif<CR>
 endif
 
 " Quickfix navigation
