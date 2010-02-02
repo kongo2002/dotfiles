@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 31 Jan 2010 18:05:13 CET
+" Last Change:  Di 02 Feb 2010 01:02:53 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -400,6 +400,12 @@ if has('win32') || has('win64')
 endif
 
 " CUSTOM FUNCTIONS -----------------------------------------------------{{{1
+
+" DiffOrig - compare current buffer with original ----------------------{{{2
+if !exists(':DiffOrig')
+    com! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+                \ | wincmd p | diffthis
+endif
 
 " SSpace() - get current movement for space.vim plugin -----------------{{{2
 function! SSpace()
