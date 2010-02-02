@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 02 Feb 2010 17:54:28 CET
+" Last Change:  Di 02 Feb 2010 20:04:14 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -365,7 +365,7 @@ if has('autocmd')
     au! BufWritePost .Xdefaults sil !xrdb %
     au! BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
     au! BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
-    au! CursorHold,BufWritePost * call NumLongLines(1)
+    au! BufEnter,CursorHold,BufWritePost * call NumLongLines(1)
 endif
 
 " C / C++ --------------------------------------------------------------{{{2
