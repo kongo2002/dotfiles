@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Do 04 Feb 2010 23:49:24 CET
+" Last Change:  Fr 05 Feb 2010 00:00:15 CET
 
 let g:gentoo_portdir = '/usr/portage'
 
@@ -50,6 +50,7 @@ function! s:getPortageTree() "{{{
         call extend(s:packages, l:pack)
     endfor
     call map(s:packages, 'substitute(v:val, "^.*\\/\\(\\S\\+\\)", "\\1", "")')
+    call sort(s:packages)
     let s:portage_loaded = 1
 endfunction
 " }}}
