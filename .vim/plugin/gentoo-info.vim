@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Do 04 Feb 2010 22:28:45 CET
+" Last Change:  Do 04 Feb 2010 23:49:24 CET
 
 let g:gentoo_portdir = '/usr/portage'
 
@@ -41,6 +41,15 @@ function! s:getPortageTree() "{{{
     if filereadable(l:cat_file)
         let s:categories = readfile(g:gentoo_portdir.'/profiles/categories')
     endif
+    let s:packages = []
+    for category in s:categories
+        let l:pack = []
+        let l:dir = g:gentoo_portdir.'/'.category
+        let l:pack = split(system('find '.l:dir.' -maxdepth 1 -type d'), '\n')
+        call remove(l:pack, 0)
+        call extend(s:packages, l:pack)
+    endfor
+    call map(s:packages, 'substitute(v:val, "^.*\\/\\(\\S\\+\\)", "\\1", "")')
     let s:portage_loaded = 1
 endfunction
 " }}}
@@ -764,21 +773,28 @@ endfunction
 
 function! s:GComplete(A, L, P) "{{{
     let l:arguments = ['info', 'use', 'dep', 'rdep', 'changelog']
-    if strpart(a:L, 5) !~ '^\w\+$'
+    if strpart(a:L, 5) =~ '^\w\+$'
         return join(l:arguments, "\n")
     endif
-    return ''
+    if !exists('s:portage_loaded')
+        call s:getPortageTree()
+    endif
+    return join(s:packages, "\n")
 endfunction
 " }}}
 
 function! GentooInfo(...) "{{{
     if a:0 < 1
-        echoerr "Usage: GentooInfo <package> [mode]"
+        echohl ErrorMsg
+        echo "Usage: GentooInfo <package> [mode]"
+        echohl None
         return
     endif
     let l:package = s:getPackage(a:1)
     if l:package == ''
-        echoerr 'Package "' . a:1 . '" not found'
+        echohl ErrorMsg
+        echo 'Package "' . a:1 . '" not found'
+        echohl None
         return
     endif
     if a:0 < 2
