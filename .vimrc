@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 02 Feb 2010 20:04:14 CET
+" Last Change:  Mi 03 Feb 2010 00:06:16 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -257,6 +257,9 @@ if exists('+margincolumn')
     nmap <silent> <Leader>mc :if &mc == -1 <Bar> set mc=0 <Bar>
                 \ else <Bar> set mc=-1 <Bar> endif<CR>
 endif
+
+" print current syntax item
+nmap <silent> <Leader>si :echo SyntaxItem()<CR>
 
 " Quickfix navigation
 nmap <silent> gc :cnext<CR>

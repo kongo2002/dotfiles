@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:     AutoMod
 " Maintainer:   Gregor Uhlenheuer
-" Last Change:  Mo 25 Jan 2010 19:04:25 CET
+" Last Change:  Mi 03 Feb 2010 18:50:26 CET
 
 if version < 600
     syntax clear
@@ -82,7 +82,7 @@ syn match mParenError display /)/
 syn region mParenInner  matchgroup=mParen start=/(/ end=/)/ contains=ALLBUT,mComment,mTodo,mParen
 
 " operators
-syn match mOperator display /[-+*/%=]\+/
+syn match mOperator display /[-+*/%=<>]\+/
 
 " numbers
 syn match mNumber display /\<\d*\.\?\d\+\>/
@@ -91,28 +91,41 @@ syn match mNumber display /\<\d*\.\?\d\+\>/
 syn match mConstant display /\<\u\+\%(_*[0-9A-Z]\+\)*\>/
 
 " nesting comments
-syn region mComment start=/\/\*/ end=/\*\// contains=mComment,mTodo
+syn region mComment matchgroup=mCommentInner start=/\/\*/ end=/\*\// contains=mComment,mTodo
 
 " default highlighting
-hi def link mStatement  Function
-hi def link mBlock Function
-hi def link mRepeat Repeat
-hi def link mConditional Conditional
-hi def link mSystem Label
-hi def link mControl Statement
-hi def link mModel Type
-hi def link mBool Boolean
-hi def link mCharacter Character
-hi def link mString String
-hi def link mTodo Todo
-hi def link mComment Comment
-hi def link mColor SpecialChar
-hi def link mParen Function
-hi def link mNumber Number
-hi def link mOperator Operator
-hi def link mConstant Constant
-hi def link mParenError Error
-hi def link mBlockError Error
-hi def link mAtEnd Type
+if version >= 508 || !exists("did_automod_syn_inits")
+    if version <= 508
+        let did_automod_syn_inits = 1
+        command -nargs=+ HiLink hi link <args>
+    else
+        command -nargs=+ HiLink hi def link <args>
+    endif
+
+    HiLink mStatement  Function
+    HiLink mBlock Function
+    HiLink mRepeat Repeat
+    HiLink mConditional Conditional
+    HiLink mSystem Label
+    HiLink mControl Statement
+    HiLink mModel Type
+    HiLink mBool Boolean
+    HiLink mCharacter Character
+    HiLink mString String
+    HiLink mTodo Todo
+    HiLink mComment Comment
+    HiLink mCommentInner Comment
+    HiLink mColor SpecialChar
+    HiLink mParen Function
+    HiLink mNumber Number
+    HiLink mOperator Operator
+    HiLink mConstant Constant
+    HiLink mParenError Error
+    HiLink mBlockError Error
+    HiLink mAtEnd Type
+
+    delcommand HiLink
+
+endif
 
 let b:current_syntax = "AutoMod"

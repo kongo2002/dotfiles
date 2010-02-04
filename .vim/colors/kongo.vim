@@ -1,7 +1,7 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Di 26 Jan 2010 18:59:14 CET
+" Last Change:  Di 02 Feb 2010 23:01:23 CET
 " Version:      0.1
 
 set background=dark
@@ -233,5 +233,10 @@ hi Error            guifg=#f80c0c       guibg=bg           gui=reverse
 hi Error            ctermfg=160         ctermbg=bg         cterm=reverse
 hi Todo             guifg=#ffae25       guibg=bg           gui=reverse,bold
 hi Todo             ctermfg=214         ctermbg=bg         cterm=reverse,bold
+
+" SPECIAL GROUPS {{{1
+
+hi MarginColumn     guifg=NONE          guibg=#242424      gui=none
+hi MarginColumn     ctermfg=NONE        ctermbg=235        cterm=none
 
 " vim: set fdm=marker foldmarker={{{,}}}

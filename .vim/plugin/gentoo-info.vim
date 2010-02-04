@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Di 29 Dez 2009 17:42:51 CET
+" Last Change:  Do 04 Feb 2010 22:28:45 CET
 
 let g:gentoo_portdir = '/usr/portage'
 
@@ -763,7 +763,11 @@ endfunction
 " }}}
 
 function! s:GComplete(A, L, P) "{{{
-    return ['info', 'use', 'dep', 'rdep', 'changelog']
+    let l:arguments = ['info', 'use', 'dep', 'rdep', 'changelog']
+    if strpart(a:L, 5) !~ '^\w\+$'
+        return join(l:arguments, "\n")
+    endif
+    return ''
 endfunction
 " }}}
 
@@ -786,4 +790,4 @@ function! GentooInfo(...) "{{{
 endfunction
 " }}}
 
-com! -complete=customlist,s:GComplete -nargs=+ GInfo call GentooInfo(<f-args>)
+com! -complete=custom,s:GComplete -nargs=+ GInfo call GentooInfo(<f-args>)
