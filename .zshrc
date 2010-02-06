@@ -93,7 +93,7 @@ HISTFILE=~/.zshhistory
 HISTSIZE=3000
 SAVEHIST=3000
 
-bindkey "^f" history-beginning-search-backward
+bindkey "^n" history-beginning-search-backward
  
 # grc stuff for colored output
 #
