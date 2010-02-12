@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mi 03 Feb 2010 00:06:16 CET
+" Last Change:  Fr 12 Feb 2010 01:30:53 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -343,6 +343,7 @@ let html_no_pre = 1       " don't enclose in <pre> tags
 
 " OMNICPPCOMPLETE ------------------------------------------------------{{{2
 
+let OmniCpp_SelectFirstItem = 2
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
