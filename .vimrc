@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 12 Feb 2010 01:30:53 CET
+" Last Change:  So 14 Feb 2010 11:36:22 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -308,6 +308,10 @@ endif
 
 " extend runtime path with plugin directory
 sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
+
+" BUFLINE --------------------------------------------------------------{{{2
+
+let g:bufline_loaded = 1
 
 " SYNTASTIC ------------------------------------------------------------{{{2
 
