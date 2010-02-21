@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 14 Feb 2010 11:36:22 CET
+" Last Change:  So 21 Feb 2010 13:09:58 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -416,6 +416,17 @@ if has('win32') || has('win64')
 endif
 
 " CUSTOM FUNCTIONS -----------------------------------------------------{{{1
+
+" VSetSearch - visual search mappings ----------------------------------{{{2
+function! VSetSearch()
+    let tmp = @@
+    normal! gvy
+    let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    let @@ = tmp
+endfunction
+
+vnoremap * :<C-u>call VSetSearch()<CR>//<CR>
+vnoremap # :<C-u>call VSetSearch()<CR>??<CR>
 
 " DiffOrig - compare current buffer with original ----------------------{{{2
 if !exists(':DiffOrig')
