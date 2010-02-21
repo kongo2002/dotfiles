@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 21 Feb 2010 13:09:58 CET
+" Last Change:  So 21 Feb 2010 13:13:38 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -24,6 +24,7 @@ set backspace=indent,eol,start
 " tabs settings
 set expandtab
 set shiftwidth=4
+set softtabstop=4
 set tabstop=4
 set smarttab
 
