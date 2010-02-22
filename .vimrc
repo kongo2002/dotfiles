@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 21 Feb 2010 13:13:38 CET
+" Last Change:  Mo 22 Feb 2010 02:31:46 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -313,6 +313,10 @@ sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
 " BUFLINE --------------------------------------------------------------{{{2
 
 let g:bufline_loaded = 1
+
+" SURROUND -------------------------------------------------------------{{{2
+
+let g:surround_indent = 1
 
 " SYNTASTIC ------------------------------------------------------------{{{2
 
