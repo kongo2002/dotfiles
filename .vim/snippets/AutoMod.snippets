@@ -41,3 +41,7 @@ snippet for
 
 snippet order
 	order ${1:1} loads from ${2:orderlist} to ${3:continue}
+
+snippet log
+	print ${1:"text"} to ${2:log_sV}
+	call logm.logF(${3:ERROR}, $2)${4}
