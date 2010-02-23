@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mo 22 Feb 2010 02:31:46 CET
+" Last Change:  Di 23 Feb 2010 18:35:30 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -556,4 +556,39 @@ function! NumLongLines(update)
     else
         let g:num_long_lines = ''
     endif
+endfunction
+
+" FSerach() - search while skipping closed folds -----------------------{{{2
+function! FSearch()
+    let pat = input("/")
+    let start = line(".")
+    let cur = start
+    let last = line("$")
+    while cur <= last
+        let fold_end = foldclosedend(cur)
+        if fold_end != -1
+            let cur = fold_end + 1
+        endif
+        let txt = getline(cur)
+        if txt =~ pat
+            let i = stridx(txt, pat)
+            call cursor(cur, i+1)
+            return
+        endif
+        let cur += 1
+    endwhile
+    let cur = 0
+    while cur <= start
+        let fold_end = foldclosedend(cur)
+        if fold_end != -1
+            let cur = fold_end + 1
+        endif
+        let txt = getline(cur)
+        if txt =~ pat
+            let i = stridx(txt, pat)
+            call cursor(cur, i+1)
+            return
+        endif
+        let cur += 1
+    endwhile
 endfunction
