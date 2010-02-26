@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 23 Feb 2010 18:35:30 CET
+" Last Change:  Fr 26 Feb 2010 12:49:10 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -558,7 +558,7 @@ function! NumLongLines(update)
     endif
 endfunction
 
-" FSerach() - search while skipping closed folds -----------------------{{{2
+" FSearch() - search while skipping closed folds -----------------------{{{2
 function! FSearch()
     let pat = input("/")
     let start = line(".")
