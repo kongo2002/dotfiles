@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 26 Feb 2010 14:15:56 CET
+" Last Change:  Fr 26 Feb 2010 16:42:24 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -76,6 +76,9 @@ set hidden
 
 " vertical diffsplit by default
 set diffopt+=vertical
+
+" do not consider octal numbers for C-a/C-x
+set nrformats-=octal
 
 " number of screen lines around cursor
 set scrolloff=5
