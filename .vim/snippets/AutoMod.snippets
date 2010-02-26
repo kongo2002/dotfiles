@@ -44,4 +44,4 @@ snippet order
 
 snippet log
 	print ${1:"text"} to ${2:log_sV}
-	call logm.logF(${3:ERROR}, $2)${4}
+	call logm.logF(logm.${3:ERROR}, $2)${4}
