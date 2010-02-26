@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 26 Feb 2010 12:49:10 CET
+" Last Change:  Fr 26 Feb 2010 14:15:56 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -160,6 +160,9 @@ set statusline=%<%F\ #%n\ %m%*%r%h%w
 
 " fileformat, encoding
 set statusline+=[%{&ff}]%y[%{(&fenc==\"\"?&enc:&fenc)}]
+
+" show paste if enabled
+set statusline+=%{&paste?'[paste]':''}
 
 " current space.vim command
 set statusline+=%{SSpace()}
