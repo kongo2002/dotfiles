@@ -1,7 +1,7 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Di 02 Feb 2010 23:01:23 CET
+" Last Change:  Fr 26 Feb 2010 16:46:21 CET
 " Version:      0.1
 
 set background=dark
@@ -28,8 +28,8 @@ let g:colors_name = 'kongo'
 
 hi Normal           guifg=#e0e0e0       guibg=#202020
 hi Normal           ctermfg=253         ctermbg=234
-hi Cursor           guifg=bg            guibg=#dfdfdf
-hi Cursor           ctermfg=bg          ctermbg=253
+hi Cursor           guifg=bg            guibg=#969696
+hi Cursor           ctermfg=bg          ctermbg=246
 hi CursorIM         guifg=bg            guibg=#96cdcd
 hi CursorIM         ctermfg=bg          ctermbg=80
 hi CursorColumn     guifg=NONE          guibg=#151515      gui=none
