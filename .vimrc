@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 27 Feb 2010 15:10:29 CET
+" Last Change:  Sa 27 Feb 2010 16:00:40 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -332,6 +332,7 @@ let g:syntastic_enable_signs = 1
 
 let g:snips_author='Gregor Uhlenheuer'
 
+" insert mode completion for snippets
 inoremap <C-l> <C-r>=CompleteSnippets()<CR>
 
 " TAGLIST --------------------------------------------------------------{{{2
