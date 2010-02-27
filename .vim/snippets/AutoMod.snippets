@@ -27,11 +27,17 @@ snippet startfunc
 		${5:/* code */}
 	end /* $1 */
 
-snippet while
+snippet while default
 	while ${1:condition} do
 	begin
 		${2:/* code */}
 	end${3}
+
+snippet while infinite loop
+	while 1 = 1 do
+	begin
+		${1:/* code */}
+	end${2}
 
 snippet for
 	for each ${1:variable} in ${2:entity list} do
