@@ -1,13 +1,16 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 27 Feb 2010 16:00:40 CET
+" Last Change:  So 28 Feb 2010 20:29:35 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
 " unlet g:colors_name to prevent multiple loading of the
 " same colorscheme when resourcing .vimrc
 sil! unlet g:colors_name
+
+" extend runtime path with plugin directory
+sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
 
 set nocompatible
 
@@ -312,9 +315,6 @@ else
 endif
 
 " PLUGIN SETTINGS ------------------------------------------------------{{{1
-
-" extend runtime path with plugin directory
-sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
 
 " BUFLINE --------------------------------------------------------------{{{2
 

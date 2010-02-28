@@ -15,6 +15,7 @@
 !.vimperatorrc
 !.vimrc
 !.zshrc
+tags
 .vim/.VimballRecord
 .vim/doc/tags*
 .vim/spell
