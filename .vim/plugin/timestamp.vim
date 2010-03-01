@@ -50,7 +50,7 @@ function s:initialise()
     " timestamped. Speeds up the vim load time.
 
     " Default timestamp expressions
-    let s:timestamp_regexp = s:getValue('\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\a+ \d{2} \a+ \d{4} \d{2}:\d{2}:\d{2}%(\s+[AP]M)?%(\s+\a+)?|TIMESTAMP', 'g:timestamp_regexp')
+    let s:timestamp_regexp = s:getValue('\v\C%(<%(Last %([cC]hanged?|modified)|Modified)\s*:\s+)@<=\a+ \d{2} \S+ \d{4} \d{2}:\d{2}:\d{2}%(\s+[AP]M)?%(\s+\a+)?|TIMESTAMP', 'g:timestamp_regexp')
 
     " %c seems to be different on different systems. Use a full form instead.
     let s:timestamp_rep = s:getValue('%a %d %b %Y %I:%M:%S %p %Z', 'g:timestamp_rep')
