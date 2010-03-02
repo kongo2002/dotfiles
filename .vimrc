@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 28 Feb 2010 20:29:35 CET
+" Last Change:  Di 02 Mär 2010 20:24:05 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -51,9 +51,6 @@ set viminfo='100,<1000,s100,h
 "           |    |     +------- Exclude registers greater than N Kb
 "           |    +------------- Keep N lines for each register
 "           +------------------ Keep marks for N files
-
-" interoperate with the X clipboard (* register)
-set clipboard=unnamed
 
 " highlight current cursorline
 set cursorline
