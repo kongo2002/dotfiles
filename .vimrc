@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mi 03 Mär 2010 01:56:12 CET
+" Last Change:  Mi 03 Mär 2010 19:17:39 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -275,7 +275,8 @@ nmap <silent> gC :cprev<CR>
 " Buffer navigation
 nmap <silent> gb :bnext<CR>
 nmap <silent> gB :bprev<CR>
-nmap <silent> <M-b> :bnext<CR>
+nmap <silent> <A-right> :bnext<CR>
+nmap <silent> <A-left> :bprev<CR>
 
 " NERDTree mapping
 map <F1> :NERDTreeToggle<CR>
