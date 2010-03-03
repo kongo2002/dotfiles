@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Di 02 Mär 2010 20:24:05 CET
+" Last Change:  Mi 03 Mär 2010 01:56:12 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -312,6 +312,15 @@ else
 endif
 
 " PLUGIN SETTINGS ------------------------------------------------------{{{1
+
+" BUILT-INS ------------------------------------------------------------{{{2
+
+" disable some built-in plugins
+let g:loaded_gzip = 1
+let g:loaded_tarPlugin = 1
+let g:loaded_zipPlugin = 1
+let g:loaded_getscriptPlugin = 1
+let g:loaded_vimballPlugin = 1
 
 " BUFLINE --------------------------------------------------------------{{{2
 
