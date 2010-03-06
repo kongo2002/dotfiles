@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mi 03 Mär 2010 19:17:39 CET
+" Last Change:  Sa 06 Mär 2010 22:28:31 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -28,7 +28,6 @@ set backspace=indent,eol,start
 set expandtab
 set shiftwidth=4
 set softtabstop=4
-set tabstop=4
 set smarttab
 
 " turn on highlight search
@@ -139,6 +138,9 @@ set nobackup
 
 " hide intro screen
 set shortmess+=I
+
+" show command
+set showcmd
 
 " modify grep settings
 set grepprg=grep\ -nH\ $*
