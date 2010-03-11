@@ -1,6 +1,9 @@
 *background:                    #111111
 *foreground:                    #eeeeee
 
+! allow external programs to modify the xterm window
+xterm*allowWindowOps:           true
+
 !URxvt*colorBD:                  orange
 !URxvt*colorIT:                  cyan
 URxvt*colorUL:                  #ff9922
