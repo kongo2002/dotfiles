@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sa 06 Mär 2010 22:28:31 CET
+" Last Change:  Fr 12 Mär 2010 16:19:11 CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -367,6 +367,10 @@ let g:timestamp_rep='%c'
 let html_number_lines = 0 " don't show line numbers
 let html_use_css = 1      " don't use inline stylesheets
 let html_no_pre = 1       " don't enclose in <pre> tags
+
+" CODE COMPLETE --------------------------------------------------------{{{2
+
+let g:completekey = '<C-k>'
 
 " OMNICPPCOMPLETE ------------------------------------------------------{{{2
 
