@@ -1,6 +1,6 @@
 " File:           proto_compl.vim
-" Maintainer:         Gregor Uhlenheuer
-" Last Change:    Sa 13 Mär 2010 02:44:58 CET
+" Maintainer:     Gregor Uhlenheuer
+" Last Change:    Sa 13 Mär 2010 16:18:41 CET
 "
 " Description:    a small prototype completion plugin for c/c++ heavily
 "                 inspired by code_complete.vim written by Ming Bai
@@ -17,7 +17,7 @@
 "                 but you can easily configure it by setting the
 "                 'g:proto_compl_key' variable in your .vimrc like this:
 "
-"                     let g:proto_compl_key = '<CTRL-L>'
+"                   let g:proto_compl_key = '<CTRL-L>'
 
 
 if exists('g:loaded_proto_compl') || &cp || version < 700
@@ -62,6 +62,8 @@ function s:ProtoFunComplete(funn)
         call filter(tags, 'v:val["signature"] !~ "(\\s*\\(void\\)\\=\\s*)"')
 
         call map(tags, 's:GSubM(v:val, "signature", "\\(\\s*,\\s*\\)", "´>\\1`<")')
+        call map(tags, 's:GSubM(v:val, "signature", ")[^)]\\+$", ")")')
+        call map(tags, 's:GSubM(v:val, "signature", "^[^(]\\+(", "(")')
         call map(tags, 's:GSubM(v:val, "signature", "(\\(.*\\))", "`<\\1´>")')
 
         let bracket = s:ClosBrack() ? '' : ')'
@@ -102,7 +104,11 @@ endfunction
 function ProtoJump()
     if len(s:sig_list) > 1
         let s:sig_list = []
-        return ''
+        if pumvisible()
+            return "\<down>\<up>"
+        else
+            return "\<C-p>"
+        endif
     endif
 
     if match(getline('.'), '`<.*´>') != -1 || search('`<.\{-}´>') != 0
