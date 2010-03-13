@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     c.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 12 Mär 2010 00:31:43 CET
+" Last Change:  Sa 13 Mär 2010 02:32:32 CET
 
 " set makeprg to compiler when no Makefile
 if !filereadable(expand("%:p:h")."/Makefile")
@@ -16,3 +16,6 @@ set tags+=~/.vim/tags/pango
 
 " build c specific tags file
 map <buffer> <F12> :!ctags -R --c-kinds=+lp --fields=+iaS --extra=+q --language-force=C .<CR><CR>
+
+" enable prototype completion
+call ProtoComplInit()
