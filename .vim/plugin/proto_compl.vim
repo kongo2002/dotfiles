@@ -64,13 +64,15 @@ function s:ProtoFunComplete(funn)
         call map(tags, 's:GSubM(v:val, "signature", "\\(\\s*,\\s*\\)", "´>\\1`<")')
         call map(tags, 's:GSubM(v:val, "signature", "(\\(.*\\))", "`<\\1´>")')
 
+        let bracket = s:ClosBrack() ? '' : ')'
+
         " populate signature list
         for item in tags
             if item["signature"] != ''
                 if index(sig_words, item["signature"]) == -1
                     let sig_words += [item["signature"]]
                     let sig = {}
-                    let sig['word'] = item["signature"]
+                    let sig['word'] = item["signature"] . bracket
                     let sig['menu'] = item["filename"]
                     let s:sig_list += [sig]
                 endif
@@ -116,6 +118,14 @@ function ProtoJump()
     endif
 
     return ''
+endfunction
+
+function! s:ClosBrack()
+    let l:line = getline('.')[col('.')-2:]
+    if match(l:line, '^\s*(\s*)') != -1
+        return 1
+    endif
+    return 0
 endfunction
 
 function! s:GSubM(item, member, pat, sub)
