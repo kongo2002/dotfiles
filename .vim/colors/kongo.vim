@@ -1,8 +1,8 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Fr 26 Feb 2010 16:46:21 CET
-" Version:      0.1
+" Last Change:  Mo 15 Mär 2010 12:15:34 CET
+" Version:      0.2
 
 set background=dark
 
@@ -150,14 +150,14 @@ hi SpellLocal       ctermfg=130                            cterm=reverse
 " DiffDelete  = removed line
 " DiffText    = changed characters
 
-hi DiffAdd          guifg=#80a090       guibg=#313c36      gui=none
-hi DiffAdd          ctermfg=29          ctermbg=23         cterm=none
-hi DiffChange       guifg=NONE          guibg=#4a343a      gui=none
-hi DiffChange       ctermfg=NONE        ctermbg=88         cterm=none
-hi DiffDelete       guifg=#6c6661       guibg=#3c3631      gui=none
-hi DiffDelete       ctermfg=242         ctermbg=23         cterm=none
-hi DiffText         guifg=#f05060       guibg=#4a343a      gui=bold
-hi DiffText         ctermfg=160         ctermbg=88         cterm=bold
+hi DiffAdd          guifg=#e0e0e0       guibg=#324900      gui=none
+hi DiffAdd          ctermfg=253         ctermbg=22         cterm=none
+hi DiffChange       guifg=NONE          guibg=#303030      gui=none
+hi DiffChange       ctermfg=NONE        ctermbg=236        cterm=none
+hi DiffDelete       guifg=#e0e0e0       guibg=#3A0200      gui=none
+hi DiffDelete       ctermfg=253         ctermbg=52         cterm=none
+hi DiffText         guifg=#e0e0e0       guibg=#324900      gui=none
+hi DiffText         ctermfg=253         ctermbg=22         cterm=none
 
 " SYNTAX HIGHLIGHTING {{{1
 
