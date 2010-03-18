@@ -35,12 +35,14 @@ alias ll="ls -lh --color=auto"
 alias l="ls -lha --color=auto"
 
 # get current vi mode
-function zle-keymap-select {
-    VIMODE="${${KEYMAP/vicmd/[M] }/(main|viins)/[I] }"
+VIMODE="[I] "
+function zle-line-init zle-keymap-select {
+    VIMODE="${${KEYMAP/vicmd/[C] }/(main|viins)/[I] }"
     zle reset-prompt
 }
 
 # register new zsh widget
+zle -N zle-line-init
 zle -N zle-keymap-select
 
 git_b() {
