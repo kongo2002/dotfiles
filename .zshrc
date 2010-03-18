@@ -95,6 +95,8 @@ SAVEHIST=3000
 
 bindkey "^n" history-beginning-search-backward
 bindkey "^p" history-beginning-search-forward
+bindkey -M vicmd "\e." insert-last-word
+bindkey -M viins "\e." insert-last-word
  
 # grc stuff for colored output
 #
