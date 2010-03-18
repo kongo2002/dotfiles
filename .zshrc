@@ -94,6 +94,7 @@ HISTSIZE=3000
 SAVEHIST=3000
 
 bindkey "^n" history-beginning-search-backward
+bindkey "^p" history-beginning-search-forward
  
 # grc stuff for colored output
 #
