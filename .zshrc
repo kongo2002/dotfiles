@@ -51,7 +51,7 @@ git_b() {
 
 git_c() {
     if [[ -d ".git" ]] then
-        s="$(git status | tail -1 | sed -e 's/^\(\w*\).*/\1/')"
+        s="$(git status 2> /dev/null | tail -1 | sed -e 's/^\(\w*\).*/\1/')"
 
         if [ "$s" = "nothing" ]; then
             GCOLOR=$PR_BOLD_GREEN
@@ -96,18 +96,18 @@ bindkey "^n" history-beginning-search-backward
 # grc stuff for colored output
 #
 if [ "$TERM" != dumb ] && [ -x /usr/bin/grc ] ; then
-alias cl='/usr/bin/grc -es --colour=auto'
-alias configure='cl ./configure'
-alias diff='cl diff'
-alias make='cl make'
-alias gcc='cl gcc'
-alias g++='cl g++'
-alias as='cl as'
-alias gas='cl gas'
-alias ld='cl ld'
-alias netstat='cl netstat'
-alias ping='cl ping'
-alias traceroute='cl /usr/sbin/traceroute'
+    alias cl='/usr/bin/grc -es --colour=auto'
+    alias configure='cl ./configure'
+    alias diff='cl diff'
+    alias make='cl make'
+    alias gcc='cl gcc'
+    alias g++='cl g++'
+    alias as='cl as'
+    alias gas='cl gas'
+    alias ld='cl ld'
+    alias netstat='cl netstat'
+    alias ping='cl ping'
+    alias traceroute='cl /usr/sbin/traceroute'
 fi
 
 # Other misc settings
