@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mo 15 Mär 2010 11:10:34 CET
+" Last Change:  Fri 19 Mar 2010 01:21:22 AM CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -161,37 +161,39 @@ colorscheme kongo
 set laststatus=2
 
 " filename, flags
-set statusline=%<%F\ #%n\ %m%*%r%h%w
+let &statusline='%<%F #%n %m%*%r%h%w'
 
 " fileformat, encoding
-set statusline+=[%{&ff}]%y[%{(&fenc==\"\"?&enc:&fenc)}]
+let &statusline.='[%{&ff}]%y[%{(&fenc==""?&enc:&fenc)}]'
 
 " show paste if enabled
-set statusline+=%{&paste?'[paste]':''}
+let &statusline.='%{&paste?"[paste]":""}'
 
 " current space.vim command
-set statusline+=%{SSpace()}
+let &statusline.='%{SSpace()}'
 
 " syntastic plugin
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+let &statusline.='%#warningmsg#'
+let &statusline.='%{SyntasticStatuslineFlag()}'
+let &statusline.='%*'
 
 " number of long lines
-let g:num_long_lines = ''
+let g:num_long_lines =' '''
 
-set statusline+=%#warningmsg#
-set statusline+=%{NumLongLines(0)}
-set statusline+=%*
+let &statusline.='%#warningmsg#'
+let &statusline.='%{exists("actual_curbuf") ?'
+            \ . 'NumLongLines(0, actual_curbuf) : ""}'
+let &statusline.='%*'
 
 " current syntax group
-"set statusline+=%{SyntaxItem()}
+"let &statusline+='%{SyntaxItem()}'
 
 " display search matches
-set statusline+=%=%{SearchMatches()}
+let &statusline.='%=%{exists("actual_curbuf") ?'
+            \ . 'SearchMatches(actual_curbuf) : ""}'
 
 " line, column, percentage
-set statusline+=%10(%l,%v%)\ %P
+let &statusline.='%10(%l,%v%) %P'
 
 " MAPPINGS -------------------------------------------------------------{{{1
 
@@ -497,8 +499,12 @@ function! LastCurPos()
 endfunction
 
 " SearchMatches() - get number of search matches -----------------------{{{2
-function! SearchMatches()
+function! SearchMatches(id)
     try
+        if a:id != bufnr('')
+            return ''
+        endif
+
         if getreg('/') == '' | return '' | endif
         if line('$') > 5000 | return '' | endif
 
@@ -558,7 +564,13 @@ function! ToggleLongLines()
 endfunction
 
 " NumLongLines() - return number of long lines -------------------------{{{2
-function! NumLongLines(update)
+function! NumLongLines(update, ...)
+    if a:0
+        if a:1 != bufnr("")
+            return ''
+        endif
+    endif
+
     if !a:update | return g:num_long_lines | endif
     let l:max = (&tw ? &tw : 80) + 1
     let l:i = 1
