@@ -23,15 +23,14 @@ endif
 
 syn keyword uzblKeyword back forward scroll reload reload_ign_cache stop
 syn keyword uzblKeyword zoom_in zoom_out toggle_zoom_type uri js script
-syn keyword uzblKeyword toggle_status spawn sync_spawn sync_sh
-syn keyword uzblKeyword talk_to_socket exit search search_reverse search_clear
-syn keyword uzblKeyword dehilight set dump_config dump_config_as_events chain
-syn keyword uzblKeyword print event request menu_add menu_link_add
-syn keyword uzblKeyword menu_image_add menu_editable_add menu_separator
-syn keyword uzblKeyword menu_link_separator menu_image_separator
-syn keyword uzblKeyword menu_editable_separator menu_remove menu_link_remove
-syn keyword uzblKeyword menu_image_remove menu_editable_remove hardcopy
-syn keyword uzblKeyword include
+syn keyword uzblKeyword toggle_status spawn sync_spawn sync_sh talk_to_socket
+syn keyword uzblKeyword exit search search_reverse search_clear dehilight set
+syn keyword uzblKeyword dump_config dump_config_as_events chain print event
+syn keyword uzblKeyword request menu_add menu_link_add menu_image_add
+syn keyword uzblKeyword menu_editable_add menu_separator menu_link_separator
+syn keyword uzblKeyword menu_image_separator menu_editable_separator
+syn keyword uzblKeyword menu_remove menu_link_remove menu_image_remove
+syn keyword uzblKeyword menu_editable_remove hardcopy include
 
 syn match uzblKeyword /\.\@<!sh\s\+/
 
