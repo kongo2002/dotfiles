@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 19 Mar 2010 01:21:22 AM CET
+" Last Change:  Thu 25 Mar 2010 05:36:31 PM CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -330,6 +330,10 @@ let g:loaded_vimballPlugin = 1
 " BUFLINE --------------------------------------------------------------{{{2
 
 let g:bufline_loaded = 1
+
+" GIST -----------------------------------------------------------------{{{2
+
+let g:gist_detect_filetype = 1
 
 " SURROUND -------------------------------------------------------------{{{2
 

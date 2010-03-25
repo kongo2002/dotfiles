@@ -19,6 +19,9 @@
 [submodule ".vim_plugins/syntastic"]
     path = .vim_plugins/syntastic
     url = git://github.com/kongo2002/syntastic.git
-[submodule ".vim_plugins/syntastic"]
+[submodule ".vim_plugins/vim-automod"]
     path = .vim_plugins/vim-automod
     url = git://github.com/kongo2002/vim-automod.git
+[submodule ".vim_plugins/gist-vim"]
+    path = .vim_plugins/gist-vim
+    url = git://github.com/kongo2002/gist-vim.git
