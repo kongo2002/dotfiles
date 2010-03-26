@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 25 Mar 2010 05:36:31 PM CET
+" Last Change:  Fri 26 Mar 2010 01:31:53 AM CET
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -107,13 +107,6 @@ set ruler
 
 " indicates fast terminal connection
 set ttyfast
-
-" do not timeout on mappings
-set notimeout
-
-" timeout on keycodes
-set ttimeout
-set ttimeoutlen=100
 
 " visually break lines
 set wrap
