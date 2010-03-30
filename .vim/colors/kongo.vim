@@ -1,8 +1,8 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Mo 15 Mär 2010 12:15:34 CET
-" Version:      0.2
+" Last Change:  Tue 30 Mar 2010 08:11:05 PM CEST
+" Version:      0.3
 
 set background=dark
 
@@ -152,8 +152,8 @@ hi SpellLocal       ctermfg=130                            cterm=reverse
 
 hi DiffAdd          guifg=#e0e0e0       guibg=#324900      gui=none
 hi DiffAdd          ctermfg=253         ctermbg=22         cterm=none
-hi DiffChange       guifg=NONE          guibg=#303030      gui=none
-hi DiffChange       ctermfg=NONE        ctermbg=236        cterm=none
+hi DiffChange       guifg=NONE          guibg=#3B4865      gui=none
+hi DiffChange       ctermfg=NONE        ctermbg=67         cterm=none
 hi DiffDelete       guifg=#e0e0e0       guibg=#3A0200      gui=none
 hi DiffDelete       ctermfg=253         ctermbg=52         cterm=none
 hi DiffText         guifg=#e0e0e0       guibg=#324900      gui=none
@@ -236,7 +236,12 @@ hi Todo             ctermfg=214         ctermbg=bg         cterm=reverse,bold
 
 " SPECIAL GROUPS {{{1
 
-hi MarginColumn     guifg=NONE          guibg=#242424      gui=none
-hi MarginColumn     ctermfg=NONE        ctermbg=235        cterm=none
+hi MyTagListFileName  guifg=#969696       guibg=#101010      gui=none
+hi MyTagListFileName  ctermfg=246         ctermbg=232        cterm=none
+
+if exists('+margincolumn')
+    hi MarginColumn     guifg=NONE          guibg=#242424      gui=none
+    hi MarginColumn     ctermfg=NONE        ctermbg=235        cterm=none
+endif
 
 " vim: set fdm=marker foldmarker={{{,}}}
