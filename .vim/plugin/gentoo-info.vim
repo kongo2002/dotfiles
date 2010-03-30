@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Mi 24 Feb 2010 01:03:49 CET
+" Last Change:  Tue 30 Mar 2010 10:33:21 PM CEST
 
 let g:gentoo_portdir = '/usr/portage'
 
@@ -372,7 +372,7 @@ function! s:setSyntax(package) "{{{
     syntax keyword genIUse hog host hotpixels hou
     syntax keyword genIUse howl-compat hpcups hpijs hpn
     syntax keyword genIUse hr hsieh html htmlsingle
-    syntax keyword genIUse htmltidy http httpd httppower
+    syntax keyword genIUse htmltidy httpd httppower
     syntax keyword genIUse hub humanities hunspell huro
     syntax keyword genIUse hvm hwmixer hybrid hybrid-auth
     syntax keyword genIUse hyperestraier hyperspec hyphenation i18n
@@ -760,15 +760,15 @@ function! s:setSyntax(package) "{{{
 
     exe 'syntax match genIPackage display /.*' . l:pkg . '.*/'
     syntax match genIMask display /Hard\s\+Masked/
-    syntax match genIWWW display /\%(https\?:\/\/\)\?\%(www.\)\?\%([a-zA-Z0-9/_-]\+\.\)*[a-zA-Z0-9/_-]\+\.[a-z]\+\/\?/
+    syntax match genIWWW display /\%(https\?:\/\/\)\?\%(www.\)\?\%([a-zA-Z0-9/_-]\+\.\)*[a-zA-Z0-9/_-]\+\.[a-z]\+\/\?.*/
 
     hi link genIArch Constant
     hi link genIStab PreProc
     hi link genIPackage Statement
     hi link genIMask Identifier
     hi link genIWWW String
-    hi link genIMask Type
-    hi link genIUse Constant
+    hi link genIMask Error
+    hi link genIUse Type
 endfunction
 " }}}
 
