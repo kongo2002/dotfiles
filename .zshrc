@@ -7,14 +7,14 @@ source /etc/profile
 export MPD_HOST="127.0.0.1"
 export MPD_PORT="6600"
 
-# settings for uzbl (especially)
+# XDG variables
 export XDG_CONFIG_HOME="/home/kongo/.config"
 export XDG_DATA_HOME="/home/kongo/.data"
 
-# settings for lancelot nlp solver engine
-export LANDIR="/home/kongo/programs/lancelot/lancelot"
-alias sdlan="$LANDIR/sdlan"
-alias lan="$LANDIR/lan"
+alias '..'='cd ..'
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g ....='../../../..'
 
 alias mv='nocorrect mv'
 alias cp='nocorrect cp'
@@ -97,7 +97,7 @@ bindkey "^n" history-beginning-search-backward
 bindkey "^p" history-beginning-search-forward
 bindkey -M vicmd "\e." insert-last-word
 bindkey -M viins "\e." insert-last-word
- 
+
 # grc stuff for colored output
 #
 if [ "$TERM" != dumb ] && [ -x /usr/bin/grc ] ; then
@@ -118,14 +118,14 @@ fi
 # Other misc settings
 #
 LISTMAX=0
- 
+
 # Expansion options
 #
 zstyle ':completion:*' completer _complete _prefix
 zstyle ':completion::prefix-1:*' completer _complete
 zstyle ':completion:incremental:*' completer _complete _correct
 zstyle ':completion:predict:*' completer _complete
- 
+
 # Completion caching
 #
 zstyle ':completion::complete:*' use-cache 1
@@ -135,7 +135,7 @@ zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 #
 zstyle ':completion:*' expand 'yes'
 zstyle ':completion:*' squeeze-slashes 'yes'
- 
+
 # Include non-hidden directories in globbed file completions
 # for certain commands
 #
@@ -144,40 +144,40 @@ zstyle ':completion::complete:*' '\'
 #  tag-order 'globbed-files directories' all-files
 #
 zstyle ':completion::complete:*:tar:directories' file-patterns '*~.*(-/)'
- 
+
 # Don't complete backup files as executables
 #
 zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
- 
+
 # Separate matches into groups
 #
 zstyle ':completion:*:matches' group 'yes'
- 
+
 # Describe each match group.
 #
 zstyle ':completion:*:descriptions' format "%B---- %d%b"
- 
+
 # Messages/warnings format
 #
 zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
 zstyle ':completion:*:warnings' format '%B%U---- no match for: %d%u%b'
- 
+
 # Describe options in full
 #
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
- 
+
 # {{{ Simulate my old dabbrev-expand 3.0.5 patch
 #
 zstyle ':completion:*:history-words' stop verbose
 zstyle ':completion:*:history-words' remove-all-dups yes
 zstyle ':completion:*:history-words' list false
- 
+
 #zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 #
 # zsh Options
 #
- 
+
 setopt                       \
      NO_all_export           \
         always_last_prompt   \
@@ -266,6 +266,6 @@ setopt                       \
      NO_sun_keyboard_hack    \
         unset                \
      NO_verbose              \
-     	zle
+        zle
 
 setprompt
