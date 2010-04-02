@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 26 Mar 2010 10:48:18 PM CET
+" Last Change:  Fri 02 Apr 2010 01:01:11 PM CEST
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -160,7 +160,7 @@ colorscheme kongo
 set laststatus=2
 
 " filename, flags
-let &statusline='%<%F #%n %m%*%r%h%w'
+let &statusline='%<%f #%n %m%*%r%h%w'
 
 " fileformat, encoding
 let &statusline.='[%{&ff}]%y[%{(&fenc==""?&enc:&fenc)}]'
@@ -402,6 +402,7 @@ if has('autocmd')
     au! BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
     au! BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
     au! BufEnter,CursorHold,BufWritePost * call NumLongLines(1)
+    au! BufWritePre * call RemoveTrailingWhitespace()
 endif
 
 " C / C++ --------------------------------------------------------------{{{2
@@ -624,4 +625,13 @@ function! FSearch()
         endif
         let cur += 1
     endwhile
+endfunction
+
+" RemoveTrailingWhitespace() -------------------------------------------{{{2
+function! RemoveTrailingWhitespace()
+    let cur = getpos('.')
+    let reg = @/
+    %s/\s\+$//e
+    let @/ = reg
+    call setpos('.', cur)
 endfunction
