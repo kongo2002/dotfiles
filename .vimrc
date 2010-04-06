@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 02 Apr 2010 01:01:11 PM CEST
+" Last Change:  Tue 06 Apr 2010 09:33:24 PM CEST
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -451,6 +451,8 @@ function! VSetSearch()
     let tmp = @@
     normal! gvy
     let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+    call histadd('/', substitute(@/, '[?/]',
+                \ '\="\\%d".char2nr(submatch(0))', 'g'))
     let @@ = tmp
 endfunction
 
