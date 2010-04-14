@@ -10,6 +10,7 @@ export MPD_PORT="6600"
 # XDG variables
 export XDG_CONFIG_HOME="/home/kongo/.config"
 export XDG_DATA_HOME="/home/kongo/.data"
+export XDG_CACHE_HOME="/home/kongo/.cache"
 
 alias '..'='cd ..'
 alias -g ...='../..'
