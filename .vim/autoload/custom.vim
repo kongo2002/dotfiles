@@ -1,7 +1,7 @@
 " Vim script file
 " Description:  custom file manipulation scripts
 " Author:       Gregor Uhlenheuer
-" Last Change:  So 06 Dez 2009 00:35:53 CET
+" Last Change:  Fri 23 Apr 2010 01:26:19 AM CEST
 
 " convert lines to xml telegrams
 function! custom#Telegram(...) range "{{{
@@ -40,7 +40,10 @@ endfunction "}}}
 
 " remove whitespace before \cite tags
 function! custom#PrepareTex() "{{{
-    silent! %s/\s\+\(\~\?\\cite\)/\1/ge
+    silent! %s/\s\+\\cite\)/\~\\cite/ge
+    silent! %s/\<z\.B\./z.\~B./ge
+    silent! %s/\<u\.a\./u.\~a./ge
+    silent! %s/\<o\.a\./o.\~a./ge
 endfunction "}}}
 
 " remove 'IndexedFaceSets' from VRML files
