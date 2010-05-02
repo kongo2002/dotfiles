@@ -1,8 +1,37 @@
+! Xft settings {{{
+xft.dpi:                        96
+xft.antialias:                  true
+xft.hinting:                    true
+xft.hintstyle:                  hintslight
+xft.rgba:                       rgb
+xft.lcdfilter:                  lcddefault
+! }}}
+
+! General settings {{{
 *background:                    #111111
 *foreground:                    #eeeeee
+! }}}
+
+! Xterm settings {{{
+xterm*termName:                 xterm-256color
 
 ! allow external programs to modify the xterm window
 xterm*allowWindowOps:           true
+xterm*geometry:                 85x35
+xterm*boldMode:                 false
+!xterm*colorBD:                  #eeeeee
+!xterm*colorBDMode:              true
+
+! font settings
+!xterm*font:                 -*-proggycleanszcp-*-*-*-*-*-*-*-96-*-70-*-*
+xterm*font:                 -*-andale mono-medium-r-*-*-*-120-*-*-*-*-*-15
+!xterm*faceName:             DejaVu Sans Mono
+!xterm*faceSize:             12
+!xterm*boldFont:             xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
+! }}}
+
+! URxvt settings {{{
+URxvt*termName:                 rxvt-256color
 
 !URxvt*colorBD:                  orange
 !URxvt*colorIT:                  cyan
@@ -21,7 +50,6 @@ URxvt*externalBorder:           0
 URxvt*cursorBlink:              True
 URxvt*imLocale:                 de_DE.UTF-8
 URxvt*geometry:                 85x35
-xterm*geometry:                 85x35
 
 ! open urls with middle mouse click
 URxvt.perl-ext-common:          default,matcher
@@ -33,6 +61,15 @@ URxvt.urlLauncher:              firefox
 ! screen scrollbackbuffer
 !URxvt*secondaryScroll:          true
 
+! font settings
+URxvt*font:                 xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
+URxvt*boldFont:             xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
+URxvt*italicFont:           xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
+URxvt*bolditalicFont:       xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
+
+! }}}
+
+! Color themes {{{
 ! Theme Six
 ! (http://phraktured.net/terminal-colors/)
 !*background: rgb:be/be/be
@@ -203,10 +240,4 @@ URxvt.urlLauncher:              firefox
 !*color14:                  orange
 !*color15:                  cyan
 
-xterm*boldMode:             false
-xterm*font:                 -*-proggycleanszcp-*-*-*-*-*-*-*-96-*-70-*-*
-
-URxvt*font:                 xft:Dejavu Sans Mono:pixelsize=11.0:antialias=true:hinting=true
-URxvt*boldFont:             xft:Dejavu Sans Mono:pixelsize=11.0:antialias=true:hinting=true
-URxvt*italicFont:           xft:Dejavu Sans Mono:pixelsize=11.0:antialias=true:hinting=true
-URxvt*bolditalicFont:       xft:Dejavu Sans Mono:pixelsize=11.0:antialias=true:hinting=true
+! }}}
