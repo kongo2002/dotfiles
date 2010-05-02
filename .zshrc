@@ -29,8 +29,6 @@ alias boistart='sudo /etc/init.d/boinc start'
 
 alias kvm-arch='kvm -hda ~/.kvm_arch/arch-i686.img -net nic -net tap,ifname=qtap0,script=no,downscript=no -boot c -m 1024 -soundhw es1370'
 
-alias screen='screen -T $TERM'
-
 alias ls="ls -h --color=auto"
 alias ll="ls -lh --color=auto"
 alias l="ls -lha --color=auto"
