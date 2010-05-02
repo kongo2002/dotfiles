@@ -1,10 +1,10 @@
 " Vim script file
 " Description:  custom file manipulation scripts
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 23 Apr 2010 01:26:19 AM CEST
+" Last Change:  Fri 30 Apr 2010 01:57:06 PM CEST
 
-" convert lines to xml telegrams
-function! custom#Telegram(...) range "{{{
+" convert lines to xml telegrams {{{
+function! custom#Telegram(...) range
     let lnum = a:firstline
     let id = 1
     if lnum > 1
@@ -25,10 +25,12 @@ function! custom#Telegram(...) range "{{{
         let id += 1
         let lnum += 1
     endwhile
-endfunction "}}}
+endfunction " }}}
 
-" substitute umlaut characters
-function! custom#PrepareBib() "{{{
+" substitute umlaut characters {{{
+function! custom#PrepareBib()
+    let save_reg = getreg('/')
+
     silent! %s/ä/\"a/gI
     silent! %s/ö/\"o/gI
     silent! %s/ü/\"u/gI
@@ -36,18 +38,29 @@ function! custom#PrepareBib() "{{{
     silent! %s/Ö/\"O/gI
     silent! %s/Ü/\"U/gI
     silent! %s/ß/\"s/gI
-endfunction "}}}
 
-" remove whitespace before \cite tags
-function! custom#PrepareTex() "{{{
+    call setreg('/', save_reg)
+endfunction " }}}
+
+" prepare tex files before saving {{{
+function! custom#PrepareTex()
+    let save_reg = getreg('/')
+
     silent! %s/\s\+\\cite\)/\~\\cite/ge
-    silent! %s/\<z\.B\./z.\~B./ge
-    silent! %s/\<u\.a\./u.\~a./ge
-    silent! %s/\<o\.a\./o.\~a./ge
-endfunction "}}}
 
-" remove 'IndexedFaceSets' from VRML files
-function! custom#CleanVRML() "{{{
+    silent! %s/\<z\.B\./z.\~B./geI
+    silent! %s/\<u\.a\./u.\~a./geI
+    silent! %s/\<o\.a\./o.\~a./geI
+    silent! %s/\<i\.A\./i.\~A./geI
+    silent! %s/\<i\.d\.R\./i.\~d.\~R./geI
+
+    silent! %s/S\.\s*\(\d\+\%(-\d\+\)\=\)/S.\~\1/geI
+
+    call setreg('/', save_reg)
+endfunction " }}}
+
+" remove 'IndexedFaceSets' from VRML files {{{
+function! custom#CleanVRML()
     let l:id = 0
     normal! gg
     while search('\<VRMLIndexedFaceSet\>', 'e') > 0
@@ -63,10 +76,10 @@ function! custom#CleanVRML() "{{{
     silent! %s/,\_s\+]/\r]/
     silent! g/^\s*$/d
     echo l:id . " IndexedFaceSet's removed"
-endfunction "}}}
+endfunction " }}}
 
-" remove 'VRML*Sets' from VRML files (after confirmation)
-function! custom#AnalyzeVRML() "{{{
+" remove 'VRML*Sets' from VRML files (after confirmation) {{{
+function! custom#AnalyzeVRML()
     normal! gg
     while search('\<VRML\S\+Set\>', 'W') > 0
         let l:type = matchstr(getline('.'), '\<VRML\zs\S\+Set\>')
@@ -84,10 +97,10 @@ function! custom#AnalyzeVRML() "{{{
     endwhile
     silent! %s/,\_s\+]/\r]/
     silent! g/^\s*$/d
-endfunction "}}}
+endfunction " }}}
 
-" remove given entity from DXF files
-function! s:RemoveEntity(entity) "{{{
+" remove given entity from DXF files {{{
+function! s:RemoveEntity(entity)
     let l:handles = []
     call cursor(1, 1)
     while search('^  0\ze\n'.a:entity.'$', 'W') > 0
@@ -97,10 +110,10 @@ function! s:RemoveEntity(entity) "{{{
         exec '.,'.l:hitLine.'delete _'
     endwhile
     return l:handles
-endfunction "}}}
+endfunction " }}}
 
-" remove several entities from DXF files (-> s:RemoveEntity())
-function! custom#CleanDXF() "{{{
+" remove several entities from DXF files (-> s:RemoveEntity()) {{{
+function! custom#CleanDXF()
     let l:retList = []
     for entity in ['MTEXT', 'DIMENSION', 'TEXT']
         let l:retList += s:RemoveEntity(entity)
@@ -112,4 +125,4 @@ function! custom#CleanDXF() "{{{
         endwhile
     endfor
     echo len(l:retList).' entities deleted'
-endfunction "}}}
+endfunction " }}}

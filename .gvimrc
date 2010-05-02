@@ -1,11 +1,12 @@
 " Filename:     .gvimrc
 " Description:  GVim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fr 29 Jan 2010 21:44:11 CET
+" Last Change:  Fri 30 Apr 2010 02:13:48 PM CEST
 
 " font name and size
-set guifont=Monospace\ 9
+"set guifont=Monospace\ 9
 "set guifont=Terminus\ 10
+set guifont=DejaVu\ Sans\ Mono\ 11
 
 " default window size
 set columns=90

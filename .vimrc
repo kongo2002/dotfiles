@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 06 Apr 2010 09:33:24 PM CEST
+" Last Change:  Fri 30 Apr 2010 02:10:34 PM CEST
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -144,11 +144,6 @@ set showcmd
 " modify grep settings
 set grepprg=grep\ -nH\ $*
 
-" enable 256 color support in xterm and rxvt-unicode
-if &term ==? "rxvt-unicode" || &term ==? "xterm"
-    set t_Co=256
-endif
-
 " set colorscheme
 set background=dark
 
@@ -177,7 +172,7 @@ let &statusline.='%{SyntasticStatuslineFlag()}'
 let &statusline.='%*'
 
 " number of long lines
-let g:num_long_lines =' '''
+let g:num_long_lines = ''
 
 let &statusline.='%#warningmsg#'
 let &statusline.='%{exists("actual_curbuf") ?'
@@ -352,7 +347,8 @@ inoremap <C-l> <C-r>=CompleteSnippets()<CR>
 " TAGLIST --------------------------------------------------------------{{{2
 
 let Tlist_Exit_OnlyWindow = 1
-let tlist_AutoMod_settings='AutoMod;p:procedure;f:function;s:subroutine'
+let tlist_automod_settings='automod;p:procedure;f:function;s:subroutine'
+let tlist_tex_settings='tex;c:chapter;s:section;l:label;r:ref'
 
 " NERDTREE -------------------------------------------------------------{{{2
 
@@ -500,7 +496,7 @@ com! -range=% DivHtml <line1>,<line2>call DivHtml()
 " LastCurPos() - jump to last cursor position --------------------------{{{2
 function! LastCurPos()
     if line("'\"") > 0 && line ("'\"") <= line("$")
-        exe "normal g'\""
+        exe "norm! g`\""
     endif
 endfunction
 
