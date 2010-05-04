@@ -1,7 +1,19 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 30 Apr 2010 02:10:34 PM CEST
+" Last Change:  Tue 04 May 2010 01:44:43 PM CEST
+
+set nocompatible
+
+" MACHINE SPECIFICS ----------------------------------------------------{{{1
+
+" machines at work should behave more 'mswin'-like
+if has('win32') || has('win64')
+    if hostname() != 'UHLI'
+        source $VIMRUNTIME/mswin.vim
+        behave mswin
+    endif
+endif
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -11,8 +23,6 @@ sil! unlet g:colors_name
 
 " extend runtime path with plugin directory
 sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
-
-set nocompatible
 
 syntax on
 filetype on
@@ -167,9 +177,11 @@ let &statusline.='%{&paste?"[paste]":""}'
 let &statusline.='%{SSpace()}'
 
 " syntastic plugin
-let &statusline.='%#warningmsg#'
-let &statusline.='%{SyntasticStatuslineFlag()}'
-let &statusline.='%*'
+if exists('*SyntasticStatuslineFlag')
+    let &statusline.='%#warningmsg#'
+    let &statusline.='%{SyntasticStatuslineFlag()}'
+    let &statusline.='%*'
+endif
 
 " number of long lines
 let g:num_long_lines = ''
@@ -178,9 +190,6 @@ let &statusline.='%#warningmsg#'
 let &statusline.='%{exists("actual_curbuf") ?'
             \ . 'NumLongLines(0, actual_curbuf) : ""}'
 let &statusline.='%*'
-
-" current syntax group
-"let &statusline+='%{SyntaxItem()}'
 
 " display search matches
 let &statusline.='%=%{exists("actual_curbuf") ?'
@@ -193,7 +202,6 @@ let &statusline.='%10(%l,%v%) %P'
 
 " set mapleader from backslash to comma
 let mapleader=','
-let g:mapleader=','
 
 " map Ctrl-E to do what , used to do
 nnoremap <C-e> ,
@@ -390,6 +398,7 @@ if has('autocmd')
     au! FileType perl map <buffer> <F6> :!perl %<CR>
     au! FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
     au! FileType crontab setlocal backupcopy=yes
+    au! FileType text setlocal textwidth=78
     au! BufWrite *.bib call custom#PrepareBib()
     au! BufWrite *.tex call custom#PrepareTex()
     au! BufReadPost * call LastCurPos()
@@ -411,6 +420,7 @@ let g:python_highlight_all = 1
 
 " LATEX ----------------------------------------------------------------{{{2
 
+let g:tex_flavor = 'tex'      " set default filetype to LaTeX
 let g:tex_fold_enabled = 1    " enable syntax folding
 let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
 
