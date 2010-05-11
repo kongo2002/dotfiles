@@ -33,6 +33,9 @@ alias ls="ls -h --color=auto"
 alias ll="ls -lh --color=auto"
 alias l="ls -lha --color=auto"
 
+# use a light gtk theme
+alias gtkl="GTK2_RC_FILES='MorningGlory:$HOME/.themes/MorningGlory/gtk-2.0/gtkrc'"
+
 # get current vi mode
 VIMODE="[I] "
 function zle-line-init zle-keymap-select {
