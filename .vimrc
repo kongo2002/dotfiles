@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 04 May 2010 01:44:43 PM CEST
+" Last Change:  Tue 11 May 2010 12:40:56 PM CEST
 
 set nocompatible
 
@@ -279,6 +279,7 @@ nmap <silent> gc :cnext<CR>
 nmap <silent> gC :cprev<CR>
 
 " Buffer navigation
+nmap <silent> <Leader>bd :bdelete<CR>
 nmap <silent> gb :bnext<CR>
 nmap <silent> gB :bprev<CR>
 nmap <silent> <A-right> :bnext<CR>
@@ -296,10 +297,10 @@ nmap <Leader>fd :FufDir<CR>
 nmap <Leader>ff :FufFile<CR>
 
 " close current window
-noremap <Leader>cc :close<CR>
+nmap <silent> <Leader>cc :close<CR>
 
 " cd to the directory containing the file in the buffer
-nmap <Leader>cd :lcd %:h<CR>
+nmap <silent> <Leader>cd :lcd %:h<CR>
 
 " search recursively in current dir for word under cursor
 map <F4> :execute 'vimgrep /' . expand('<cword>') . '/j **'
