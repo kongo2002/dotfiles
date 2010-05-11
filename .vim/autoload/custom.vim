@@ -1,7 +1,7 @@
 " Vim script file
 " Description:  custom file manipulation scripts
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 30 Apr 2010 01:57:06 PM CEST
+" Last Change:  Mon 03 May 2010 01:07:37 AM CEST
 
 " convert lines to xml telegrams {{{
 function! custom#Telegram(...) range
@@ -29,6 +29,7 @@ endfunction " }}}
 
 " substitute umlaut characters {{{
 function! custom#PrepareBib()
+    let cur = getpos('.')
     let save_reg = getreg('/')
 
     silent! %s/ä/\"a/gI
@@ -40,23 +41,26 @@ function! custom#PrepareBib()
     silent! %s/ß/\"s/gI
 
     call setreg('/', save_reg)
+    call setpos('.', cur)
 endfunction " }}}
 
 " prepare tex files before saving {{{
 function! custom#PrepareTex()
+    let cur = getpos('.')
     let save_reg = getreg('/')
 
     silent! %s/\s\+\\cite\)/\~\\cite/ge
 
-    silent! %s/\<z\.B\./z.\~B./geI
-    silent! %s/\<u\.a\./u.\~a./geI
-    silent! %s/\<o\.a\./o.\~a./geI
-    silent! %s/\<i\.A\./i.\~A./geI
-    silent! %s/\<i\.d\.R\./i.\~d.\~R./geI
+    silent! %s/\<z\.[~]\=B\./z.\\,B./geI
+    silent! %s/\<u\.[~]\=a\./u.\\,a./geI
+    silent! %s/\<o\.[~]\=a\./o.\\,a./geI
+    silent! %s/\<i\.[~]\=A\./i.\\,A./geI
+    silent! %s/\<i\.[~]\=d\.[~]\=R\./i.\\,d.\\,R./geI
 
-    silent! %s/S\.\s*\(\d\+\%(-\d\+\)\=\)/S.\~\1/geI
+    silent! %s/S\.\s*\(\d\+\%(--\d\+\)\=\)/S.\\,\1/geI
 
     call setreg('/', save_reg)
+    call setpos('.', cur)
 endfunction " }}}
 
 " remove 'IndexedFaceSets' from VRML files {{{

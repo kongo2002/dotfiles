@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     tex.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 02 May 2010 12:23:54 PM CEST
+" Last Change:  Wed 05 May 2010 12:25:11 PM CEST
 
 " turn on syntax-based folding
 setlocal foldmethod=syntax
@@ -107,7 +107,7 @@ nmap <buffer> <leader>lv :ViewPdf<CR>
 " s:runPdfLatex - run pdflatex {{{
 function! s:runPdfLatex()
     if executable('pdflatex')
-        silent !pdflatex -interaction=nonstopmode %
+        silent !pdflatex -shell-escape -interaction=nonstopmode %
         if v:shell_error != 0
             call s:warn('pdflatex: There were some errors')
         endif
