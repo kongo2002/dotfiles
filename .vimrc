@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 21 May 2010 01:03:19 AM CEST
+" Last Change:  Fri 21 May 2010 01:15:22 AM CEST
 
 set nocompatible
 
@@ -646,8 +646,7 @@ function! LoadColorScheme(highcolor, lowcolor)
     else
         let colors = a:lowcolor
     endif
-    let names = split(colors, ':')
-    for name in names
+    for name in split(colors, ':')
         try
             exec 'colorscheme' name
             break
