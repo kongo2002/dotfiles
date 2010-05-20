@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 11 May 2010 12:40:56 PM CEST
+" Last Change:  Fri 21 May 2010 01:03:19 AM CEST
 
 set nocompatible
 
@@ -153,11 +153,6 @@ set showcmd
 
 " modify grep settings
 set grepprg=grep\ -nH\ $*
-
-" set colorscheme
-set background=dark
-
-colorscheme kongo
 
 " STATUSLINE SETTINGS --------------------------------------------------{{{1
 
@@ -635,7 +630,7 @@ function! FSearch()
     endwhile
 endfunction
 
-" RemoveTrailingWhitespace() -------------------------------------------{{{2
+" RemoveTrailingWhitespace() - remove trailing whitespace --------------{{{2
 function! RemoveTrailingWhitespace()
     let cur = getpos('.')
     let reg = @/
@@ -643,3 +638,24 @@ function! RemoveTrailingWhitespace()
     let @/ = reg
     call setpos('.', cur)
 endfunction
+
+" LoadColorScheme() - try to load an existing colorscheme --------------{{{2
+function! LoadColorScheme(highcolor, lowcolor)
+    if has('gui_running') || &t_Co == 256 || &t_Co == 88
+        let colors = a:highcolor
+    else
+        let colors = a:lowcolor
+    endif
+    let names = split(colors, ':')
+    for name in names
+        try
+            exec 'colorscheme' name
+            break
+        catch /.*/
+        endtry
+    endfor
+endfunction
+
+" COLORSCHEME ----------------------------------------------------------{{{1
+
+call LoadColorScheme('kongo:kongo2:slate', 'slate')
