@@ -375,8 +375,8 @@ let g:timestamp_rep='%c'
 " TO_HTML --------------------------------------------------------------{{{2
 
 let html_number_lines = 0 " don't show line numbers
-let html_use_css = 1      " don't use inline stylesheets
-let html_no_pre = 1       " don't enclose in <pre> tags
+"let html_use_css = 1     " don't use inline stylesheets
+"let html_no_pre = 1      " don't enclose in <pre> tags
 
 " OMNICPPCOMPLETE ------------------------------------------------------{{{2
 
@@ -494,12 +494,11 @@ endfunction
 " DivHtml() - implement a custom TOhtml function -----------------------{{{2
 function! DivHtml() range
     exec a:firstline . "," . a:lastline . "TOhtml"
-    %g/<style/normal! $dgg
-    %s/<\/style>\n<\/head>\n//
-    %s/body {/.vim_block {/
-    %s/<body\(.*\)>/<div class="vim_block"\1>/
-    %s/<\/body>\n<\/html>/<\/div>/
+    g/<\/head/normal! $dgg
+    %s/^<body.*$/<pre>/
+    g/<\/body>$/normal! 0dG
     silent %s/<br>//g
+    call append(line('$'), '</pre>')
 endfunction
 
 com! -range=% DivHtml <line1>,<line2>call DivHtml()
