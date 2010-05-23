@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 21 May 2010 01:15:22 AM CEST
+" Last Change:  Sun 23 May 2010 10:19:33 PM CEST
 
 set nocompatible
 
@@ -291,6 +291,17 @@ nmap <Leader>fb :FufBuffer<CR>
 nmap <Leader>fd :FufDir<CR>
 nmap <Leader>ff :FufFile<CR>
 
+" FSwitch mappings
+nmap <silent> <Leader>of :FSHere<CR>
+nmap <silent> <Leader>ol :FSRight<CR>
+nmap <silent> <Leader>oL :FSSplitRight<CR>
+nmap <silent> <Leader>oh :FSLeft<CR>
+nmap <silent> <Leader>oH :FSSplitLeft<CR>
+nmap <silent> <Leader>ok :FSAbove<CR>
+nmap <silent> <Leader>oK :FSSplitAbove<CR>
+nmap <silent> <Leader>oj :FSBelow<CR>
+nmap <silent> <Leader>oJ :FSSplitBelow<CR>
+
 " close current window
 nmap <silent> <Leader>cc :close<CR>
 
@@ -324,6 +335,29 @@ let g:loaded_tarPlugin = 1
 let g:loaded_zipPlugin = 1
 let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
+
+" FSWITCH --------------------------------------------------------------{{{2
+
+if has('autocmd')
+    augroup fswitch_au
+        au!
+        au BufRead,BufNewFile *.h let b:fswitchdst = 'c,C,cc,cpp'
+        au BufRead,BufNewFile *.h let b:fswitchlocs = 'reg:/include/src/,'
+                   \ . 'reg:/include.*/src/,./'
+
+        au BufRead,BufNewFile *.c let b:fswitchdst  = 'h'
+        au BufRead,BufNewFile *.c let b:fswitchlocs = 'reg:/src/include/,'
+                   \ . 'reg:|src|include/**|,./'
+
+        au BufRead,BufNewFile *.cc let b:fswitchdst  = 'h'
+        au BufRead,BufNewFile *.cc let b:fswitchlocs = 'reg:/src/include/,'
+                    \ . 'reg:|src|include/**|,./'
+
+        au BufRead,BufNewFile *.cpp let b:fswitchdst  = 'h'
+        au BufRead,BufNewFile *.cpp let b:fswitchlocs = 'reg:/src/include/,'
+                    \ . 'reg:|src|include/**|,./'
+    augroup END
+endif
 
 " BUFLINE --------------------------------------------------------------{{{2
 
@@ -390,20 +424,23 @@ let OmniCpp_DefaultNamespaces = [ "std" ]
 " AUTOCOMMANDS ---------------------------------------------------------{{{2
 
 if has('autocmd')
-    au! FileType python map <buffer> <F6> :!python %<CR>
-    au! FileType perl map <buffer> <F6> :!perl %<CR>
-    au! FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
-    au! FileType crontab setlocal backupcopy=yes
-    au! FileType text setlocal textwidth=78
-    au! BufWrite *.bib call custom#PrepareBib()
-    au! BufWrite *.tex call custom#PrepareTex()
-    au! BufReadPost * call LastCurPos()
-    au! BufWritePost .vimrc,_vimrc so %
-    au! BufWritePost .Xdefaults sil !xrdb %
-    au! BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
-    au! BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
-    au! BufEnter,CursorHold,BufWritePost * call NumLongLines(1)
-    au! BufWritePre * call RemoveTrailingWhitespace()
+    augroup custom_au
+        au!
+        au FileType python map <buffer> <F6> :!python %<CR>
+        au FileType perl map <buffer> <F6> :!perl %<CR>
+        au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
+        au FileType crontab setlocal backupcopy=yes
+        au FileType text setlocal textwidth=78
+        au BufWrite *.bib call custom#PrepareBib()
+        au BufWrite *.tex call custom#PrepareTex()
+        au BufReadPost * call LastCurPos()
+        au BufWritePost .vimrc,_vimrc so %
+        au BufWritePost .Xdefaults sil !xrdb %
+        au BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
+        au BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
+        au BufEnter,CursorHold,BufWritePost * call NumLongLines(1)
+        au BufWritePre * call RemoveTrailingWhitespace()
+    augroup END
 endif
 
 " C / C++ --------------------------------------------------------------{{{2
