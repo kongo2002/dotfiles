@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 23 May 2010 10:19:33 PM CEST
+" Last Change:  Mon 24 May 2010 12:48:34 AM CEST
 
 set nocompatible
 
@@ -303,7 +303,7 @@ nmap <silent> <Leader>oj :FSBelow<CR>
 nmap <silent> <Leader>oJ :FSSplitBelow<CR>
 
 " close current window
-nmap <silent> <Leader>cc :close<CR>
+nmap <silent> <Leader>cl :close<CR>
 
 " cd to the directory containing the file in the buffer
 nmap <silent> <Leader>cd :lcd %:h<CR>
