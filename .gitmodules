@@ -25,3 +25,6 @@
 [submodule ".vim_plugins/gist-vim"]
     path = .vim_plugins/gist-vim
     url = git://github.com/kongo2002/gist-vim.git
+[submodule ".vim_plugins/nerdcommenter"]
+    path = .vim_plugins/nerdcommenter
+    url = git://github.com/scrooloose/nerdcommenter.git
