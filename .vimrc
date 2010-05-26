@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 24 May 2010 12:48:34 AM CEST
+" Last Change:  Wed 26 May 2010 07:14:25 PM CEST
 
 set nocompatible
 
@@ -388,6 +388,23 @@ let Tlist_Exit_OnlyWindow = 1
 let tlist_automod_settings='automod;p:procedure;f:function;s:subroutine'
 let tlist_tex_settings='tex;c:chapter;s:section;l:label;r:ref'
 
+" NERDCOMMENTER --------------------------------------------------------{{{2
+
+let NERDCreateDefaultMappings = 0
+
+nmap <Leader>cc <Plug>NERDCommenterComment
+vmap <Leader>cc <Plug>NERDCommenterComment
+nmap <Leader>cn <Plug>NERDCommenterNest
+vmap <Leader>cn <Plug>NERDCommenterNest
+nmap <Leader>cm <Plug>NERDCommenterMinimal
+vmap <Leader>cm <Plug>NERDCommenterMinimal
+nmap <Leader>cs <Plug>NERDCommenterSexy
+vmap <Leader>cs <Plug>NERDCommenterSexy
+nmap <Leader>cA <Plug>NERDCommenterAppend
+vmap <Leader>cA <Plug>NERDCommenterAppend
+nmap <Leader>cu <Plug>NERDCommenterUncomment
+vmap <Leader>cu <Plug>NERDCommenterUncomment
+
 " NERDTREE -------------------------------------------------------------{{{2
 
 let NERDTreeQuitOnOpen = 1
@@ -690,6 +707,12 @@ function! LoadColorScheme(highcolor, lowcolor)
         catch /.*/
         endtry
     endfor
+endfunction
+
+" Underline() - underline current line with fill char ------------------{{{2
+function! Underline(...)
+    let char = a:0 ? a:1 : '='
+    call append('.', repeat(char, virtcol('$')-1))
 endfunction
 
 " COLORSCHEME ----------------------------------------------------------{{{1
