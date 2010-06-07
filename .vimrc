@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Wed 26 May 2010 07:14:25 PM CEST
+" Last Change:  Mon 07 Jun 2010 10:11:14 PM CEST
 
 set nocompatible
 
@@ -335,6 +335,7 @@ let g:loaded_tarPlugin = 1
 let g:loaded_zipPlugin = 1
 let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
+let g:loaded_spellfile_plugin = 1
 
 " FSWITCH --------------------------------------------------------------{{{2
 
@@ -391,6 +392,7 @@ let tlist_tex_settings='tex;c:chapter;s:section;l:label;r:ref'
 " NERDCOMMENTER --------------------------------------------------------{{{2
 
 let NERDCreateDefaultMappings = 0
+let NERDSpaceDelims = 1
 
 nmap <Leader>cc <Plug>NERDCommenterComment
 vmap <Leader>cc <Plug>NERDCommenterComment
