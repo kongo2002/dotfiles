@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     tex.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Wed 05 May 2010 12:25:11 PM CEST
+" Last Change:  Tue 08 Jun 2010 12:54:13 PM CEST
 
 " turn on syntax-based folding
 setlocal foldmethod=syntax
@@ -37,8 +37,13 @@ endif
 let b:surround_indent = 0
 
 " define custom 'surround' mapping
-let b:surround_34 = "„\r“"              " s"
-let b:surround_45 = "\\\1tex: \1{\r}"   " s-
+if &fenc == 'utf-8'
+    let b:surround_34 = "„\r“"
+else
+    let b:surround_34 = "\"`\r\"'"
+endif
+
+let b:surround_45 = "\\\1tex: \1{\r}"
 
 " useful abbreviations
 ia <buffer> ... \ldots

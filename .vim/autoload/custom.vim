@@ -1,7 +1,7 @@
 " Vim script file
 " Description:  custom file manipulation scripts
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 03 May 2010 01:07:37 AM CEST
+" Last Change:  Tue 08 Jun 2010 06:23:56 PM CEST
 
 " convert lines to xml telegrams {{{
 function! custom#Telegram(...) range
@@ -58,6 +58,15 @@ function! custom#PrepareTex()
     silent! %s/\<i\.[~]\=d\.[~]\=R\./i.\\,d.\\,R./geI
 
     silent! %s/S\.\s*\(\d\+\%(--\d\+\)\=\)/S.\\,\1/geI
+
+    silent! %s/bzw\.\zs\s/\\ /geI
+    silent! %s/etc\.\zs\s/\\ /geI
+    silent! %s/uvm\.\zs\s/\\ /geI
+    silent! %s/Abk\.\zs\s/\\ /geI
+    silent! %s/ggf\.\zs\s/\\ /geI
+    silent! %s/sog\.\zs\s/\\ /geI
+    silent! %s/u\.\\,a\.\zs\s/\\ /geI
+    silent! %s/o\.\\,a\.\zs\s/\\ /geI
 
     call setreg('/', save_reg)
     call setpos('.', cur)
