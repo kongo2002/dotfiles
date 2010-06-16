@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 07 Jun 2010 10:11:14 PM CEST
+" Last Change:  Tue 08 Jun 2010 04:39:02 PM CEST
 
 set nocompatible
 
@@ -385,6 +385,7 @@ inoremap <C-l> <C-r>=CompleteSnippets()<CR>
 
 " TAGLIST --------------------------------------------------------------{{{2
 
+let Tlist_Show_One_File = 1
 let Tlist_Exit_OnlyWindow = 1
 let tlist_automod_settings='automod;p:procedure;f:function;s:subroutine'
 let tlist_tex_settings='tex;c:chapter;s:section;l:label;r:ref'
