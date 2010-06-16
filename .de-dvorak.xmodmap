@@ -145,16 +145,16 @@ keycode 134 =
 !keycode 176 = F16
 
 !make caps lock an additional left control
-remove Lock      = Caps_Lock
-remove Control   = Control_L
-keysym Caps_Lock = Control_L
+!remove Lock      = Caps_Lock
+!remove Control   = Control_L
+!keysym Caps_Lock = Control_L
 !keysym Control_L = Caps_Lock
 !keysym Control_L = Return
 !add    Lock      = Caps_Lock
 
 !remove Lock      = Caps_Lock
 !remove Control   = Control_L
-add    Control   = Control_L
+!add    Control   = Control_L
 
 !! Second example: Make left Alt key to left Meta key
 !! Note that afterwards no key is assigned anymore to the symbol Alt_L.
@@ -184,7 +184,7 @@ keysym u = g G
 keysym i = c C copyright
 keysym o = t T trademark
 keysym p = z Z
-keysym udiaeresis = question ssharp 
+keysym udiaeresis = question ssharp
 keysym plus = slash backslash acute
 keysym a = a A aring Aring
 keysym s = o O
