@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Thu 27 May 2010 07:20:32 PM CEST
+" Last Change:  Sat 19 Jun 2010 02:48:19 PM CEST
 
 let g:gentoo_portdir = '/usr/portage'
 
@@ -144,7 +144,7 @@ function! s:display(lines) " {{{
         nnoremap <silent> <buffer> <CR> :call <SID>checkGPackage()<CR>
     else
         setl noreadonly modifiable nolist
-        norm! ggdG
+        %d _
     endif
 
     call append(0, a:lines)
