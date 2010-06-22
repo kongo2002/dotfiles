@@ -635,6 +635,10 @@ function! NumLongLines(update, ...)
         endif
     endif
 
+    if line('$') > 5000
+        return ''
+    endif
+
     if !a:update | return g:num_long_lines | endif
     let l:max = (&tw ? &tw : 80) + 1
     let l:i = 1
