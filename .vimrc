@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 08 Jun 2010 04:39:02 PM CEST
+" Last Change:  Tue 22 Jun 2010 11:59:26 AM CEST
 
 set nocompatible
 
@@ -151,8 +151,9 @@ set shortmess+=I
 " show command
 set showcmd
 
-" modify grep settings
-set grepprg=grep\ -nH\ $*
+" use ack for grepping
+set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column
+set grepformat=%f:%l:%c:%m,%f
 
 " STATUSLINE SETTINGS --------------------------------------------------{{{1
 
