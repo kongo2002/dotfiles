@@ -8,7 +8,7 @@ xftalpha                0.8
 
 own_window              yes
 own_window_transparent  no
-own_window_type         normal
+own_window_type         panel
 own_window_hints        undecorated,below,sticky,skip_taskbar,skip_pager
 
 minimum_size            1680 1
@@ -17,7 +17,7 @@ draw_outline            yes
 draw_borders            yes
 draw_graph_borders      no
 stippled_borders        0
-border_margin           3
+border_inner_margin     3
 border_width            0
 
 default_color           white
