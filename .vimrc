@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 22 Jun 2010 11:59:26 AM CEST
+" Last Change:  Tue 13 Jul 2010 09:40:26 PM CEST
 
 set nocompatible
 
@@ -263,8 +263,6 @@ endif
 if exists('+margincolumn')
     " set margincolumn to textwidth
     set margincolumn=-1
-    nmap <silent> <Leader>mc :if &mc == -1 <Bar> set mc=0 <Bar>
-                \ else <Bar> set mc=-1 <Bar> endif<CR>
 endif
 
 " print current syntax item
@@ -722,6 +720,37 @@ function! Underline(...)
     let char = a:0 ? a:1 : '='
     call append('.', repeat(char, virtcol('$')-1))
 endfunction
+
+" GuideCol() - define 'margincolumn' relative to 'textwidth' -----------{{{2
+if exists('+margincolumn')
+    function! GuideCol(cols)
+        let columns = []
+        for col in split(a:cols, ',')
+            if col =~ '[-+]\d\+'
+                call insert(columns, str2nr(col) + &tw)
+            else
+                call insert(columns, col)
+            endif
+        endfor
+        exe 'set mc=' . join(columns, ',')
+    endfunction
+    com! -nargs=1 GuideColumn :call GuideCol(<f-args>)
+endif
+
+" InsertLineNumbers() - insert line numbers ----------------------------{{{2
+function! InsertLineNumbers(first, last)
+    let maxlen = strlen(a:last) + 1
+    for line_num in range(a:first, a:last)
+        let line = getline(line_num)
+        if line !~ '^\s*$'
+            call setline(line_num, strpart(line_num.repeat(' ', maxlen), 0,
+                        \ maxlen) . line)
+        else
+            call setline(line_num, line_num . line)
+        endif
+    endfor
+endfunction
+com! -range=% LineNum :call InsertLineNumbers(<line1>, <line2>)
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
