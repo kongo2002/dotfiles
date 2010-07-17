@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 13 Jul 2010 09:40:26 PM CEST
+" Last Change:  Sat 17 Jul 2010 11:19:09 PM CEST
 
 set nocompatible
 
@@ -199,10 +199,6 @@ let &statusline.='%10(%l,%v%) %P'
 " set mapleader from backslash to comma
 let mapleader=','
 
-" map Ctrl-E to do what , used to do
-nnoremap <C-e> ,
-vnoremap <C-e> ,
-
 " bind escape key
 imap jj <Esc>
 
@@ -253,16 +249,16 @@ nmap <silent> <Leader>w :setl wrap! wrap?<CR>
 " toggle list
 nmap <silent> <Leader>nl :setl list! list?<CR>
 
-" toggle relative numbers if installed (custom build)
+" toggle relative numbers if installed
 if exists('+relativenumber')
     nmap <silent> <Leader>rn :if &rnu <Bar> set nornu nu <Bar>
                 \ else <Bar> set rnu nonu <Bar> endif<CR>
 endif
 
-" toggle margincolumn if installed (custom build)
-if exists('+margincolumn')
-    " set margincolumn to textwidth
-    set margincolumn=-1
+" toggle colorcolumn if installed
+if exists('+colorcolumn')
+    " set colorcolumn to textwidth + 1
+    set colorcolumn=+1
 endif
 
 " print current syntax item
@@ -445,9 +441,9 @@ let OmniCpp_DefaultNamespaces = [ "std" ]
 if has('autocmd')
     augroup custom_au
         au!
-        au FileType python map <buffer> <F6> :!python %<CR>
-        au FileType perl map <buffer> <F6> :!perl %<CR>
-        au FileType html,xhtml map <buffer> <F6> :!firefox %<CR>
+        au FileType python map <buffer> <F6> :!python "%"<CR>
+        au FileType perl map <buffer> <F6> :!perl "%"<CR>
+        au FileType html,xhtml map <buffer> <F6> :!firefox "%"<CR>
         au FileType crontab setlocal backupcopy=yes
         au FileType text setlocal textwidth=78
         au BufWrite *.bib call custom#PrepareBib()
@@ -720,22 +716,6 @@ function! Underline(...)
     let char = a:0 ? a:1 : '='
     call append('.', repeat(char, virtcol('$')-1))
 endfunction
-
-" GuideCol() - define 'margincolumn' relative to 'textwidth' -----------{{{2
-if exists('+margincolumn')
-    function! GuideCol(cols)
-        let columns = []
-        for col in split(a:cols, ',')
-            if col =~ '[-+]\d\+'
-                call insert(columns, str2nr(col) + &tw)
-            else
-                call insert(columns, col)
-            endif
-        endfor
-        exe 'set mc=' . join(columns, ',')
-    endfunction
-    com! -nargs=1 GuideColumn :call GuideCol(<f-args>)
-endif
 
 " InsertLineNumbers() - insert line numbers ----------------------------{{{2
 function! InsertLineNumbers(first, last)

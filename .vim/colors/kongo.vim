@@ -1,7 +1,7 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Tue 30 Mar 2010 08:11:05 PM CEST
+" Last Change:  Thu 15 Jul 2010 05:48:16 PM CEST
 " Version:      0.3
 
 set background=dark
@@ -239,9 +239,9 @@ hi Todo             ctermfg=214         ctermbg=bg         cterm=reverse,bold
 hi MyTagListFileName  guifg=#969696       guibg=#101010      gui=none
 hi MyTagListFileName  ctermfg=246         ctermbg=232        cterm=none
 
-if exists('+margincolumn')
-    hi MarginColumn     guifg=NONE          guibg=#242424      gui=none
-    hi MarginColumn     ctermfg=NONE        ctermbg=235        cterm=none
+if exists('+colorcolumn')
+    hi ColorColumn     guifg=NONE          guibg=#242424      gui=none
+    hi ColorColumn     ctermfg=NONE        ctermbg=235        cterm=none
 endif
 
 " vim: set fdm=marker foldmarker={{{,}}}
