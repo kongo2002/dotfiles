@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sat 17 Jul 2010 11:19:09 PM CEST
+" Last Change:  Thu 22 Jul 2010 07:08:54 PM CEST
 
 set nocompatible
 
@@ -717,6 +717,16 @@ function! Underline(...)
     call append('.', repeat(char, virtcol('$')-1))
 endfunction
 
+" GrepOpenBuffers() - search in all open buffers -----------------------{{{2
+function! GrepOpenBuffers(search, jump)
+    call setqflist([])
+    let arg = (a:jump) ? '' : 'j'
+    silent! exe 'bufdo vimgrepadd /' . a:search . '/' . arg . ' %'
+    let matches = len(getqflist())
+    echo 'BufGrep:' ((matches) ? matches : 'No') 'matches found'
+endfunction
+com! -nargs=1 -bang BufGrep call GrepOpenBuffers('<args>', <bang>0)
+
 " InsertLineNumbers() - insert line numbers ----------------------------{{{2
 function! InsertLineNumbers(first, last)
     let maxlen = strlen(a:last) + 1
@@ -730,7 +740,7 @@ function! InsertLineNumbers(first, last)
         endif
     endfor
 endfunction
-com! -range=% LineNum :call InsertLineNumbers(<line1>, <line2>)
+com! -range=% LineNum call InsertLineNumbers(<line1>, <line2>)
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
