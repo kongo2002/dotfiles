@@ -1,10 +1,8 @@
 " Name:         kongo.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Thu 15 Jul 2010 05:48:16 PM CEST
+" Last Change:  Sat 24 Jul 2010 10:25:08 PM CEST
 " Version:      0.3
-
-set background=dark
 
 if version > 580
     hi clear
