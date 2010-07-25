@@ -3,7 +3,7 @@
     url = git://github.com/scrooloose/nerdtree.git
 [submodule ".vim_plugins/snipmate.vim"]
     path = .vim_plugins/snipmate.vim
-    url = git://github.com/msanders/snipmate.vim.git
+    url = git://github.com/kongo2002/snipmate.vim.git
 [submodule ".vim_plugins/tabular"]
     path = .vim_plugins/tabular
     url = git://github.com/godlygeek/tabular.git
