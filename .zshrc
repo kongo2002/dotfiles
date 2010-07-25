@@ -1,7 +1,7 @@
 autoload -U compinit promptinit
 compinit
 
-if [[ "$HOST" -eq "eeepc" ]]; then
+if [[ "$HOST" == "eeepc" ]]; then
     promptinit
 else
     promptinit; prompt gentoo
