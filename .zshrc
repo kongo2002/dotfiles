@@ -1,6 +1,11 @@
 autoload -U compinit promptinit
 compinit
-promptinit; prompt gentoo
+
+if [[ "$HOST" -eq "eeepc" ]]; then
+    promptinit
+else
+    promptinit; prompt gentoo
+fi
 
 source /etc/profile
 
