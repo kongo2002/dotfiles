@@ -1,6 +1,6 @@
 " File:           proto_compl.vim
 " Maintainer:     Gregor Uhlenheuer
-" Last Change:    Sa 13 Mär 2010 16:18:41 CET
+" Last Change:    Thu 29 Jul 2010 08:52:34 PM CEST
 "
 " Description:    a small prototype completion plugin for c/c++ heavily
 "                 inspired by code_complete.vim written by Ming Bai
@@ -35,9 +35,13 @@ function! ProtoComplInit()
     endif
 
     exec 'silent! iunmap <buffer> ' . g:proto_compl_key
-    exec 'inoremap <buffer> ' . g:proto_compl_key . 
+    exec 'inoremap <buffer> ' . g:proto_compl_key .
                 \ ' <C-r>=ProtoComplete()<CR>' .
                 \ '<C-r>=ProtoJump()<CR>'
+
+    if !exists('g:proto_no_auto_newline') || g:proto_no_auto_newline == 0
+        inoremap <buffer> <expr> ; <SID>DoNewline()
+    endif
 endfunction
 
 function s:ProtoFunComplete(funn)
@@ -124,6 +128,16 @@ function ProtoJump()
     endif
 
     return ''
+endfunction
+
+function! s:DoNewline()
+    let l:line = getline('.')[:(col('.')-2)]
+    if match(l:line, '([^)]*$') != -1 || synIDattr(synID(line('.'),
+                \ col('.')-1, 1), 'name') =~? 'cComment'
+        return ";"
+    else
+        return ";\<CR>"
+    endif
 endfunction
 
 function! s:ClosBrack()
