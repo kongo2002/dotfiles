@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 22 Jul 2010 07:08:54 PM CEST
+" Last Change:  Fri 06 Aug 2010 10:14:42 PM CEST
 
 set nocompatible
 
@@ -24,10 +24,11 @@ sil! unlet g:colors_name
 " extend runtime path with plugin directory
 sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
 
-syntax on
 filetype on
 filetype plugin on
 filetype indent on
+
+syntax on
 
 set encoding=utf-8
 
@@ -434,6 +435,10 @@ let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteScope = 1
 let OmniCpp_DefaultNamespaces = [ "std" ]
 
+" PROTO-COMPLETE -------------------------------------------------------{{{2
+
+let g:proto_no_auto_newline = 1
+
 " FILETYPE SPECIFICS ---------------------------------------------------{{{1
 
 " AUTOCOMMANDS ---------------------------------------------------------{{{2
@@ -553,7 +558,7 @@ com! -range=% DivHtml <line1>,<line2>call DivHtml()
 " LastCurPos() - jump to last cursor position --------------------------{{{2
 function! LastCurPos()
     if line("'\"") > 0 && line ("'\"") <= line("$")
-        exe "norm! g`\""
+        norm! g`"
     endif
 endfunction
 
@@ -741,6 +746,17 @@ function! InsertLineNumbers(first, last)
     endfor
 endfunction
 com! -range=% LineNum call InsertLineNumbers(<line1>, <line2>)
+
+" HighAllOverColumn() - highlight all columns after given column -------{{{2
+function! HighAllOverColumn(column)
+    if a:column <= 0 | return | endif
+    let cc_set = ''
+    for col in range(a:column + 1, &columns)
+        if col != a:column + 1 | let cc_set .= ',' | endif
+        let cc_set .= col
+    endfor
+    let &cc = cc_set
+endfunction
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 

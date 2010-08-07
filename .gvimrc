@@ -1,7 +1,7 @@
 " Filename:     .gvimrc
 " Description:  GVim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 04 Jun 2010 10:40:24 PM CEST
+" Last Change:  Mon 02 Aug 2010 10:12:30 PM CEST
 
 " font name and size
 "set guifont=Monospace\ 9
@@ -23,6 +23,7 @@ map! <S-Insert> <C-r>*
 " popup on right-click
 set mousemodel=popup
 
+set guioptions-=m   " no menu
 set guioptions-=T   " no toolbar
 set guioptions-=r   " no right scrollbar
 set guioptions-=L   " no left scrollbar
