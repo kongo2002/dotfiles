@@ -119,7 +119,7 @@ if [ "$TERM" != dumb ] && [ -x /usr/bin/grc ] ; then
     alias ld='cl ld'
     alias netstat='cl netstat'
     alias ping='cl ping'
-    alias traceroute='cl /usr/sbin/traceroute'
+    alias traceroute='cl traceroute'
 fi
 
 # Other misc settings
