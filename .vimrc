@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 06 Aug 2010 10:14:42 PM CEST
+" Last Change:  Wed 25 Aug 2010 05:10:50 PM CEST
 
 set nocompatible
 
@@ -177,6 +177,13 @@ let &statusline.='%{SSpace()}'
 if exists('*SyntasticStatuslineFlag')
     let &statusline.='%#warningmsg#'
     let &statusline.='%{SyntasticStatuslineFlag()}'
+    let &statusline.='%*'
+endif
+
+" git branch and commit
+if exists('*fugitive#statusline')
+    let &statusline.='%#modemsg#'
+    let &statusline.='%{fugitive#statusline()}'
     let &statusline.='%*'
 endif
 
