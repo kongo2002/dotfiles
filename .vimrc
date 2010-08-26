@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 26 Aug 2010 01:10:50 PM CEST
+" Last Change:  Thu 26 Aug 2010 11:15:17 PM CEST
 
 set nocompatible
 
@@ -162,7 +162,7 @@ set grepformat=%f:%l:%c:%m,%f
 set laststatus=2
 
 " filename, flags
-let &statusline='%<%f #%n %m%*%r%h%w'
+let &statusline='%f %<#%n %m%*%r%h%w'
 
 " fileformat, encoding
 let &statusline.='[%{&ff}]%y[%{(&fenc==""?&enc:&fenc)}]'
