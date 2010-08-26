@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Wed 25 Aug 2010 05:10:50 PM CEST
+" Last Change:  Thu 26 Aug 2010 01:10:50 PM CEST
 
 set nocompatible
 
@@ -181,11 +181,9 @@ if exists('*SyntasticStatuslineFlag')
 endif
 
 " git branch and commit
-if exists('*fugitive#statusline')
-    let &statusline.='%#modemsg#'
-    let &statusline.='%{fugitive#statusline()}'
-    let &statusline.='%*'
-endif
+let &statusline.='%#modemsg#'
+let &statusline.='%{SFugitive()}'
+let &statusline.='%*'
 
 " number of long lines
 let g:num_long_lines = ''
@@ -538,6 +536,14 @@ function! SSpace()
     else
         return ""
     endif
+endfunction
+
+" SFugitive() - get the current git branch and commit ------------------{{{2
+function! SFugitive()
+    if exists('*fugitive#statusline')
+        return fugitive#statusline()
+    endif
+    return ""
 endfunction
 
 " SyntaxItem() - get syntax highlight group under cursor ---------------{{{2
