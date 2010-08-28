@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 26 Aug 2010 11:15:17 PM CEST
+" Last Change:  Sat 28 Aug 2010 01:16:32 PM CEST
 
 set nocompatible
 
@@ -769,6 +769,30 @@ function! HighAllOverColumn(column)
         let cc_set .= col
     endfor
     let &cc = cc_set
+endfunction
+
+" TextEnableCodeSnip() - highlight nested syntax regions ---------------{{{2
+function! TextEnableCodeSnip(ft, start, end, textSnipHl) abort
+    let ft=toupper(a:ft)
+    let group='textGroup'.ft
+    if exists('b:current_syntax')
+        let s:current_syntax = b:current_syntax
+        unlet b:current_syntax
+    endif
+    execute 'syntax include @'.group.' syntax/'.a:ft.'.vim'
+    try
+        execute 'syntax include @'.group.' after/syntax/'.a:ft.'.vim'
+    catch
+    endtry
+    if exists('s:current_syntax')
+        let b:current_syntax = s:current_syntax
+    else
+        unlet b:current_syntax
+    endif
+    execute 'syntax region textSnip'.ft.'
+                \ matchgroup='.a:textSnipHl.'
+                \ start="'.a:start.'" end="'.a:end.'"
+                \ contains=@'.group
 endfunction
 
 " COLORSCHEME ----------------------------------------------------------{{{1
