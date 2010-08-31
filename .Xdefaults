@@ -8,8 +8,8 @@ xft.lcdfilter:                  lcddefault
 ! }}}
 
 ! General settings {{{
-*background:                    #111111
-*foreground:                    #eeeeee
+*background:                    #202020
+*foreground:                    #e0e0e0
 ! }}}
 
 ! Xterm settings {{{
