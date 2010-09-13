@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 13 Sep 2010 08:05:24 PM CEST
+" Last Change:  Mon 13 Sep 2010 08:42:18 PM CEST
 
 set nocompatible
 
@@ -315,6 +315,9 @@ nmap <silent> <Leader>cd :cd %:h<CR>
 " search recursively in current dir for word under cursor
 map <F4> :execute 'vimgrep /' . expand('<cword>') . '/j **'
             \ <Bar> copen <CR>
+
+" search recursively for highlighted string
+vmap <Leader>v y:vimgrep /<C-r>"/ **/*.
 
 " toggle matching of long lines
 map <F11> :call ToggleLongLines()<CR>
@@ -741,9 +744,14 @@ endfunction
 " GrepOpenBuffers() - search in all open buffers -----------------------{{{2
 function! GrepOpenBuffers(search, jump)
     call setqflist([])
-    let arg = (a:jump) ? '' : 'j'
-    silent! exe 'bufdo vimgrepadd /' . a:search . '/' . arg . ' %'
+    let cur = getpos('.')
+    silent! exe 'bufdo vimgrepadd /' . a:search . '/ %'
     let matches = len(getqflist())
+    if a:jump && matches > 0
+        sil! cfirst
+    else
+        call setpos('.', cur)
+    endif
     echo 'BufGrep:' ((matches) ? matches : 'No') 'matches found'
 endfunction
 com! -nargs=1 -bang BufGrep call GrepOpenBuffers('<args>', <bang>0)
