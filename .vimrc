@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 10 Sep 2010 07:11:33 PM CEST
+" Last Change:  Mon 13 Sep 2010 08:05:24 PM CEST
 
 set nocompatible
 
@@ -246,8 +246,8 @@ cnoremap <C-n> <Up>
 cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
 
-" disable autocommands on vimgrep
-cabbr no noautocmd vim
+" use vimgrep without autocommands being invoked
+cmap novim noautocmd vim
 
 " toggle paste mode
 nmap <silent> <Leader>p :setl paste! paste?<CR>
