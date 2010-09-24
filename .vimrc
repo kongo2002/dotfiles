@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 13 Sep 2010 08:42:18 PM CEST
+" Last Change:  Fri 24 Sep 2010 04:35:34 PM CEST
 
 set nocompatible
 
@@ -174,11 +174,9 @@ let &statusline.='%{&paste?"[paste]":""}'
 let &statusline.='%{SSpace()}'
 
 " syntastic plugin
-if exists('*SyntasticStatuslineFlag')
-    let &statusline.='%#warningmsg#'
-    let &statusline.='%{SyntasticStatuslineFlag()}'
-    let &statusline.='%*'
-endif
+let &statusline.='%#warningmsg#'
+let &statusline.='%{SSyntastic()}'
+let &statusline.='%*'
 
 " git branch and commit
 let &statusline.='%#modemsg#'
@@ -548,6 +546,14 @@ endfunction
 function! SFugitive()
     if exists('*fugitive#statusline')
         return fugitive#statusline()
+    endif
+    return ""
+endfunction
+
+" SSyntastic() - get the number of syntax errors found -----------------{{{2
+function! SSyntastic()
+    if exists('*SyntasticStatuslineFlag')
+        return SyntasticStatuslineFlag()
     endif
     return ""
 endfunction
