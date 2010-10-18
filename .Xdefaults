@@ -24,7 +24,9 @@ xterm*boldMode:                 false
 
 ! font settings
 !xterm*font:                 -*-proggycleanszcp-*-*-*-*-*-*-*-96-*-70-*-*
+!xterm*boldFont:             -*-proggycleanszcp-*-*-*-*-*-*-*-96-*-70-*-*
 !xterm*font:                 -*-andale mono-medium-r-*-*-*-120-*-*-*-*-*-15
+!xterm*boldFont:             -*-andale mono-medium-r-*-*-*-120-*-*-*-*-*-15
 xterm*font:                  -*-terminus-medium-*-*-*-17-*-*-*-*-*-*-15
 xterm*boldFont:              -*-terminus-medium-*-*-*-17-*-*-*-*-*-*-15
 !xterm*faceName:             DejaVu Sans Mono
