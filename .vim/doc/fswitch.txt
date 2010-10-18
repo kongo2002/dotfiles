@@ -1,4 +1,4 @@
-	For Vim version 7.2 and above	Last change: 2009 Mar 23
+*fswitch.txt*	For Vim version 7.2 and above	Last change: 2009 Mar 23
 
 			       ---------------
  			        File Switcher
@@ -509,6 +509,9 @@ path.
 ==============================================================================
 							*fswitch-changes*
 A. Change History~
+
+0.9.3
+	- Made sure that there's a check for 7.0 (Thanks Timon Kelter)
 
 0.9.2
 	- Fix for the splitting commands (Thanks Michael Henry)

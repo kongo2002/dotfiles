@@ -19,8 +19,13 @@ if exists("g:disable_fswitch")
     finish
 endif
 
+if v:version < 700
+  echoerr "FSwitch requires Vim 7.0 or higher!"
+  finish
+endif
+
 " Version
-let s:fswitch_version = '0.9.2'
+let s:fswitch_version = '0.9.3'
 
 " Get the path separator right
 let s:os_slash = &ssl == 0 && (has("win16") || has("win32") || has("win64")) ? '\' : '/'
@@ -290,3 +295,4 @@ com! FSAbove      :call FSwitch('%', 'wincmd k')
 com! FSSplitAbove :call FSwitch('%', 'split | wincmd k')
 com! FSBelow      :call FSwitch('%', 'wincmd j')
 com! FSSplitBelow :call FSwitch('%', 'split | wincmd j')
+
