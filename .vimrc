@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 24 Sep 2010 04:35:34 PM CEST
+" Last Change:  Mon 01 Nov 2010 01:05:34 PM CET
 
 set nocompatible
 
@@ -245,7 +245,7 @@ cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
 
 " use vimgrep without autocommands being invoked
-cmap novim noautocmd vim
+nmap <Leader>nv :noautocmd vim /
 
 " toggle paste mode
 nmap <silent> <Leader>p :setl paste! paste?<CR>
@@ -814,4 +814,4 @@ endfunction
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
-call LoadColorScheme('kongo:kongo2:slate', 'slate')
+call LoadColorScheme('kongo3:kongo:kongo2:slate', 'slate')
