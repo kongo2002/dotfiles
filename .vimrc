@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 01 Nov 2010 01:05:34 PM CET
+" Last Change:  Thu 04 Nov 2010 06:57:56 PM CET
 
 set nocompatible
 
@@ -103,10 +103,12 @@ set lazyredraw
 set wildmenu
 
 " give following files lower priority
-set suffixes+=.info,.aux,.log,.dvi,.bbl,.out,.o,.lo
+set suffixes+=.info,.aux,.log,.dvi,.bbl,.out,.lo
 
 " disable some filetypes for completion
-set wildignore=*.o,*.obj,*.dll,*.pyc
+set wildignore+=*.o,*.obj,*.dll,*.pyc
+set wildignore+=*.gif,*.jpg,*.jpeg,*.png
+set wildignore+=movies/**,pictures/**,music/**
 
 " turn on mouse in all modes
 if has('mouse')
@@ -179,9 +181,7 @@ let &statusline.='%{SSyntastic()}'
 let &statusline.='%*'
 
 " git branch and commit
-let &statusline.='%#modemsg#'
 let &statusline.='%{SFugitive()}'
-let &statusline.='%*'
 
 " number of long lines
 let g:num_long_lines = ''
