@@ -15,9 +15,10 @@
 "              See http://sam.zoy.org/wtfpl/COPYING for more details.
 " ============================================================================
 
-if exists("g:disable_fswitch")
+if exists("g:loaded_fswitch")
     finish
 endif
+let g:loaded_fswitch = 1
 
 if v:version < 700
   echoerr "FSwitch requires Vim 7.0 or higher!"
@@ -216,24 +217,24 @@ function! s:FSReturnCompanionFilename(filename, mustBeReadable)
 endfunction
 
 "
-" FSReturnReadableCompanionFilename
+" s:FSReturnReadableCompanionFilename
 "
 " This function will return a path that is the best candidate for the companion
 " file to switch to, so long as that file actually exists on the filesystem and
 " is readable.
 "
-function! FSReturnReadableCompanionFilename(filename)
+function! s:FSReturnReadableCompanionFilename(filename)
     return s:FSReturnCompanionFilename(a:filename, 1)
 endfunction
 
 "
-" FSReturnCompanionFilenameString
+" s:FSReturnCompanionFilenameString
 "
 " This function will return a path that is the best candidate for the companion
 " file to switch to.  The file does not need to actually exist on the
 " filesystem in order to qualify as a proper companion.
 "
-function! FSReturnCompanionFilenameString(filename)
+function! s:FSReturnCompanionFilenameString(filename)
     return s:FSReturnCompanionFilename(a:filename, 0)
 endfunction
 
@@ -251,13 +252,13 @@ function! FSwitch(filename, precmd)
      \ (!exists("b:fsdisablegloc") || b:fsdisablegloc == 0)
         throw "There are no locations defined (see :h fswitchlocs and :h fsdisablegloc)"
     endif
-    let newpath = FSReturnReadableCompanionFilename(a:filename)
+    let newpath = s:FSReturnReadableCompanionFilename(a:filename)
     let openfile = 1
     if !filereadable(newpath)
         if exists("b:fsnonewfiles") || exists("g:fsnonewfiles")
             let openfile = 0
         else
-            let newpath = FSReturnCompanionFilenameString(a:filename)
+            let newpath = s:FSReturnCompanionFilenameString(a:filename)
         endif
     endif
     if openfile == 1
