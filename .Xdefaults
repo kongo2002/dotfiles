@@ -27,10 +27,10 @@ xterm*boldMode:                 false
 !xterm*boldFont:             -*-proggycleanszcp-*-*-*-*-*-*-*-96-*-70-*-*
 !xterm*font:                 -*-andale mono-medium-r-*-*-*-120-*-*-*-*-*-15
 !xterm*boldFont:             -*-andale mono-medium-r-*-*-*-120-*-*-*-*-*-15
-xterm*font:                  -*-terminus-medium-*-*-*-17-*-*-*-*-*-*-15
-xterm*boldFont:              -*-terminus-medium-*-*-*-17-*-*-*-*-*-*-15
-!xterm*faceName:             DejaVu Sans Mono
-!xterm*faceSize:             12
+!xterm*font:                  -*-terminus-medium-*-*-*-17-*-*-*-*-*-*-15
+!xterm*boldFont:              -*-terminus-medium-*-*-*-17-*-*-*-*-*-*-15
+xterm*faceName:             Inconsolata
+xterm*faceSize:             12
 !xterm*boldFont:             xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
 ! }}}
 
@@ -66,10 +66,14 @@ URxvt.urlLauncher:              firefox
 !URxvt*secondaryScroll:          true
 
 ! font settings
-URxvt*font:                 xft:Terminus:pixelsize=14.0:antialias=true:hinting=true
-URxvt*boldFont:             xft:Terminus:pixelsize=14.0:antialias=true:hinting=true
-URxvt*italicFont:           xft:Terminus:pixelsize=14.0:antialias=true:hinting=true
-URxvt*bolditalicFont:       xft:Terminus:pixelsize=14.0:antialias=true:hinting=true
+URxvt*font:                 xft:Inconsolata:pixelsize=16.0:antialias=true:hinting=true
+URxvt*boldFont:             xft:Inconsolata:pixelsize=16.0:antialias=true:hinting=true
+URxvt*italicFont:           xft:Inconsolata:pixelsize=16.0:antialias=true:hinting=true
+URxvt*bolditalicFont:       xft:Inconsolata:pixelsize=16.0:antialias=true:hinting=true
+!URxvt*font:                 xft:Terminus:pixelsize=14.0:antialias=true:hinting=true
+!URxvt*boldFont:             xft:Terminus:pixelsize=14.0:antialias=true:hinting=true
+!URxvt*italicFont:           xft:Terminus:pixelsize=14.0:antialias=true:hinting=true
+!URxvt*bolditalicFont:       xft:Terminus:pixelsize=14.0:antialias=true:hinting=true
 !URxvt*font:                 xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
 !URxvt*boldFont:             xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
 !URxvt*italicFont:           xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
