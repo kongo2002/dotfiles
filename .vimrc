@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 04 Nov 2010 06:57:56 PM CET
+" Last Change:  Fri 10 Dec 2010 12:40:16 PM CET
 
 set nocompatible
 
@@ -106,6 +106,8 @@ set wildmenu
 set suffixes+=.info,.aux,.log,.dvi,.bbl,.out,.lo
 
 " disable some filetypes for completion
+" blocking possibly large directories that usually are
+" not of interest will speed up plugins like Command-T
 set wildignore+=*.o,*.obj,*.dll,*.pyc
 set wildignore+=*.gif,*.jpg,*.jpeg,*.png
 set wildignore+=movies/**,pictures/**,music/**
@@ -335,9 +337,9 @@ endif
 " BUILT-INS ------------------------------------------------------------{{{2
 
 " disable some built-in plugins
-let g:loaded_gzip = 1
-let g:loaded_tarPlugin = 1
-let g:loaded_zipPlugin = 1
+" let g:loaded_gzip = 1
+" let g:loaded_tarPlugin = 1
+" let g:loaded_zipPlugin = 1
 let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_spellfile_plugin = 1
@@ -364,10 +366,6 @@ if has('autocmd')
                     \ . 'reg:|src|include/**|,./'
     augroup END
 endif
-
-" BUFLINE --------------------------------------------------------------{{{2
-
-let g:bufline_loaded = 1
 
 " GIST -----------------------------------------------------------------{{{2
 
