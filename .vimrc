@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 10 Dec 2010 12:40:16 PM CET
+" Last Change:  Sun 19 Dec 2010 11:32:18 PM CET
 
 set nocompatible
 
@@ -207,6 +207,10 @@ let mapleader=','
 
 " bind escape key
 imap jj <Esc>
+
+" easily add empty newlines
+nmap <Return> o<Esc>
+nmap <S-Return> O<Esc>
 
 " switch 'jump to mark' mapping
 nnoremap ' `
