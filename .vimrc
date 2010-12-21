@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 19 Dec 2010 11:32:18 PM CET
+" Last Change:  Tue 21 Dec 2010 10:48:59 PM CET
 
 set nocompatible
 
@@ -209,8 +209,8 @@ let mapleader=','
 imap jj <Esc>
 
 " easily add empty newlines
-nmap <Return> o<Esc>
-nmap <S-Return> O<Esc>
+nmap <expr> <Return> InsertNewline(1)
+nmap <expr> <S-Return> InsertNewline(0)
 
 " switch 'jump to mark' mapping
 nnoremap ' `
@@ -812,6 +812,18 @@ function! TextEnableCodeSnip(ft, start, end, textSnipHl) abort
                 \ matchgroup='.a:textSnipHl.'
                 \ start="'.a:start.'" end="'.a:end.'"
                 \ contains=@'.group
+endfunction
+
+" InsertNewline() - insert an empty newline in normal mode --------------------{{{2
+function! InsertNewline(below)
+    if &modifiable && &buftype == ''
+        if a:below
+            return "o\<Esc>"
+        else
+            return "O\<Esc>"
+        endif
+    endif
+    return "\<cr>"
 endfunction
 
 " COLORSCHEME ----------------------------------------------------------{{{1
