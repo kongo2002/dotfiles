@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 21 Dec 2010 11:19:37 PM CET
+" Last Change:  Wed 22 Dec 2010 12:02:51 AM CET
 
 set nocompatible
 
@@ -146,6 +146,9 @@ set lcs+=extends:→
 set lcs+=precedes:←
 set lcs+=nbsp:·
 set lcs+=trail:·
+
+" store swap files in the same directory
+set directory=~/.vim/backup,~/tmp,/tmp,.
 
 " no backup
 set nobackup
