@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 21 Dec 2010 10:48:59 PM CET
+" Last Change:  Tue 21 Dec 2010 11:19:37 PM CET
 
 set nocompatible
 
@@ -227,6 +227,9 @@ nnoremap Y y$
 
 " use Q for formatting
 noremap Q gq
+
+" break the undo sequence before deleting the whole line
+inoremap <C-u> <C-g>u<C-u>
 
 " easier navigation on wrapped lines
 nnoremap j gj
@@ -823,7 +826,7 @@ function! InsertNewline(below)
             return "O\<Esc>"
         endif
     endif
-    return "\<cr>"
+    return "\<CR>"
 endfunction
 
 " COLORSCHEME ----------------------------------------------------------{{{1
