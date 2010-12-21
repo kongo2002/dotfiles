@@ -100,6 +100,10 @@ HISTFILE=~/.zshhistory
 HISTSIZE=3000
 SAVEHIST=3000
 
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey "^e" edit-command-line
+
 bindkey "^n" history-beginning-search-backward
 bindkey "^p" history-beginning-search-forward
 bindkey -M vicmd "\e." insert-last-word
