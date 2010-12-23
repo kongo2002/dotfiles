@@ -1,5 +1,6 @@
-autoload -U compinit promptinit
+autoload -U compinit promptinit colors
 compinit
+colors
 
 if [[ "$HOST" == "eeepc" ]]; then
     promptinit
@@ -9,18 +10,51 @@ fi
 
 source /etc/profile
 
+# source zsh config files
+for config_file ($HOME/.zsh/*.zsh) source $config_file
+
 export MPD_HOST="127.0.0.1"
 export MPD_PORT="6600"
 
-# XDG variables
+# XDG environment variables
 export XDG_CONFIG_HOME="/home/kongo/.config"
 export XDG_DATA_HOME="/home/kongo/.data"
 export XDG_CACHE_HOME="/home/kongo/.cache"
 
 alias '..'='cd ..'
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g ....='../../../..'
+alias 'cd..'='cd ..'
+alias 'cd...'='cd ../..'
+alias 'cd....'='cd ../../..'
+alias 'cd.....'='cd ../../../..'
+alias 'cd/'='cd /'
+
+alias 1='cd -'
+alias 2='cd +2'
+alias 3='cd +3'
+alias 4='cd +4'
+alias 5='cd +5'
+alias 6='cd +6'
+alias 7='cd +7'
+alias 8='cd +8'
+alias 9='cd +9'
+
+cd () {
+    if [[ "x$*" == "x..." ]]; then
+        cd ../..
+    elif [[ "x$*" == "x...." ]]; then
+        cd ../../..
+    elif [[ "x$*" == "x....." ]]; then
+        cd ../../..
+    elif [[ "x$*" == "x......" ]]; then
+        cd ../../../..
+    else
+        builtin cd "$@"
+    fi
+}
+
+zsh_stats() {
+    history 1 | awk '{print $2}' | sort | uniq -c | sort -rn | head
+}
 
 alias mv='nocorrect mv'
 alias cp='nocorrect cp'
@@ -52,53 +86,13 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-git_b() {
-    if [[ -d ".git" ]] then
-        git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
-    fi
-}
-
-git_c() {
-    if [[ -d ".git" ]] then
-        s="$(git status 2> /dev/null | tail -1 | sed -e 's/^\(\w*\).*/\1/')"
-
-        if [ "$s" = "nothing" ]; then
-            GCOLOR=$PR_BOLD_GREEN
-        elif [ "$s" = "no" ]; then
-            GCOLOR=$PR_BOLD_YELLOW
-        else
-            GCOLOR=$PR_BOLD_RED
-        fi
-
-        printf "%s" "${GCOLOR}"
-    else
-        echo ""
-    fi
-}
-
-setprompt() {    # load colors
-    autoload -U colors
-    colors
-
-    for COLOR in RED GREEN YELLOW BLUE WHITE BLACK; do
-        eval PR_$COLOR='%{$fg_no_bold[${(L)COLOR}]%}'
-        eval PR_BOLD_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
-    done
-
-    PROMPT='${PR_BOLD_BLUE}$VIMODE${PR_BOLD_WHITE}%n@%m${PR_BOLD_RED}!${PR_BOLD_WHITE}%!>%{${reset_color}%} '
-    RPROMPT='$(git_c)$(git_b)%{${reset_color}%} %~'
-}
+PROMPT='%{${fg_bold[blue]}%}$VIMODE%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!>%{${reset_color}%} '
+RPROMPT='$(git_prompt) %~'
 
 EDITOR="/usr/bin/vim"
 
 # toggle vi mode
 bindkey -v
-
-# history settings
-#
-HISTFILE=~/.zshhistory
-HISTSIZE=3000
-SAVEHIST=3000
 
 autoload -U edit-command-line
 zle -N edit-command-line
@@ -110,8 +104,7 @@ bindkey -M vicmd "\e." insert-last-word
 bindkey -M viins "\e." insert-last-word
 
 # grc stuff for colored output
-#
-if [ "$TERM" != dumb ] && [ -x /usr/bin/grc ] ; then
+if [ "$TERM" != dumb ] && [ -x /usr/bin/grc ]; then
     alias cl='/usr/bin/grc -es --colour=auto'
     alias configure='cl ./configure'
     alias diff='cl diff'
@@ -126,8 +119,12 @@ if [ "$TERM" != dumb ] && [ -x /usr/bin/grc ] ; then
     alias traceroute='cl traceroute'
 fi
 
-# Other misc settings
+# history settings
 #
+HISTFILE=~/.zshhistory
+HISTSIZE=3000
+SAVEHIST=3000
+
 LISTMAX=0
 
 # Expansion options
@@ -178,105 +175,95 @@ zstyle ':completion:*:warnings' format '%B%U---- no match for: %d%u%b'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
 
-# {{{ Simulate my old dabbrev-expand 3.0.5 patch
-#
-zstyle ':completion:*:history-words' stop verbose
-zstyle ':completion:*:history-words' remove-all-dups yes
-zstyle ':completion:*:history-words' list false
-
-#zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-#
 # zsh Options
 #
-
-setopt                       \
-     NO_all_export           \
-        always_last_prompt   \
-     NO_always_to_end        \
-        append_history       \
-     NO_auto_cd              \
-        auto_list            \
-        auto_menu            \
-     NO_auto_name_dirs       \
-        auto_param_keys      \
-        auto_param_slash     \
-        auto_pushd           \
-        auto_remove_slash    \
-     NO_auto_resume          \
-        bad_pattern          \
-        bang_hist            \
-        beep                 \
-        brace_ccl            \
-        correct_all          \
-     NO_bsd_echo             \
-        cdable_vars          \
-     NO_chase_links          \
-     NO_clobber              \
-        complete_aliases     \
-        complete_in_word     \
-     correct                 \
-     NO_correct_all          \
-        csh_junkie_history   \
-     NO_csh_junkie_loops     \
-     NO_csh_junkie_quotes    \
-     NO_csh_null_glob        \
-        equals               \
-        extended_glob        \
-        extended_history     \
-        function_argzero     \
-        glob                 \
-     NO_glob_assign          \
-        glob_complete        \
-     NO_glob_dots            \
-        glob_subst           \
-        hash_cmds            \
-        hash_dirs            \
-        hash_list_all        \
-        hist_allow_clobber   \
-        hist_beep            \
-        hist_ignore_dups     \
-        hist_ignore_space    \
-     NO_hist_no_store        \
-        hist_verify          \
-     NO_hup                  \
-     NO_ignore_braces        \
-     NO_ignore_eof           \
-        interactive_comments \
-        inc_append_history   \
-     NO_list_ambiguous       \
-     NO_list_beep            \
-        list_types           \
-        long_list_jobs       \
-        magic_equal_subst    \
-     NO_mail_warning         \
-     NO_mark_dirs            \
-     NO_menu_complete        \
-        multios              \
-        nomatch              \
-        notify               \
-     NO_null_glob            \
-        numeric_glob_sort    \
-     NO_overstrike           \
-        path_dirs            \
-        posix_builtins       \
-     NO_print_exit_value     \
-     NO_prompt_cr            \
-        prompt_subst         \
-        pushd_ignore_dups    \
-     NO_pushd_minus          \
-        pushd_silent         \
-        pushd_to_home        \
-        rc_expand_param      \
-     NO_rc_quotes            \
-     NO_rm_star_silent       \
-     NO_sh_file_expansion    \
-        sh_option_letters    \
-        short_loops          \
-     NO_sh_word_split        \
-     NO_single_line_zle      \
-     NO_sun_keyboard_hack    \
-        unset                \
-     NO_verbose              \
+setopt                         \
+     NO_all_export             \
+        always_last_prompt     \
+        always_to_end          \
+        append_history         \
+     NO_auto_cd                \
+        auto_list              \
+        auto_menu              \
+     NO_auto_name_dirs         \
+        auto_param_keys        \
+        auto_param_slash       \
+        auto_pushd             \
+        auto_remove_slash      \
+     NO_auto_resume            \
+        bad_pattern            \
+        bang_hist              \
+        beep                   \
+        brace_ccl              \
+        correct_all            \
+     NO_bsd_echo               \
+        cdable_vars            \
+     NO_chase_links            \
+     NO_clobber                \
+        complete_aliases       \
+        complete_in_word       \
+     correct                   \
+     NO_correct_all            \
+        csh_junkie_history     \
+     NO_csh_junkie_loops       \
+     NO_csh_junkie_quotes      \
+     NO_csh_null_glob          \
+        equals                 \
+        extended_glob          \
+        extended_history       \
+        function_argzero       \
+        glob                   \
+     NO_glob_assign            \
+        glob_complete          \
+     NO_glob_dots              \
+        glob_subst             \
+        hash_cmds              \
+        hash_dirs              \
+        hash_list_all          \
+        hist_allow_clobber     \
+        hist_beep              \
+        hist_expire_dups_first \
+        hist_ignore_dups       \
+        hist_ignore_space      \
+     NO_hist_no_store          \
+        hist_verify            \
+     NO_hup                    \
+     NO_ignore_braces          \
+     NO_ignore_eof             \
+        interactive_comments   \
+        inc_append_history     \
+     NO_list_ambiguous         \
+     NO_list_beep              \
+        list_types             \
+        long_list_jobs         \
+        magic_equal_subst      \
+     NO_mail_warning           \
+     NO_mark_dirs              \
+     NO_menu_complete          \
+        multios                \
+        nomatch                \
+        notify                 \
+     NO_null_glob              \
+        numeric_glob_sort      \
+     NO_overstrike             \
+        path_dirs              \
+        posix_builtins         \
+     NO_print_exit_value       \
+     NO_prompt_cr              \
+        prompt_subst           \
+        pushd_ignore_dups      \
+     NO_pushd_minus            \
+        pushd_silent           \
+        pushd_to_home          \
+        rc_expand_param        \
+     NO_rc_quotes              \
+     NO_rm_star_silent         \
+     NO_sh_file_expansion      \
+        sh_option_letters      \
+        short_loops            \
+     NO_sh_word_split          \
+     NO_single_line_zle        \
+     NO_sun_keyboard_hack      \
+        unset                  \
+     NO_verbose                \
         zle
-
-setprompt
