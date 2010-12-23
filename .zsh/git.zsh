@@ -1,11 +1,11 @@
 # git status colors
 
-ZSH_THEME_GIT_PROMPT_CLEAN="%{${fg[green]}%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{${fg[green]}%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{${fg_bold[green]}%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{${fg_bold[green]}%}"
 ZSH_THEME_GIT_PROMPT_ADDED="%{${fg_bold[yellow]}%}"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{${fg_bold[yellow]}%}"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{${fg_bold[yellow]}%}"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{${fg[red]}%}"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{${fg_bold[red]}%}"
 
 # get the current branch
 
