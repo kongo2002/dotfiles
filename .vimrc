@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 24 Dec 2010 03:16:57 AM CET
+" Last Change:  Fri 24 Dec 2010 03:02:27 PM CET
 
 set nocompatible
 
@@ -733,10 +733,13 @@ function! LoadColorScheme(highcolor, lowcolor)
 endfunction
 
 " Underline() - underline current line with fill char ------------------{{{2
-function! Underline(...)
-    let char = a:0 ? a:1 : '='
-    call append('.', repeat(char, virtcol('$')-1))
+function! s:Underline(chars)
+    let chars = empty(a:chars) ? '-' : a:chars
+    let len = (virtcol('$') - 1) / len(chars)
+    let rem = virtcol('$') - len * len(chars) - 1
+    call append('.', repeat(chars, len) . (rem ? strpart(chars, 0, rem) : ''))
 endfunction
+com! -nargs=? Underline call <SID>Underline(<q-args>)
 
 " GrepOpenBuffers() - search in all open buffers -----------------------{{{2
 function! GrepOpenBuffers(search, jump)
