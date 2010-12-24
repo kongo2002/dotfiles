@@ -18,6 +18,7 @@
 !.zshrc
 tags
 .vim/.VimballRecord
+.vim/backup
 .vim/doc/tags*
 .vim/spell
 .vim/tags
