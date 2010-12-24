@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Wed 22 Dec 2010 12:02:51 AM CET
+" Last Change:  Fri 24 Dec 2010 03:16:57 AM CET
 
 set nocompatible
 
@@ -347,9 +347,6 @@ endif
 " BUILT-INS ------------------------------------------------------------{{{2
 
 " disable some built-in plugins
-" let g:loaded_gzip = 1
-" let g:loaded_tarPlugin = 1
-" let g:loaded_zipPlugin = 1
 let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_spellfile_plugin = 1
@@ -405,21 +402,7 @@ let tlist_tex_settings='tex;c:chapter;s:section;l:label;r:ref'
 
 " NERDCOMMENTER --------------------------------------------------------{{{2
 
-let NERDCreateDefaultMappings = 0
 let NERDSpaceDelims = 1
-
-nmap <Leader>cc <Plug>NERDCommenterComment
-vmap <Leader>cc <Plug>NERDCommenterComment
-nmap <Leader>cn <Plug>NERDCommenterNest
-vmap <Leader>cn <Plug>NERDCommenterNest
-nmap <Leader>cm <Plug>NERDCommenterMinimal
-vmap <Leader>cm <Plug>NERDCommenterMinimal
-nmap <Leader>cs <Plug>NERDCommenterSexy
-vmap <Leader>cs <Plug>NERDCommenterSexy
-nmap <Leader>cA <Plug>NERDCommenterAppend
-vmap <Leader>cA <Plug>NERDCommenterAppend
-nmap <Leader>cu <Plug>NERDCommenterUncomment
-vmap <Leader>cu <Plug>NERDCommenterUncomment
 
 " NERDTREE -------------------------------------------------------------{{{2
 
