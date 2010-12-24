@@ -1,5 +1,6 @@
 # git status colors
 
+ZSH_THEME_GIT_PROMPT_BRANCH="%{${fg_bold[blue]}%}"
 ZSH_THEME_GIT_PROMPT_ADDED="%{${fg_bold[green]}%}+"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{${fg_bold[yellow]}%}?"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{${fg_bold[yellow]}%}*"
@@ -17,9 +18,7 @@ function current_branch() {
 # build the git prompt string
 
 git_prompt () {
-    BRANCH=$(current_branch)
-
-    [[ -n $BRANCH ]] || return
+    [[ -n ${BRANCH::=$(current_branch)} ]] || return
 
     INDEX=$(git status --porcelain 2> /dev/null)
     GIT=""
@@ -50,5 +49,5 @@ git_prompt () {
         GIT="$ZSH_THEME_GIT_PROMPT_UNMERGED$GIT"
     fi
 
-    echo "$GIT %{${reset_color}%}(${BRANCH})"
+    echo "$GIT $ZSH_THEME_GIT_PROMPT_BRANCH(${BRANCH})%{${reset_color}%}"
 }
