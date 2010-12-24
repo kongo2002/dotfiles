@@ -21,6 +21,10 @@ export XDG_CONFIG_HOME="/home/kongo/.config"
 export XDG_DATA_HOME="/home/kongo/.data"
 export XDG_CACHE_HOME="/home/kongo/.cache"
 
+# register git-achievements
+export PATH="${PATH}:${HOME}/programs/git-achievements"
+alias 'git'='git-achievements'
+
 alias '..'='cd ..'
 alias 'cd..'='cd ..'
 alias 'cd...'='cd ../..'
