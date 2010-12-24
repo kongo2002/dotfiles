@@ -10,13 +10,17 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{${fg_bold[red]}%}-"
 # get the current branch
 
 function current_branch() {
-ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
     echo ${ref#refs/heads/}
 }
 
 # build the git prompt string
 
 git_prompt () {
+    BRANCH=$(current_branch)
+
+    [[ -n $BRANCH ]] || return
+
     INDEX=$(git status --porcelain 2> /dev/null)
     GIT=""
 
@@ -46,5 +50,5 @@ git_prompt () {
         GIT="$ZSH_THEME_GIT_PROMPT_UNMERGED$GIT"
     fi
 
-    echo "$GIT %{${reset_color}%}($(current_branch))"
+    echo "$GIT %{${reset_color}%}(${BRANCH})"
 }
