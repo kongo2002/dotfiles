@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 24 Dec 2010 03:02:27 PM CET
+" Last Change:  Fri 24 Dec 2010 03:11:54 PM CET
 
 set nocompatible
 
@@ -520,7 +520,7 @@ vnoremap # :<C-u>call VSetSearch()<CR>??<CR>
 
 " DiffOrig - compare current buffer with original ----------------------{{{2
 if !exists(':DiffOrig')
-    com! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+    com! DiffOrig vert new | setl bt=nofile | r # | 0d_ | diffthis
                 \ | wincmd p | diffthis
 endif
 
@@ -717,7 +717,7 @@ function! RemoveTrailingWhitespace()
 endfunction
 
 " LoadColorScheme() - try to load an existing colorscheme --------------{{{2
-function! LoadColorScheme(highcolor, lowcolor)
+function! s:LoadColorScheme(highcolor, lowcolor)
     if has('gui_running') || &t_Co == 256 || &t_Co == 88
         let colors = a:highcolor
     else
@@ -742,7 +742,7 @@ endfunction
 com! -nargs=? Underline call <SID>Underline(<q-args>)
 
 " GrepOpenBuffers() - search in all open buffers -----------------------{{{2
-function! GrepOpenBuffers(search, jump)
+function! s:GrepOpenBuffers(search, jump)
     call setqflist([])
     let cur = getpos('.')
     silent! exe 'bufdo vimgrepadd /' . a:search . '/ %'
@@ -754,10 +754,10 @@ function! GrepOpenBuffers(search, jump)
     endif
     echo 'BufGrep:' ((matches) ? matches : 'No') 'matches found'
 endfunction
-com! -nargs=1 -bang BufGrep call GrepOpenBuffers('<args>', <bang>0)
+com! -nargs=1 -bang BufGrep call <SID>GrepOpenBuffers('<args>', <bang>0)
 
 " InsertLineNumbers() - insert line numbers ----------------------------{{{2
-function! InsertLineNumbers(first, last)
+function! s:InsertLineNumbers(first, last)
     let maxlen = strlen(a:last) + 1
     for line_num in range(a:first, a:last)
         let line = getline(line_num)
@@ -769,7 +769,7 @@ function! InsertLineNumbers(first, last)
         endif
     endfor
 endfunction
-com! -range=% LineNum call InsertLineNumbers(<line1>, <line2>)
+com! -range=% LineNum call <SID>InsertLineNumbers(<line1>, <line2>)
 
 " HighAllOverColumn() - highlight all columns after given column -------{{{2
 function! HighAllOverColumn(column)
@@ -806,18 +806,14 @@ function! TextEnableCodeSnip(ft, start, end, textSnipHl) abort
                 \ contains=@'.group
 endfunction
 
-" InsertNewline() - insert an empty newline in normal mode --------------------{{{2
+" InsertNewline() - insert an empty newline in normal mode -------------{{{2
 function! InsertNewline(below)
     if &modifiable && &buftype == ''
-        if a:below
-            return "o\<Esc>"
-        else
-            return "O\<Esc>"
-        endif
+        return a:below ? "o\<Esc>" : "O\<Esc>"
     endif
     return "\<CR>"
 endfunction
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
-call LoadColorScheme('kongo3:kongo:kongo2:slate', 'slate')
+call <SID>LoadColorScheme('kongo3:kongo:kongo2:slate', 'slate')
