@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 24 Dec 2010 03:11:54 PM CET
+" Last Change:  Sun 26 Dec 2010 03:54:44 PM CET
 
 set nocompatible
 
@@ -22,7 +22,7 @@ endif
 sil! unlet g:colors_name
 
 " extend runtime path with plugin directory
-sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.vim_plugins')
+sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.plugins')
 
 filetype on
 filetype plugin on
