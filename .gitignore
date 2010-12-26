@@ -9,9 +9,9 @@
 !.gvimrc
 !.ncmpcpp/config
 !.no_capslock
+!.plugins
 !.screenrc
 !.vim
-!.vim_plugins
 !.vimperatorrc
 !.vimrc
 !.zsh

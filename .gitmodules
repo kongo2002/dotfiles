@@ -1,30 +1,30 @@
-[submodule ".vim_plugins/nerdtree"]
-    path = .vim_plugins/nerdtree
+[submodule ".plugins/nerdtree"]
+    path = .plugins/nerdtree
     url = git://github.com/scrooloose/nerdtree.git
-[submodule ".vim_plugins/snipmate.vim"]
-    path = .vim_plugins/snipmate.vim
+[submodule ".plugins/snipmate.vim"]
+    path = .plugins/snipmate.vim
     url = git://github.com/kongo2002/snipmate.vim.git
-[submodule ".vim_plugins/tabular"]
-    path = .vim_plugins/tabular
+[submodule ".plugins/tabular"]
+    path = .plugins/tabular
     url = git://github.com/godlygeek/tabular.git
-[submodule ".vim_plugins/vim-fugitive"]
-    path = .vim_plugins/vim-fugitive
+[submodule ".plugins/vim-fugitive"]
+    path = .plugins/vim-fugitive
     url = git://github.com/tpope/vim-fugitive.git
-[submodule ".vim_plugins/vim-space"]
-    path = .vim_plugins/vim-space
+[submodule ".plugins/vim-space"]
+    path = .plugins/vim-space
     url = git://github.com/kongo2002/vim-space.git
-[submodule ".vim_plugins/vim-surround"]
-    path = .vim_plugins/vim-surround
+[submodule ".plugins/vim-surround"]
+    path = .plugins/vim-surround
     url = git://github.com/tpope/vim-surround.git
-[submodule ".vim_plugins/syntastic"]
-    path = .vim_plugins/syntastic
+[submodule ".plugins/syntastic"]
+    path = .plugins/syntastic
     url = git://github.com/kongo2002/syntastic.git
-[submodule ".vim_plugins/vim-automod"]
-    path = .vim_plugins/vim-automod
+[submodule ".plugins/vim-automod"]
+    path = .plugins/vim-automod
     url = git://github.com/kongo2002/vim-automod.git
-[submodule ".vim_plugins/gist-vim"]
-    path = .vim_plugins/gist-vim
+[submodule ".plugins/gist-vim"]
+    path = .plugins/gist-vim
     url = git://github.com/kongo2002/gist-vim.git
-[submodule ".vim_plugins/nerdcommenter"]
-    path = .vim_plugins/nerdcommenter
+[submodule ".plugins/nerdcommenter"]
+    path = .plugins/nerdcommenter
     url = git://github.com/scrooloose/nerdcommenter.git
