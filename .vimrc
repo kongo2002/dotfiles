@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 26 Dec 2010 03:54:44 PM CET
+" Last Change:  Sun 02 Jan 2011 09:01:45 PM CET
 
 set nocompatible
 
@@ -403,6 +403,18 @@ let tlist_tex_settings='tex;c:chapter;s:section;l:label;r:ref'
 " NERDCOMMENTER --------------------------------------------------------{{{2
 
 let NERDSpaceDelims = 1
+let NERDCreateDefaultMappings = 0
+
+nmap <Leader>cc <plug>NERDCommenterComment
+vmap <Leader>cc <plug>NERDCommenterComment
+nmap <Leader>ci <plug>NERDCommenterInvertComment
+vmap <Leader>ci <plug>NERDCommenterInvertComment
+nmap <Leader>cs <plug>NERDCommenterSexyComment
+vmap <Leader>cs <plug>NERDCommenterSexyComment
+nmap <Leader>cA <plug>NERDCommenterAppendComment
+vmap <Leader>cA <plug>NERDCommenterAppendComment
+nmap <Leader>cu <plug>NERDCommenterUncommentLine
+vmap <Leader>cu <plug>NERDCommenterUncommentLine
 
 " NERDTREE -------------------------------------------------------------{{{2
 
