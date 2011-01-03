@@ -2,9 +2,20 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Sat 19 Jun 2010 02:48:19 PM CEST
+" Last Change:  Mon 03 Jan 2011 06:00:52 PM CET
 
-let g:gentoo_portdir = '/usr/portage'
+if exists('g:loaded_gentoo_info')
+    finish
+endif
+let g:loaded_gentoo_info = 1
+
+if !executable('curl') || !executable('find')
+    finish
+endif
+
+if !exists('g:gentoo_portdir')
+    let g:gentoo_portdir = '/usr/portage'
+endif
 
 " list manipulation functions {{{
 
