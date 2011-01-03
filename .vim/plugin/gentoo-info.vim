@@ -2,14 +2,17 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Mon 03 Jan 2011 06:00:52 PM CET
+" Last Change:  Mon 03 Jan 2011 06:13:44 PM CET
 
 if exists('g:loaded_gentoo_info')
     finish
 endif
 let g:loaded_gentoo_info = 1
 
-if !executable('curl') || !executable('find')
+if !executable('curl')
+    echohl ErrorMsg
+    echom 'gentoo-info.vim: no "curl" executable found on your system.'
+    echohl None
     finish
 endif
 
@@ -48,21 +51,22 @@ endfunction
 " }}}
 
 function! s:getPortageTree() " {{{
+    if exists('s:portage_loaded')
+        return
+    endif
+    let s:portage_loaded = 1
     let l:cat_file = g:gentoo_portdir . '/profiles/categories'
     if filereadable(l:cat_file)
         let s:categories = readfile(g:gentoo_portdir.'/profiles/categories')
     endif
     let s:packages = []
     for category in s:categories
-        let l:pack = []
         let l:dir = g:gentoo_portdir.'/'.category
-        let l:pack = split(system('find '.l:dir.' -maxdepth 1 -type d'), '\n')
-        call remove(l:pack, 0)
+        let l:pack = split(globpath(l:dir, '*'), '\n')
         call extend(s:packages, l:pack)
     endfor
     call map(s:packages, 'substitute(v:val, "^.*\\/\\(\\S\\+\\)", "\\1", "")')
     call sort(s:packages)
-    let s:portage_loaded = 1
 endfunction
 " }}}
 
@@ -71,9 +75,7 @@ function! s:getPackage(name) " {{{
         if a:name =~'\S\+\/\S\+'
             return a:name
         endif
-        if !exists('s:portage_loaded')
-            call s:getPortageTree()
-        endif
+        call s:getPortageTree()
         for category in s:categories
             if isdirectory(join([g:gentoo_portdir, category, a:name], '/'))
                 return category . '/' . a:name
@@ -215,9 +217,7 @@ function! s:GComplete(A, L, P) " {{{
     if strpart(a:L, 6) =~ '^\S\+\s\+\w*$'
         return join(l:arguments, "\n")
     endif
-    if !exists('s:portage_loaded')
-        call s:getPortageTree()
-    endif
+    call s:getPortageTree()
     return join(s:packages, "\n")
 endfunction
 " }}}
