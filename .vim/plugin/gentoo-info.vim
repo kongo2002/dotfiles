@@ -2,7 +2,7 @@
 " Description:  fetch gentoo package information from gentoo-portage.com
 " Author:       Gregor Uhlenheuer
 " Filename:     gentoo-info.vim
-" Last Change:  Mon 03 Jan 2011 06:13:44 PM CET
+" Last Change:  Tue 04 Jan 2011 12:28:47 AM CET
 
 if exists('g:loaded_gentoo_info')
     finish
@@ -149,15 +149,30 @@ function! s:checkGPackage() " {{{
 endfunction
 " }}}
 
+function! s:findBuffer(name)
+    for i in range(1, bufnr(bufname('$')))
+        if bufexists(i) && bufname(i) == a:name
+            let win = bufwinnr(a:name)
+            if win != -1
+                exe win . 'wincmd w'
+                return 1
+            else
+                exe i . 'bd'
+            endif
+        endif
+    endfor
+    return 0
+endfunction
+
 function! s:display(lines) " {{{
     " create new split if necessary
-    if bufname('') != '[GentooInfo]'
+    if s:findBuffer('[GentooInfo]')
+        setl noreadonly modifiable nolist
+        %d _
+    else
         split [GentooInfo]
         setl noreadonly modifiable nolist
         nnoremap <silent> <buffer> <CR> :call <SID>checkGPackage()<CR>
-    else
-        setl noreadonly modifiable nolist
-        %d _
     endif
 
     call append(0, a:lines)
