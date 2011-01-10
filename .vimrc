@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 02 Jan 2011 09:01:45 PM CET
+" Last Change:  Mon 10 Jan 2011 02:10:50 PM CET
 
 set nocompatible
 
@@ -407,14 +407,14 @@ let NERDCreateDefaultMappings = 0
 
 nmap <Leader>cc <plug>NERDCommenterComment
 vmap <Leader>cc <plug>NERDCommenterComment
-nmap <Leader>ci <plug>NERDCommenterInvertComment
-vmap <Leader>ci <plug>NERDCommenterInvertComment
-nmap <Leader>cs <plug>NERDCommenterSexyComment
-vmap <Leader>cs <plug>NERDCommenterSexyComment
-nmap <Leader>cA <plug>NERDCommenterAppendComment
-vmap <Leader>cA <plug>NERDCommenterAppendComment
-nmap <Leader>cu <plug>NERDCommenterUncommentLine
-vmap <Leader>cu <plug>NERDCommenterUncommentLine
+nmap <Leader>ci <plug>NERDCommenterInvert
+vmap <Leader>ci <plug>NERDCommenterInvert
+nmap <Leader>cs <plug>NERDCommenterSexy
+vmap <Leader>cs <plug>NERDCommenterSexy
+nmap <Leader>cA <plug>NERDCommenterAppend
+vmap <Leader>cA <plug>NERDCommenterAppend
+nmap <Leader>cu <plug>NERDCommenterUncomment
+vmap <Leader>cu <plug>NERDCommenterUncomment
 
 " NERDTREE -------------------------------------------------------------{{{2
 
