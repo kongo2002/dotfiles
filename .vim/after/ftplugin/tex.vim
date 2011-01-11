@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     tex.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 08 Jun 2010 12:54:13 PM CEST
+" Last Change:  Tue 11 Jan 2011 10:22:08 PM CET
 
 " turn on syntax-based folding
 setlocal foldmethod=syntax
@@ -21,6 +21,9 @@ setlocal sps=fast,10
 
 " wrap the text after 80 columns
 setlocal textwidth=80
+
+" add umlauts to 'iskeyword'
+setlocal iskeyword+=ä,ü,ö,Ä,Ü,Ö,ß
 
 " set compiler/make
 compiler tex
