@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 10 Jan 2011 02:10:50 PM CET
+" Last Change:  Fri 21 Jan 2011 07:13:15 PM CET
 
 set nocompatible
 
@@ -253,6 +253,7 @@ map ß \
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-n> <Up>
+cnoremap <C-p> <Down>
 cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
 
@@ -386,12 +387,13 @@ let g:surround_indent = 1
 
 let g:syntastic_enable_signs = 1
 
-" SNIPMATE -------------------------------------------------------------{{{2
+" ULTISNIPS ------------------------------------------------------------{{{2
 
-let g:snips_author='Gregor Uhlenheuer'
+let g:snips_author = 'Gregor Uhlenheuer'
 
-" insert mode completion for snippets
-inoremap <C-l> <C-r>=CompleteSnippets()<CR>
+let g:UltiSnipsExpandTrigger = "<Tab>"
+let g:UltiSnipsJumpForwardTrigger = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
 " TAGLIST --------------------------------------------------------------{{{2
 
@@ -492,14 +494,14 @@ let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
 " TERM SPECIFICS -------------------------------------------------------{{{1
 
 " fix arrow keys
-if &term ==? "rxvt-unicode"
+if &term =~? "rxvt"
     imap OA <Esc>ki
     imap OB <Esc>ji
     imap OC <Esc>li
     imap OD <Esc>hi
 endif
 
-if &term ==? "xterm"
+if &term =~? "xterm"
   set t_Sb=^[4%dm
   set t_Sf=^[3%dm
   set ttymouse=xterm2
