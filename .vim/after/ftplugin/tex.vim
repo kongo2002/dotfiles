@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     tex.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 11 Jan 2011 10:22:08 PM CET
+" Last Change:  Mon 24 Jan 2011 01:26:46 AM CET
 
 " turn on syntax-based folding
 setlocal foldmethod=syntax
@@ -163,6 +163,24 @@ endfunction
 
 command! -buffer ViewTexErrors call s:viewErrors()
 nmap <buffer> <leader>le :ViewTexErrors<CR>
+" }}}
+
+" s:launchBibtex - run BibTex if there is a *.bib file {{{
+function! s:launchBibtex()
+    if executable('bibtex')
+        if glob("*.bib") != ''
+            call system('bibtex ' . expand('%:r'))
+            if v:shell_error
+                call s:warn('BibTex execution failed')
+            endif
+        else
+            call s:warn('No bibfile to parse')
+        endif
+    endif
+endfunction
+
+command! -buffer RunBibtex call s:launchBibtex()
+nmap <buffer> <leader>lb :RunBibtex<CR>
 " }}}
 
 " s:warn - helper function {{{
