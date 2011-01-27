@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 21 Jan 2011 07:13:15 PM CET
+" Last Change:  Thu 27 Jan 2011 03:38:43 PM CET
 
 set nocompatible
 
@@ -490,22 +490,6 @@ let g:python_highlight_all = 1
 let g:tex_flavor = 'tex'      " set default filetype to LaTeX
 let g:tex_fold_enabled = 1    " enable syntax folding
 let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
-
-" TERM SPECIFICS -------------------------------------------------------{{{1
-
-" fix arrow keys
-if &term =~? "rxvt"
-    imap OA <Esc>ki
-    imap OB <Esc>ji
-    imap OC <Esc>li
-    imap OD <Esc>hi
-endif
-
-if &term =~? "xterm"
-  set t_Sb=^[4%dm
-  set t_Sf=^[3%dm
-  set ttymouse=xterm2
-endif
 
 " OS SPECIFICS ---------------------------------------------------------{{{1
 
