@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     tex.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 03 Feb 2011 10:34:33 PM CET
+" Last Change:  Sun 06 Feb 2011 08:46:37 PM CET
 
 " turn on syntax-based folding
 setlocal foldmethod=syntax
@@ -56,18 +56,21 @@ if &fenc == 'utf-8'
     ia <buffer> "´ “
 endif
 
-" s:launchBibtex - search for bibtex usage {{{
-function! s:launchBibtex()
-    if executable('bibtex') && search('^\s*\\bibliography{[^}]\+}', 'n') != 0
-        silent !bibtex "%:p:r"
-        if v:shell_error != 0
-            call s:warn('bibtex: There were some errors')
-        endif
+" s:findMainFile - find the main latex file in the current directory {{{
+function! s:findMainFile()
+    if !exists('s:mainfile')
+        for file in split(glob('*.tex'), "\n")
+            for line in readfile(file, 100)
+                if line =~? '^[^%]*\\begin{document}'
+                    let s:mainfile = file
+                    return s:mainfile
+                endif
+            endfor
+        endfor
+        return ''
     endif
+    return s:mainfile
 endfunction
-
-command! -buffer BibTex call s:launchBibtex()
-nmap <buffer> <leader>bt :BibTex<CR>
 " }}}
 
 " s:viewPdf - view pdf file {{{
@@ -100,7 +103,7 @@ function! s:viewPdf()
         return
     endif
 
-    let pdfname = expand('%:p:r') . '.pdf'
+    let pdfname = fnamemodify(s:findMainFile(), ':t:r') . '.pdf'
     if filereadable(pdfname)
         exe 'silent !'.s:viewer.' '.pdfname.' &'
     else
@@ -110,23 +113,6 @@ endfunction
 
 command! -buffer ViewPdf call s:viewPdf()
 nmap <buffer> <leader>lv :ViewPdf<CR>
-" }}}
-
-" s:findMainFile - find the main latex file in the current directory {{{
-function! s:findMainFile()
-    if !exists('s:mainfile')
-        for file in split(glob('*.tex'), "\n")
-            for line in readfile(file, 100)
-                if line =~? '^[^%]*\\begin{document}'
-                    let s:mainfile = file
-                    return s:mainfile
-                endif
-            endfor
-        endfor
-        return ''
-    endif
-    return s:mainfile
-endfunction
 " }}}
 
 " s:runPdfLatex - run pdflatex {{{
@@ -148,7 +134,7 @@ nmap <buffer> <leader>ll :RunPdf<CR>
 
 " s:viewLog - open tex log {{{
 function! s:viewLog()
-    let logname = expand('%:t:r') . '.log'
+    let logname = fnamemodify(s:findMainFile(), ':t:r') . '.log'
     if filereadable(logname)
         exe 'sp' logname
         nnoremap <buffer> <CR> :bd!<CR>
@@ -163,7 +149,7 @@ nmap <buffer> <leader>lo :ViewTexLog<CR>
 
 " s:viewErrors - open tex errors {{{
 function! s:viewErrors()
-    let logname = expand('%:t:r') . '.log'
+    let logname = fnamemodify(s:findMainFile(), ':t:r') . '.log'
     if filereadable(logname)
         if executable('latex-errorfilter')
             let errors = system('latex-errorfilter ' . logname)
@@ -187,7 +173,7 @@ nmap <buffer> <leader>le :ViewTexErrors<CR>
 function! s:launchBibtex()
     if executable('bibtex')
         if glob("*.bib") != ''
-            call system('bibtex ' . expand('%:r'))
+            call system('bibtex ' . fnamemodify(s:findMainFile(), ':t:r'))
             if v:shell_error
                 call s:warn('BibTex execution failed')
             endif
