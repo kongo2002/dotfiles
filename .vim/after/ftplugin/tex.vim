@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     tex.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 24 Jan 2011 01:26:46 AM CET
+" Last Change:  Thu 03 Feb 2011 10:34:33 PM CET
 
 " turn on syntax-based folding
 setlocal foldmethod=syntax
@@ -112,10 +112,28 @@ command! -buffer ViewPdf call s:viewPdf()
 nmap <buffer> <leader>lv :ViewPdf<CR>
 " }}}
 
+" s:findMainFile - find the main latex file in the current directory {{{
+function! s:findMainFile()
+    if !exists('s:mainfile')
+        for file in split(glob('*.tex'), "\n")
+            for line in readfile(file, 100)
+                if line =~? '^[^%]*\\begin{document}'
+                    let s:mainfile = file
+                    return s:mainfile
+                endif
+            endfor
+        endfor
+        return ''
+    endif
+    return s:mainfile
+endfunction
+" }}}
+
 " s:runPdfLatex - run pdflatex {{{
 function! s:runPdfLatex()
     if executable('pdflatex')
-        silent !pdflatex -shell-escape -interaction=nonstopmode %
+        exe 'silent !pdflatex -shell-escape -interaction=nonstopmode ' .
+                    \ s:findMainFile()
         if v:shell_error != 0
             call s:warn('pdflatex: There were some errors')
         endif
