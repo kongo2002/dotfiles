@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 27 Jan 2011 03:38:43 PM CET
+" Last Change:  Tue 08 Feb 2011 10:50:22 PM CET
 
 set nocompatible
 
@@ -268,6 +268,9 @@ nmap <silent> <Leader>w :setl wrap! wrap?<CR>
 
 " toggle list
 nmap <silent> <Leader>nl :setl list! list?<CR>
+
+" toggle spell checking
+nmap <silent> <Leader>ns :setl spell! spell?<CR>
 
 " toggle relative numbers if installed
 if exists('+relativenumber')
