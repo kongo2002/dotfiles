@@ -1,7 +1,7 @@
 " Name:         kongo3.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Sun 28 Nov 2010 12:17:29 PM CET
+" Last Change:  Tue 15 Feb 2011 05:09:01 PM CET
 " Version:      0.1
 
 if version > 580
@@ -150,8 +150,8 @@ hi SpellLocal       ctermfg=130                            cterm=reverse
 
 hi DiffAdd          guifg=#e0e0e0       guibg=#324900      gui=none
 hi DiffAdd          ctermfg=253         ctermbg=22         cterm=none
-hi DiffChange       guifg=NONE          guibg=#3B4865      gui=none
-hi DiffChange       ctermfg=NONE        ctermbg=67         cterm=none
+hi DiffChange       guifg=#e0e0e0       guibg=#3B4865      gui=none
+hi DiffChange       ctermfg=253         ctermbg=67         cterm=none
 hi DiffDelete       guifg=#e0e0e0       guibg=#3A0200      gui=none
 hi DiffDelete       ctermfg=253         ctermbg=52         cterm=none
 hi DiffText         guifg=#e0e0e0       guibg=#324900      gui=none
