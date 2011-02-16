@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 08 Feb 2011 10:50:22 PM CET
+" Last Change:  Wed 16 Feb 2011 12:33:01 PM CET
 
 set nocompatible
 
@@ -389,6 +389,7 @@ let g:surround_indent = 1
 " SYNTASTIC ------------------------------------------------------------{{{2
 
 let g:syntastic_enable_signs = 1
+let g:syntastic_auto_loc_list = 2
 
 " ULTISNIPS ------------------------------------------------------------{{{2
 
