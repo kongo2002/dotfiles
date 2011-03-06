@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     tex.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Wed 23 Feb 2011 01:46:07 PM CET
+" Last Change:  Wed 23 Feb 2011 04:31:25 PM CET
 
 " turn on syntax-based folding
 setlocal foldmethod=syntax
@@ -115,6 +115,33 @@ command! -buffer ViewPdf call s:viewPdf()
 nmap <buffer> <leader>lv :ViewPdf<CR>
 " }}}
 
+" s:inspectLogfile - search the logfile for warnings {{{
+function! s:inspectLogfile()
+    let logfile = fnamemodify(s:findMainFile(), ':t:r') . '.log'
+    if filereadable(logfile)
+        let lines = readfile(logfile)
+        let warnings = 0
+        for line in lines
+            if line =~ '^Latex Warning'
+                let warnings += 1
+                if line =~ 'undefined references'
+                    echo 'pdflatex: undefined references found'
+                    return
+                elseif line =~ 'get cross-references'
+                    echo 'pdflatex: rerun for cross-references'
+                    return
+                endif
+            endif
+        endfor
+        if warnings > 0
+            echo 'pdflatex:' warnings 'warnings found'
+        else
+            echo 'pdflatex: no warnings'
+        endif
+    endif
+endfunction
+" }}}
+
 " s:runPdfLatex - run pdflatex {{{
 function! s:runPdfLatex()
     if executable('pdflatex')
@@ -125,6 +152,8 @@ function! s:runPdfLatex()
         exe exec . s:findMainFile()
         if v:shell_error != 0
             call s:warn('pdflatex: There were some errors')
+        else
+            call s:inspectLogfile()
         endif
     else
         call s:warn('No pdflatex executable found')
@@ -132,7 +161,7 @@ function! s:runPdfLatex()
 endfunction
 
 command! -buffer RunPdf call s:runPdfLatex()
-nmap <buffer> <leader>ll :RunPdf<CR>
+nmap <buffer> <silent> <leader>ll :RunPdf<CR>
 " }}}
 
 " s:viewLog - open tex log {{{
