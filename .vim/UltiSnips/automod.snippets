@@ -1,0 +1,93 @@
+snippet "a?proc" "arriving procedure" br
+/****************************************************************************
+ * Procedure:	$1
+ *
+ * Author:		`!v g:snips_author`
+ * Date:		`!v strftime("%c")`
+ * Description: ${2:short description}
+ ****************************************************************************/
+begin ${1:procname_P} arriving procedure
+
+	${0:/* code */}
+
+end /* $1 arriving */
+endsnippet
+
+snippet lproc "leaving procedure" b
+/****************************************************************************
+ * Procedure:	$1
+ *
+ * Author:		`!v g:snips_author`
+ * Date:		`!v strftime("%c")`
+ * Description: ${2:short description}
+ ****************************************************************************/
+begin ${1:procedure_P} leaving procedure
+
+	${0:/* code */}
+
+end /* $1 leaving */
+endsnippet
+
+snippet sub "subroutine" b
+/****************************************************************************
+ * Subroutine:	$1
+ *
+ * Author:		`!v g:snips_author`
+ * Date:		`!v strftime("%c")`
+ * Description: ${2:short description}
+ ****************************************************************************/
+begin ${1:subroutine_S} procedure
+
+	${0:/* code */}
+
+end /* $1 */
+endsnippet
+
+snippet func "function" b
+/****************************************************************************
+ * Function:	$1
+ *
+ * Author:		`!v g:snips_author`
+ * Date:		`!v strftime("%c")`
+ * Description: ${2:short description}
+ *
+ * Parameters:	${3:parameter}
+ * Returns:		${4:parameter}
+ ****************************************************************************/
+begin ${1:function_F} function
+
+	${0:/* code */}
+
+end /* $1 */
+endsnippet
+
+snippet "wh(ile)?" "while" r
+while ${1:1 = 1} do
+begin
+
+	${0:/* code */}
+
+end
+endsnippet
+
+snippet if "if"
+if ${1:/* condition */} then
+begin
+
+	${0:/* code */}
+
+end
+endsnippet
+
+snippet "for(each)?" "foreach" r
+foreach ${1:tmp_StrV} in ${2:list} do
+begin
+
+	${0:/* code */}
+
+end
+endsnippet
+
+snippet "par(ameter)?" "parameter" r
+${1:variable}	[${2:TYPE}]$0
+endsnippet
