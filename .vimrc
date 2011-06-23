@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Wed 16 Feb 2011 12:33:01 PM CET
+" Last Change:  Thu 23 Jun 2011 07:55:37 PM CEST
 
 set nocompatible
 
@@ -301,8 +301,8 @@ nmap <silent> <A-left> :bprev<CR>
 " NERDTree mapping
 map <F1> :NERDTreeToggle<CR>
 
-" TagList mapping
-map <F3> :TlistToggle<CR>
+" TagBar mapping
+map <F3> :TagbarToggle<CR>
 
 " FuzzyFinder mappings
 nmap <Leader>fb :FufBuffer<CR>
@@ -399,12 +399,26 @@ let g:UltiSnipsExpandTrigger = "<Tab>"
 let g:UltiSnipsJumpForwardTrigger = "<Tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
-" TAGLIST --------------------------------------------------------------{{{2
+" TAGBAR ---------------------------------------------------------------{{{2
 
-let Tlist_Show_One_File = 1
-let Tlist_Exit_OnlyWindow = 1
-let tlist_automod_settings='automod;p:procedure;f:function;s:subroutine'
-let tlist_tex_settings='tex;c:chapter;s:section;l:label;r:ref'
+let g:tagbar_type_automod = {
+    \ 'ctagstype' : 'automod',
+    \ 'kinds' : [
+        \ 'p:procedure',
+        \ 'f:function',
+        \ 's:subroutine' ],
+    \ 'sort' : 0
+    \ }
+
+let g:tagbar_type_tex = {
+    \ 'ctagstype' : 'tex',
+    \ 'kinds' : [
+        \ 'c:chapter',
+        \ 's:section',
+        \ 'l:label',
+        \ 'r:ref' ],
+    \ 'sort' : 0
+    \ }
 
 " NERDCOMMENTER --------------------------------------------------------{{{2
 
@@ -502,7 +516,7 @@ if has('win32') || has('win64')
     set lines=80
     set columns=90
 
-    let Tlist_Ctags_Cmd='D:\ctags57\ctags.exe'
+    let g:tagbar_ctags_bin = 'c:\bin\ctags58\ctags.exe'
 endif
 
 " CUSTOM FUNCTIONS -----------------------------------------------------{{{1
