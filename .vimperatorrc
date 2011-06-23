@@ -1,8 +1,7 @@
 " kongo .vimperatorrc
-" 2.0 alpha 3
 
-" use colorscheme ~/.vimperator/colors/kongo.vimp
-colorscheme kongo
+" just show the addon statusbar
+set gui=none,tabs
 
 " tab-complete search engines, smart-list
 set complete=sl
@@ -10,16 +9,16 @@ set complete=sl
 " set title
 set titlestring="vimperator"
 
-" show bottom scrollbar only
-set guioptions=b
+" set maximum items in a listing
+set maxitems=10
 
-" hide tabline
-set showtabline=0
+" show small numbers in tab corners
+set tabnumbers
 
 " tab switching options
 noremap <Right> gt
 noremap <Left> gT
 
 " toggle tabline
-map <A-Up> :set showtabline=1<CR>
-map <A-Down> :set showtabline=0<CR>
+map <A-Up> :set gui+=tabs<CR>
+map <A-Down> :set gui+=notabs<CR>
