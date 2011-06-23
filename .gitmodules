@@ -25,3 +25,6 @@
 [submodule ".plugins/nerdcommenter"]
     path = .plugins/nerdcommenter
     url = git://github.com/scrooloose/nerdcommenter.git
+[submodule ".plugins/tagbar"]
+    path = .plugins/tagbar
+    url = git://github.com/majutsushi/tagbar.git
