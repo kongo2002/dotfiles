@@ -10,6 +10,9 @@ fi
 
 source /etc/profile
 
+# source rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" && unset RUBYOPT
+
 # source zsh config files
 for config_file ($HOME/.zsh/*.zsh) source $config_file
 
