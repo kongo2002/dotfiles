@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 23 Jun 2011 07:55:37 PM CEST
+" Last Change:  Sun 16 Oct 2011 02:46:12 PM CEST
 
 set nocompatible
 
@@ -327,7 +327,7 @@ nmap <silent> <Leader>cl :close<CR>
 nmap <silent> <Leader>cd :cd %:h<CR>
 
 " search recursively in current dir for word under cursor
-map <F4> :execute 'vimgrep /' . expand('<cword>') . '/j **'
+map <F4> :execute 'noautocmd vim /' . expand('<cword>') . '/j **'
             \ <Bar> copen <CR>
 
 " search recursively for highlighted string
