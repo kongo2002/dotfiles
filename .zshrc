@@ -10,6 +10,9 @@ fi
 
 source /etc/profile
 
+# extend PATH
+[[ -d "${HOME}/.bin" ]] && export PATH="${PATH}:${HOME}/.bin"
+
 # source rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" && unset RUBYOPT
 
