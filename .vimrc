@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 16 Oct 2011 02:46:12 PM CEST
+" Last Change:  Sat 25 Feb 2012 08:14:56 PM CET
 
 set nocompatible
 
@@ -215,10 +215,6 @@ imap jj <Esc>
 nmap <expr> <Return> InsertNewline(1)
 nmap <expr> <S-Return> InsertNewline(0)
 
-" switch 'jump to mark' mapping
-nnoremap ' `
-nnoremap ` '
-
 " redraw screen and remove search highlights
 nnoremap <silent> <C-l> :noh<CR><C-l>
 
@@ -240,14 +236,6 @@ nnoremap k gk
 
 " move to middle of current line
 nmap <expr> gM (strlen(getline("."))/2)."<Bar>"
-
-" map special keys for non-us keyboards
-map ü <C-]>
-map ö [
-map ä ]
-map Ö {
-map Ä }
-map ß \
 
 " easier navigation in command mode
 cnoremap <C-a> <Home>
@@ -390,6 +378,7 @@ let g:surround_indent = 1
 
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 2
+let g:syntastic_check_on_open = 1
 
 " ULTISNIPS ------------------------------------------------------------{{{2
 
