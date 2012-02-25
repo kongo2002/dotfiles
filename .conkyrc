@@ -11,7 +11,7 @@ own_window_transparent  no
 own_window_type         panel
 own_window_hints        undecorated,below,sticky,skip_taskbar,skip_pager
 
-minimum_size            1680 1
+minimum_size            1650 1
 draw_shades             no
 draw_outline            yes
 draw_borders            yes
@@ -37,4 +37,4 @@ color1                  707070
 color2                  99C906
 
 TEXT
-${alignc}${time %H:%M %d.%m.%y} ${color1}${kernel}: ${color2}M${color1}:${color0} ${memperc}% ${color2}CPU${color1}:${color0} ${cpu cpu1}%${color1}/${color0}${cpu cpu2}% ${freq_g}GHz ${color2}HD${color1}: ${color0}${fs_used /home}${color1}/${color0}${fs_size /home} ${color2}T${color1}: ${color0}${hwmon 0 temp 1}C${color1}/${color0}${hwmon 0 temp 2}C${color1}/${color0}${nvidia temp}C ${color2}N${color1}: ${color0}${downspeedf eth0}kb${color1}/${color0}${upspeedf eth0}kb ${color2}M${color1}:${color0} ${mem}${color1}/${color0}${memmax} ${color2}P${color1}:${color0} ${running_processes}${color1}/${color0}${processes} ${color2}MPD${color1}: ${color0}${mpd_smart} ${color1}(${color0}${mpd_elapsed}${color1}/${color0}${mpd_length}${color1}) [${mpd_vol}%]
+${time %H:%M %d.%m.%y} ${color1}${kernel}: ${color2}M${color1}:${color0} ${memperc}% ${color2}CPU${color1}:${color0} ${cpu cpu1}%${color1}/${color0}${cpu cpu2}% ${freq_g}GHz ${color2}HD${color1}: ${color0}${fs_used /home}${color1}/${color0}${fs_size /home} ${color2}T${color1}: ${color0}${hwmon 0 temp 1}C${color1}/${color0}${hwmon 0 temp 2}C${color1}/${color0}${nvidia temp}C ${color2}N${color1}: ${color0}${downspeedf eth0}kb${color1}/${color0}${upspeedf eth0}kb ${color2}M${color1}:${color0} ${mem}${color1}/${color0}${memmax} ${color2}P${color1}:${color0} ${running_processes}${color1}/${color0}${processes} ${color2}MPD${color1}: ${color0}${mpd_smart} ${color1}(${color0}${mpd_elapsed}${color1}/${color0}${mpd_length}${color1}) [${mpd_vol}%]
