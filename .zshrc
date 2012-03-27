@@ -114,22 +114,6 @@ bindkey "^p" history-beginning-search-forward
 bindkey -M vicmd "\e." insert-last-word
 bindkey -M viins "\e." insert-last-word
 
-# grc stuff for colored output
-if [ "$TERM" != dumb ] && [ -x /usr/bin/grc ]; then
-    alias cl='/usr/bin/grc -es --colour=auto'
-    alias configure='cl ./configure'
-    alias diff='cl diff'
-    alias make='cl make'
-    alias gcc='cl gcc'
-    alias g++='cl g++'
-    alias as='cl as'
-    alias gas='cl gas'
-    alias ld='cl ld'
-    alias netstat='cl netstat'
-    alias ping='cl ping'
-    alias traceroute='cl traceroute'
-fi
-
 # history settings
 #
 HISTFILE=~/.zshhistory
