@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sat 25 Feb 2012 08:14:56 PM CET
+" Last Change:  Thu 08 Mar 2012 01:44:35 AM CET
 
 set nocompatible
 
@@ -379,6 +379,7 @@ let g:surround_indent = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
+let g:syntastic_python_checker = 'pylint'
 
 " ULTISNIPS ------------------------------------------------------------{{{2
 
