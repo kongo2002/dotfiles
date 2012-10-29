@@ -23,11 +23,6 @@ for config_file ($HOME/.zsh/*.zsh) source $config_file
 export MPD_HOST="127.0.0.1"
 export MPD_PORT="6600"
 
-# XDG environment variables
-export XDG_CONFIG_HOME="/home/kongo/.config"
-export XDG_DATA_HOME="/home/kongo/.data"
-export XDG_CACHE_HOME="/home/kongo/.cache"
-
 # register git-achievements
 export PATH="${PATH}:${HOME}/programs/git-achievements"
 alias 'git'='git-achievements'
@@ -117,8 +112,9 @@ bindkey -M viins "\e." insert-last-word
 # history settings
 #
 HISTFILE=~/.zshhistory
-HISTSIZE=3000
-SAVEHIST=3000
+HISTIGNORE="ls:ll:exit:cd"
+HISTSIZE=25000
+SAVEHIST=10000
 
 LISTMAX=0
 
