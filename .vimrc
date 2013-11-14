@@ -387,7 +387,10 @@ let g:surround_indent = 1
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
-let g:syntastic_python_checker = 'pylint'
+let g:syntastic_c_config_file = '.config'
+let g:syntastic_cpp_compiler_options = '-std=c++0x'
+let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
+let g:hdevtools_options = '-g -Wall'
 
 " ULTISNIPS ------------------------------------------------------------{{{2
 
