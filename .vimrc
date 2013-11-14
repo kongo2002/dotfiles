@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 08 Mar 2012 01:44:35 AM CET
+" Last Change:  Thu 07 Nov 2013 11:21:22 PM CET
 
 set nocompatible
 
@@ -111,6 +111,7 @@ set suffixes+=.info,.aux,.log,.dvi,.bbl,.out,.lo
 set wildignore+=*.o,*.obj,*.dll,*.pyc
 set wildignore+=*.gif,*.jpg,*.jpeg,*.png
 set wildignore+=movies/**,pictures/**,music/**
+set wildignore+=*.class,*.jar
 
 " turn on mouse in all modes
 if has('mouse')
@@ -285,6 +286,8 @@ nmap <silent> gb :bnext<CR>
 nmap <silent> gB :bprev<CR>
 nmap <silent> <A-right> :bnext<CR>
 nmap <silent> <A-left> :bprev<CR>
+nnoremap <silent> <C-j> :bnext<CR>
+nnoremap <silent> <C-k> :bprev<CR>
 
 " NERDTree mapping
 map <F1> :NERDTreeToggle<CR>
@@ -327,6 +330,9 @@ map <F11> :call ToggleLongLines()<CR>
 " build ctags in current directory
 map <F12> :!ctags -R .<CR><CR>
 
+" invoke sudo afterwards using 'tee'
+com! SudoW exe 'silent w !sudo tee % >/dev/null' | :edit!
+
 " maps Control-Space to omnicompletion
 if has('gui_running')
     inoremap <C-Space> <C-x><C-o>
@@ -335,6 +341,8 @@ else
 endif
 
 " PLUGIN SETTINGS ------------------------------------------------------{{{1
+
+let g:loaded_dict = 1
 
 " BUILT-INS ------------------------------------------------------------{{{2
 
