@@ -18,14 +18,18 @@ source /etc/profile
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" && unset RUBYOPT
 
 # source zsh config files
-for config_file ($HOME/.zsh/*.zsh) source $config_file
+if [[ -d "${HOME}/.zsh" ]]; then
+    for config_file ($HOME/.zsh/*.zsh) source $config_file
+fi
 
 export MPD_HOST="127.0.0.1"
 export MPD_PORT="6600"
 
 # register git-achievements
-export PATH="${PATH}:${HOME}/programs/git-achievements"
-alias 'git'='git-achievements'
+if [[ -x "${HOME}/programs/git-achievements/git-achievements" ]]; then
+    export PATH="${PATH}:${HOME}/programs/git-achievements"
+    alias 'git'='git-achievements'
+fi
 
 alias '..'='cd ..'
 alias 'cd..'='cd ..'
@@ -56,6 +60,15 @@ cd () {
     else
         builtin cd "$@"
     fi
+}
+
+waitfor() {
+    for process in "$@"; do
+        while pgrep "$process" > /dev/null 2>&1; do
+            echo "Waiting for '$process' ..."
+            sleep 10
+        done
+    done
 }
 
 zsh_stats() {
@@ -112,7 +125,7 @@ bindkey -M viins "\e." insert-last-word
 # history settings
 #
 HISTFILE=~/.zshhistory
-HISTIGNORE="ls:ll:exit:cd"
+HISTIGNORE="ls:ll:exit:cd:su"
 HISTSIZE=25000
 SAVEHIST=10000
 
