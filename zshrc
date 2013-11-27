@@ -2,11 +2,7 @@ autoload -U compinit promptinit colors
 compinit
 colors
 
-if [[ "$HOST" == "eeepc" ]]; then
-    promptinit
-else
-    promptinit; prompt gentoo
-fi
+promptinit; prompt gentoo
 
 source /etc/profile
 
@@ -15,15 +11,17 @@ source /etc/profile
 [[ -d "${HOME}/.cabal/bin" ]] && export PATH="${PATH}:${HOME}/.cabal/bin"
 
 # source rvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" && unset RUBYOPT
+[[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm" && unset RUBYOPT
 
 # source zsh config files
 if [[ -d "${HOME}/.zsh" ]]; then
     for config_file ($HOME/.zsh/*.zsh) source $config_file
 fi
 
-export MPD_HOST="127.0.0.1"
-export MPD_PORT="6600"
+if [[ -x $(which mpd) ]]; then
+    export MPD_HOST="127.0.0.1"
+    export MPD_PORT="6600"
+fi
 
 # register git-achievements
 if [[ -x "${HOME}/programs/git-achievements/git-achievements" ]]; then
@@ -105,7 +103,7 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-PROMPT='%{${fg_bold[blue]}%}$VIMODE%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!>%{${reset_color}%} '
+PROMPT='%{${fg_bold[blue]}%}$VIMODE%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})>%{${reset_color}%} '
 RPROMPT='$(git_prompt) %~'
 
 EDITOR="/usr/bin/vim"
