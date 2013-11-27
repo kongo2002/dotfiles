@@ -1,0 +1,38 @@
+# use allman/ansi/bsd style
+style=ansi
+
+# use indentation of 4 spaces
+indent=spaces=4
+
+# indent 'public:', 'private' inside class and struct blocks
+indent-classes
+
+# indent 'case' statements inside switch blocks
+indent-switches
+
+# indent multiline preprocessor statements
+indent-preprocessor
+
+# since 1.24
+# indent C++ comments beginning in column one
+indent-col1-comments
+
+# pad empty lines around 'if', 'for', 'while' ...
+break-blocks
+
+# insert spaces around operators
+pad-oper
+
+# since 1.24
+# insert space after paren headers, e.g. 'if', 'for' ...
+pad-header
+
+# remove unneeded padding spaces
+unpad-paren
+
+# convert tabs to spaces
+convert-tabs
+
+# since 1.24
+# align the pointer operator at the name, e.g. char *name
+align-pointer=name
