@@ -1,0 +1,26 @@
+[user]
+	name = kongo2002
+	email = kongo2002@googlemail.com
+[alias]
+	br = branch
+	ci = commit
+	co = checkout
+	df = diff
+	lg = log --graph --oneline --decorate --all
+	lgd = log --graph --all --pretty=format:'%C(yellow)%h%Cred%d %Creset%s %Cblue(%ci)'
+	lga = log --graph --all --pretty=format:'%C(yellow)%h%Cred%d %Creset%s %Cgreen[%an]'
+	lgg = log --graph --all --pretty=format:'%C(yellow)%h%Cred%d %Creset%s %Cgreen[%an] %Cblue(%ci)'
+	st = status --short --branch
+	unadd = reset HEAD
+	graph = log --graph --pretty=oneline --abbrev-commit
+	graph-ext = log --graph --pretty=medium --abbrev-commit
+	ffmerge = merge --ff-only
+	bra = branch --all
+[merge]
+	tool = vimdiff
+[diff]
+	tool = vimdiff
+[color]
+	ui = true
+[core]
+	pager = less -FRSX
