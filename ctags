@@ -4,15 +4,6 @@
 --regex-automod=/begin[ \t]*([a-zA-Z0-9_.:]+([ \t]+[a-zA-Z]+)*)[ \t]+function/\1/f,function/
 --regex-automod=/^begin[ \t]*([a-zA-Z0-9_.]+)[ \t]*(procedure[ \t]*)?$/\1/s,subroutine/
 
---langdef=tex
---langmap=tex:.tex
---regex-tex=/\\subsubsection[ \t]*\*?\{[ \t]*([^}]*)\}/- \1/s,subsubsection/
---regex-tex=/\\subsection[ \t]*\*?\{[ \t]*([^}]*)\}/+\1/s,subsection/
---regex-tex=/\\section[ \t]*\*?\{[ \t]*([^}]*)\}/\1/s,section/
---regex-tex=/\\chapter[ \t]*\*?\{[ \t]*([^}]*)\}/\1/c,chapter/
---regex-tex=/\\label[ \t]*\*?\{[ \t]*([^}]*)\}/\1/l,label/
---regex-tex=/\\ref[ \t]*\*?\{[ \t]*([^}]*)\}/\1/r,ref/
-
 --langdef=fsharp
 --langmap=fsharp:.fs
 --regex-fsharp=/^[ \t]*let[ \t]+(rec[ \t]+)?([a-zA-Z][a-zA-Z0-9_]+)/\2/b,binding/
