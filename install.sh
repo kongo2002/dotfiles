@@ -3,19 +3,7 @@
 # simple script to initially install the config files
 
 REPO=$(pwd)
-
-FILES="Xdefaults \
-conkyrc \
-ctags \
-gvimrc \
-ncmpcpp \
-plugins \
-screenrc \
-vim \
-vimperatorrc \
-vimrc \
-zsh
-zshrc"
+FILES=$(ls | grep -v "install.sh")
 
 pushd "$HOME"
 
