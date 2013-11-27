@@ -28,3 +28,24 @@
 [submodule "plugins/tagbar"]
     path = plugins/tagbar
     url = git://github.com/majutsushi/tagbar.git
+[submodule "plugins/Command-T"]
+	path = plugins/Command-T
+	url = git://github.com/wincent/Command-T.git
+[submodule "plugins/fsharp-vim"]
+	path = plugins/fsharp-vim
+	url = git@github.com:kongo2002/fsharp-vim.git
+[submodule "plugins/neco-ghc"]
+	path = plugins/neco-ghc
+	url = git://github.com/ujihisa/neco-ghc.git
+[submodule "plugins/ultisnips"]
+	path = plugins/ultisnips
+	url = git://github.com/SirVer/ultisnips.git
+[submodule "plugins/vim-coffee-script"]
+	path = plugins/vim-coffee-script
+	url = git://github.com/kchmck/vim-coffee-script.git
+[submodule "plugins/vim-dispatch"]
+	path = plugins/vim-dispatch
+	url = git://github.com/tpope/vim-dispatch.git
+[submodule "plugins/vim-scala"]
+	path = plugins/vim-scala
+	url = git://github.com/derekwyatt/vim-scala.git
