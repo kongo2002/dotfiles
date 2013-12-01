@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 07 Nov 2013 11:21:22 PM CET
+" Last Change:  Sun 01 Dec 2013 05:41:42 PM CET
 
 set nocompatible
 
@@ -389,8 +389,20 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_c_config_file = '.config'
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
+
+" SYNTASTIC - HASKELL OPTIONS ------------------------------------------{{{3
+
+function! s:FindCabalSandbox()
+    let sandbox = finddir('.cabal-sandbox', './;')
+    let package = glob(sandbox . '/*-packages.conf.d')
+    if package != ''
+        return ' -g-package-db=' . package
+    endif
+    return ''
+endfunction
+
 let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
-let g:hdevtools_options = '-g -Wall'
+let g:hdevtools_options = '-g-Wall' . <sid>FindCabalSandbox()
 
 " ULTISNIPS ------------------------------------------------------------{{{2
 

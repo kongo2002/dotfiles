@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     haskell.vim
 " Maintainer:   Gregor Uhlenheuer
-" Last Change:  Thu 14 Nov 2013 09:55:42 PM CET
+" Last Change:  Fri 29 Nov 2013 09:31:48 PM CET
 
 " activate omni completion via neco-ghc
 setl omnifunc=necoghc#omnifunc
@@ -10,3 +10,6 @@ setl omnifunc=necoghc#omnifunc
 setl expandtab
 setl shiftwidth=2
 setl softtabstop=2
+
+" default to 80 character lines
+setl textwidth=80
