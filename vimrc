@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 01 Dec 2013 05:41:42 PM CET
+" Last Change:  Mon 27 Jan 2014 10:25:54 PM CET
 
 set nocompatible
 
@@ -467,6 +467,11 @@ let g:timestamp_rep='%c'
 let html_number_lines = 0 " don't show line numbers
 "let html_use_css = 1     " don't use inline stylesheets
 "let html_no_pre = 1      " don't enclose in <pre> tags
+
+" VIMERL ---------------------------------------------------------------{{{2
+
+let erlang_show_errors = 0
+let erlang_skel_replace = 0
 
 " OMNICPPCOMPLETE ------------------------------------------------------{{{2
 
