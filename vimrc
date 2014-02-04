@@ -322,7 +322,7 @@ map <F4> :execute 'noautocmd vim /' . expand('<cword>') . '/j **'
             \ <Bar> copen <CR>
 
 " search recursively for highlighted string
-vmap <Leader>v y:vimgrep /<C-r>"/ **/*.
+vmap <Leader>v y:noautocmd vimgrep /<C-r>"/ **/*.
 
 " toggle matching of long lines
 map <F11> :call ToggleLongLines()<CR>
