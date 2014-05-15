@@ -1,0 +1,87 @@
+# configuration
+regexp=Configuration:\s(\S+)
+colours=unchanged,bold blue
+count=once
+.........
+# platform
+regexp=Platform:\s(\S+)
+colours=unchanged,bold blue
+count=once
+.........
+# warning count
+regexp=\d+ Warning
+colours=yellow
+count=once
+.........
+# error count
+regexp=\d+ Error
+colours=red
+count=once
+.........
+# time elapsed
+regexp=^Time Elapsed ([:.0-9]+)\b
+colours=unchanged,cyan
+count=once
+.........
+# target definitions
+regexp=^\s*Target (\w+):
+colours=unchanged,magenta
+count=once
+.........
+# project definitions
+regexp=^\s*Project "([^"]+)"
+colours=unchanged,green
+count=once
+.........
+# success
+regexp=^Build succeeded.$
+colours=green
+count=once
+.........
+# file, line, column
+regexp=^\s*(\S+)\((\d+,\d+)\):
+colours=unchanged,green,bold yellow,unchanged
+count=once
+.........
+#
+# WARNINGS
+#
+regexp=^Warnings:$
+colours=yellow
+count=once
+.........
+regexp=\bwarning [CF]S\d+
+colours=yellow
+count=once
+.........
+regexp=^\s*(\S+):\s+(warning)
+colours=unchanged,green,yellow
+count=once
+.........
+regexp=\b(?:Project reference|Reference|Source file|Considered) '([^']+)'\s
+colours=unchanged,bold yellow,unchanged
+count=once
+.........
+#
+# ERRORS
+#
+regexp=^Errors:$
+colours=red
+count=once
+.........
+regexp=\berror [CF]S\d+
+colours=red
+count=once
+.........
+regexp=^\s*(\S+):\s+(error)
+colours=unchanged,green,red
+count=once
+.........
+regexp=FAILED
+colours=red
+count=once
+.........
+# tool
+regexp=^\s*Tool (\S+)
+colours=unchanged,magenta
+count=once
