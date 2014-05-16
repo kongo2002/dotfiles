@@ -295,11 +295,6 @@ map <F1> :NERDTreeToggle<CR>
 " TagBar mapping
 map <F3> :TagbarToggle<CR>
 
-" FuzzyFinder mappings
-nmap <Leader>fb :FufBuffer<CR>
-nmap <Leader>fd :FufDir<CR>
-nmap <Leader>ff :FufFile<CR>
-
 " FSwitch mappings
 nmap <silent> <Leader>of :FSHere<CR>
 nmap <silent> <Leader>ol :FSRight<CR>
