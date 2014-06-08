@@ -384,6 +384,7 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_c_config_file = '.config'
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
+let g:syntastic_cs_checkers = ['syntax', 'issues']
 
 " SYNTASTIC - HASKELL OPTIONS ------------------------------------------{{{3
 
@@ -496,6 +497,8 @@ if has('autocmd')
         au FileType html,xhtml map <buffer> <F6> :!firefox "%"<CR>
         au FileType crontab setlocal backupcopy=yes
         au FileType text setlocal textwidth=78
+        au FileType markdown setlocal textwidth=80
+        au FileType cs setlocal omnifunc=OmniSharp#Complete
         au BufWrite *.bib call custom#PrepareBib()
         au BufWrite *.tex call custom#PrepareTex()
         au BufReadPost * call LastCurPos()

@@ -1,33 +1,33 @@
 [submodule "plugins/nerdtree"]
-    path = plugins/nerdtree
-    url = git://github.com/scrooloose/nerdtree.git
+	path = plugins/nerdtree
+	url = git://github.com/scrooloose/nerdtree.git
 [submodule "plugins/tabular"]
-    path = plugins/tabular
-    url = git://github.com/godlygeek/tabular.git
+	path = plugins/tabular
+	url = git://github.com/godlygeek/tabular.git
 [submodule "plugins/vim-fugitive"]
-    path = plugins/vim-fugitive
-    url = git://github.com/tpope/vim-fugitive.git
+	path = plugins/vim-fugitive
+	url = git://github.com/tpope/vim-fugitive.git
 [submodule "plugins/vim-space"]
-    path = plugins/vim-space
-    url = git://github.com/kongo2002/vim-space.git
+	path = plugins/vim-space
+	url = git://github.com/kongo2002/vim-space.git
 [submodule "plugins/vim-surround"]
-    path = plugins/vim-surround
-    url = git://github.com/tpope/vim-surround.git
+	path = plugins/vim-surround
+	url = git://github.com/tpope/vim-surround.git
 [submodule "plugins/syntastic"]
-    path = plugins/syntastic
-    url = git://github.com/kongo2002/syntastic.git
+	path = plugins/syntastic
+	url = git://github.com/kongo2002/syntastic.git
 [submodule "plugins/vim-automod"]
-    path = plugins/vim-automod
-    url = git://github.com/kongo2002/vim-automod.git
+	path = plugins/vim-automod
+	url = git://github.com/kongo2002/vim-automod.git
 [submodule "plugins/gist-vim"]
-    path = plugins/gist-vim
-    url = git://github.com/kongo2002/gist-vim.git
+	path = plugins/gist-vim
+	url = git://github.com/kongo2002/gist-vim.git
 [submodule "plugins/nerdcommenter"]
-    path = plugins/nerdcommenter
-    url = git://github.com/scrooloose/nerdcommenter.git
+	path = plugins/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
 [submodule "plugins/tagbar"]
-    path = plugins/tagbar
-    url = git://github.com/majutsushi/tagbar.git
+	path = plugins/tagbar
+	url = git://github.com/majutsushi/tagbar.git
 [submodule "plugins/Command-T"]
 	path = plugins/Command-T
 	url = git://github.com/wincent/Command-T.git
@@ -49,3 +49,6 @@
 [submodule "plugins/vim-scala"]
 	path = plugins/vim-scala
 	url = git://github.com/derekwyatt/vim-scala.git
+[submodule "plugins/Omnisharp"]
+	path = plugins/Omnisharp
+	url = git://github.com/nosami/Omnisharp.git
