@@ -112,6 +112,8 @@ set wildignore+=*.o,*.obj,*.dll,*.pyc
 set wildignore+=*.gif,*.jpg,*.jpeg,*.png
 set wildignore+=movies/**,pictures/**,music/**
 set wildignore+=*.class,*.jar
+set wildignore+=*.beam
+set wildignore+=*.hi
 
 " turn on mouse in all modes
 if has('mouse')
