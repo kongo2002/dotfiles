@@ -23,6 +23,8 @@ if [[ -x $(which mpd) ]]; then
     export MPD_PORT="6600"
 fi
 
+export FZF_DEFAULT_OPTS="--no-mouse"
+
 # register git-achievements
 if [[ -x "${HOME}/programs/git-achievements/git-achievements" ]]; then
     export PATH="${PATH}:${HOME}/programs/git-achievements"
@@ -279,3 +281,5 @@ setopt                         \
         unset                  \
      NO_verbose                \
         zle
+
+source ~/.fzf.zsh
