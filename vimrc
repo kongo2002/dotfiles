@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 27 Jan 2014 10:25:54 PM CET
+" Last Change:  Thu 19 Jun 2014 07:31:55 PM CEST
 
 set nocompatible
 
@@ -348,6 +348,12 @@ let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_spellfile_plugin = 1
 
+" AIRLINE --------------------------------------------------------------{{{2
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+
 " FSWITCH --------------------------------------------------------------{{{2
 
 if has('autocmd')
@@ -508,7 +514,6 @@ if has('autocmd')
         au BufWritePost .Xdefaults sil !xrdb %
         au BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
         au BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
-        au BufEnter,CursorHold,BufWritePost * call NumLongLines(1)
         au BufWritePre * call RemoveTrailingWhitespace()
     augroup END
 endif

@@ -52,3 +52,6 @@
 [submodule "plugins/Omnisharp"]
 	path = plugins/Omnisharp
 	url = git://github.com/nosami/Omnisharp.git
+[submodule "plugins/vim-airline"]
+	path = plugins/vim-airline
+	url = git://github.com/bling/vim-airline.git
