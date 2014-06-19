@@ -19,6 +19,9 @@ set tabnumbers
 noremap <Right> gt
 noremap <Left> gT
 
+" back in history
+map <BS> <C-o>
+
 " toggle tabline
 map <A-Up> :set gui+=tabs<CR>
 map <A-Down> :set gui+=notabs<CR>
