@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Thu 19 Jun 2014 07:31:55 PM CEST
+" Last Change:  Sun 07 Sep 2014 06:12:27 PM CEST
 
 set nocompatible
 
@@ -456,6 +456,22 @@ vmap <Leader>cu <plug>NERDCommenterUncomment
 " NERDTREE -------------------------------------------------------------{{{2
 
 let NERDTreeQuitOnOpen = 1
+
+" OMNISHARP ------------------------------------------------------------{{{2
+
+augroup custom_omnisharp
+    au!
+    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
+    autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
+    autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
+    autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
+    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr>
+    autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
+    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+    "autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
+    "autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
+augroup END
 
 " SPACE-VIM ------------------------------------------------------------{{{2
 
