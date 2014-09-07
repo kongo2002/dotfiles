@@ -351,8 +351,10 @@ let g:loaded_spellfile_plugin = 1
 " AIRLINE --------------------------------------------------------------{{{2
 
 let g:airline_powerline_fonts = 1
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#whitespace#enabled = 0
 
 " FSWITCH --------------------------------------------------------------{{{2
 
