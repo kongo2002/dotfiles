@@ -530,6 +530,7 @@ if has('autocmd')
         au BufWritePost .Xdefaults sil !xrdb %
         au BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
         au BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
+        au BufRead,BufNewFile haproxy* setl ft=haproxy
         au BufWritePre * call RemoveTrailingWhitespace()
     augroup END
 endif
