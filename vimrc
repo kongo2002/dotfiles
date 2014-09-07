@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 07 Sep 2014 06:12:27 PM CEST
+" Last Change:  Sun 07 Sep 2014 07:31:50 PM CEST
 
 set nocompatible
 
@@ -113,7 +113,7 @@ set wildignore+=*.gif,*.jpg,*.jpeg,*.png
 set wildignore+=movies/**,pictures/**,music/**
 set wildignore+=*.class,*.jar
 set wildignore+=*.beam
-set wildignore+=*.hi
+set wildignore+=*.hi,*.p_hi,*.p_o
 
 " turn on mouse in all modes
 if has('mouse')
