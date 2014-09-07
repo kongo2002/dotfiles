@@ -55,3 +55,6 @@
 [submodule "plugins/vim-airline"]
 	path = plugins/vim-airline
 	url = git://github.com/bling/vim-airline.git
+[submodule "plugins/ctrlp"]
+	path = plugins/ctrlp
+	url = git://github.com/kien/ctrlp.vim.git
