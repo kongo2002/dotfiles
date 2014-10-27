@@ -1,7 +1,7 @@
 " Name:         kongo3.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Tue 15 Feb 2011 05:09:01 PM CET
+" Last Change:  Tue 28 Oct 2014 12:27:36 AM CET
 " Version:      0.1
 
 if version > 580
@@ -24,8 +24,8 @@ let g:colors_name = 'kongo3'
 "                 (X11 GUI and xterm-clipboard only)
 " Directory     = directory names (and special names in listings)
 
-hi Normal           guifg=#e2e2e5       guibg=#202020
-hi Normal           ctermfg=253         ctermbg=234
+hi Normal           guifg=#e2e2e5       guibg=#000000
+hi Normal           ctermfg=253         ctermbg=0
 hi Cursor           guifg=NONE          guibg=#626262
 hi Cursor           ctermfg=NONE        ctermbg=241
 hi CursorIM         guifg=bg            guibg=#96cdcd
@@ -74,8 +74,8 @@ hi LineNr           guifg=#808080       guibg=#000000
 hi LineNr           ctermfg=244         ctermbg=232
 hi ModeMsg          guifg=#b3b3b3       guibg=NONE         gui=none
 hi ModeMsg          ctermfg=249         ctermbg=NONE       cterm=none
-hi NonText          guifg=#000000       guibg=#202020      gui=none
-hi NonText          ctermfg=232         ctermbg=234        cterm=none
+hi NonText          guifg=#202020       guibg=#000000      gui=none
+hi NonText          ctermfg=234         ctermbg=0          cterm=none
 hi SignColumn       guifg=#808080       guibg=#000000
 hi SignColumn       ctermfg=244         ctermbg=232
 hi StatusLine       guifg=#d3d3d5       guibg=#444444      gui=italic
