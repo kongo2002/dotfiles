@@ -8,7 +8,7 @@ source /etc/profile
 
 # extend PATH
 [[ -d "${HOME}/.bin" ]] && export PATH="${PATH}:${HOME}/.bin"
-[[ -d "${HOME}/.cabal/bin" ]] && export PATH="${PATH}:${HOME}/.cabal/bin"
+[[ -d "${HOME}/.cabal/bin" ]] && export PATH="${HOME}/.cabal/bin:${PATH}"
 
 # source rvm
 [[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm" && unset RUBYOPT
