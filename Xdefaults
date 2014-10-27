@@ -304,4 +304,25 @@ URxvt*bolditalicFont:        -*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-*
 !*color14:                  orange
 !*color15:                  cyan
 
+
+!*cursorColor: #06989a
+*background: #000000
+*foreground: #cccccc
+*color0:  #000000
+*color8:  #555753
+*color1:  #cc0000
+*color9:  #EF2929
+*color2:  #4E9A06
+*color10: #8AE234
+*color3:  #C4A000
+*color11: #FCE94F
+*color4:  #3465A4
+*color12: #739FCF
+*color5:  #75507B
+*color13: #AD7FA8
+*color6:  #06989A
+*color14: #34E2E2
+*color7:  #D3D7CF
+*color15: #EEEEEC
+
 ! }}}
