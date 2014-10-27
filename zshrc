@@ -23,6 +23,10 @@ if [[ -x $(which mpd) ]]; then
     export MPD_PORT="6600"
 fi
 
+if [[ -x $(which tig) ]]; then
+    alias tiga='tig --all'
+fi
+
 export FZF_DEFAULT_OPTS="--no-mouse"
 
 # register git-achievements
