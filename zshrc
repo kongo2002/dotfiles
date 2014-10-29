@@ -68,10 +68,12 @@ cd () {
 
 waitfor() {
     for process in "$@"; do
+        echo -n "Waiting for '$process' "
         while pgrep "$process" > /dev/null 2>&1; do
-            echo "Waiting for '$process' ..."
-            sleep 10
+            echo -n "."
+            sleep 30
         done
+        echo ""
     done
 }
 
@@ -82,14 +84,6 @@ zsh_stats() {
 alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
-
-alias ig='grep -i'
-alias ping='ping -c 5'
-
-alias boistop='sudo /etc/init.d/boinc stop'
-alias boistart='sudo /etc/init.d/boinc start'
-
-alias kvm-arch='kvm -hda ~/.kvm_arch/arch-i686.img -net nic -net tap,ifname=qtap0,script=no,downscript=no -boot c -m 1024 -soundhw es1370'
 
 alias ls="ls -h --color=auto"
 alias ll="ls -lh --color=auto"
@@ -286,4 +280,5 @@ setopt                         \
      NO_verbose                \
         zle
 
-source ~/.fzf.zsh
+# source fzf if existing
+[[ -s ~/.fzf.zsh ]] && source ~/.fzf.zsh
