@@ -348,14 +348,6 @@ let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_spellfile_plugin = 1
 
-" AIRLINE --------------------------------------------------------------{{{2
-
-let g:airline_powerline_fonts = 1
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
-let g:airline#extensions#whitespace#enabled = 0
-
 " FSWITCH --------------------------------------------------------------{{{2
 
 if has('autocmd')
@@ -458,6 +450,20 @@ vmap <Leader>cu <plug>NERDCommenterUncomment
 " NERDTREE -------------------------------------------------------------{{{2
 
 let NERDTreeQuitOnOpen = 1
+
+" AIRLNE ---------------------------------------------------------------{{{2
+
+" use (patched) extended font characters
+let g:airline_powerline_fonts = 1
+
+" disable whitespace checks
+let g:airline#extensions#whitespace#enabled = 0
+
+" activate the extended tabline extension
+let g:airline#extensions#tabline#enabled = 1
+
+" tabline displays buffers in a single tab
+let g:airline#extensions#tabline#show_buffers = 1
 
 " SPACE-VIM ------------------------------------------------------------{{{2
 
