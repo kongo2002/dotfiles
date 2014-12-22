@@ -4,7 +4,7 @@ colors
 
 promptinit; prompt gentoo
 
-source /etc/profile
+source /etc/zsh/zprofile
 
 # extend PATH
 [[ -d "${HOME}/.bin" ]] && export PATH="${PATH}:${HOME}/.bin"
@@ -281,4 +281,6 @@ setopt                         \
         zle
 
 # source fzf if existing
-[[ -s ~/.fzf.zsh ]] && source ~/.fzf.zsh
+if [[ -s ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+fi
