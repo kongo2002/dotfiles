@@ -862,6 +862,30 @@ function! InsertNewline(below)
     return "\<CR>"
 endfunction
 
+" CloseOthers() - Close all other buffers than the current one ---------{{{2
+function! CloseOthers()
+    let n = 1
+    let closed = 0
+    let buffer = bufnr('%')
+    let last_buffer = bufnr('$')
+
+    while n <= last_buffer
+        if n != buffer && buflisted(n) && !getbufvar(n, '&modified')
+            sil exe 'bdel ' . n
+            if !buflisted(n)
+                let closed += 1
+            endif
+        endif
+        let n += 1
+    endwhile
+
+    if closed > 0
+        echomsg closed 'buffers closed'
+    endif
+endfunction
+com! -nargs=0 BOthers call CloseOthers()
+nmap <Leader>bo :call CloseOthers()<CR>
+
 " COLORSCHEME ----------------------------------------------------------{{{1
 
 call <SID>LoadColorScheme('kongo3:kongo:kongo2:slate', 'slate')
