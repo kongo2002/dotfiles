@@ -402,6 +402,11 @@ endfunction
 let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
 let g:hdevtools_options = '-g-Wall' . <sid>FindCabalSandbox()
 
+" YOUCOMPLETEME --------------------------------------------------------{{{2
+
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_filetype_whitelist = { 'c' : 1 }
+
 " ULTISNIPS ------------------------------------------------------------{{{2
 
 let g:snips_author = 'Gregor Uhlenheuer'
