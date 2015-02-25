@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 30 Mar 2015 08:16:27 PM UTC
+" Last Change:  Tue 12 May 2015 12:02:56 PM UTC
 
 set nocompatible
 
@@ -897,6 +897,14 @@ function! CloseOthers()
 endfunction
 com! -nargs=0 BOthers call CloseOthers()
 nmap <Leader>bo :call CloseOthers()<CR>
+
+" CUSTOM COMMANDS ------------------------------------------------------{{{1
+
+com! MongoRC :e ~/.mongorc.js
+com! -range=% Json exe '<line1>,<line2>!python -m json.tool' |
+            \ set filetype=javascript
+com! -range=% Xml exe '<line1>,<line2>!xmllint --format --recover -' |
+            \ set filetype=xml
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
