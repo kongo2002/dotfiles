@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 12 May 2015 12:02:56 PM UTC
+" Last Change:  Tue 12 May 2015 12:03:48 PM UTC
 
 set nocompatible
 
@@ -23,6 +23,9 @@ sil! unlet g:colors_name
 
 " extend runtime path with plugin directory
 sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.plugins')
+
+" reset any global filetype actions
+filetype off
 
 filetype on
 filetype plugin on
@@ -114,6 +117,7 @@ set wildignore+=movies/**,pictures/**,music/**
 set wildignore+=*.class,*.jar
 set wildignore+=*.beam
 set wildignore+=*.hi,*.p_hi,*.p_o
+set wildignore+=*.pdb,*.mdb
 
 " turn on mouse in all modes
 if has('mouse')
@@ -164,8 +168,10 @@ set showcmd
 
 " use ag or ack for grepping
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
+    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepformat=%f:%l:%c%m
 else
+    " use ack for grepping otherwise
     set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column
     set grepformat=%f:%l:%c:%m,%f
 endif
@@ -327,6 +333,9 @@ map <F4> :execute 'noautocmd vim /' . expand('<cword>') . '/j **'
 
 " search recursively for highlighted string
 vmap <Leader>v y:noautocmd vimgrep /<C-r>"/ **/*.
+
+" substitute the highlighted string
+vmap <Leader>s y:%s/<C-r>"/
 
 " toggle matching of long lines
 map <F11> :call ToggleLongLines()<CR>
@@ -535,6 +544,7 @@ if has('autocmd')
         au BufRead,BufNewFile *.e{build,class} let is_bash=1|setf sh
         au BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
         au BufRead,BufNewFile haproxy* setl ft=haproxy
+        au BufRead,BufNewFile *.cpp,*.CPP setl ft=cpp
         au BufWritePre * call RemoveTrailingWhitespace()
     augroup END
 endif
@@ -546,6 +556,38 @@ let g:c_syntax_for_h = 1
 " PYTHON ---------------------------------------------------------------{{{2
 
 let g:python_highlight_all = 1
+
+" VALA -----------------------------------------------------------------{{{2
+
+let g:syntastic_vala_modules =
+    \ [ 'ggit-1.0'
+    \ , 'gio-2.0'
+    \ , 'gtk+-3.0'
+    \ , 'gd-1.0'
+    \ , 'gtksourceview-3.0'
+    \ , 'libpeas-1.0'
+    \ , 'gee-0.8'
+    \ , 'json-glib-1.0'
+    \ , 'libsoup-2.4'
+    \ , 'webkit2gtk-3.0'
+    \ , 'config'
+    \ ]
+
+" OMNISHARP ------------------------------------------------------------{
+
+augroup custom_omnisharp
+    au!
+    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
+    autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
+    autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
+    autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
+    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr>
+    autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
+    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+    "autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
+    "autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
+augroup END
 
 " LATEX ----------------------------------------------------------------{{{2
 
