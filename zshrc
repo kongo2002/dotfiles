@@ -9,14 +9,20 @@ source /etc/zsh/zprofile
 # extend PATH
 [[ -d "${HOME}/.bin" ]] && export PATH="${PATH}:${HOME}/.bin"
 [[ -d "${HOME}/.cabal/bin" ]] && export PATH="${HOME}/.cabal/bin:${PATH}"
+[[ -d "${HOME}/.gem/ruby/2.0.0/bin" ]] && export PATH="${PATH}:${HOME}/.gem/ruby/2.0.0/bin"
 
 # source rvm
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && . "${HOME}/.rvm/scripts/rvm" && unset RUBYOPT
+if [[ -s "${HOME}/.rvm/scripts/rvm" ]]; then
+    . "${HOME}/.rvm/scripts/rvm" && unset RUBYOPT
+    export PATH="${PATH}:${HOME}/.rvm/bin"
+fi
 
 # source zsh config files
 if [[ -d "${HOME}/.zsh" ]]; then
     for config_file ($HOME/.zsh/*.zsh) source $config_file
 fi
+
+[[ -f "${HOME}/python/startup.py" ]] && export PYTHONSTARTUP="${HOME}/python/startup.py"
 
 if [[ -x $(which mpd) ]]; then
     export MPD_HOST="127.0.0.1"
@@ -27,6 +33,10 @@ if [[ -x $(which tig) ]]; then
     alias tiga='tig --all'
 fi
 
+if [[ -x $(which ag) ]]; then
+    alias ag='ag --smart-case'
+fi
+
 export FZF_DEFAULT_OPTS="--no-mouse"
 
 # register git-achievements
@@ -34,6 +44,8 @@ if [[ -x "${HOME}/programs/git-achievements/git-achievements" ]]; then
     export PATH="${PATH}:${HOME}/programs/git-achievements"
     alias 'git'='git-achievements'
 fi
+
+alias tiga='tig --all'
 
 alias '..'='cd ..'
 alias 'cd..'='cd ..'
@@ -125,7 +137,7 @@ bindkey -M viins "\e." insert-last-word
 HISTFILE=~/.zshhistory
 HISTIGNORE="ls:ll:exit:cd:su"
 HISTSIZE=25000
-SAVEHIST=10000
+SAVEHIST=100000
 
 LISTMAX=0
 
