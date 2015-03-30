@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 08 Sep 2014 12:04:22 AM CEST
+" Last Change:  Mon 30 Mar 2015 08:16:27 PM UTC
 
 set nocompatible
 
@@ -162,9 +162,13 @@ set shortmess+=I
 " show command
 set showcmd
 
-" use ack for grepping
-set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column
-set grepformat=%f:%l:%c:%m,%f
+" use ag or ack for grepping
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+else
+    set grepprg=ack\ -H\ --nocolor\ --nogroup\ --column
+    set grepformat=%f:%l:%c:%m,%f
+endif
 
 " STATUSLINE SETTINGS --------------------------------------------------{{{1
 
@@ -247,6 +251,9 @@ cnoremap <C-n> <Up>
 cnoremap <C-p> <Down>
 cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
+
+" bind K to grep
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " use vimgrep without autocommands being invoked
 nmap <Leader>nv :noautocmd vim /
