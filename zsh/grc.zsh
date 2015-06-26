@@ -1,6 +1,6 @@
 GRC=`which grc`
 
-if [ "$TERM" != dumb ] && [ -e $GRC ]; then
+if [ "$TERM" != dumb ] && [ -x $GRC ] && [ "$USER" != root ]; then
     alias colorize="$GRC -es --colour=auto"
 
     alias as='colorize as'
