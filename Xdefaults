@@ -57,13 +57,13 @@ URxvt*cursorBlink:              True
 URxvt*imLocale:                 de_DE.UTF-8
 URxvt*geometry:                 85x35
 URxvt*transparent:              True
-URxvt*shading:                  20
+URxvt*shading:                  10
 
 ! open urls with middle mouse click
 URxvt.perl-ext-common:          default,matcher
 URxvt.matcher.button:           2
 URxvt.matcher.pattern.1:        \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
-URxvt.urlLauncher:              firefox
+URxvt.url-launcher:              firefox
 !URxvt.keysym.C-Delete:          perl:matcher
 
 ! screen scrollbackbuffer
@@ -86,6 +86,10 @@ URxvt*bolditalicFont:        -*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-*
 !URxvt*boldFont:             xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
 !URxvt*italicFont:           xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
 !URxvt*bolditalicFont:       xft:Dejavu Sans Mono:pixelsize=14.0:antialias=true:hinting=true
+
+URxvt*keysym.C-1: command: \033]50;-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*\007
+URxvt*keysym.C-2: command: \033]50;-*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-*\007
+URxvt*keysym.C-3: command: \033]50;-*-terminus-medium-r-*-*-18-*-*-*-*-*-iso10646-*\007
 
 ! }}}
 
