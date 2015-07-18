@@ -475,7 +475,7 @@ let NERDTreeQuitOnOpen = 1
 " AIRLNE ---------------------------------------------------------------{{{2
 
 " use (patched) extended font characters
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 
 " disable whitespace checks
 let g:airline#extensions#whitespace#enabled = 0
