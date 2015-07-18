@@ -116,7 +116,7 @@ set wildignore+=*.gif,*.jpg,*.jpeg,*.png
 set wildignore+=movies/**,pictures/**,music/**
 set wildignore+=*.class,*.jar
 set wildignore+=*.beam
-set wildignore+=*.hi,*.p_hi,*.p_o
+set wildignore+=*.hi,*.p_hi,*.p_o,*.dyn_hi,*.dyn_o
 set wildignore+=*.pdb,*.mdb
 
 " turn on mouse in all modes
