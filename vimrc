@@ -301,8 +301,8 @@ nmap <silent> gb :bnext<CR>
 nmap <silent> gB :bprev<CR>
 nmap <silent> <A-right> :bnext<CR>
 nmap <silent> <A-left> :bprev<CR>
-nnoremap <silent> <C-j> :bnext<CR>
-nnoremap <silent> <C-k> :bprev<CR>
+nnoremap <silent> <C-j> :bprev<CR>
+nnoremap <silent> <C-k> :bnext<CR>
 
 " NERDTree mapping
 map <F1> :NERDTreeToggle<CR>
