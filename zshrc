@@ -93,6 +93,10 @@ zsh_stats() {
     history 1 | awk '{print $2}' | sort | uniq -c | sort -rn | head
 }
 
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
 alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
@@ -104,18 +108,7 @@ alias l="ls -lha --color=auto"
 # use a light gtk theme
 alias gtkl="GTK2_RC_FILES='MorningGlory:$HOME/.themes/MorningGlory/gtk-2.0/gtkrc'"
 
-# get current vi mode
-VIMODE="[I] "
-function zle-line-init zle-keymap-select {
-    VIMODE="${${KEYMAP/vicmd/[C] }/(main|viins)/[I] }"
-    zle reset-prompt
-}
-
-# register new zsh widget
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-PROMPT='%{${fg_bold[blue]}%}$VIMODE%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})>%{${reset_color}%} '
+PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})>%{${reset_color}%} '
 RPROMPT='$(git_prompt) %~'
 
 EDITOR="/usr/bin/vim"
