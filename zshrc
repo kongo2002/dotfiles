@@ -29,12 +29,17 @@ if [[ -x $(which mpd) ]]; then
     export MPD_PORT="6600"
 fi
 
+# convenience bluetooth alias for mplayer
+if [[ -x $(which mplayer) ]]; then
+    alias mplayer-blue='mplayer -ao alsa:device=bluetooth'
+fi
+
 if [[ -x $(which tig) ]]; then
     alias tiga='tig --all'
 fi
 
 if [[ -x $(which ag) ]]; then
-    alias ag='ag --smart-case'
+    alias ag='ag --smart-case --ignore tags'
 fi
 
 export FZF_DEFAULT_OPTS="--no-mouse"
