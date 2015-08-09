@@ -1,7 +1,7 @@
 " Name:         kongo3.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Tue 28 Oct 2014 12:27:36 AM CET
+" Last Change:  Sun 09 Aug 2015 09:43:20 PM CEST
 " Version:      0.1
 
 if version > 580
@@ -234,12 +234,19 @@ hi Todo             ctermfg=227         ctermbg=bg         cterm=reverse,bold
 
 " SPECIAL GROUPS {{{1
 
-" hi MyTagListFileName  guifg=#969696       guibg=#101010      gui=none
-" hi MyTagListFileName  ctermfg=246         ctermbg=232        cterm=none
+" COLOR COLUMN {{{2
 
 if exists('+colorcolumn')
     hi ColorColumn     guifg=NONE          guibg=#181818      gui=none
     hi ColorColumn     ctermfg=NONE        ctermbg=233        cterm=none
 endif
+
+" LANGUAGE SPECIFICS {{{1
+
+" SCALA {{{2
+
+" highlight mutable variables
+hi scalaVar         guifg=#d70000                           gui=underline
+hi scalaVar         ctermfg=160                             cterm=none
 
 " vim: set fdm=marker foldmarker={{{,}}}
