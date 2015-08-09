@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Tue 12 May 2015 12:03:48 PM UTC
+" Last Change:  Sun 09 Aug 2015 07:45:13 PM CEST
 
 set nocompatible
 
@@ -83,6 +83,11 @@ set number
 
 " line numbers as narrow as possible
 set numberwidth=1
+
+" set relative numbers as well
+if exists('+relativenumber')
+    set relativenumber
+endif
 
 " switch buffers without saving
 set hidden
@@ -168,7 +173,7 @@ set showcmd
 
 " use ag or ack for grepping
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor\ --column
+    set grepprg=ag\ --nogroup\ --nocolor\ --column\ --ignore\ tags
     set grepformat=%f:%l:%c%m
 else
     " use ack for grepping otherwise
@@ -416,7 +421,7 @@ function! s:FindCabalSandbox()
 endfunction
 
 let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
-let g:hdevtools_options = '-g-Wall' . <sid>FindCabalSandbox()
+let g:syntastic_haskell_hdevtools_args = '-g-Wall' . <sid>FindCabalSandbox()
 
 " YOUCOMPLETEME --------------------------------------------------------{{{2
 
@@ -573,7 +578,7 @@ let g:syntastic_vala_modules =
     \ , 'config'
     \ ]
 
-" OMNISHARP ------------------------------------------------------------{
+" OMNISHARP ------------------------------------------------------------{{{2
 
 augroup custom_omnisharp
     au!
