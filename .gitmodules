@@ -61,3 +61,6 @@
 [submodule "plugins/vimerl"]
 	path = plugins/vimerl
 	url = git://github.com/jimenezrick/vimerl.git
+[submodule "plugins/xptemplate"]
+	path = plugins/xptemplate
+	url = https://github.com/drmingdrmer/xptemplate.git
