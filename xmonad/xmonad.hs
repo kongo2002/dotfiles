@@ -237,7 +237,7 @@ myStartupHook = return ()
 
 -- spawn xmobar using a pipe
 myxmobar cfg = do
-  pipe <- spawnPipe xmobarPipe
+  pipe <- spawnPipe bar
   return $ cfg
     { logHook = dynamicLogWithPP $ def
       { ppOutput        = hPutStrLn pipe
@@ -254,45 +254,9 @@ myxmobar cfg = do
     -- make room for docks
     , layoutHook = avoidStruts $ layoutHook cfg
     }
-
--- xmobar configuration
-xmobarPipe :: String
-xmobarPipe =
-  bar ++ foreground ++ template ++ barfont ++ iconPath ++ cmds
  where
-  bar        = "/home/kongo/.cabal/bin/xmobar"
-  iconPath   = " -i /home/kongo/.xmonad/icons/xbm "
-  barfont    = " -f " ++ "xft:" ++ font
-  foreground = " -F '#aaaaaa' "
-  template   = " -t '%UnsafeStdinReader%}" ++ center ++ "{" ++ right ++ "'"
-
-  center = icon "note" ++ " %mpd%"
-
-  right      = intercalate xmobarSep
-    [ icon "cpu" ++ " %cpu%"
-    , icon "mem" ++ " %memory%"
-    , "%disku%"
-    , "%br0%"
-    , icon "clock" ++ " %date%"
-    ]
-
-  cmds = " -c '[" ++ intercalate ","
-    [ "Run Cpu [\"-L\",\"3\",\"-H\",\"50\",\"-n\",\"green\",\"-h\",\"red\",\"-t\",\"<total>%\"] 20"
-    , "Run Memory [\"-t\",\"<usedratio>% (<used> MB / <available> MB)\"] 100"
-    , "Run Network \"br0\" [\"-t\",\"" ++ icon "net_down_03" ++ " <rx> " ++ icon "net_up_03" ++ " <tx>\"] 20"
-    , "Run Date \"%a %b %_d %Y %H:%M\" \"date\" 600"
-    , "Run MPD [\"-b\",\" \",\"-f\",\"_\",\"-t\",\"<artist> - <title> <fc=#555555>[<bar>]</fc>\"] 50"
-    , "Run DiskU [(\"/\",\"" ++ icon "diskette" ++ " <used>/<size>\"),(\"/home\",\"" ++ icon "diskette" ++ " <used>/<size>\")] [] 600"
-    , "Run UnsafeStdinReader"
-    ] ++ "]'"
-
-
-icon :: String -> String
-icon name = "<icon=" ++ name ++ ".xbm/>"
-
-
-xmobarSep :: String
-xmobarSep = xmobarColor "#ff6600" "" " | "
+  bar       = "~/.cabal/bin/xmobar ~/.xmonad/xmobar.config"
+  xmobarSep = xmobarColor "#ff6600" "" " | "
 
 
 myConfig = def
