@@ -8,6 +8,8 @@ source /etc/zsh/zprofile
 
 # extend PATH
 [[ -d "${HOME}/.bin" ]] && export PATH="${PATH}:${HOME}/.bin"
+[[ -d "${HOME}/.local/bin" ]] && export PATH="${PATH}:${HOME}/.local/bin"
+[[ -d "${HOME}/.local/sbin" ]] && export PATH="${PATH}:${HOME}/.local/sbin"
 [[ -d "${HOME}/.cabal/bin" ]] && export PATH="${HOME}/.cabal/bin:${PATH}"
 [[ -d "${HOME}/.gem/ruby/2.0.0/bin" ]] && export PATH="${PATH}:${HOME}/.gem/ruby/2.0.0/bin"
 
@@ -81,6 +83,27 @@ cd () {
     else
         builtin cd "$@"
     fi
+}
+
+function veth_interface_for_container() {
+  # Get the process ID for the container named ${1}:
+  local pid=$(docker inspect -f '{{.State.Pid}}' "${1}")
+
+  # Make the container's network namespace available to the ip-netns command:
+  mkdir -p /var/run/netns
+  ln -sf /proc/$pid/ns/net "/var/run/netns/${1}"
+
+  # Get the interface index of the container's eth0:
+  local index=$(ip netns exec "${1}" ip link show eth0 | head -n1 | sed s/:.*//)
+  # Increment the index to determine the veth index, which we assume is
+  # always one greater than the container's index:
+  let index=index+1
+
+  # Write the name of the veth interface to stdout:
+  ip link show | grep "^${index}:" | sed "s/${index}: \(.*\):.*/\1/"
+
+  # Clean up the netns symlink, since we don't need it anymore
+  rm -f "/var/run/netns/${1}"
 }
 
 waitfor() {
@@ -198,99 +221,65 @@ zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
 
 # zsh Options
-#
-setopt                         \
-     NO_all_export             \
-        always_last_prompt     \
-        always_to_end          \
-        append_history         \
-     NO_auto_cd                \
-        auto_list              \
-        auto_menu              \
-     NO_auto_name_dirs         \
-        auto_param_keys        \
-        auto_param_slash       \
-        auto_pushd             \
-        auto_remove_slash      \
-     NO_auto_resume            \
-        bad_pattern            \
-        bang_hist              \
-        beep                   \
-        brace_ccl              \
-        correct_all            \
-     NO_bsd_echo               \
-        cdable_vars            \
-     NO_chase_links            \
-     NO_clobber                \
-        complete_aliases       \
-        complete_in_word       \
-     correct                   \
-     NO_correct_all            \
-        csh_junkie_history     \
-     NO_csh_junkie_loops       \
-     NO_csh_junkie_quotes      \
-     NO_csh_null_glob          \
-        equals                 \
-        extended_glob          \
-        extended_history       \
-        function_argzero       \
-        glob                   \
-     NO_glob_assign            \
-        glob_complete          \
-     NO_glob_dots              \
-        glob_subst             \
-        hash_cmds              \
-        hash_dirs              \
-        hash_list_all          \
-        hist_allow_clobber     \
-        hist_beep              \
-        hist_expire_dups_first \
-        hist_ignore_dups       \
-        hist_ignore_space      \
-     NO_hist_no_store          \
-        hist_verify            \
-     NO_hup                    \
-     NO_ignore_braces          \
-     NO_ignore_eof             \
-        interactive_comments   \
-        inc_append_history     \
-     NO_list_ambiguous         \
-     NO_list_beep              \
-        list_types             \
-        long_list_jobs         \
-        magic_equal_subst      \
-     NO_mail_warning           \
-     NO_mark_dirs              \
-     NO_menu_complete          \
-        multios                \
-        nomatch                \
-        notify                 \
-     NO_null_glob              \
-        numeric_glob_sort      \
-     NO_overstrike             \
-        path_dirs              \
-        posix_builtins         \
-     NO_print_exit_value       \
-     NO_prompt_cr              \
-        prompt_subst           \
-        pushd_ignore_dups      \
-     NO_pushd_minus            \
-        pushd_silent           \
-        pushd_to_home          \
-        rc_expand_param        \
-     NO_rc_quotes              \
-     NO_rm_star_silent         \
-     NO_sh_file_expansion      \
-        sh_option_letters      \
-        short_loops            \
-     NO_sh_word_split          \
-     NO_single_line_zle        \
-     NO_sun_keyboard_hack      \
-        unset                  \
-     NO_verbose                \
-        zle
+
+# change dirs
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushd_silent
+setopt pushd_to_home
+
+# completion
+setopt always_to_end
+setopt complete_aliases
+setopt complete_in_word
+setopt glob_complete
+setopt list_packed
+
+setopt no_listbeep
+
+# expansion/globbing
+setopt bad_pattern
+setopt equals
+setopt numeric_glob_sort
+
+setopt no_glob_subst
+setopt no_casematch
+
+# history
+setopt append_history
+setopt extended_history
+setopt hist_allow_clobber
+setopt hist_ignore_dups
+setopt hist_expire_dups_first
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+
+setopt no_hist_beep
+
+# i/o
+setopt correct
+setopt path_dirs
+setopt short_loops
+setopt notify
+setopt long_list_jobs
+
+setopt no_correct_all
+setopt no_clobber
+setopt no_hup
+
+# prompt
+setopt prompt_subst
+
+# zle
+setopt zle
+setopt vi
+
+setopt no_beep
 
 # source fzf if existing
 if [[ -s ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
 fi
+
+[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
