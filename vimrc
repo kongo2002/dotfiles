@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 09 Aug 2015 07:45:13 PM CEST
+" Last Change:  Fri Oct 16 19:57:50 2015
 
 set nocompatible
 
@@ -408,6 +408,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_c_config_file = '.config'
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
 let g:syntastic_cs_checkers = ['syntax', 'issues']
+
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['scala'] }
 
 " SYNTASTIC - HASKELL OPTIONS ------------------------------------------{{{3
 
@@ -920,6 +924,32 @@ function! InsertNewline(below)
     endif
     return "\<CR>"
 endfunction
+
+" DiffTwoLines() - Diff the two specified lines ------------------------{{{2
+function! DiffTwoLines(line1, line2)
+    " split line on parens and comma
+    let reg = '[(,)]\s*\zs'
+    let text1 = split(getline(a:line1), reg)
+    let text2 = split(getline(a:line2), reg)
+
+    new
+    sil put =text1
+    normal ggdd
+    setl buftype=nofile
+    setl bufhidden=hide
+    setl noswapfile
+    diffthis
+
+    vnew
+    sil put =text2
+    normal ggdd
+    setl buftype=nofile
+    setl bufhidden=hide
+    setl noswapfile
+    diffthis
+endfunction
+
+com! DiffNextLine call DiffTwoLines('.', line('.')+1)
 
 " CloseOthers() - Close all other buffers than the current one ---------{{{2
 function! CloseOthers()
