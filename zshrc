@@ -150,6 +150,8 @@ bindkey "^e" edit-command-line
 
 bindkey "^n" history-beginning-search-backward
 bindkey "^p" history-beginning-search-forward
+bindkey "^r" history-incremental-search-backward
+
 bindkey -M vicmd "\e." insert-last-word
 bindkey -M viins "\e." insert-last-word
 
