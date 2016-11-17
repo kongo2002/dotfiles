@@ -2,7 +2,7 @@ autoload -U compinit promptinit colors
 compinit
 colors
 
-promptinit; prompt gentoo
+promptinit
 
 source /etc/zsh/zprofile
 
