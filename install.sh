@@ -5,7 +5,7 @@
 REPO=$(pwd)
 FILES=$(ls | grep -v "install.sh")
 
-pushd "$HOME"
+cd "$HOME"
 
 for f in $FILES; do
     if [ ! -e "$HOME/.$f" ]; then
@@ -19,7 +19,5 @@ for f in $FILES; do
         fi
     fi
 done
-
-popd
 
 #vim: set et sw=4 sts=4:
