@@ -117,10 +117,6 @@ waitfor() {
     done
 }
 
-zsh_stats() {
-    history 1 | awk '{print $2}' | sort | uniq -c | sort -rn | head
-}
-
 mkcd() {
     mkdir -p "$1" && cd "$1"
 }
@@ -133,11 +129,31 @@ alias ls="ls -h --color=auto"
 alias ll="ls -lh --color=auto"
 alias l="ls -lha --color=auto"
 
-# use a light gtk theme
-alias gtkl="GTK2_RC_FILES='MorningGlory:$HOME/.themes/MorningGlory/gtk-2.0/gtkrc'"
-
 PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})>%{${reset_color}%} '
-RPROMPT='$(git_prompt) %~'
+RPROMPT=' %~'
+
+_KONGO_ASYNC_PROMPT=0
+function precmd() {
+    function async() {
+        printf "%s %%~" "$(git_prompt)" >| "/tmp/.zsh_prompt_$$"
+        kill -s USR1 $$
+    }
+
+    if [[ "${_KONGO_ASYNC_PROMPT}" != 0 ]]; then
+        kill -s HUP $_KONGO_ASYNC_PROMPT >/dev/null 2>&1 || :
+    fi
+
+    async &!
+    _KONGO_ASYNC_PROMPT=$!
+}
+
+function TRAPUSR1() {
+    RPROMPT="$(cat /tmp/.zsh_prompt_$$)"
+    _KONGO_ASYNC_PROMPT=0
+
+    # reset prompt
+    zle && zle reset-prompt
+}
 
 EDITOR="/usr/bin/vim"
 
@@ -284,4 +300,7 @@ if [[ -s ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
 fi
 
-[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ] && source "${HOME}/.scm_breeze/scm_breeze.sh"
+# source scm-breeze if existing
+if [[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
+    source "${HOME}/.scm_breeze/scm_breeze.sh"
+fi
