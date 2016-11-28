@@ -133,9 +133,11 @@ PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?
 RPROMPT=' %~'
 
 _KONGO_ASYNC_PROMPT=0
-function precmd() {
+_KONGO_ASYNC_COMM="/tmp/.zsh_prompt_$$"
+
+function _kongo_precmd() {
     function async() {
-        printf "%s %%~" "$(git_prompt)" >| "/tmp/.zsh_prompt_$$"
+        printf "%s %%~" "$(git_prompt)" >| $_KONGO_ASYNC_COMM
         kill -s USR1 $$
     }
 
@@ -147,13 +149,22 @@ function precmd() {
     _KONGO_ASYNC_PROMPT=$!
 }
 
-function TRAPUSR1() {
-    RPROMPT="$(cat /tmp/.zsh_prompt_$$)"
+function _kongo_trap() {
+    RPROMPT="$(cat $_KONGO_ASYNC_COMM)"
     _KONGO_ASYNC_PROMPT=0
 
     # reset prompt
     zle && zle reset-prompt
 }
+
+function _kongo_atexit() {
+    # cleanup on shutdown
+    rm -f $_KONGO_ASYNC_COMM
+}
+
+precmd_functions+=(_kongo_precmd)
+zshexit_functions+=(_kongo_atexit)
+trap '_kongo_trap' USR1
 
 EDITOR="/usr/bin/vim"
 
