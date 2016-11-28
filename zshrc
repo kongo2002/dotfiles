@@ -125,9 +125,13 @@ alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
 
-alias ls="ls -h --color=auto"
-alias ll="ls -lh --color=auto"
-alias l="ls -lha --color=auto"
+alias ls='ls -h --color=auto'
+alias ll='ls -lh --color=auto'
+alias l='ls -lha --color=auto'
+
+alias gd='git diff'
+alias gf='git fetch'
+alias ga='git add'
 
 PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})>%{${reset_color}%} '
 RPROMPT=' %~'

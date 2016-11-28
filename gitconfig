@@ -3,7 +3,7 @@
 	email = kongo2002@googlemail.com
 [alias]
 	br = branch
-	ci = commit
+	ci = commit -v
 	co = checkout
 	df = diff
 	lg = log --graph --oneline --decorate --all
