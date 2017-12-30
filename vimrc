@@ -1,9 +1,11 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri Oct 16 19:57:50 2015
+" Last Change:  Mon 04 Dec 2017 11:17:46 PM CET
 
-set nocompatible
+if !has('nvim')
+    set nocompatible
+endif
 
 " MACHINE SPECIFICS ----------------------------------------------------{{{1
 
@@ -132,8 +134,10 @@ endif
 " show cursor position all the time
 set ruler
 
-" indicates fast terminal connection
-set ttyfast
+" indicates fast terminal connection (if necessary)
+if !has('nvim')
+    set ttyfast
+endif
 
 " timeout settings
 set timeout
@@ -225,6 +229,7 @@ let &statusline.='%10(%l,%v%) %P'
 
 " set mapleader from backslash to comma
 let mapleader=','
+let maplocalleader=','
 
 " bind escape key
 imap jj <Esc>
@@ -367,7 +372,7 @@ let g:loaded_dict = 1
 " disable some built-in plugins
 let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
-let g:loaded_spellfile_plugin = 1
+let g:loaded_spellfile_plugin = 0
 
 " FSWITCH --------------------------------------------------------------{{{2
 
@@ -407,11 +412,16 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_c_config_file = '.config'
 let g:syntastic_cpp_compiler_options = '-std=c++0x'
+let g:syntastic_cpp_config_file = '.config'
 let g:syntastic_cs_checkers = ['syntax', 'issues']
 
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': ['scala'] }
+
+" SYNTASTIC - PYTHON OPTIONS -------------------------------------------{{{3
+
+let g:syntastic_python_flake8_args = '--ignore=E501'
 
 " SYNTASTIC - HASKELL OPTIONS ------------------------------------------{{{3
 
