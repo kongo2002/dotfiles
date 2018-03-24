@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 04 Dec 2017 11:17:46 PM CET
+" Last Change:  Sun 04 Mar 2018 11:36:56 AM CET
 
 if !has('nvim')
     set nocompatible
@@ -437,6 +437,11 @@ endfunction
 let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
 let g:syntastic_haskell_hdevtools_args = '-g-Wall' . <sid>FindCabalSandbox()
 
+" ELM-VIM --------------------------------------------------------------{{{2
+
+let g:elm_format_autosave = 0
+let g:elm_setup_keybindings = 0
+
 " YOUCOMPLETEME --------------------------------------------------------{{{2
 
 let g:ycm_confirm_extra_conf = 0
@@ -492,9 +497,6 @@ vmap <Leader>cu <plug>NERDCommenterUncomment
 let NERDTreeQuitOnOpen = 1
 
 " AIRLNE ---------------------------------------------------------------{{{2
-
-" use (patched) extended font characters
-let g:airline_powerline_fonts = 0
 
 " disable whitespace checks
 let g:airline#extensions#whitespace#enabled = 0
