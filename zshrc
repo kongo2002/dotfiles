@@ -33,7 +33,8 @@ fi
 
 # convenience bluetooth alias for mplayer
 if [[ -x $(which mplayer) ]]; then
-    alias mplayer-blue='mplayer -ao alsa:device=bluetooth'
+    alias mplayer-blue='mplayer -ao alsa:device=bluealsa'
+    alias mplayer-hdmi='mplayer -ao alsa:device=hw=1.7'
 fi
 
 if [[ -x $(which tig) ]]; then
@@ -44,7 +45,13 @@ if [[ -x $(which ag) ]]; then
     alias ag='ag --smart-case --ignore tags'
 fi
 
+if [[ -x $(which nvim) ]]; then
+    alias vim=nvim
+fi
+
 export FZF_DEFAULT_OPTS="--no-mouse"
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND='ag -g ""'
 
 # register git-achievements
 if [[ -x "${HOME}/programs/git-achievements/git-achievements" ]]; then
@@ -318,4 +325,8 @@ fi
 # source scm-breeze if existing
 if [[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
     source "${HOME}/.scm_breeze/scm_breeze.sh"
+fi
+
+if [[ -x $(which scmpuff) ]]; then
+    eval "$(scmpuff init -s)"
 fi
