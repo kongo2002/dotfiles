@@ -1,10 +1,11 @@
 " Filename:     .gvimrc
 " Description:  GVim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 31 Oct 2010 07:25:57 PM CET
+" Last Change:  Thu 02 Jul 2015 04:43:46 PM CEST
 
 " font name and size
-set guifont=Inconsolata\ Medium\ 12
+set guifont=PragmataPro\ 10
+"set guifont=Inconsolata\ Medium\ 12
 "set guifont=Monospace\ 9
 "set guifont=Terminus\ 12
 "set guifont=DejaVu\ Sans\ Mono\ 11
