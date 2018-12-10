@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 04 Mar 2018 11:36:56 AM CET
+" Last Change:  Sun 13 May 2018 07:41:56 PM CEST
 
 if !has('nvim')
     set nocompatible
@@ -383,15 +383,19 @@ if has('autocmd')
         au BufRead,BufNewFile *.h let b:fswitchlocs = 'reg:/include/src/,'
                    \ . 'reg:/include.*/src/,./'
 
+        au BufRead,BufNewFile *.hpp,*.hh let b:fswitchdst = 'cc,cpp'
+        au BufRead,BufNewFile *.hpp,*.hh let b:fswitchlocs = 'reg:/include/src/,'
+                   \ . 'reg:/include.*/src/,./'
+
         au BufRead,BufNewFile *.c let b:fswitchdst  = 'h'
         au BufRead,BufNewFile *.c let b:fswitchlocs = 'reg:/src/include/,'
                    \ . 'reg:|src|include/**|,./'
 
-        au BufRead,BufNewFile *.cc let b:fswitchdst  = 'h'
+        au BufRead,BufNewFile *.cc let b:fswitchdst  = 'h,hh'
         au BufRead,BufNewFile *.cc let b:fswitchlocs = 'reg:/src/include/,'
                     \ . 'reg:|src|include/**|,./'
 
-        au BufRead,BufNewFile *.cpp let b:fswitchdst  = 'h'
+        au BufRead,BufNewFile *.cpp let b:fswitchdst  = 'h,hpp'
         au BufRead,BufNewFile *.cpp let b:fswitchlocs = 'reg:/src/include/,'
                     \ . 'reg:|src|include/**|,./'
     augroup END
