@@ -64,3 +64,9 @@
 [submodule "plugins/deoplete.nvim"]
 	path = plugins/deoplete.nvim
 	url = https://github.com/Shougo/deoplete.nvim.git
+[submodule "plugins/neomake"]
+	path = plugins/neomake
+	url = https://github.com/neomake/neomake.git
+[submodule "plugins/elm-vim"]
+	path = plugins/elm-vim
+	url = https://github.com/ElmCast/elm-vim.git
