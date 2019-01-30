@@ -55,3 +55,12 @@
 [submodule "plugins/xptemplate"]
 	path = plugins/xptemplate
 	url = https://github.com/drmingdrmer/xptemplate.git
+[submodule "plugins/vim-go"]
+	path = plugins/vim-go
+	url = https://github.com/fatih/vim-go.git
+[submodule "plugins/deoplete-go"]
+	path = plugins/deoplete-go
+	url = https://github.com/zchee/deoplete-go.git
+[submodule "plugins/deoplete.nvim"]
+	path = plugins/deoplete.nvim
+	url = https://github.com/Shougo/deoplete.nvim.git
