@@ -1,7 +1,7 @@
 " Vim filetype file
 " Filename:     cpp.vim
 " Author:       Gregor Uhlenheuer
-" Last Change:  Fri 11 May 2018 11:35:12 PM CEST
+" Last Change:  Wed 30 Jan 2019 06:16:30 PM CET
 
 " set makeprg to compiler when no Makefile
 if !filereadable(expand("%:p:h")."/Makefile")
@@ -17,9 +17,6 @@ set tags+=~/.vim/tags/sdl
 
 " build c++ specific tags file
 map <buffer> <F12> :sil !ctags -R --c++-kinds=+lp --fields=+iaS --extra=+q --language-force=C++ .<CR>
-
-" enable prototype completion
-call ProtoComplInit()
 
 " OmniCppComplete initialization
 call omni#cpp#complete#Init()

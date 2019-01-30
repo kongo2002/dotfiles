@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Sun 13 May 2018 07:41:56 PM CEST
+" Last Change:  Wed 30 Jan 2019 06:17:19 PM CET
 
 if !has('nvim')
     set nocompatible
@@ -543,9 +543,9 @@ let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteScope = 1
 let OmniCpp_DefaultNamespaces = [ "std" ]
 
-" PROTO-COMPLETE -------------------------------------------------------{{{2
+" DEOPLETE -------------------------------------------------------------{{{2
 
-let g:proto_no_auto_newline = 1
+let g:deoplete#enable_at_startup = 1
 
 " FILETYPE SPECIFICS ---------------------------------------------------{{{1
 
