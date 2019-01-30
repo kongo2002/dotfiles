@@ -13,9 +13,6 @@
 [submodule "plugins/vim-surround"]
 	path = plugins/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "plugins/syntastic"]
-	path = plugins/syntastic
-	url = git://github.com/kongo2002/syntastic.git
 [submodule "plugins/vim-automod"]
 	path = plugins/vim-automod
 	url = git://github.com/kongo2002/vim-automod.git
@@ -31,9 +28,6 @@
 [submodule "plugins/Command-T"]
 	path = plugins/Command-T
 	url = git://github.com/wincent/Command-T.git
-[submodule "plugins/fsharp-vim"]
-	path = plugins/fsharp-vim
-	url = git@github.com:kongo2002/fsharp-vim.git
 [submodule "plugins/neco-ghc"]
 	path = plugins/neco-ghc
 	url = git://github.com/ujihisa/neco-ghc.git
@@ -49,9 +43,6 @@
 [submodule "plugins/vim-scala"]
 	path = plugins/vim-scala
 	url = git://github.com/derekwyatt/vim-scala.git
-[submodule "plugins/Omnisharp"]
-	path = plugins/Omnisharp
-	url = git://github.com/nosami/Omnisharp.git
 [submodule "plugins/vim-airline"]
 	path = plugins/vim-airline
 	url = git://github.com/bling/vim-airline.git
