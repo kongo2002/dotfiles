@@ -1,7 +1,7 @@
 " Name:         kongo3.vim
 " Description:  vim colorscheme
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
-" Last Change:  Sun 09 Aug 2015 09:43:20 PM CEST
+" Last Change:  Wed 30 Jan 2019 06:45:18 PM CET
 " Version:      0.1
 
 if version > 580
@@ -102,8 +102,8 @@ hi MoreMsg          guifg=#a28700                          gui=none
 hi MoreMsg          ctermfg=178                            cterm=none
 hi Question         guifg=fg                               gui=none
 hi Question         ctermfg=fg                             cterm=none
-hi SpecialKey       guifg=#808080       guibg=#262626
-hi SpecialKey       ctermfg=244         ctermbg=235
+hi SpecialKey       guifg=#262626
+hi SpecialKey       ctermfg=235
 hi Title            guifg=#f6f3e8                          gui=bold
 hi Title            ctermfg=254                            cterm=bold
 
