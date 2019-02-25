@@ -132,9 +132,7 @@ alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
 
-alias ls='ls -h --color=auto'
-alias ll='ls -lh --color=auto'
-alias l='ls -lha --color=auto'
+alias cal='cal -3'
 
 alias gd='git diff'
 alias gf='git fetch'
