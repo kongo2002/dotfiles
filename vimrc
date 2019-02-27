@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Wed 30 Jan 2019 06:17:19 PM CET
+" Last Change:  Wed 27 Feb 2019 09:56:58 PM CET
 
 if !has('nvim')
     set nocompatible
@@ -446,6 +446,18 @@ let g:syntastic_haskell_hdevtools_args = '-g-Wall' . <sid>FindCabalSandbox()
 let g:elm_format_autosave = 0
 let g:elm_setup_keybindings = 0
 
+" VIM-GO ---------------------------------------------------------------{{{2
+
+" general settings
+let g:go_autodetect_gopath = 1
+
+" syntax highlighting
+let g:go_highlight_extra_types = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+
 " YOUCOMPLETEME --------------------------------------------------------{{{2
 
 let g:ycm_confirm_extra_conf = 0
@@ -478,6 +490,34 @@ let g:tagbar_type_tex = {
         \ 'l:label',
         \ 'r:ref' ],
     \ 'sort' : 0
+    \ }
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
     \ }
 
 " NERDCOMMENTER --------------------------------------------------------{{{2
