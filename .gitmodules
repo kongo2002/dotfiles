@@ -67,3 +67,6 @@
 [submodule "plugins/vim-erlang-skeletons"]
 	path = plugins/vim-erlang-skeletons
 	url = https://github.com/vim-erlang/vim-erlang-skeletons.git
+[submodule "plugins/fzf.vim"]
+	path = plugins/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
