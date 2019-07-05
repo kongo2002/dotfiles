@@ -25,9 +25,6 @@
 [submodule "plugins/tagbar"]
 	path = plugins/tagbar
 	url = git://github.com/majutsushi/tagbar.git
-[submodule "plugins/Command-T"]
-	path = plugins/Command-T
-	url = git://github.com/wincent/Command-T.git
 [submodule "plugins/neco-ghc"]
 	path = plugins/neco-ghc
 	url = git://github.com/ujihisa/neco-ghc.git
