@@ -67,3 +67,6 @@
 [submodule "plugins/dart-vim-plugin"]
 	path = plugins/dart-vim-plugin
 	url = https://github.com/dart-lang/dart-vim-plugin.git
+[submodule "plugins/vim-erlang-skeletons"]
+	path = plugins/vim-erlang-skeletons
+	url = https://github.com/vim-erlang/vim-erlang-skeletons.git
