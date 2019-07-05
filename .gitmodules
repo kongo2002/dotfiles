@@ -70,3 +70,6 @@
 [submodule "plugins/fzf.vim"]
 	path = plugins/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule "plugins/ale"]
+	path = plugins/ale
+	url = https://github.com/w0rp/ale.git
