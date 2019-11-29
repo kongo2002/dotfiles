@@ -136,11 +136,18 @@ alias gd='git diff'
 alias gf='git fetch'
 alias ga='git add'
 
-PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})>%{${reset_color}%} '
+PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
 RPROMPT=' %~'
 
 _KONGO_ASYNC_PROMPT=0
 _KONGO_ASYNC_COMM="/tmp/.zsh_prompt_$$"
+
+function _python_prompt() {
+    if [[ -n "${VIRTUAL_ENV}" ]]; then
+        local venv="$(basename "${VIRTUAL_ENV}")"
+        echo -n "%{${fg_bold[green]}%}!%{${reset_color}%}${venv//python-/}"
+    fi
+}
 
 function _kongo_precmd() {
     function async() {
