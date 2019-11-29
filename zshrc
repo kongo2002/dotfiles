@@ -26,6 +26,10 @@ fi
 
 [[ -f "${HOME}/python/startup.py" ]] && export PYTHONSTARTUP="${HOME}/python/startup.py"
 
+if [[ -x "${HOME}/programs/dotnet/dotnet" ]]; then
+    export DOTNET_ROOT="${HOME}/programs/dotnet/dotnet"
+fi
+
 if [[ -x $(which mpd) ]]; then
     export MPD_HOST="127.0.0.1"
     export MPD_PORT="6600"
