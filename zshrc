@@ -333,3 +333,7 @@ fi
 if [[ -x $(which scmpuff) ]]; then
     eval "$(scmpuff init -s)"
 fi
+
+if [[ -x $(which direnv) ]]; then
+    eval "$(direnv hook zsh)"
+fi
