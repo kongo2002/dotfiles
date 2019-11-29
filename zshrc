@@ -325,6 +325,12 @@ if [[ -s ~/.fzf.zsh ]]; then
     source ~/.fzf.zsh
 fi
 
+# source zsh-autocompletions
+#   <https://github.com/zsh-users/zsh-autosuggestions>
+if [[ -s ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 # source scm-breeze if existing
 if [[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
     source "${HOME}/.scm_breeze/scm_breeze.sh"
