@@ -57,12 +57,6 @@ export FZF_DEFAULT_OPTS="--no-mouse"
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND='ag -g ""'
 
-# register git-achievements
-if [[ -x "${HOME}/programs/git-achievements/git-achievements" ]]; then
-    export PATH="${PATH}:${HOME}/programs/git-achievements"
-    alias 'git'='git-achievements'
-fi
-
 alias tiga='tig --all'
 
 alias '..'='cd ..'
