@@ -73,3 +73,9 @@
 [submodule "plugins/ale"]
 	path = plugins/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "plugins/vim-racer"]
+	path = plugins/vim-racer
+	url = https://github.com/racer-rust/vim-racer.git
+[submodule "plugins/YouCompleteMe"]
+	path = plugins/YouCompleteMe
+	url = https://github.com/ycm-core/YouCompleteMe.git
