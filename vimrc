@@ -483,6 +483,19 @@ let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
 " TAGBAR ---------------------------------------------------------------{{{2
 
+let g:tagbar_compact = 1
+
+let g:tagbar_type_erlang = {
+    \ 'ctagstype': 'erlang',
+    \ 'sro': ':',
+    \ 'kinds': [
+        \ 'm:modules',
+        \ 'f:functions',
+        \ 'r:records',
+        \ 't:types',
+        \ 'd:macros' ]
+    \ }
+
 let g:tagbar_type_automod = {
     \ 'ctagstype' : 'automod',
     \ 'kinds' : [
