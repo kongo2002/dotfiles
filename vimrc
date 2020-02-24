@@ -195,6 +195,11 @@ endif
 " display statusline even if there is only one window
 set laststatus=2
 
+" NOTE: the `statusline` settings below are usually overwritten when
+" you have vim-airline installed. However I will keep it in here so
+" we have a somewhat decent statusline in case you don't have additional
+" plugins installed.
+
 " filename, flags
 let &statusline='%f %<#%n %m%*%r%h%w'
 
@@ -274,7 +279,7 @@ cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
 
 " bind K to grep
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
 
 " use vimgrep without autocommands being invoked
 nmap <Leader>nv :noautocmd vim /
