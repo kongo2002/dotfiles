@@ -1,7 +1,7 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Wed 27 Feb 2019 09:56:58 PM CET
+" Last Change:  Mon 24 Feb 2020 10:39:49 PM CET
 
 if !has('nvim')
     set nocompatible
@@ -22,6 +22,11 @@ endif
 " unlet g:colors_name to prevent multiple loading of the
 " same colorscheme when resourcing .vimrc
 sil! unlet g:colors_name
+
+" enable 24-bit colors (if possible)
+if has('termguicolors') && index(['xterm-256color', 'xterm-kitty'], expand('$TERM')) >= 0
+    set termguicolors
+endif
 
 " extend runtime path with plugin directory
 sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.plugins')
