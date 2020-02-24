@@ -1064,4 +1064,4 @@ com! -range=% Xml exe '<line1>,<line2>!xmllint --format --recover -' |
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
-call <SID>LoadColorScheme('kongo3:kongo:kongo2:slate', 'slate')
+call <SID>LoadColorScheme('tender:kongo3:kongo:kongo2:slate', 'slate')
