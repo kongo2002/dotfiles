@@ -79,3 +79,6 @@
 [submodule "plugins/YouCompleteMe"]
 	path = plugins/YouCompleteMe
 	url = https://github.com/ycm-core/YouCompleteMe.git
+[submodule "plugins/deoplete.nvim.git"]
+	path = plugins/deoplete.nvim.git
+	url = https://github.com/Shougo/deoplete.nvim.git
