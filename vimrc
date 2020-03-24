@@ -411,6 +411,12 @@ if has('autocmd')
     augroup END
 endif
 
+" FZF ------------------------------------------------------------------{{{2
+
+if has('nvim')
+    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+endif
+
 " GIST -----------------------------------------------------------------{{{2
 
 let g:gist_detect_filetype = 1
