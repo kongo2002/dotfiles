@@ -45,12 +45,21 @@ if [[ -x $(which tig) ]]; then
     alias tiga='tig --all'
 fi
 
+if [[ -x $(which docker-compose) ]]; then
+    alias dockerc='docker-compose'
+fi
+
 if [[ -x $(which ag) ]]; then
     alias ag='ag --smart-case --ignore tags'
 fi
 
 if [[ -x $(which nvim) ]]; then
     alias vim=nvim
+fi
+
+if [[ -x $(which timew) ]]; then
+    alias tiday='timew summary :id'
+    alias tiweek='timew summary :week :id'
 fi
 
 export FZF_DEFAULT_OPTS="--no-mouse"
@@ -338,8 +347,17 @@ fi
 
 if [[ -x $(which scmpuff) ]]; then
     eval "$(scmpuff init -s)"
+
+    function vimf() {
+        eval "$(scmpuff expand -- vim "$@")"
+    }
 fi
 
 if [[ -x $(which direnv) ]]; then
     eval "$(direnv hook zsh)"
 fi
+
+if [[ -f "${HOME}/.ripgreprc" ]]; then
+    export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
+fi
+
