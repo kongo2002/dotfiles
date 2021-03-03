@@ -7,6 +7,7 @@
 	cia = commit -v --amend
 	co = checkout
 	df = diff
+	dfc = diff --cached
 	lg = log --graph --oneline --decorate --all
 	lgd = log --graph --all --pretty=format:'%C(yellow)%h%Cred%d %Creset%s %Cblue(%ci)'
 	lga = log --graph --all --pretty=format:'%C(yellow)%h%Cred%d %Creset%s %Cgreen[%an]'
