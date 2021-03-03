@@ -4,7 +4,7 @@ colors
 
 promptinit
 
-source /etc/zsh/zprofile
+[[ -f "/etc/zsh/zprofile" ]] && source /etc/zsh/zprofile
 
 # extend PATH
 [[ -d "${HOME}/.bin" ]] && export PATH="${PATH}:${HOME}/.bin"
@@ -53,6 +53,12 @@ if [[ -x $(which ag) ]]; then
     alias ag='ag --smart-case --ignore tags'
 fi
 
+alias urldecode='python3 -c "import sys, urllib.parse as ul; \
+    print(ul.unquote_plus(sys.argv[1]))"'
+
+alias urlencode='python3 -c "import sys, urllib.parse as ul; \
+    print (ul.quote_plus(sys.argv[1]))"'
+
 if [[ -x $(which nvim) ]]; then
     alias vim=nvim
 fi
@@ -84,6 +90,8 @@ alias 6='cd +6'
 alias 7='cd +7'
 alias 8='cd +8'
 alias 9='cd +9'
+
+alias cal='cal -3'
 
 cd () {
     if [[ "x$*" == "x..." ]]; then
@@ -147,6 +155,10 @@ alias ga='git add'
 
 PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
 RPROMPT=' %~'
+if [[ -x $(which timew) ]]; then
+    alias tiday='timew summary :id'
+    alias tiweek='timew summary :week :id'
+fi
 
 _KONGO_ASYNC_PROMPT=0
 _KONGO_ASYNC_COMM="/tmp/.zsh_prompt_$$"
@@ -208,7 +220,7 @@ bindkey -M viins "\e." insert-last-word
 # history settings
 #
 HISTFILE=~/.zshhistory
-HISTIGNORE="ls:ll:exit:cd:su"
+HISTORY_IGNORE="(ls|ll|exit|cd|su|cd -|gs|gd|gf|tiday|git cia|git ci|tig|tmux|vim)"
 HISTSIZE=25000
 SAVEHIST=100000
 
@@ -348,9 +360,19 @@ fi
 if [[ -x $(which scmpuff) ]]; then
     eval "$(scmpuff init -s)"
 
+    # integrate scm-puff with flutter
+    function flformat() {
+        eval "$(scmpuff expand -- flutter format "$@")"
+    }
+
+    # integrate scm-puff with vim
     function vimf() {
         eval "$(scmpuff expand -- vim "$@")"
     }
+fi
+
+if [ -x "$HOME/.gradle-wrapper.sh" ]; then
+    alias gradle="$HOME/.gradle-wrapper.sh"
 fi
 
 if [[ -x $(which direnv) ]]; then
