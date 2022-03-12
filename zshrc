@@ -4,15 +4,6 @@ colors
 
 promptinit
 
-[[ -f "/etc/zsh/zprofile" ]] && source /etc/zsh/zprofile
-
-# extend PATH
-[[ -d "${HOME}/.bin" ]] && export PATH="${PATH}:${HOME}/.bin"
-[[ -d "${HOME}/.local/bin" ]] && export PATH="${PATH}:${HOME}/.local/bin"
-[[ -d "${HOME}/.local/sbin" ]] && export PATH="${PATH}:${HOME}/.local/sbin"
-[[ -d "${HOME}/.cabal/bin" ]] && export PATH="${HOME}/.cabal/bin:${PATH}"
-[[ -d "${HOME}/.gem/ruby/2.0.0/bin" ]] && export PATH="${PATH}:${HOME}/.gem/ruby/2.0.0/bin"
-
 # source rvm
 if [[ -s "${HOME}/.rvm/scripts/rvm" ]]; then
     . "${HOME}/.rvm/scripts/rvm" && unset RUBYOPT
@@ -27,7 +18,16 @@ fi
 [[ -f "${HOME}/python/startup.py" ]] && export PYTHONSTARTUP="${HOME}/python/startup.py"
 
 if [[ -x "${HOME}/programs/dotnet/dotnet" ]]; then
-    export DOTNET_ROOT="${HOME}/programs/dotnet/dotnet"
+    export DOTNET_ROOT="${HOME}/programs/dotnet"
+fi
+
+if [[ -x "${HOME}/programs/nim/bin/nim" ]]; then
+    export PATH="${PATH}:${HOME}/programs/nim/bin"
+    export PATH="${PATH}:${HOME}/.nimble/bin"
+fi
+
+if [[ -d "$HOME/.krew" ]]; then
+    export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 
 if [[ -x $(which mpd) ]]; then
@@ -35,14 +35,12 @@ if [[ -x $(which mpd) ]]; then
     export MPD_PORT="6600"
 fi
 
-# convenience bluetooth alias for mplayer
-if [[ -x $(which mplayer) ]]; then
-    alias mplayer-blue='mplayer -ao alsa:device=bluealsa'
-    alias mplayer-hdmi='mplayer -ao alsa:device=hw=1.7'
-fi
-
 if [[ -x $(which tig) ]]; then
     alias tiga='tig --all'
+fi
+
+if [[ -x "$HOME/.zsh/gradle-wrapper.sh" ]]; then
+    alias gradle="$HOME/.zsh/gradle-wrapper.sh"
 fi
 
 if [[ -x $(which docker-compose) ]]; then
@@ -69,8 +67,11 @@ if [[ -x $(which timew) ]]; then
 fi
 
 export FZF_DEFAULT_OPTS="--no-mouse"
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_CTRL_T_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='fd --type f --color never'
+export FZF_CTRL_T_OPTS="--preview 'bat --color always --style numbers {}'"
+export FZF_CTRL_T_COMMAND='fd --type f --color never'
+
+export BAT_THEME='1337'
 
 alias tiga='tig --all'
 
@@ -107,28 +108,12 @@ cd () {
     fi
 }
 
-function veth_interface_for_container() {
-  # Get the process ID for the container named ${1}:
-  local pid=$(docker inspect -f '{{.State.Pid}}' "${1}")
-
-  # Make the container's network namespace available to the ip-netns command:
-  mkdir -p /var/run/netns
-  ln -sf /proc/$pid/ns/net "/var/run/netns/${1}"
-
-  # Get the interface index of the container's eth0:
-  local index=$(ip netns exec "${1}" ip link show eth0 | head -n1 | sed s/:.*//)
-  # Increment the index to determine the veth index, which we assume is
-  # always one greater than the container's index:
-  let index=index+1
-
-  # Write the name of the veth interface to stdout:
-  ip link show | grep "^${index}:" | sed "s/${index}: \(.*\):.*/\1/"
-
-  # Clean up the netns symlink, since we don't need it anymore
-  rm -f "/var/run/netns/${1}"
-}
+alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.argv[1]))"'
+alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]))"'
 
 waitfor() {
+    local process
+    pgrep "$@" > /dev/null 2>&1 || return 1
     for process in "$@"; do
         echo -n "Waiting for '$process' "
         while pgrep "$process" > /dev/null 2>&1; do
@@ -153,55 +138,60 @@ alias gd='git diff'
 alias gf='git fetch'
 alias ga='git add'
 
-PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
-RPROMPT=' %~'
 if [[ -x $(which timew) ]]; then
     alias tiday='timew summary :id'
     alias tiweek='timew summary :week :id'
 fi
 
-_KONGO_ASYNC_PROMPT=0
-_KONGO_ASYNC_COMM="/tmp/.zsh_prompt_$$"
+if [[ -x $(which starship) ]]; then
+    eval "$(starship init zsh)"
+else
+    PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
+    RPROMPT=' %~'
 
-function _python_prompt() {
-    if [[ -n "${VIRTUAL_ENV}" ]]; then
-        local venv="$(basename "${VIRTUAL_ENV}")"
-        echo -n "%{${fg_bold[green]}%}!%{${reset_color}%}${venv//python-/}"
-    fi
-}
+    _KONGO_ASYNC_PROMPT=0
+    _KONGO_ASYNC_COMM="/tmp/.zsh_prompt_$$"
 
-function _kongo_precmd() {
-    function async() {
-        printf "%s %%~" "$(git_prompt)" >| $_KONGO_ASYNC_COMM
-        kill -s USR1 $$
+    function _python_prompt() {
+        if [[ -n "${VIRTUAL_ENV}" ]]; then
+            local venv="$(basename "${VIRTUAL_ENV}")"
+            echo -n "%{${fg_bold[green]}%}!%{${reset_color}%}${venv//python-/}"
+        fi
     }
 
-    if [[ "${_KONGO_ASYNC_PROMPT}" != 0 ]]; then
-        kill -s HUP $_KONGO_ASYNC_PROMPT >/dev/null 2>&1 || :
-    fi
+    function _kongo_precmd() {
+        function async() {
+            printf "%s %%~" "$(git_prompt)" >| $_KONGO_ASYNC_COMM
+            kill -s USR1 $$
+        }
 
-    async &!
-    _KONGO_ASYNC_PROMPT=$!
-}
+        if [[ "${_KONGO_ASYNC_PROMPT}" != 0 ]]; then
+            kill -s HUP $_KONGO_ASYNC_PROMPT >/dev/null 2>&1 || :
+        fi
 
-function _kongo_trap() {
-    RPROMPT="$(cat $_KONGO_ASYNC_COMM)"
-    _KONGO_ASYNC_PROMPT=0
+        async &!
+        _KONGO_ASYNC_PROMPT=$!
+    }
 
-    # reset prompt
-    zle && zle reset-prompt
-}
+    function _kongo_trap() {
+        RPROMPT="$(cat $_KONGO_ASYNC_COMM)"
+        _KONGO_ASYNC_PROMPT=0
 
-function _kongo_atexit() {
-    # cleanup on shutdown
-    rm -f $_KONGO_ASYNC_COMM
-}
+        # reset prompt
+        zle && zle reset-prompt
+    }
 
-precmd_functions+=(_kongo_precmd)
-zshexit_functions+=(_kongo_atexit)
-trap '_kongo_trap' USR1
+    function _kongo_atexit() {
+        # cleanup on shutdown
+        rm -f $_KONGO_ASYNC_COMM
+    }
 
-EDITOR="/usr/bin/vim"
+    precmd_functions+=(_kongo_precmd)
+    zshexit_functions+=(_kongo_atexit)
+    trap '_kongo_trap' USR1
+fi
+
+EDITOR="/usr/local/bin/nvim"
 
 # toggle vi mode
 bindkey -v
@@ -220,7 +210,7 @@ bindkey -M viins "\e." insert-last-word
 # history settings
 #
 HISTFILE=~/.zshhistory
-HISTORY_IGNORE="(ls|ll|exit|cd|su|cd -|gs|gd|gf|tiday|git cia|git ci|tig|tmux|vim)"
+HISTORY_IGNORE="(l|ls|ll|exit|cd|su|su -|gf|gs|gd|tiday|git ci|git cia|cd -|tiga|tig|vim|tmux)"
 HISTSIZE=25000
 SAVEHIST=100000
 
@@ -352,11 +342,6 @@ if [[ -s ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
     source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-# source scm-breeze if existing
-if [[ -s "${HOME}/.scm_breeze/scm_breeze.sh" ]]; then
-    source "${HOME}/.scm_breeze/scm_breeze.sh"
-fi
-
 if [[ -x $(which scmpuff) ]]; then
     eval "$(scmpuff init -s)"
 
@@ -379,7 +364,28 @@ if [[ -x $(which direnv) ]]; then
     eval "$(direnv hook zsh)"
 fi
 
+if [[ -x $(which nnn) ]]; then
+    alias n='nnn -c'
+    export NNN_OPENER=nuke
+fi
+
 if [[ -f "${HOME}/.ripgreprc" ]]; then
     export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 fi
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/programs/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/programs/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/programs/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/programs/google-cloud-sdk/completion.zsh.inc"; fi
+
+# YARN
+if [[ -d "$HOME/.yarn/bin" ]]; then
+    export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+fi
+
+# NVM
+if [[ -d "$HOME/.nvm" ]]; then
+    export NVM_DIR="$HOME/.nvm"
+fi
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
