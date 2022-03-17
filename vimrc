@@ -1,21 +1,69 @@
 " Filename:     .vimrc
 " Description:  Vim configuration file
 " Author:       Gregor Uhlenheuer
-" Last Change:  Mon 24 Feb 2020 10:39:49 PM CET
+" Last Change:  Fri Apr 30 14:41:05 2021
 
 if !has('nvim')
     set nocompatible
 endif
 
-" MACHINE SPECIFICS ----------------------------------------------------{{{1
+" PLUGINS --------------------------------------------------------------{{{1
 
-" machines at work should behave more 'mswin'-like
-if has('win32') || has('win64')
-    if hostname() != 'UHLI'
-        source $VIMRUNTIME/mswin.vim
-        behave mswin
-    endif
+call plug#begin()
+
+" editing
+Plug 'godlygeek/tabular'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
+
+" syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+
+" navigation
+Plug 'junegunn/fzf.vim'
+Plug 'kongo2002/vim-space'
+
+" completion
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" snippets (required for nvim-cmp)
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+" UI
+Plug 'majutsushi/tagbar'
+
+if has('nvim')
+    Plug 'nvim-lualine/lualine.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
+else
+    Plug 'bling/vim-airline'
 endif
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
+
+" lua utils
+Plug 'nvim-lua/plenary.nvim'
+
+" colorschemes
+Plug 'arcticicestudio/nord-vim'
+Plug 'jacoborus/tender.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'EdenEast/nightfox.nvim'
+
+" golang
+Plug 'fatih/vim-go'
+
+call plug#end()
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
 
@@ -23,13 +71,10 @@ endif
 " same colorscheme when resourcing .vimrc
 sil! unlet g:colors_name
 
-" enable 24-bit colors (if possible)
-if has('termguicolors') && index(['xterm-256color', 'xterm-kitty'], expand('$TERM')) >= 0
+" 24-bit colors (given the terminal supports it)
+if has('termguicolors')
     set termguicolors
 endif
-
-" extend runtime path with plugin directory
-sil! call pathogen#runtime_prepend_subdirectories($HOME.'/.plugins')
 
 " reset any global filetype actions
 filetype off
@@ -190,6 +235,12 @@ else
     set grepformat=%f:%l:%c:%m,%f
 endif
 
+" MACHINE SPECIFICS ----------------------------------------------------{{{1
+
+if has('mac')
+    set clipboard=unnamedplus
+endif
+
 " STATUSLINE SETTINGS --------------------------------------------------{{{1
 
 " display statusline even if there is only one window
@@ -279,7 +330,13 @@ cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
 
 " bind K to grep
-nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
+if executable('rg')
+    com! -nargs=* RgWord call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -- " . shellescape(<q-args>), 1, {}, 1)
+    nnoremap K :RgWord <C-r><C-w><CR>
+    vnoremap K "vy:RgWord <C-r>v<CR>
+else
+    nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
+endif
 
 " use vimgrep without autocommands being invoked
 nmap <Leader>nv :noautocmd vim /
@@ -384,6 +441,9 @@ let g:loaded_getscriptPlugin = 1
 let g:loaded_vimballPlugin = 1
 let g:loaded_spellfile_plugin = 0
 
+" no need for fancy XML edit mappings
+let g:xml_jump_string = ''
+
 " FSWITCH --------------------------------------------------------------{{{2
 
 if has('autocmd')
@@ -462,10 +522,19 @@ let g:syntastic_haskell_hdevtools_args = '-g-Wall' . <sid>FindCabalSandbox()
 let g:elm_format_autosave = 0
 let g:elm_setup_keybindings = 0
 
-" VIM-GO ---------------------------------------------------------------{{{2
+" VSNIP ----------------------------------------------------------------{{{2
+
+" jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
+
+" GO-VIM ---------------------------------------------------------------{{{2
 
 " general settings
 let g:go_autodetect_gopath = 1
+let g:go_fmt_fail_silently = 1
 
 " syntax highlighting
 let g:go_highlight_extra_types = 1
@@ -502,6 +571,7 @@ let g:tagbar_type_erlang = {
         \ 'd:macros' ]
     \ }
 
+" filetype: automod
 let g:tagbar_type_automod = {
     \ 'ctagstype' : 'automod',
     \ 'kinds' : [
@@ -511,6 +581,7 @@ let g:tagbar_type_automod = {
     \ 'sort' : 0
     \ }
 
+" filetype: tex
 let g:tagbar_type_tex = {
     \ 'ctagstype' : 'tex',
     \ 'kinds' : [
@@ -574,6 +645,9 @@ let NERDTreeQuitOnOpen = 1
 " disable whitespace checks
 let g:airline#extensions#whitespace#enabled = 0
 
+" disable word counting
+let g:airline#extensions#wordcount#enabled = 0
+
 " activate the extended tabline extension
 let g:airline#extensions#tabline#enabled = 1
 
@@ -616,6 +690,7 @@ let OmniCpp_DefaultNamespaces = [ "std" ]
 
 let g:deoplete#enable_at_startup = 1
 
+
 " FILETYPE SPECIFICS ---------------------------------------------------{{{1
 
 " AUTOCOMMANDS ---------------------------------------------------------{{{2
@@ -630,6 +705,8 @@ if has('autocmd')
         au FileType text setlocal textwidth=78
         au FileType markdown setlocal textwidth=80
         au FileType cs setlocal omnifunc=OmniSharp#Complete
+        au FileType typescriptreact setlocal sw=2 sts=2 et
+        au FileType typescript setlocal sw=2 sts=2 et
         au BufWrite *.bib call custom#PrepareBib()
         au BufWrite *.tex call custom#PrepareTex()
         au BufReadPost * call LastCurPos()
@@ -650,6 +727,11 @@ let g:c_syntax_for_h = 1
 " PYTHON ---------------------------------------------------------------{{{2
 
 let g:python_highlight_all = 1
+
+" GO -------------------------------------------------------------------{{{2
+
+" deactivate overriding `K` mapping
+let g:go_doc_keywordprg_enabled = 0
 
 " VALA -----------------------------------------------------------------{{{2
 
@@ -688,16 +770,6 @@ augroup END
 let g:tex_flavor = 'tex'      " set default filetype to LaTeX
 let g:tex_fold_enabled = 1    " enable syntax folding
 let g:tex_ignore_makefile = 1 " do not search for 'Makefile'
-
-" OS SPECIFICS ---------------------------------------------------------{{{1
-
-if has('win32') || has('win64')
-    set guifont=Lucida_Console:h8:cDEFAULT
-    set lines=80
-    set columns=90
-
-    let g:tagbar_ctags_bin = 'c:\bin\ctags58\ctags.exe'
-endif
 
 " CUSTOM FUNCTIONS -----------------------------------------------------{{{1
 
@@ -1062,7 +1134,6 @@ nmap <Leader>bo :call CloseOthers()<CR>
 
 " CUSTOM COMMANDS ------------------------------------------------------{{{1
 
-com! MongoRC :e ~/.mongorc.js
 com! -range=% Json exe '<line1>,<line2>!python -m json.tool' |
             \ set filetype=javascript
 com! -range=% Xml exe '<line1>,<line2>!xmllint --format --recover -' |
@@ -1070,4 +1141,214 @@ com! -range=% Xml exe '<line1>,<line2>!xmllint --format --recover -' |
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
-call <SID>LoadColorScheme('tender:kongo3:kongo:kongo2:slate', 'slate')
+call <SID>LoadColorScheme('gruvbox-material:nord:tender:kongo3:kongo:kongo2:slate', 'slate')
+
+" SIGN COLUMN ----------------------------------------------------------{{{1
+
+set signcolumn=auto:2
+
+sign define DiagnosticSignError text=⊗ texthl=DiagnosticSignError
+sign define DiagnosticSignWarn  text=⊘ texthl=DiagnosticSignWarn
+sign define DiagnosticSignInfo  text=⊙ texthl=DiagnosticSignInfo
+sign define DiagnosticSignHint  text=∘ texthl=DiagnosticSignHint
+
+" LUA (LSP) -------------------------------------------------------------{{{1
+
+"set completeopt=menuone,noselect,noinsert
+set completeopt=menuone,noselect,noinsert
+
+lua << EOF
+local cmp = require'cmp'
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  experimental = {
+    ghost_text = true
+  },
+  mapping = {
+    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    -- Tab support
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ['<C-y>'] = cmp.config.disable,
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+  }, {
+    { name = 'path' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline', keyword_length = 2 }
+  })
+})
+
+-- connect to autocompletion plugin
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+-- vim api shorthands
+local on_attach = function(client, bufnr, mappings)
+  -- mappings.
+  local mappings = mappings or {}
+
+  local opts = { noremap=true, silent=true }
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+  local function normal_map(key, map, cmd)
+    local do_set = mappings[key] == nil or mappings[key]
+    if do_set then
+      buf_set_keymap('n', map, cmd, opts)
+    end
+  end
+
+  normal_map('declaration',
+    'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+  normal_map('definition',
+    '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>')
+  normal_map('hover',
+    '<C-p>', '<cmd>lua vim.lsp.buf.hover()<CR>')
+  normal_map('implementation',
+    'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+  normal_map('signature',
+    'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
+  normal_map('type_definition',
+    '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
+  normal_map('rename',
+    '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+  normal_map('code_action',
+    '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+  normal_map('references',
+    'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
+  normal_map('diagnostics',
+    '<leader>e', '<cmd>lua vim.diagnostic.open_float(0, {scope="line"})<CR>')
+  normal_map('diagnostics_loclist',
+    '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+  normal_map('formatting',
+    '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+end
+
+-- golang
+require'lspconfig'.gopls.setup {
+    init_options = {
+        usePlaceholders = true,
+    },
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- typescript
+-- `npm install -g typescript typescript-language-server`
+require'lspconfig'.tsserver.setup {
+    on_attach = function(client, bufnr)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+        on_attach(client, bufnr, {
+            formatting = false
+        })
+    end,
+    capabilities = capabilities
+}
+
+-- eslint
+-- `npm install -g vscode-langservers-extracted
+require'lspconfig'.eslint.setup {
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr, {
+            formatting = false
+        })
+        -- override the default formatting from tsserver
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>EslintFixAll<CR>', { noremap=true, silent=true })
+    end,
+    capabilities = capabilities
+}
+
+-- git signs
+require('gitsigns').setup()
+
+-- statusline
+require('lualine').setup {
+  options = {
+    theme = 'gruvbox'
+  },
+  sections = {
+    lualine_c = {
+      { 'filename',
+        -- show relative path
+        path = 1,
+      },
+    },
+  },
+  tabline = {
+    lualine_a = { 'buffers' },
+  }
+}
+
+-- tree-sitter - syntax highlighting
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {
+      'bash',
+      'c',
+      'cpp',
+      'css',
+      'css',
+      'dart',
+      'dockerfile',
+      'dot',
+      'erlang',
+      'go',
+      'hcl',
+      'html',
+      'html',
+      'javascript',
+      'json',
+      'kotlin',
+      'lua',
+      'make',
+      'python',
+      'ruby',
+      'rust',
+      'scala',
+      'scss',
+      'toml',
+      'tsx',
+      'typescript',
+      'vim',
+      'yaml',
+  },
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
