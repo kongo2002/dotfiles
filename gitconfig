@@ -26,3 +26,16 @@
 	ui = true
 [core]
 	pager = less -FRSX
+	editor = /usr/local/bin/nvim
+	excludesfile = ~/.gitignore_global
+[push]
+	default = current
+[pager]
+	diff = delta
+	log = delta
+	reflog = delta
+	show = delta
+
+[delta]
+	line-numbers = true
+	syntax-theme = Solarized (dark)
