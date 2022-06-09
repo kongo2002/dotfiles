@@ -1263,6 +1263,13 @@ require'lspconfig'.gopls.setup {
     capabilities = capabilities
 }
 
+-- python - pyright
+-- `pip install pyright`
+require'lspconfig'.pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
 -- typescript
 -- `npm install -g typescript typescript-language-server`
 require'lspconfig'.tsserver.setup {
@@ -1274,6 +1281,20 @@ require'lspconfig'.tsserver.setup {
         })
     end,
     capabilities = capabilities
+}
+
+-- rust - rls
+-- `rustup component add rls rust-analysis rust-src`
+require'lspconfig'.rls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        rust = {
+            unstable_features = true,
+            build_on_save = false,
+            all_features = true,
+        },
+    },
 }
 
 -- eslint
