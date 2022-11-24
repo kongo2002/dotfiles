@@ -22,6 +22,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " LSP
 Plug 'neovim/nvim-lspconfig'
 
+" lua utils
+Plug 'nvim-lua/plenary.nvim'
+
 " navigation
 Plug 'junegunn/fzf.vim'
 Plug 'kongo2002/vim-space'
@@ -51,8 +54,8 @@ endif
 Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
-" lua utils
-Plug 'nvim-lua/plenary.nvim'
+" diff
+Plug 'sindrets/diffview.nvim'
 
 " colorschemes
 Plug 'arcticicestudio/nord-vim'
@@ -1211,7 +1214,7 @@ cmp.setup.cmdline(':', {
 })
 
 -- connect to autocompletion plugin
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- vim api shorthands
 local on_attach = function(client, bufnr, mappings)
@@ -1251,7 +1254,7 @@ local on_attach = function(client, bufnr, mappings)
   normal_map('diagnostics_loclist',
     '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
   normal_map('formatting',
-    '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+    '<leader>f', '<cmd>lua vim.lsp.buf.format { async = true }<CR>')
 end
 
 -- golang
@@ -1274,8 +1277,10 @@ require'lspconfig'.pyright.setup {
 -- `npm install -g typescript typescript-language-server`
 require'lspconfig'.tsserver.setup {
     on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        -- in older nvim this was `resolved_capabilities`
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+
         on_attach(client, bufnr, {
             formatting = false
         })
@@ -1283,18 +1288,43 @@ require'lspconfig'.tsserver.setup {
     capabilities = capabilities
 }
 
--- rust - rls
+-- rust - rls (rust < 1.65)
 -- `rustup component add rls rust-analysis rust-src`
-require'lspconfig'.rls.setup {
+--require'lspconfig'.rls.setup {
+--    on_attach = on_attach,
+--    capabilities = capabilities,
+--    settings = {
+--        rust = {
+--            unstable_features = true,
+--            build_on_save = false,
+--            all_features = true,
+--        },
+--    },
+--}
+
+-- rust - rust-analyzer (rust >= 1.65)
+-- `rustup component add rust-analyzer`
+require'lspconfig'.rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
-        rust = {
-            unstable_features = true,
-            build_on_save = false,
-            all_features = true,
-        },
-    },
+        ["rust-analyzer"] = {
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
 }
 
 -- eslint
