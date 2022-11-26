@@ -18,6 +18,7 @@ fi
 [[ -f "${HOME}/python/startup.py" ]] && export PYTHONSTARTUP="${HOME}/python/startup.py"
 
 if [[ -x "${HOME}/programs/dotnet/dotnet" ]]; then
+    export DOTNET_CLI_TELEMETRY_OPTOUT=1
     export DOTNET_ROOT="${HOME}/programs/dotnet"
 fi
 
@@ -68,7 +69,7 @@ fi
 
 export FZF_DEFAULT_OPTS="--no-mouse"
 export FZF_DEFAULT_COMMAND='fd --type f --color never'
-export FZF_CTRL_T_OPTS="--preview 'bat --color always --style numbers {}'"
+export FZF_CTRL_T_OPTS="--preview 'bat --color always --style numbers {}' --preview-window down"
 export FZF_CTRL_T_COMMAND='fd --type f --color never'
 
 export BAT_THEME='1337'
@@ -364,6 +365,10 @@ if [[ -x $(which direnv) ]]; then
     eval "$(direnv hook zsh)"
 fi
 
+if [[ -x $(which zoxide) ]]; then
+    eval "$(zoxide init zsh)"
+fi
+
 if [[ -x $(which nnn) ]]; then
     alias n='nnn -c'
     export NNN_OPENER=nuke
@@ -372,6 +377,8 @@ fi
 if [[ -f "${HOME}/.ripgreprc" ]]; then
     export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 fi
+
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/programs/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/programs/google-cloud-sdk/path.zsh.inc"; fi
