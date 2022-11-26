@@ -66,6 +66,9 @@ Plug 'EdenEast/nightfox.nvim'
 " golang
 Plug 'fatih/vim-go'
 
+" fsharp
+Plug 'PhilT/vim-fsharp'
+
 call plug#end()
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
@@ -1157,7 +1160,6 @@ sign define DiagnosticSignHint  text=∘ texthl=DiagnosticSignHint
 
 " LUA (LSP) -------------------------------------------------------------{{{1
 
-"set completeopt=menuone,noselect,noinsert
 set completeopt=menuone,noselect,noinsert
 
 lua << EOF
@@ -1366,8 +1368,8 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {
       'bash',
       'c',
+      'c_sharp',
       'cpp',
-      'css',
       'css',
       'dart',
       'dockerfile',
@@ -1382,6 +1384,7 @@ require'nvim-treesitter.configs'.setup {
       'kotlin',
       'lua',
       'make',
+      'proto',
       'python',
       'ruby',
       'rust',
