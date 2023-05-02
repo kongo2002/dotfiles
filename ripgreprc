@@ -1,0 +1,8 @@
+--max-columns=150
+--max-columns-preview
+
+--smart-case
+
+--colors=path:style:bold
+--colors=path:fg:green
+--colors=line:fg:yellow
