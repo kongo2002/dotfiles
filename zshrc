@@ -370,7 +370,8 @@ if [[ -x $(which zoxide) ]]; then
 fi
 
 if [[ -x $(which nnn) ]]; then
-    alias n='nnn -c'
+    alias n='nnn -c -a -P p'
+    export NNN_PLUG="p:preview-tui"
     export NNN_OPENER=nuke
 fi
 
