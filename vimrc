@@ -21,6 +21,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
+Plug 'folke/trouble.nvim'
 
 " lua utils
 Plug 'nvim-lua/plenary.nvim'
@@ -1268,9 +1269,31 @@ require'lspconfig'.gopls.setup {
     capabilities = capabilities
 }
 
+-- haskell - haskell language server
+-- see <https://haskell-language-server.readthedocs.io>
+require'lspconfig'.hls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
 -- python - pyright
 -- `pip install pyright`
 require'lspconfig'.pyright.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- c - clangd
+require'lspconfig'.clangd.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
+-- kotlin
+require'lspconfig'.kotlin_language_server.setup {
+    root_dir = function(f)
+            return require'lspconfig.util'.root_pattern("build.gradle.kts")(f)
+        end,
     on_attach = on_attach,
     capabilities = capabilities
 }
@@ -1343,7 +1366,11 @@ require'lspconfig'.eslint.setup {
 }
 
 -- git signs
-require('gitsigns').setup()
+require('gitsigns').setup {
+  on_attach = function(bufnr)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gp', '<cmd>lua require"gitsigns".preview_hunk()<CR>', {})
+  end
+}
 
 -- statusline
 require('lualine').setup {
@@ -1375,6 +1402,7 @@ require'nvim-treesitter.configs'.setup {
       'dockerfile',
       'dot',
       'erlang',
+      'glsl',
       'go',
       'hcl',
       'html',
