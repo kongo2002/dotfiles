@@ -9,9 +9,7 @@
 	df = diff
 	dfc = diff --cached
 	lg = log --graph --oneline --decorate --all
-	lgd = log --graph --all --pretty=format:'%C(yellow)%h%Cred%d %Creset%s %Cblue(%ci)'
-	lga = log --graph --all --pretty=format:'%C(yellow)%h%Cred%d %Creset%s %Cgreen[%an]'
-	lgg = log --graph --all --pretty=format:'%C(yellow)%h%Cred%d %Creset%s %Cgreen[%an] %Cblue(%ci)'
+	lgg = log --graph --oneline --decorate
 	st = status --short --branch
 	unadd = reset HEAD
 	graph = log --graph --pretty=oneline --abbrev-commit
@@ -31,11 +29,11 @@
 [push]
 	default = current
 [pager]
+	show = delta
 	diff = delta
 	log = delta
-	reflog = delta
-	show = delta
-
 [delta]
 	line-numbers = true
-	syntax-theme = Solarized (dark)
+	syntax-theme = TwoDark
+[init]
+	defaultBranch = master
