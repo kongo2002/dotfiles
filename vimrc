@@ -63,6 +63,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'jacoborus/tender.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'EdenEast/nightfox.nvim'
+Plug 'rebelot/kanagawa.nvim'
 
 " golang
 Plug 'fatih/vim-go'
@@ -1148,7 +1149,7 @@ com! -range=% Xml exe '<line1>,<line2>!xmllint --format --recover -' |
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
-call <SID>LoadColorScheme('gruvbox-material:nord:tender:kongo3:kongo:kongo2:slate', 'slate')
+call <SID>LoadColorScheme('kanagawa:gruvbox-material:tender:nord:kongo3:kongo:kongo2:slate', 'slate')
 
 " SIGN COLUMN ----------------------------------------------------------{{{1
 
