@@ -71,6 +71,9 @@ Plug 'fatih/vim-go'
 " fsharp
 Plug 'PhilT/vim-fsharp'
 
+" gupta
+Plug 'kongo2002/vim-gupta'
+
 call plug#end()
 
 " GLOBAL SETTINGS ------------------------------------------------------{{{1
@@ -1404,6 +1407,15 @@ require('lualine').setup {
 }
 
 -- tree-sitter - syntax highlighting
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.gupta = {
+  install_info = {
+    url = "https://github.com/kongo2002/tree-sitter-gupta",
+    files = {"src/parser.c", "src/scanner.c"},
+  },
+  filetype = "gupta",
+}
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = {
       'bash',
