@@ -42,7 +42,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
 " UI
-Plug 'majutsushi/tagbar'
+Plug 'stevearc/aerial.nvim'
 
 if has('nvim')
     Plug 'nvim-lualine/lualine.nvim'
@@ -395,8 +395,8 @@ nnoremap <silent> <C-k> :bnext<CR>
 " NERDTree mapping
 map <F1> :NERDTreeToggle<CR>
 
-" TagBar mapping
-map <F3> :TagbarToggle<CR>
+" Sidebar mapping
+map <F3> :AerialToggle<CR>
 
 " FSwitch mappings
 nmap <silent> <Leader>of :FSHere<CR>
@@ -1387,6 +1387,16 @@ require('gitsigns').setup {
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gp', '<cmd>lua require"gitsigns".preview_hunk()<CR>', {})
   end
 }
+
+-- sidebar
+require("aerial").setup({
+  backends = { "treesitter", "lsp" },
+  disable_max_lines = 500000,
+  disable_max_size = 10000000, -- ~ 10 MB
+  highlight_on_jump = false,
+  show_guides = true,
+  nerd_font = false,
+})
 
 -- statusline
 require('lualine').setup {
