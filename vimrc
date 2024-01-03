@@ -727,6 +727,7 @@ if has('autocmd')
         au BufRead,BufNewFile *.e{build,class} setl ts=4 sw=4 noet
         au BufRead,BufNewFile haproxy* setl ft=haproxy
         au BufRead,BufNewFile *.cpp,*.CPP setl ft=cpp
+        au BufRead,BufNewFile *.mli setl ft=ocaml_interface
         au BufWritePre * call RemoveTrailingWhitespace()
     augroup END
 endif
@@ -743,6 +744,10 @@ let g:python_highlight_all = 1
 
 " deactivate overriding `K` mapping
 let g:go_doc_keywordprg_enabled = 0
+
+" OCAML ----------------------------------------------------------------{{{2
+
+let g:no_ocaml_maps = 1
 
 " VALA -----------------------------------------------------------------{{{2
 
@@ -1285,6 +1290,13 @@ require'lspconfig'.golangci_lint_ls.setup {
     capabilities = capabilities
 }
 
+-- ocaml
+-- opam install ocaml-lsp-server
+require'lspconfig'.ocamllsp.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
 -- haskell - haskell language server
 -- see <https://haskell-language-server.readthedocs.io>
 require'lspconfig'.hls.setup {
@@ -1447,6 +1459,8 @@ require'nvim-treesitter.configs'.setup {
       'kotlin',
       'lua',
       'make',
+      'ocaml',
+      'ocaml_interface',
       'proto',
       'python',
       'ruby',
