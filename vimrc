@@ -721,18 +721,6 @@ function! SyntaxItem()
     endif
 endfunction
 
-" DivHtml() - implement a custom TOhtml function -----------------------{{{2
-function! DivHtml() range
-    exec a:firstline . "," . a:lastline . "TOhtml"
-    g/<\/head/normal! $dgg
-    %s/^<body.*$/<pre>/
-    g/<\/body>$/normal! 0dG
-    silent %s/<br>//g
-    call append(line('$'), '</pre>')
-endfunction
-
-com! -range=% DivHtml <line1>,<line2>call DivHtml()
-
 " LastCurPos() - jump to last cursor position --------------------------{{{2
 function! LastCurPos()
     if line("'\"") > 0 && line ("'\"") <= line("$")
@@ -932,41 +920,6 @@ function! s:InsertLineNumbers(first, last)
     endfor
 endfunction
 com! -range=% LineNum call <SID>InsertLineNumbers(<line1>, <line2>)
-
-" HighAllOverColumn() - highlight all columns after given column -------{{{2
-function! HighAllOverColumn(column)
-    if a:column <= 0 | return | endif
-    let cc_set = ''
-    for col in range(a:column + 1, &columns)
-        if col != a:column + 1 | let cc_set .= ',' | endif
-        let cc_set .= col
-    endfor
-    let &cc = cc_set
-endfunction
-
-" TextEnableCodeSnip() - highlight nested syntax regions ---------------{{{2
-function! TextEnableCodeSnip(ft, start, end, textSnipHl) abort
-    let ft=toupper(a:ft)
-    let group='textGroup'.ft
-    if exists('b:current_syntax')
-        let s:current_syntax = b:current_syntax
-        unlet b:current_syntax
-    endif
-    execute 'syntax include @'.group.' syntax/'.a:ft.'.vim'
-    try
-        execute 'syntax include @'.group.' after/syntax/'.a:ft.'.vim'
-    catch
-    endtry
-    if exists('s:current_syntax')
-        let b:current_syntax = s:current_syntax
-    else
-        unlet b:current_syntax
-    endif
-    execute 'syntax region textSnip'.ft.'
-                \ matchgroup='.a:textSnipHl.'
-                \ start="'.a:start.'" end="'.a:end.'"
-                \ contains=@'.group
-endfunction
 
 " InsertNewline() - insert an empty newline in normal mode -------------{{{2
 function! InsertNewline(below)
