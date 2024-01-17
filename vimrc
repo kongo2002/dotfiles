@@ -237,7 +237,10 @@ set shortmess+=I
 set showcmd
 
 " use ag or ack for grepping
-if executable('ag')
+if executable('rg')
+    set grepprg=rg\ --color\ never\ --column\ --no-heading
+    set grepformat=%f:%l:%c:%m
+elseif executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ --column\ --ignore\ tags
     set grepformat=%f:%l:%c%m
 else
