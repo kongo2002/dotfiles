@@ -752,38 +752,6 @@ let g:go_doc_keywordprg_enabled = 0
 
 let g:no_ocaml_maps = 1
 
-" VALA -----------------------------------------------------------------{{{2
-
-let g:syntastic_vala_modules =
-    \ [ 'ggit-1.0'
-    \ , 'gio-2.0'
-    \ , 'gtk+-3.0'
-    \ , 'gd-1.0'
-    \ , 'gtksourceview-3.0'
-    \ , 'libpeas-1.0'
-    \ , 'gee-0.8'
-    \ , 'json-glib-1.0'
-    \ , 'libsoup-2.4'
-    \ , 'webkit2gtk-3.0'
-    \ , 'config'
-    \ ]
-
-" OMNISHARP ------------------------------------------------------------{{{2
-
-augroup custom_omnisharp
-    au!
-    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
-    autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
-    autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
-    autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
-    autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
-    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr>
-    autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
-    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
-    "autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>
-    "autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
-augroup END
-
 " LATEX ----------------------------------------------------------------{{{2
 
 let g:tex_flavor = 'tex'      " set default filetype to LaTeX
