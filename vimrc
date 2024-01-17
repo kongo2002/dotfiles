@@ -1323,10 +1323,36 @@ require'lspconfig'.clangd.setup {
 -- kotlin
 require'lspconfig'.kotlin_language_server.setup {
     root_dir = function(f)
-            return require'lspconfig.util'.root_pattern("build.gradle.kts")(f)
-        end,
+        return require'lspconfig.util'.root_pattern("build.gradle.kts")(f)
+    end,
     on_attach = on_attach,
     capabilities = capabilities
+}
+
+-- vue - volar
+-- `npm install -g @vue/language-server`
+local function get_vue_typescript_server_path(root_dir)
+    local lsputil = require 'lspconfig.util'
+    local found_ts = ''
+    local function check_dir(path)
+        found_ts =  lsputil.path.join(path, 'node_modules', 'typescript', 'lib')
+        if lsputil.path.exists(found_ts) then
+            return path
+        end
+    end
+    if lsputil.search_ancestors(root_dir, check_dir) then
+        return found_ts
+    else
+        return nil
+    end
+end
+
+require'lspconfig'.volar.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    on_new_config = function(new_config, new_root_dir)
+        new_config.init_options.typescript.tsdk = get_vue_typescript_server_path(new_root_dir)
+    end
 }
 
 -- typescript
@@ -1343,20 +1369,6 @@ require'lspconfig'.tsserver.setup {
     end,
     capabilities = capabilities
 }
-
--- rust - rls (rust < 1.65)
--- `rustup component add rls rust-analysis rust-src`
---require'lspconfig'.rls.setup {
---    on_attach = on_attach,
---    capabilities = capabilities,
---    settings = {
---        rust = {
---            unstable_features = true,
---            build_on_save = false,
---            all_features = true,
---        },
---    },
---}
 
 -- rust - rust-analyzer (rust >= 1.65)
 -- `rustup component add rust-analyzer`
@@ -1474,6 +1486,7 @@ require'nvim-treesitter.configs'.setup {
       'tsx',
       'typescript',
       'vim',
+      'vue',
       'yaml',
   },
   highlight = {
