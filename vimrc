@@ -557,83 +557,6 @@ let g:go_highlight_function_parameters = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_types = 1
 
-" YOUCOMPLETEME --------------------------------------------------------{{{2
-
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_filetype_whitelist = { 'c' : 1 }
-
-" ULTISNIPS ------------------------------------------------------------{{{2
-
-let g:snips_author = 'Gregor Uhlenheuer'
-
-let g:UltiSnipsExpandTrigger = "<Tab>"
-let g:UltiSnipsJumpForwardTrigger = "<Tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
-
-" TAGBAR ---------------------------------------------------------------{{{2
-
-let g:tagbar_compact = 1
-
-let g:tagbar_type_erlang = {
-    \ 'ctagstype': 'erlang',
-    \ 'sro': ':',
-    \ 'kinds': [
-        \ 'm:modules',
-        \ 'f:functions',
-        \ 'r:records',
-        \ 't:types',
-        \ 'd:macros' ]
-    \ }
-
-" filetype: automod
-let g:tagbar_type_automod = {
-    \ 'ctagstype' : 'automod',
-    \ 'kinds' : [
-        \ 'p:procedure',
-        \ 'f:function',
-        \ 's:subroutine' ],
-    \ 'sort' : 0
-    \ }
-
-" filetype: tex
-let g:tagbar_type_tex = {
-    \ 'ctagstype' : 'tex',
-    \ 'kinds' : [
-        \ 'c:chapter',
-        \ 's:section',
-        \ 'l:label',
-        \ 'r:ref' ],
-    \ 'sort' : 0
-    \ }
-
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
-
 " NERDCOMMENTER --------------------------------------------------------{{{2
 
 let NERDSpaceDelims = 1
@@ -687,22 +610,6 @@ let html_number_lines = 0 " don't show line numbers
 
 let erlang_show_errors = 0
 let erlang_skel_replace = 0
-
-" OMNICPPCOMPLETE ------------------------------------------------------{{{2
-
-let OmniCpp_SelectFirstItem = 2
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1
-let OmniCpp_MayCompleteDot = 1
-let OmniCpp_MayCompleteArrow = 1
-let OmniCpp_MayCompleteScope = 1
-let OmniCpp_DefaultNamespaces = [ "std" ]
-
-" DEOPLETE -------------------------------------------------------------{{{2
-
-let g:deoplete#enable_at_startup = 1
 
 
 " FILETYPE SPECIFICS ---------------------------------------------------{{{1
