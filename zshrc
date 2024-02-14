@@ -397,3 +397,6 @@ if [[ -d "$HOME/.nvm" ]]; then
     export NVM_DIR="$HOME/.nvm"
 fi
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# opam (ocaml) configuration
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
