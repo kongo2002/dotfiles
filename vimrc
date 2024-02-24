@@ -71,9 +71,6 @@ Plug 'rebelot/kanagawa.nvim'
 " golang
 Plug 'fatih/vim-go'
 
-" fsharp
-Plug 'PhilT/vim-fsharp'
-
 " gupta
 Plug 'kongo2002/vim-gupta'
 
