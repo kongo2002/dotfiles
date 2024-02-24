@@ -55,6 +55,9 @@ endif
 Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
+" file tree
+Plug 'nvim-tree/nvim-tree.lua'
+
 " diff
 Plug 'sindrets/diffview.nvim'
 
@@ -393,8 +396,8 @@ nmap <silent> <A-left> :bprev<CR>
 nnoremap <silent> <C-j> :bprev<CR>
 nnoremap <silent> <C-k> :bnext<CR>
 
-" NERDTree mapping
-map <F1> :NERDTreeToggle<CR>
+" nvim-tree mapping
+map <F1> :NvimTreeToggle<CR>
 
 " Sidebar mapping
 map <F3> :AerialToggle<CR>
@@ -571,9 +574,11 @@ vmap <Leader>cA <plug>NERDCommenterAppend
 nmap <Leader>cu <plug>NERDCommenterUncomment
 vmap <Leader>cu <plug>NERDCommenterUncomment
 
-" NERDTREE -------------------------------------------------------------{{{2
+" NVIM-TREE ------------------------------------------------------------{{{2
 
-let NERDTreeQuitOnOpen = 1
+" disable loading of default netrw plugin
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 
 " AIRLNE ---------------------------------------------------------------{{{2
 
@@ -1103,7 +1108,12 @@ local on_attach = function(client, bufnr, mappings)
     '<leader>f', '<cmd>lua vim.lsp.buf.format { async = true }<CR>')
 end
 
+-- nvim-tree
+require("nvim-tree").setup()
+
 -- golang
+require('go').setup()
+
 require'lspconfig'.gopls.setup {
     init_options = {
         usePlaceholders = true,
