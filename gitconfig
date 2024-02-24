@@ -24,7 +24,6 @@
 	ui = true
 [core]
 	pager = less -FRSX
-	editor = /usr/local/bin/nvim
 	excludesfile = ~/.gitignore_global
 [push]
 	default = current

@@ -388,8 +388,6 @@ nmap <silent> gC :cprev<CR>
 
 " Buffer navigation
 nmap <silent> <Leader>bd :bdelete<CR>
-nmap <silent> gb :bnext<CR>
-nmap <silent> gB :bprev<CR>
 nmap <silent> <A-right> :bnext<CR>
 nmap <silent> <A-left> :bprev<CR>
 nnoremap <silent> <C-j> :bprev<CR>
@@ -1239,7 +1237,16 @@ require'lspconfig'.eslint.setup {
 -- git signs
 require('gitsigns').setup {
   on_attach = function(bufnr)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gp', '<cmd>lua require"gitsigns".preview_hunk()<CR>', {})
+    local gs = package.loaded.gitsigns
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    map('n', 'gb', function() gs.blame_line{full=true} end)
+    map('n', 'gp', gs.preview_hunk)
+    map('n', 'gd', gs.diffthis)
   end
 }
 
