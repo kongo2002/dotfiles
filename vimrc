@@ -69,7 +69,8 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'rebelot/kanagawa.nvim'
 
 " golang
-Plug 'fatih/vim-go'
+Plug 'ray-x/go.nvim'
+Plug 'ray-x/guihua.lua'
 
 " gupta
 Plug 'kongo2002/vim-gupta'
