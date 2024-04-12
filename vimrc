@@ -41,6 +41,11 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
+" database
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'kristijanhusak/vim-dadbod-completion'
+
 " UI
 Plug 'stevearc/aerial.nvim'
 
@@ -626,9 +631,9 @@ if has('autocmd')
         au FileType crontab setlocal backupcopy=yes
         au FileType text setlocal textwidth=78
         au FileType markdown setlocal textwidth=80
-        au FileType cs setlocal omnifunc=OmniSharp#Complete
         au FileType typescriptreact setlocal sw=2 sts=2 et
         au FileType typescript setlocal sw=2 sts=2 et
+        au FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
         au BufWrite *.bib call custom#PrepareBib()
         au BufWrite *.tex call custom#PrepareTex()
         au BufReadPost * call LastCurPos()
@@ -1325,6 +1330,7 @@ require'nvim-treesitter.configs'.setup {
       'rust',
       'scala',
       'scss',
+      'sql',
       'toml',
       'tsx',
       'typescript',
