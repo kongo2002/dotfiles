@@ -404,6 +404,7 @@ nnoremap <silent> <C-k> :bnext<CR>
 
 " nvim-tree mapping
 map <F1> :NvimTreeToggle<CR>
+nmap <silent> <Leader>ff :NvimTreeFindFile!<CR>
 
 " Sidebar mapping
 map <F3> :AerialToggle<CR>
@@ -491,6 +492,10 @@ if has('autocmd')
                     \ . 'reg:|src|include/**|,./'
     augroup END
 endif
+
+" VIM-FUGITIVE ---------------------------------------------------------{{{2
+
+nmap <silent> ,G :G<CR>
 
 " FZF ------------------------------------------------------------------{{{2
 
