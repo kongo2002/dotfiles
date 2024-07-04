@@ -67,7 +67,7 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'sindrets/diffview.nvim'
 
 " colorschemes
-Plug 'arcticicestudio/nord-vim'
+Plug 'shaunsingh/nord.nvim'
 Plug 'jacoborus/tender.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'EdenEast/nightfox.nvim'
@@ -994,7 +994,9 @@ com! -range=% Xml exe '<line1>,<line2>!xmllint --format --recover -' |
 
 " COLORSCHEME ----------------------------------------------------------{{{1
 
-call <SID>LoadColorScheme('kanagawa:gruvbox-material:tender:nord:kongo3:kongo:kongo2:slate', 'slate')
+let g:nord_italic = v:false
+
+call <SID>LoadColorScheme('nord:nightfox:tender:kanagawa-dragon:gruvbox-material:tender:kongo3:kongo:kongo2:slate', 'slate')
 
 " SIGN COLUMN ----------------------------------------------------------{{{1
 
@@ -1276,7 +1278,7 @@ require("aerial").setup({
 -- statusline
 require('lualine').setup {
   options = {
-    theme = 'gruvbox'
+    theme = 'nord'
   },
   sections = {
     lualine_c = {
