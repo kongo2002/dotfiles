@@ -1355,6 +1355,11 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+require('trouble').setup {
+  auto_jump = {},
+}
+
 require("toggleterm").setup {
   direction = 'float',
   open_mapping = [[<c-y>]],
