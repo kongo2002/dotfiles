@@ -66,6 +66,9 @@ Plug 'nvim-tree/nvim-tree.lua'
 " diff
 Plug 'sindrets/diffview.nvim'
 
+" terminal
+Plug 'akinsho/toggleterm.nvim'
+
 " colorschemes
 Plug 'shaunsingh/nord.nvim'
 Plug 'jacoborus/tender.vim'
@@ -1350,4 +1353,9 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+require("toggleterm").setup {
+  direction = 'float',
+  open_mapping = [[<c-y>]],
+}
+
 EOF
