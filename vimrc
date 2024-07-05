@@ -4,7 +4,7 @@
 " Last Change:  Fri Apr 30 14:41:05 2021
 
 if !has('nvim')
-    set nocompatible
+set nocompatible
 endif
 
 " PLUGINS --------------------------------------------------------------{{{1
@@ -50,10 +50,10 @@ Plug 'kristijanhusak/vim-dadbod-completion'
 Plug 'stevearc/aerial.nvim'
 
 if has('nvim')
-    Plug 'nvim-lualine/lualine.nvim'
-    Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 else
-    Plug 'bling/vim-airline'
+Plug 'bling/vim-airline'
 endif
 
 " git
@@ -1008,17 +1008,20 @@ call <SID>LoadColorScheme('nord:nightfox:tender:kanagawa-dragon:gruvbox-material
 
 " SIGN COLUMN ----------------------------------------------------------{{{1
 
+if has('nvim')
 set signcolumn=auto:2
 
 sign define DiagnosticSignError text=⊗ texthl=DiagnosticSignError
 sign define DiagnosticSignWarn  text=⊘ texthl=DiagnosticSignWarn
 sign define DiagnosticSignInfo  text=⊙ texthl=DiagnosticSignInfo
 sign define DiagnosticSignHint  text=∘ texthl=DiagnosticSignHint
+endif
 
 " LUA (LSP) -------------------------------------------------------------{{{1
 
 set completeopt=menuone,noselect,noinsert
 
+if has('nvim')
 lua << EOF
 local cmp = require'cmp'
 cmp.setup({
@@ -1371,3 +1374,4 @@ require("toggleterm").setup {
 }
 
 EOF
+endif
