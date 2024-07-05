@@ -1128,7 +1128,9 @@ end
 require("nvim-tree").setup()
 
 -- golang
-require('go').setup()
+require('go').setup {
+  lsp_codelens = false
+}
 
 require'lspconfig'.gopls.setup {
     init_options = {
