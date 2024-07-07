@@ -411,14 +411,6 @@ map <F3> :AerialToggle<CR>
 
 " FSwitch mappings
 nmap <silent> <Leader>of :FSHere<CR>
-nmap <silent> <Leader>ol :FSRight<CR>
-nmap <silent> <Leader>oL :FSSplitRight<CR>
-nmap <silent> <Leader>oh :FSLeft<CR>
-nmap <silent> <Leader>oH :FSSplitLeft<CR>
-nmap <silent> <Leader>ok :FSAbove<CR>
-nmap <silent> <Leader>oK :FSSplitAbove<CR>
-nmap <silent> <Leader>oj :FSBelow<CR>
-nmap <silent> <Leader>oJ :FSSplitBelow<CR>
 
 " close current window
 nmap <silent> <Leader>cl :close<CR>
