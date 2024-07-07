@@ -476,8 +476,6 @@ nmap <silent> ,G :G<CR>
 " FZF ------------------------------------------------------------------{{{2
 
 if has('nvim')
-    let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
-
     nmap <silent> <leader>t <cmd>lua require('fzf-lua').files()<CR>
     nmap <silent> <leader>g <cmd>lua require('fzf-lua').git_files()<CR>
     nmap <silent> <leader>bb <cmd>lua require('fzf-lua').buffers()<CR>
