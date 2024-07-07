@@ -27,7 +27,7 @@ Plug 'folke/trouble.nvim'
 Plug 'nvim-lua/plenary.nvim'
 
 " navigation
-Plug 'junegunn/fzf.vim'
+Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'kongo2002/vim-space'
 
 " completion
@@ -348,13 +348,8 @@ cnoremap <C-b> <S-Left>
 cnoremap <C-f> <S-Right>
 
 " bind K to grep
-if executable('rg')
-    com! -nargs=* RgWord call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case -- " . shellescape(<q-args>), 1, {}, 1)
-    nnoremap K :RgWord <C-r><C-w><CR>
-    vnoremap K "vy:RgWord <C-r>v<CR>
-else
-    nnoremap K :grep! "\b<cword>\b"<CR>:cw<CR>
-endif
+nnoremap K <cmd>lua require('fzf-lua').grep_cword()<CR>
+vnoremap K <cmd>lua require('fzf-lua').grep_visual()<CR>
 
 " use vimgrep without autocommands being invoked
 nmap <Leader>nv :noautocmd vim /
@@ -482,6 +477,10 @@ nmap <silent> ,G :G<CR>
 
 if has('nvim')
     let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+
+    nmap <silent> <leader>t <cmd>lua require('fzf-lua').files()<CR>
+    nmap <silent> <leader>g <cmd>lua require('fzf-lua').git_files()<CR>
+    nmap <silent> <leader>bb <cmd>lua require('fzf-lua').buffers()<CR>
 endif
 
 " GIST -----------------------------------------------------------------{{{2
@@ -1306,6 +1305,19 @@ end, {})
 require("toggleterm").setup {
   direction = 'float',
   open_mapping = [[<c-y>]],
+}
+
+require('fzf-lua').setup {
+  -- max-perf profile: similar to 'fzf-native' and disables icons globally
+  "max-perf",
+  winopts = {
+    height = 0.9,
+    width = 0.9,
+    preview = {
+      vertical = 'down:35%',
+      horizontal = 'right:50%',
+    },
+  }
 }
 
 EOF
