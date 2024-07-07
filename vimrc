@@ -428,12 +428,6 @@ vmap <Leader>v y:noautocmd vimgrep /<C-r>"/ **/*.
 " substitute the highlighted string
 vmap <Leader>s y:%s/<C-r>"/
 
-" toggle matching of long lines
-map <F11> :call ToggleLongLines()<CR>
-
-" build ctags in current directory
-map <F12> :!ctags -R .<CR><CR>
-
 " invoke sudo afterwards using 'tee'
 com! SudoW exe 'silent w !sudo tee % >/dev/null' | :edit!
 
@@ -782,21 +776,6 @@ function! SearchMatches(id)
     catch /.*/
         return ''
     endtry
-endfunction
-
-" ToggleLongLines() - toggle matching of long lines --------------------{{{2
-function! ToggleLongLines()
-    if exists('*matchadd')
-        if !exists('w:long_match')
-            let len = (&tw <= 0 ? 80 : &tw)
-            let w:long_match = matchadd('ErrorMsg', '.\%>'.(len+1).'v', 0)
-            echo 'longlines'
-        else
-            call matchdelete(w:long_match)
-            unlet w:long_match
-            echo 'nolonglines'
-        endif
-    endif
 endfunction
 
 " NumLongLines() - return number of long lines -------------------------{{{2
