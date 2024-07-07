@@ -286,11 +286,6 @@ let &statusline.='%{&paste?"[paste]":""}'
 " current space.vim command
 let &statusline.='%{SSpace()}'
 
-" syntastic plugin
-let &statusline.='%#warningmsg#'
-let &statusline.='%{SSyntastic()}'
-let &statusline.='%*'
-
 " git branch and commit
 let &statusline.='%{SFugitive()}'
 
@@ -497,38 +492,6 @@ let g:gist_detect_filetype = 1
 
 let g:surround_indent = 1
 
-" SYNTASTIC ------------------------------------------------------------{{{2
-
-let g:syntastic_enable_signs = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_c_config_file = '.config'
-let g:syntastic_cpp_compiler_options = '-std=c++0x'
-let g:syntastic_cpp_config_file = '.config'
-let g:syntastic_cs_checkers = ['syntax', 'issues']
-
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['scala'] }
-
-" SYNTASTIC - PYTHON OPTIONS -------------------------------------------{{{3
-
-let g:syntastic_python_flake8_args = '--ignore=E501'
-
-" SYNTASTIC - HASKELL OPTIONS ------------------------------------------{{{3
-
-function! s:FindCabalSandbox()
-    let sandbox = finddir('.cabal-sandbox', './;')
-    let package = glob(sandbox . '/*-packages.conf.d')
-    if package != ''
-        return ' -g-package-db=' . package
-    endif
-    return ''
-endfunction
-
-let g:syntastic_haskell_checkers = ['hdevtools', 'hlint']
-let g:syntastic_haskell_hdevtools_args = '-g-Wall' . <sid>FindCabalSandbox()
-
 " ELM-VIM --------------------------------------------------------------{{{2
 
 let g:elm_format_autosave = 0
@@ -699,14 +662,6 @@ endfunction
 function! SFugitive()
     if exists('*fugitive#statusline')
         return fugitive#statusline()
-    endif
-    return ""
-endfunction
-
-" SSyntastic() - get the number of syntax errors found -----------------{{{2
-function! SSyntastic()
-    if exists('*SyntasticStatuslineFlag')
-        return SyntasticStatuslineFlag()
     endif
     return ""
 endfunction
