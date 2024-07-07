@@ -1368,7 +1368,14 @@ require'nvim-treesitter.configs'.setup {
 
 require('trouble').setup {
   auto_jump = {},
+  warn_no_results = false,
 }
+
+vim.keymap.set('n', '<leader>T', function()
+  require('trouble').toggle('diagnostics', {
+      focus = false,
+    })
+end, {})
 
 require("toggleterm").setup {
   direction = 'float',
