@@ -147,7 +147,7 @@ fi
 if [[ -x $(which starship) ]]; then
     eval "$(starship init zsh)"
 else
-    PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
+    PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(1j.${fg_bold[yellow]}!${fg_bold[white]}%j.)%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
     RPROMPT=' %~'
 
     _KONGO_ASYNC_PROMPT=0
