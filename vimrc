@@ -1100,6 +1100,13 @@ local function get_omnisharp_bin()
     return lsputil.path.join(home, 'programs', 'omnisharp', 'OmniSharp.dll')
 end
 
+-- for decompilation support we might need this in the `omnisharp.json`:
+--
+-- {
+--   "RoslynExtensionsOptions": {
+--     "enableDecompilationSupport": true
+--   }
+-- }
 require'lspconfig'.omnisharp.setup {
     on_attach = function(client, bufnr)
         on_attach(client, bufnr)
