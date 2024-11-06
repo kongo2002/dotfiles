@@ -80,6 +80,9 @@ Plug 'rebelot/kanagawa.nvim'
 Plug 'ray-x/go.nvim'
 Plug 'ray-x/guihua.lua'
 
+" .NET
+Plug 'Hoffs/omnisharp-extended-lsp.nvim'
+
 " gupta
 Plug 'kongo2002/vim-gupta'
 
@@ -1089,6 +1092,23 @@ require'lspconfig'.hls.setup {
 require'lspconfig'.pyright.setup {
     on_attach = on_attach,
     capabilities = capabilities
+}
+
+local function get_omnisharp_bin()
+    local lsputil = require 'lspconfig.util'
+    local home = os.getenv('HOME')
+    return lsputil.path.join(home, 'programs', 'omnisharp', 'OmniSharp.dll')
+end
+
+require'lspconfig'.omnisharp.setup {
+    on_attach = function(client, bufnr)
+        on_attach(client, bufnr)
+
+        -- override jump to definition
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-]>', "<cmd>lua require('omnisharp_extended').lsp_definition()<cr>", { noremap=true, silent=true })
+    end,
+    capabilities = capabilities,
+    cmd = { "dotnet", get_omnisharp_bin() },
 }
 
 -- c - clangd
