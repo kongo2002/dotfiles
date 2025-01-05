@@ -1161,7 +1161,7 @@ require'lspconfig'.volar.setup {
 
 -- typescript
 -- `npm install -g typescript typescript-language-server`
-require'lspconfig'.tsserver.setup {
+require'lspconfig'.ts_ls.setup {
     on_attach = function(client, bufnr)
         -- in older nvim this was `resolved_capabilities`
         client.server_capabilities.documentFormattingProvider = false
