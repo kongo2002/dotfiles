@@ -81,7 +81,7 @@ Plug 'ray-x/go.nvim'
 Plug 'ray-x/guihua.lua'
 
 " .NET
-Plug 'Hoffs/omnisharp-extended-lsp.nvim'
+Plug 'Hoffs/omnisharp-extended-lsp.nvim', { 'commit': '4916fa12e5b28d21a1f031f0bdd10aa15a75d85d' }
 
 " gupta
 Plug 'kongo2002/vim-gupta'
@@ -1199,6 +1199,14 @@ require'lspconfig'.rust_analyzer.setup {
     }
 }
 
+-- jdt
+-- download release from <http://download.eclipse.org/jdtls/snapshots/>
+-- and put it into $PATH
+require'lspconfig'.jdtls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
 -- eslint
 -- `npm install -g vscode-langservers-extracted
 require'lspconfig'.eslint.setup {
@@ -1289,8 +1297,10 @@ require'nvim-treesitter.configs'.setup {
       'kotlin',
       'lua',
       'make',
+      'nix',
       'ocaml',
       'ocaml_interface',
+      'odin',
       'proto',
       'python',
       'ruby',
