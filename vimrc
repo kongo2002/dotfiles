@@ -71,6 +71,7 @@ Plug 'akinsho/toggleterm.nvim'
 
 " colorschemes
 Plug 'shaunsingh/nord.nvim'
+Plug 'marko-cerovac/material.nvim'
 Plug 'jacoborus/tender.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'EdenEast/nightfox.nvim'
@@ -929,18 +930,14 @@ com! -range=% Xml exe '<line1>,<line2>!xmllint --format --recover -' |
 " COLORSCHEME ----------------------------------------------------------{{{1
 
 let g:nord_italic = v:false
+let g:material_style = 'deep ocean'
 
-call <SID>LoadColorScheme('nord:nightfox:tender:kanagawa-dragon:gruvbox-material:tender:kongo3:kongo:kongo2:slate', 'slate')
+call <SID>LoadColorScheme('material:nord:gruvbox-material:kanagawa-dragon:nightfox:tender:kongo3:kongo:kongo2:slate', 'slate')
 
 " SIGN COLUMN ----------------------------------------------------------{{{1
 
 if has('nvim')
 set signcolumn=auto:2
-
-sign define DiagnosticSignError text=⊗ texthl=DiagnosticSignError
-sign define DiagnosticSignWarn  text=⊘ texthl=DiagnosticSignWarn
-sign define DiagnosticSignInfo  text=⊙ texthl=DiagnosticSignInfo
-sign define DiagnosticSignHint  text=∘ texthl=DiagnosticSignHint
 endif
 
 " LUA (LSP) -------------------------------------------------------------{{{1
@@ -949,6 +946,7 @@ set completeopt=menuone,noselect,noinsert
 
 if has('nvim')
 lua << EOF
+
 local cmp = require'cmp'
 cmp.setup({
   snippet = {
@@ -1009,6 +1007,48 @@ cmp.setup.cmdline(':', {
 -- connect to autocompletion plugin
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- remove default LSP key bindings
+vim.keymap.del('n', 'grn')
+vim.keymap.del({'n', 'x'}, 'gra')
+vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'gO')
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('custom_lsp_au', {}),
+    callback = function(args)
+        local function set_key(lhs, cb, desc)
+            local opts = { noremap = true, silent = true, callback = cb, desc = desc }
+            vim.api.nvim_buf_set_keymap(args.buf, 'n', lhs, '', opts)
+        end
+
+        set_key('gD', vim.lsp.buf.declaration,
+            'jump to declaration (LSP)')
+        set_key('<C-]>', vim.lsp.buf.definition,
+            'jump to definition (LSP)')
+        set_key('<C-p>', vim.lsp.buf.hover,
+            'hover information (LSP)')
+        set_key('gi', vim.lsp.buf.implementation,
+            'jump to implementation (LSP)')
+        set_key('gs', vim.lsp.buf.signature_help,
+            'show signature help (LSP)')
+        set_key('<leader>D', vim.lsp.buf.type_definition,
+            'show type definition (LSP)')
+        set_key('<leader>rn', vim.lsp.buf.rename,
+            'rename symbol (LSP)')
+        set_key('<leader>ca', vim.lsp.buf.code_action,
+            'show code actions (LSP)')
+        set_key('gr', vim.lsp.buf.references,
+            'show references (LSP)')
+        set_key('<leader>e', function() vim.diagnostic.open_float(0, {scope="line"}) end,
+            'show diagnostics (LSP)')
+        set_key('<leader>q', vim.diagnostic.setloclist,
+            'show diagnostics on location list (LSP)')
+        set_key('<leader>f', function() vim.lsp.buf.format { async = true } end,
+            'format code (LSP)')
+    end,
+})
+
 -- vim api shorthands
 local on_attach = function(client, bufnr, mappings)
   -- mappings.
@@ -1023,31 +1063,6 @@ local on_attach = function(client, bufnr, mappings)
       buf_set_keymap('n', map, cmd, opts)
     end
   end
-
-  normal_map('declaration',
-    'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-  normal_map('definition',
-    '<C-]>', '<cmd>lua vim.lsp.buf.definition()<CR>')
-  normal_map('hover',
-    '<C-p>', '<cmd>lua vim.lsp.buf.hover()<CR>')
-  normal_map('implementation',
-    'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-  normal_map('signature',
-    'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-  normal_map('type_definition',
-    '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-  normal_map('rename',
-    '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-  normal_map('code_action',
-    '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-  normal_map('references',
-    'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-  normal_map('diagnostics',
-    '<leader>e', '<cmd>lua vim.diagnostic.open_float(0, {scope="line"})<CR>')
-  normal_map('diagnostics_loclist',
-    '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
-  normal_map('formatting',
-    '<leader>f', '<cmd>lua vim.lsp.buf.format { async = true }<CR>')
 end
 
 -- nvim-tree
@@ -1058,41 +1073,43 @@ require('go').setup {
   lsp_codelens = false
 }
 
-require'lspconfig'.gopls.setup {
+-- disable inline type hints
+vim.lsp.inlay_hint.enable(false)
+
+-- configure diagnostic signs
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '⊗',
+            [vim.diagnostic.severity.WARN] = '⊘',
+            [vim.diagnostic.severity.INFO] = '⊙',
+            [vim.diagnostic.severity.HINT] = '∘',
+        },
+    },
+})
+
+vim.lsp.enable('gopls')
+vim.lsp.config('gopls', {
     init_options = {
         usePlaceholders = true,
     },
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+})
 
 -- go install github.com/nametake/golangci-lint-langserver@latest
 -- go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-require'lspconfig'.golangci_lint_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+--vim.lsp.enable('golangci_lint_ls')
 
 -- ocaml
 -- opam install ocaml-lsp-server
-require'lspconfig'.ocamllsp.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+vim.lsp.enable('ocamllsp')
 
 -- haskell - haskell language server
 -- see <https://haskell-language-server.readthedocs.io>
-require'lspconfig'.hls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+vim.lsp.enable('hls')
 
 -- python - pyright
 -- `pip install pyright`
-require'lspconfig'.pyright.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+vim.lsp.enable('pyright')
 
 local function get_omnisharp_bin()
     local lsputil = require 'lspconfig.util'
@@ -1107,31 +1124,25 @@ end
 --     "enableDecompilationSupport": true
 --   }
 -- }
-require'lspconfig'.omnisharp.setup {
+vim.lsp.enable('omnisharp')
+vim.lsp.config('omnisharp', {
     on_attach = function(client, bufnr)
-        on_attach(client, bufnr)
-
         -- override jump to definition
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-]>', "<cmd>lua require('omnisharp_extended').lsp_definition()<cr>", { noremap=true, silent=true })
     end,
-    capabilities = capabilities,
-    cmd = { "dotnet", get_omnisharp_bin() },
-}
+    cmd = { "dotnet", get_omnisharp_bin(), "-z", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" },
+})
 
 -- c - clangd
-require'lspconfig'.clangd.setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+vim.lsp.enable('clangd')
 
 -- kotlin
-require'lspconfig'.kotlin_language_server.setup {
+vim.lsp.enable('kotlin_language_server')
+vim.lsp.config('kotlin_language_server', {
     root_dir = function(f)
         return require'lspconfig.util'.root_pattern("build.gradle.kts")(f)
     end,
-    on_attach = on_attach,
-    capabilities = capabilities
-}
+})
 
 -- vue - volar
 -- `npm install -g @vue/language-server`
@@ -1151,34 +1162,30 @@ local function get_vue_typescript_server_path(root_dir)
     end
 end
 
-require'lspconfig'.volar.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+vim.lsp.enable('vue_ls')
+vim.lsp.config('vue_ls', {
     on_new_config = function(new_config, new_root_dir)
         new_config.init_options.typescript.tsdk = get_vue_typescript_server_path(new_root_dir)
     end
-}
+})
 
 -- typescript
 -- `npm install -g typescript typescript-language-server`
-require'lspconfig'.ts_ls.setup {
+vim.lsp.enable('ts_ls')
+vim.lsp.config('ts_ls', {
     on_attach = function(client, bufnr)
         -- in older nvim this was `resolved_capabilities`
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
 
-        on_attach(client, bufnr, {
-            formatting = false
-        })
+        --on_attach(client, bufnr, { formatting = false })
     end,
-    capabilities = capabilities
-}
+})
 
 -- rust - rust-analyzer (rust >= 1.65)
 -- `rustup component add rust-analyzer`
-require'lspconfig'.rust_analyzer.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
+vim.lsp.enable('rust_analyzer')
+vim.lsp.config('rust_analyzer', {
     settings = {
         ["rust-analyzer"] = {
             imports = {
@@ -1197,28 +1204,22 @@ require'lspconfig'.rust_analyzer.setup {
             },
         }
     }
-}
+})
 
 -- jdt
 -- download release from <http://download.eclipse.org/jdtls/snapshots/>
 -- and put it into $PATH
-require'lspconfig'.jdtls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
+vim.lsp.enable('jdtls')
 
 -- eslint
 -- `npm install -g vscode-langservers-extracted
-require'lspconfig'.eslint.setup {
+vim.lsp.enable('eslint')
+vim.lsp.config('eslint', {
     on_attach = function(client, bufnr)
-        on_attach(client, bufnr, {
-            formatting = false
-        })
         -- override the default formatting from tsserver
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>EslintFixAll<CR>', { noremap=true, silent=true })
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>f', '<cmd>EslintFixAll<CR>', { noremap = true, silent = true })
     end,
-    capabilities = capabilities
-}
+})
 
 -- git signs
 require('gitsigns').setup {
@@ -1249,7 +1250,8 @@ require("aerial").setup({
 -- statusline
 require('lualine').setup {
   options = {
-    theme = 'nord'
+    --theme = 'nord'
+    theme = 'material'
   },
   sections = {
     lualine_c = {
