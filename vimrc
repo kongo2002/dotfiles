@@ -31,15 +31,7 @@ Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'kongo2002/vim-space'
 
 " completion
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-
-" snippets (required for nvim-cmp)
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'saghen/blink.cmp', {'tag': 'v1.3.1'}
 
 " database
 Plug 'tpope/vim-dadbod'
@@ -498,14 +490,6 @@ let g:surround_indent = 1
 let g:elm_format_autosave = 0
 let g:elm_setup_keybindings = 0
 
-" VSNIP ----------------------------------------------------------------{{{2
-
-" jump forward or backward
-imap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-smap <expr> <Tab>   vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>'
-imap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
-smap <expr> <S-Tab> vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>'
-
 " GO-VIM ---------------------------------------------------------------{{{2
 
 " general settings
@@ -591,7 +575,6 @@ if has('autocmd')
         au FileType markdown setlocal textwidth=80
         au FileType typescriptreact setlocal sw=2 sts=2 et
         au FileType typescript setlocal sw=2 sts=2 et
-        au FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
         au BufWrite *.bib call custom#PrepareBib()
         au BufWrite *.tex call custom#PrepareTex()
         au BufReadPost * call LastCurPos()
@@ -947,65 +930,24 @@ set completeopt=menuone,noselect,noinsert
 if has('nvim')
 lua << EOF
 
-local cmp = require'cmp'
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
+require('blink.cmp').setup {
+  keymap = {
+    preset = 'enter',
   },
-  experimental = {
-    ghost_text = true
+  completion = {
+    documentation = {
+      auto_show = true,
+      auto_show_delay_ms = 500,
+    },
   },
-  mapping = {
-    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    -- Tab support
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ['<C-y>'] = cmp.config.disable,
-    ['<C-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
-    -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Insert }),
+  cmdline = {
+    completion = {
+      menu = {
+        auto_show = true,
+      },
+    },
   },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-  }, {
-    { name = 'path' },
-  }, {
-    { name = 'buffer' },
-  })
-})
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = 'buffer' }
-  }
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline',
-      keyword_length = 2,
-      option = { ignore_cmds = { '!' } }
-    }
-  })
-})
-
--- connect to autocompletion plugin
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+}
 
 -- remove default LSP key bindings
 vim.keymap.del('n', 'grn')
@@ -1072,6 +1014,10 @@ require("nvim-tree").setup()
 require('go').setup {
   lsp_codelens = false
 }
+
+vim.lsp.config('*', {
+    capabilites = require('blink.cmp').get_lsp_capabilities()
+})
 
 -- disable inline type hints
 vim.lsp.inlay_hint.enable(false)
