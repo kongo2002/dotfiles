@@ -31,6 +31,7 @@ Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 Plug 'kongo2002/vim-space'
 
 " completion
+" (using a tagged version will include a prebuilt fuzzymatch binary)
 Plug 'saghen/blink.cmp', {'tag': 'v1.3.1'}
 
 " database
@@ -60,6 +61,9 @@ Plug 'sindrets/diffview.nvim'
 
 " terminal
 Plug 'akinsho/toggleterm.nvim'
+
+" colors
+Plug 'norcalli/nvim-colorizer.lua'
 
 " colorschemes
 Plug 'shaunsingh/nord.nvim'
@@ -925,6 +929,14 @@ endif
 
 " LUA (LSP) -------------------------------------------------------------{{{1
 
+" remove default LSP key bindings
+sil! nunmap grn
+sil! nunmap gra
+sil! xunmap gra
+sil! nunmap grr
+sil! nunmap gri
+sil! nunmap gO
+
 set completeopt=menuone,noselect,noinsert
 
 if has('nvim')
@@ -941,20 +953,23 @@ require('blink.cmp').setup {
     },
   },
   cmdline = {
+    keymap = {
+      -- inherit the keymap config for normal mode
+      preset = 'inherit',
+      -- change Return to immediately run the selected command
+      ['<CR>'] = { 'accept_and_enter', 'fallback' },
+    },
     completion = {
       menu = {
         auto_show = true,
       },
     },
   },
+  -- signature help is still experimental, 2025/05/27
+  signature = {
+    enabled = true,
+  },
 }
-
--- remove default LSP key bindings
-vim.keymap.del('n', 'grn')
-vim.keymap.del({'n', 'x'}, 'gra')
-vim.keymap.del('n', 'grr')
-vim.keymap.del('n', 'gri')
-vim.keymap.del('n', 'gO')
 
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('custom_lsp_au', {}),
@@ -990,22 +1005,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
             'format code (LSP)')
     end,
 })
-
--- vim api shorthands
-local on_attach = function(client, bufnr, mappings)
-  -- mappings.
-  local mappings = mappings or {}
-
-  local opts = { noremap=true, silent=true }
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-  local function normal_map(key, map, cmd)
-    local do_set = mappings[key] == nil or mappings[key]
-    if do_set then
-      buf_set_keymap('n', map, cmd, opts)
-    end
-  end
-end
 
 -- nvim-tree
 require("nvim-tree").setup()
@@ -1123,8 +1122,6 @@ vim.lsp.config('ts_ls', {
         -- in older nvim this was `resolved_capabilities`
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
-
-        --on_attach(client, bufnr, { formatting = false })
     end,
 })
 
@@ -1301,6 +1298,10 @@ require('fzf-lua').setup {
       horizontal = 'right:50%',
     },
   }
+}
+
+require 'colorizer'.setup {
+  'vim';
 }
 
 EOF
