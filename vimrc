@@ -1296,6 +1296,8 @@ require('fzf-lua').setup {
     preview = {
       vertical = 'down:35%',
       horizontal = 'right:50%',
+      -- start with hidden preview window
+      hidden = true,
     },
   }
 }
