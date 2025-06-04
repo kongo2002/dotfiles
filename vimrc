@@ -78,7 +78,9 @@ Plug 'ray-x/go.nvim'
 Plug 'ray-x/guihua.lua'
 
 " .NET
+if has('nvim')
 Plug 'Hoffs/omnisharp-extended-lsp.nvim', { 'commit': '4916fa12e5b28d21a1f031f0bdd10aa15a75d85d' }
+endif
 
 " gupta
 Plug 'kongo2002/vim-gupta'
