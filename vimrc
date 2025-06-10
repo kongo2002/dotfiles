@@ -956,15 +956,8 @@ require('blink.cmp').setup {
   },
   cmdline = {
     keymap = {
-      -- inherit the keymap config for normal mode
-      preset = 'inherit',
       -- change Return to immediately run the selected command
       ['<CR>'] = { 'accept_and_enter', 'fallback' },
-    },
-    completion = {
-      menu = {
-        auto_show = true,
-      },
     },
   },
   -- signature help is still experimental, 2025/05/27
