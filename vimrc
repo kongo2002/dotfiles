@@ -72,6 +72,7 @@ Plug 'jacoborus/tender.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'rebelot/kanagawa.nvim'
+Plug 'sainnhe/everforest'
 
 " golang
 Plug 'ray-x/go.nvim'
@@ -921,7 +922,7 @@ com! -range=% Xml exe '<line1>,<line2>!xmllint --format --recover -' |
 let g:nord_italic = v:false
 let g:material_style = 'deep ocean'
 
-call <SID>LoadColorScheme('material:nord:gruvbox-material:kanagawa-dragon:nightfox:tender:kongo3:kongo:kongo2:slate', 'slate')
+call <SID>LoadColorScheme('everforest:material:nord:gruvbox-material:kanagawa-dragon:nightfox:tender:kongo3:kongo:kongo2:slate', 'slate')
 
 " SIGN COLUMN ----------------------------------------------------------{{{1
 
@@ -1189,7 +1190,8 @@ require("aerial").setup({
 require('lualine').setup {
   options = {
     --theme = 'nord'
-    theme = 'material'
+    --theme = 'material'
+    theme = 'everforest'
   },
   sections = {
     lualine_c = {
