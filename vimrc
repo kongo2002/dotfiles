@@ -482,6 +482,7 @@ if has('nvim')
     nmap <silent> <leader>t <cmd>lua require('fzf-lua').files()<CR>
     nmap <silent> <leader>g <cmd>lua require('fzf-lua').git_files()<CR>
     nmap <silent> <leader>bb <cmd>lua require('fzf-lua').buffers()<CR>
+    nmap <silent> <leader>ww <cmd>lua require('fzf-lua').lsp_workspace_symbols()<CR>
 endif
 
 " GIST -----------------------------------------------------------------{{{2
