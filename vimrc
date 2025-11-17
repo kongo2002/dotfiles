@@ -1151,6 +1151,10 @@ vim.lsp.config('rust_analyzer', {
 -- and put it into $PATH
 vim.lsp.enable('jdtls')
 
+-- dartls
+-- <https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server/tool/lsp_spec>
+vim.lsp.enable('dartls')
+
 -- eslint
 -- `npm install -g vscode-langservers-extracted
 vim.lsp.enable('eslint')
