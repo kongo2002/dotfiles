@@ -17,7 +17,10 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 
 " syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'branch': 'main'}
+
+" make
+Plug 'tpope/vim-dispatch'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
@@ -32,7 +35,7 @@ Plug 'kongo2002/vim-space'
 
 " completion
 " (using a tagged version will include a prebuilt fuzzymatch binary)
-Plug 'saghen/blink.cmp', {'tag': 'v1.3.1'}
+Plug 'saghen/blink.cmp', {'tag': 'v1.10.2'}
 
 " database
 Plug 'tpope/vim-dadbod'
@@ -62,9 +65,6 @@ Plug 'sindrets/diffview.nvim'
 " terminal
 Plug 'akinsho/toggleterm.nvim'
 
-" colors
-Plug 'norcalli/nvim-colorizer.lua'
-
 " colorschemes
 Plug 'shaunsingh/nord.nvim'
 Plug 'marko-cerovac/material.nvim'
@@ -80,7 +80,7 @@ Plug 'ray-x/guihua.lua'
 
 " .NET
 if has('nvim')
-Plug 'Hoffs/omnisharp-extended-lsp.nvim', { 'commit': '4916fa12e5b28d21a1f031f0bdd10aa15a75d85d' }
+Plug 'Hoffs/omnisharp-extended-lsp.nvim'
 endif
 
 " gupta
@@ -1212,65 +1212,55 @@ require('lualine').setup {
 }
 
 -- tree-sitter - syntax highlighting
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.gupta = {
-  install_info = {
-    url = "https://github.com/kongo2002/tree-sitter-gupta",
-    files = {"src/parser.c", "src/scanner.c"},
-  },
-  filetype = "gupta",
-}
+vim.api.nvim_create_autocmd('User', { pattern = 'TSUpdate',
+callback = function()
+  require('nvim-treesitter.parsers').gupta = {
+    install_info = {
+      url = 'https://github.com/kongo2002/tree-sitter-gupta',
+    },
+  }
+end})
 
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {
-      'bash',
-      'c',
-      'c_sharp',
-      'cpp',
-      'css',
-      'dart',
-      'diff',
-      'dockerfile',
-      'dot',
-      'erlang',
-      'gitcommit',
-      'glsl',
-      'go',
-      'hcl',
-      'html',
-      'html',
-      'javascript',
-      'json',
-      'kotlin',
-      'lua',
-      'make',
-      'nix',
-      'ocaml',
-      'ocaml_interface',
-      'odin',
-      'proto',
-      'python',
-      'ruby',
-      'rust',
-      'scala',
-      'scss',
-      'sql',
-      'toml',
-      'tsx',
-      'typescript',
-      'vim',
-      'vimdoc',
-      'vue',
-      'yaml',
-  },
-  highlight = {
-    enable = true,
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
+require('nvim-treesitter').install {
+  'bash',
+  'c',
+  'c_sharp',
+  'cpp',
+  'css',
+  'dart',
+  'diff',
+  'dockerfile',
+  'dot',
+  'erlang',
+  'gitcommit',
+  'glsl',
+  'go',
+  'hcl',
+  'html',
+  'html',
+  'javascript',
+  'json',
+  'kotlin',
+  'lua',
+  'make',
+  'nix',
+  'ocaml',
+  'ocaml_interface',
+  'odin',
+  'proto',
+  'python',
+  'ruby',
+  'rust',
+  'scala',
+  'scss',
+  'sql',
+  'toml',
+  'tsx',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'vue',
+  'yaml',
 }
 
 require('trouble').setup {
@@ -1302,10 +1292,6 @@ require('fzf-lua').setup {
       hidden = true,
     },
   }
-}
-
-require 'colorizer'.setup {
-  'vim';
 }
 
 EOF
