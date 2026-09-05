@@ -78,11 +78,6 @@ Plug 'sainnhe/everforest'
 Plug 'ray-x/go.nvim'
 Plug 'ray-x/guihua.lua'
 
-" .NET
-if has('nvim')
-Plug 'Hoffs/omnisharp-extended-lsp.nvim'
-endif
-
 " gupta
 Plug 'kongo2002/vim-gupta'
 
@@ -1053,27 +1048,9 @@ vim.lsp.enable('hls')
 -- `pip install pyright`
 vim.lsp.enable('pyright')
 
-local function get_omnisharp_bin()
-    local lsputil = require 'lspconfig.util'
-    local home = os.getenv('HOME')
-    return lsputil.path.join(home, 'programs', 'omnisharp', 'OmniSharp.dll')
-end
-
--- for decompilation support we might need this in the `omnisharp.json`:
---
--- {
---   "RoslynExtensionsOptions": {
---     "enableDecompilationSupport": true
---   }
--- }
-vim.lsp.enable('omnisharp')
-vim.lsp.config('omnisharp', {
-    on_attach = function(client, bufnr)
-        -- override jump to definition
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-]>', "<cmd>lua require('omnisharp_extended').lsp_definition()<cr>", { noremap=true, silent=true })
-    end,
-    cmd = { "dotnet", get_omnisharp_bin(), "-z", "DotNet:enablePackageRestore=false", "--encoding", "utf-8", "--languageserver" },
-})
+-- c#/.net - roslyn-language-server
+-- `dotnet tool install --global roslyn-language-server --prerelease`
+vim.lsp.enable('roslyn_ls')
 
 -- c - clangd
 vim.lsp.enable('clangd')
