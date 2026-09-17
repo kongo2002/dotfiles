@@ -1,39 +1,23 @@
 autoload -U compinit promptinit colors
+
 compinit
 colors
 
 promptinit
-
-# source rvm
-if [[ -s "${HOME}/.rvm/scripts/rvm" ]]; then
-    . "${HOME}/.rvm/scripts/rvm" && unset RUBYOPT
-    export PATH="${PATH}:${HOME}/.rvm/bin"
-fi
 
 # source zsh config files
 if [[ -d "${HOME}/.zsh" ]]; then
     for config_file ($HOME/.zsh/*.zsh) source $config_file
 fi
 
-[[ -f "${HOME}/python/startup.py" ]] && export PYTHONSTARTUP="${HOME}/python/startup.py"
-
 if [[ -x "${HOME}/programs/dotnet/dotnet" ]]; then
     export DOTNET_CLI_TELEMETRY_OPTOUT=1
     export DOTNET_ROOT="${HOME}/programs/dotnet"
-fi
-
-if [[ -x "${HOME}/programs/nim/bin/nim" ]]; then
-    export PATH="${PATH}:${HOME}/programs/nim/bin"
-    export PATH="${PATH}:${HOME}/.nimble/bin"
+    export PATH="$PATH:${HOME}/.dotnet/tools"
 fi
 
 if [[ -d "$HOME/.krew" ]]; then
     export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-fi
-
-if [[ -x $(which mpd) ]]; then
-    export MPD_HOST="127.0.0.1"
-    export MPD_PORT="6600"
 fi
 
 if [[ -x $(which tig) ]]; then
@@ -42,14 +26,6 @@ fi
 
 if [[ -x "$HOME/.zsh/gradle-wrapper.sh" ]]; then
     alias gradle="$HOME/.zsh/gradle-wrapper.sh"
-fi
-
-if [[ -x $(which docker-compose) ]]; then
-    alias dockerc='docker-compose'
-fi
-
-if [[ -x $(which ag) ]]; then
-    alias ag='ag --smart-case --ignore tags'
 fi
 
 alias urldecode='python3 -c "import sys, urllib.parse as ul; \
@@ -76,38 +52,7 @@ export BAT_THEME='1337'
 
 alias tiga='tig --all'
 
-alias '..'='cd ..'
-alias 'cd..'='cd ..'
-alias 'cd...'='cd ../..'
-alias 'cd....'='cd ../../..'
-alias 'cd.....'='cd ../../../..'
-alias 'cd/'='cd /'
-
-alias 1='cd -'
-alias 2='cd +2'
-alias 3='cd +3'
-alias 4='cd +4'
-alias 5='cd +5'
-alias 6='cd +6'
-alias 7='cd +7'
-alias 8='cd +8'
-alias 9='cd +9'
-
 alias cal='cal -3'
-
-cd () {
-    if [[ "x$*" == "x..." ]]; then
-        cd ../..
-    elif [[ "x$*" == "x...." ]]; then
-        cd ../../..
-    elif [[ "x$*" == "x....." ]]; then
-        cd ../../..
-    elif [[ "x$*" == "x......" ]]; then
-        cd ../../../..
-    else
-        builtin cd "$@"
-    fi
-}
 
 alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.argv[1]))"'
 alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]))"'
@@ -125,10 +70,6 @@ waitfor() {
     done
 }
 
-mkcd() {
-    mkdir -p "$1" && cd "$1"
-}
-
 alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
@@ -144,8 +85,8 @@ if [[ -x $(which timew) ]]; then
     alias tiweek='timew summary :week :id'
 fi
 
-if [[ -x $(which starship) ]]; then
-    eval "$(starship init zsh)"
+if [[ -d "${HOME}/programs/spaceship-prompt" ]]; then
+    source "${HOME}/programs/spaceship-prompt/spaceship.zsh"
 else
     PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(1j.${fg_bold[yellow]}!${fg_bold[white]}%j.)%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
     RPROMPT=' %~'
@@ -201,19 +142,9 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey "^e" edit-command-line
 
-bindkey "^n" history-beginning-search-backward
-bindkey "^p" history-beginning-search-forward
-bindkey "^r" history-incremental-search-backward
 
 bindkey -M vicmd "\e." insert-last-word
 bindkey -M viins "\e." insert-last-word
-
-# history settings
-#
-HISTFILE=~/.zshhistory
-HISTORY_IGNORE="(l|ls|ll|exit|cd|su|su -|gf|gs|gd|tiday|git ci|git cia|cd -|tiga|tig|vim|tmux)"
-HISTSIZE=25000
-SAVEHIST=100000
 
 LISTMAX=0
 
@@ -302,13 +233,14 @@ setopt no_casematch
 
 # history
 setopt append_history
-setopt extended_history
 setopt hist_allow_clobber
 setopt hist_ignore_dups
 setopt hist_expire_dups_first
 setopt hist_ignore_space
 setopt hist_verify
-setopt inc_append_history
+# typically superseded by `zhist`
+#setopt extended_history
+#setopt inc_append_history
 
 setopt no_hist_beep
 
@@ -340,6 +272,11 @@ fi
 # source zsh-autocompletions
 #   <https://github.com/zsh-users/zsh-autosuggestions>
 if [[ -s ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+    _zsh_autosuggest_strategy_zhist() {
+        suggestion=$(zhist search -limit 1 -- "$1")
+    }
+    ZSH_AUTOSUGGEST_STRATEGY=(zhist)
+
     source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
@@ -392,11 +329,41 @@ if [[ -d "$HOME/.yarn/bin" ]]; then
     export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 fi
 
-# NVM
-if [[ -d "$HOME/.nvm" ]]; then
-    export NVM_DIR="$HOME/.nvm"
-fi
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
 # opam (ocaml) configuration
 [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
+
+# fnm
+FNM_PATH="$HOME/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$HOME/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# History settings
+#
+if [[ -x $(which zhist) ]]; then
+    unset HISTFILE
+    HISTSIZE=100000
+    SAVEHIST=0
+
+    # if the first word matches, it is ignored
+    HIST_EXCLUDE=(cd l ll ls clear pwd exit su gf gs tiday tig tiga tmux)
+
+    eval "$(zhist init -no-arrow-binds)"
+else
+    HISTFILE=~/.zshhistory
+    HISTORY_IGNORE="(l|ls|ll|exit|cd|su|su -|gf|gs|gd|tiday|git ci|git cia|cd -|tiga|tig|vim|tmux)"
+    HISTSIZE=25000
+    SAVEHIST=100000
+
+    bindkey "^n" history-beginning-search-backward
+    bindkey "^p" history-beginning-search-forward
+    bindkey "^r" history-incremental-search-backward
+fi
