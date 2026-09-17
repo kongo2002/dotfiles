@@ -88,7 +88,7 @@ fi
 if [[ -d "${HOME}/programs/spaceship-prompt" ]]; then
     source "${HOME}/programs/spaceship-prompt/spaceship.zsh"
 else
-    PROMPT='%{${fg_bold[white]}%}%n@%m%{${fg_bold[red]}%}!%{${fg_bold[white]}%}%!%(1j.${fg_bold[yellow]}!${fg_bold[white]}%j.)%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
+    PROMPT='%{${fg_bold[white]}%}%n@%m%(1j.${fg_bold[yellow]}!${fg_bold[white]}%j.)%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
     RPROMPT=' %~'
 
     _KONGO_ASYNC_PROMPT=0
@@ -272,10 +272,12 @@ fi
 # source zsh-autocompletions
 #   <https://github.com/zsh-users/zsh-autosuggestions>
 if [[ -s ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-    _zsh_autosuggest_strategy_zhist() {
-        suggestion=$(zhist search -limit 1 -- "$1")
-    }
-    ZSH_AUTOSUGGEST_STRATEGY=(zhist)
+    if [[ -x $(which zshist) ]]; then
+        _zsh_autosuggest_strategy_zshist() {
+            suggestion=$(zshist search --limit 1 -- "$1")
+        }
+        ZSH_AUTOSUGGEST_STRATEGY=(zshist)
+    fi
 
     source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
@@ -306,12 +308,6 @@ if [[ -x $(which zoxide) ]]; then
     eval "$(zoxide init zsh)"
 fi
 
-if [[ -x $(which nnn) ]]; then
-    alias n='nnn -c -a -P p'
-    export NNN_PLUG="p:preview-tui"
-    export NNN_OPENER=nuke
-fi
-
 if [[ -f "${HOME}/.ripgreprc" ]]; then
     export RIPGREP_CONFIG_PATH="${HOME}/.ripgreprc"
 fi
@@ -324,31 +320,25 @@ if [ -f "$HOME/programs/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/programs
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/programs/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/programs/google-cloud-sdk/completion.zsh.inc"; fi
 
-# YARN
-if [[ -d "$HOME/.yarn/bin" ]]; then
-    export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-fi
-
 # opam (ocaml) configuration
 [[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh" > /dev/null 2> /dev/null
 
 # fnm
 FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
-  export PATH="$HOME/.local/share/fnm:$PATH"
-  eval "`fnm env`"
+  export PATH="$PATH:$HOME/.local/share/fnm"
+  eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
 # bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+if [[ -d "$HOME/.bun" ]]; then
+    export BUN_INSTALL="$HOME/.bun"
+    export PATH="$BUN_INSTALL/bin:$PATH"
+fi
 
 # History settings
 #
-if [[ -x $(which zhist) ]]; then
+if [[ -x $(which zshist) ]]; then
     unset HISTFILE
     HISTSIZE=100000
     SAVEHIST=0
@@ -356,7 +346,7 @@ if [[ -x $(which zhist) ]]; then
     # if the first word matches, it is ignored
     HIST_EXCLUDE=(cd l ll ls clear pwd exit su gf gs tiday tig tiga tmux)
 
-    eval "$(zhist init -no-arrow-binds)"
+    eval "$(zshist init)"
 else
     HISTFILE=~/.zshhistory
     HISTORY_IGNORE="(l|ls|ll|exit|cd|su|su -|gf|gs|gd|tiday|git ci|git cia|cd -|tiga|tig|vim|tmux)"
