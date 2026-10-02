@@ -88,7 +88,7 @@ fi
 if [[ -d "${HOME}/programs/spaceship-prompt" ]]; then
     source "${HOME}/programs/spaceship-prompt/spaceship.zsh"
 else
-    PROMPT='%{${fg_bold[white]}%}%n@%m%(1j.${fg_bold[yellow]}!${fg_bold[white]}%j.)%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
+    PROMPT='%{${fg_bold[white]}%}%n%(1j.${fg_bold[yellow]}!${fg_bold[white]}%j.)%(?..%{${fg_bold[red]}%} %?%{${fg_bold[white]}%})$(_python_prompt)>%{${reset_color}%} '
     RPROMPT=' %~'
 
     _KONGO_ASYNC_PROMPT=0
@@ -137,14 +137,26 @@ EDITOR="/usr/local/bin/nvim"
 
 # toggle vi mode
 bindkey -v
+export KEYTIMEOUT=1
 
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey "^e" edit-command-line
 
-
 bindkey -M vicmd "\e." insert-last-word
 bindkey -M viins "\e." insert-last-word
+
+# cursor shape: block in normal mode, beam in insert mode
+function zle-keymap-select {
+    if [[ $KEYMAP == vicmd ]]; then
+        echo -ne '\e[2 q'
+    else
+        echo -ne '\e[6 q'
+    fi
+}
+zle -N zle-keymap-select
+zle-line-init() { echo -ne '\e[6 q' }
+zle -N zle-line-init
 
 LISTMAX=0
 
