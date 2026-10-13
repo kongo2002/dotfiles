@@ -10,16 +10,6 @@ if [[ -d "${HOME}/.zsh" ]]; then
     for config_file ($HOME/.zsh/*.zsh) source $config_file
 fi
 
-if [[ -x "${HOME}/programs/dotnet/dotnet" ]]; then
-    export DOTNET_CLI_TELEMETRY_OPTOUT=1
-    export DOTNET_ROOT="${HOME}/programs/dotnet"
-    export PATH="$PATH:${HOME}/.dotnet/tools"
-fi
-
-if [[ -d "$HOME/.krew" ]]; then
-    export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-fi
-
 if [[ -x $(which tig) ]]; then
     alias tiga='tig --all'
 fi
