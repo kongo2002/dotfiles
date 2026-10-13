@@ -56,11 +56,11 @@ endif
 Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 
+" diff
+Plug 'https://forge.barrettruth.com/barrettruth/diffs.nvim'
+
 " file tree
 Plug 'nvim-tree/nvim-tree.lua'
-
-" diff
-Plug 'sindrets/diffview.nvim'
 
 " terminal
 Plug 'akinsho/toggleterm.nvim'
@@ -957,7 +957,7 @@ require('blink.cmp').setup {
       ['<CR>'] = { 'accept_and_enter', 'fallback' },
     },
   },
-  -- signature help is still experimental, 2025/05/27
+  -- signature help is still experimental, 2026/10/13
   signature = {
     enabled = true,
   },
@@ -1268,6 +1268,15 @@ require('fzf-lua').setup {
       -- start with hidden preview window
       hidden = true,
     },
+  }
+}
+
+vim.g.diffs = {
+  integrations = {
+    fugitive = true,
+    neogit = false,
+    neojj = false,
+    gitsigns = true,
   }
 }
 
