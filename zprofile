@@ -19,3 +19,18 @@ fi
 if [[ -d "$HOME/.krew" ]]; then
     export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
+
+# devcontainers
+if [[ -d "${HOME}/.devcontainers/bin" ]]; then
+    export PATH="${HOME}/.devcontainers/bin:$PATH"
+fi
+
+# chromedriver (playwright)
+if [[ -d "$HOME/programs/chromedriver" ]]; then
+    export PATH="$PATH:$HOME/programs/chromedriver"
+fi
+
+# .NET tools
+if [[ -d "${HOME}/.dotnet/tools" ]]; then
+    export PATH="$PATH:${HOME}/.dotnet/tools"
+fi
